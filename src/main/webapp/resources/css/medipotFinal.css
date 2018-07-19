@@ -1,0 +1,200 @@
+/*전체 영역을 통틀어서 스타일 정의 */
+@import url(https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding);
+*{
+	font-family: 'Nanum Gothic Coding', monospace;
+}
+
+a{
+	color : #000000;
+	text-decoration: none;		/*밑줄 안그어지게 함*/
+}
+
+/*링크에 마우스가 올라갔을 때 변경되는 색*/
+a:hover{
+	color : #bbbbbb;			/*회색*/
+	text-decoration: none;		/*밑줄 안그어지게 함*/
+		cursor: pointer;		/*내가 선택하고 있는 것이 링크다.*/
+}
+
+/*네비게이션 영역*/
+.navbar-default{/*배경 색상*/
+	height:120px;
+	background-color: #2c3e50;
+	border-bottom:8px solid #59DBF1;		/*블랙*/
+}
+
+
+.navbar-default .navbar-brand{/* 네비게이션 브랜드 글씨 색상*/
+	color: #ffffff;
+}
+
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus{ /*네비게이션 제목에 마우스를 올렸을 때*/
+	background-color: transparent;
+	color: #bbbbbb; 
+}
+
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {/*현재 선택된 네비게이션 색상 이벤트*/
+	color: white;
+	background-color: #000000; 
+}
+
+
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {/*네비게이션의 글자에 마우스를 옮겼을 때 */
+	color: #51C0BF; 
+}
+
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {/*드랍다운이 열렸을 때 마우스 색상 이벤트*/
+	color: #000000;
+	background-color: #ffffff; 
+	text-decoration: none;
+}
+.navbar-default .navbar-nav > li > a {/*네비게이션 기본 색상 */
+	color : white;
+}
+@media (max-width: 767px){/*해상도가 작을 떄 드랍다운 아이템에마우스를 올렸을때*/
+	.navbar-default .navbar-nav .open .dropdown-menu > li > a{
+		color :#ffffff;
+	}
+	.navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+	.navbar-default .navbar-nav .open .dropdown-menu > li > a:focus{
+		color : #bbbbbb;
+	}
+
+}
+
+
+
+/*슬라이드 적용 css*/
+/*
+Fade content bs-carousel with hero headers
+Code snippet by maridlcrmn (Follow me on Twitter @maridlcrmn) for Bootsnipp.com
+Image credits: unsplash.com
+*/
+
+/********************************/
+/*       Fade Bs-carousel       */
+/********************************/
+.fade-carousel {
+    position: relative;
+    height: 60vh;
+}
+.fade-carousel .carousel-inner .item {
+    height: 60vh;
+}
+.fade-carousel .carousel-indicators > li {
+    margin: 0 2px;
+    background-color: #f39c12;
+    border-color: #f39c12;
+    opacity: .7;
+}
+/*슬라이드 버튼*/
+.fade-carousel .carousel-indicators > li.active {
+  width: 10px;
+  height: 10px;
+  opacity: 1;
+}
+
+/********************************/
+/*          Hero Headers        */
+/********************************/
+.hero {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 3;
+    color: #fff;
+    text-align: center;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 0 rgba(0,0,0,.75);
+      -webkit-transform: translate3d(-50%,-50%,0);
+         -moz-transform: translate3d(-50%,-50%,0);
+          -ms-transform: translate3d(-50%,-50%,0);
+           -o-transform: translate3d(-50%,-50%,0);
+              transform: translate3d(-50%,-50%,0);
+}
+.hero h1 {
+    font-size: 6em;    
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+}
+
+.fade-carousel .carousel-inner .item .hero {
+    opacity: 0;
+    -webkit-transition: 2s all ease-in-out .1s;
+       -moz-transition: 2s all ease-in-out .1s; 
+        -ms-transition: 2s all ease-in-out .1s; 
+         -o-transition: 2s all ease-in-out .1s; 
+            transition: 2s all ease-in-out .1s; 
+}
+.fade-carousel .carousel-inner .item.active .hero {
+    opacity: 1;
+    -webkit-transition: 2s all ease-in-out .1s;
+       -moz-transition: 2s all ease-in-out .1s; 
+        -ms-transition: 2s all ease-in-out .1s; 
+         -o-transition: 2s all ease-in-out .1s; 
+            transition: 2s all ease-in-out .1s;    
+}
+
+/********************************/
+/*            Overlay           */
+/********************************/
+.overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    background-color: #080d15;
+    opacity: .7;
+}
+
+/********************************/
+/*          Custom Buttons      */
+/********************************/
+.btn.btn-lg {padding: 10px 40px;}
+.btn.btn-hero,
+.btn.btn-hero:hover,
+.btn.btn-hero:focus {
+    color: #f5f5f5;
+    background-color: #1abc9c;
+    border-color: #1abc9c;
+    outline: none;
+    margin: 20px auto;
+}
+
+/********************************/
+/*       Slides backgrounds     */
+/********************************/
+.fade-carousel .slides .slide-1, 
+.fade-carousel .slides .slide-2,
+.fade-carousel .slides .slide-3 {
+  height: 100vh;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+.fade-carousel .slides .slide-1 {
+  background-image: url("${path }/resources/img/common/health.jpg"); 
+}
+.fade-carousel .slides .slide-2 {
+  background-image: url("${path }/resources/img/common/health.jpg");
+}
+.fade-carousel .slides .slide-3 {
+  background-image: url("${path }/resources/img/common/health.jpg");
+}
+
+/********************************/
+/*          Media Queries       */
+/********************************/
+@media screen and (min-width: 980px){
+    .hero { width: 980px; }    
+}
+@media screen and (max-width: 640px){
+    .hero h1 { font-size: 4em; }    
+}
