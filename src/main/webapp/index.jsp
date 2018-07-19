@@ -6,7 +6,6 @@
 <c:set var="path" value="<%=request.getContextPath() %>" />
 
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
-<!-- 동혁스테스트 -->
 <div class="container">
 	<!-- 		<div class="jumbotron">
 			<h1 class="text-center">Hello MediPot</h1>
