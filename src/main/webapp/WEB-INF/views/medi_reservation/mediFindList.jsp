@@ -8,32 +8,50 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 <jsp:param value="HomeSpring" name="pageTitle"></jsp:param>
 </jsp:include>
-	<div style="text-align: center;">
-		<label for="hname">병원 이름으로 검색</label>
-		<input type="text" name="hname" id="hname" size="50">
-		<button class="btn">검색</button>
+	<div id="searchH">
+			<input type="text" size="30">
 	</div>
+	<style>
+		#searchH{
+			margin-left:400px;
+			text-align:center;
+			padding-left:430px;
+			padding-top:250px;
+			background-image: url("/pot/resources/img/reser/reser.png");
+			width:850px;
+			height:450px;
+			background-size:cover;
+			background-repeat:no-repeat;
+		
+		}
+	</style>
 	<br><br><br>
 	<div style="text-align: center;">
 	<button id="searchLoc" class="btn">지역 검색</button>
 	</div>
 	<div id="locList" style="display: none;text-align: center;border:2px solid lightgray;">
-		<button class="btn">서울</button>
-		<button class="btn">인천</button>
-		<button class="btn">경기도</button>
-		<button class="btn">강원도</button>
-		<button class="btn">충청도</button>
-		<button class="btn">전라도</button>
-		<button class="btn">경상도</button>
-		<button class="btn">제주도</button>
+		<button class="btn loc">서울</button>
+		<button class="btn loc">인천</button>
+		<button class="btn loc">경기도</button>
+		<button class="btn loc">강원도</button>
+		<button class="btn loc">충청도</button>
+		<button class="btn loc">전라도</button>
+		<button class="btn loc">경상도</button>
+		<button class="btn loc">제주도</button>
 	</div>
-	<div>
-		<button></button>
+	<div id="subjectList" style="display: none;text-align: center;border:2px solid lightgray;">
+		<button class="btn">내과</button>
+		<button class="btn">이빈후과</button>
 	</div>
 	<script>
 		$(function () {
 			$("#searchLoc").click(function () {
+				$("#subjectList").css("display","none");
 				$("#locList").slideToggle(1000);
+			});
+			$(".loc").click(function () {
+				$("#subjectList").css("display","none");
+				$("#subjectList").slideToggle(1000);
 			});
 		});
 	</script>
