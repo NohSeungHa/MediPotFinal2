@@ -8,26 +8,28 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 <jsp:param value="HomeSpring" name="pageTitle"></jsp:param>
 </jsp:include>
+	<div class="container">
 	<div id="searchH">
-			<input type="text" size="30">
+			<img alt="searchImg" src="/pot/resources/img/reser/reser.png" width="60%;" height="400px;">
+			<div id="searchH2">
+			<input type="text" class="form-control" placeholder="병원이름 검색" style="width:10%;">
+			<br>
+			<button type="submit" class="btn btn-default">검색</button>
+			</div>
 	</div>
 	<style>
 		#searchH{
-			margin-left:400px;
-			text-align:center;
-			padding-left:430px;
-			padding-top:250px;
-			background-image: url("/pot/resources/img/reser/reser.png");
-			width:850px;
-			height:450px;
-			background-size:cover;
-			background-repeat:no-repeat;
-		
+			position:relative;
+		}
+		#searchH2{
+			position:absolute;
+			top:60%;
+			left:35%; 
 		}
 	</style>
 	<br><br><br>
-	<div style="text-align: center;">
-	<button id="searchLoc" class="btn">지역 검색</button>
+	<div>
+	<button id="searchLoc" class="btn btn-primary">지역 검색</button>
 	</div>
 	<div id="locList" style="display: none;text-align: center;border:2px solid lightgray;">
 		<button class="btn loc">서울</button>
@@ -56,5 +58,5 @@
 		});
 	</script>
 		
-
+</div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

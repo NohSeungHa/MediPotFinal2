@@ -259,7 +259,7 @@ to {
 			<h1>3단계</h1>
 			<p>우리동네 병원 선택</p>
 			<p>
-				<a class="btn btn-default" href="#">예약하러 가기</a>
+				<a class="btn btn-default" href="${path}/medi/medireser.do">예약하러 가기</a>
 			</p>
 		</div>
 	</div>
