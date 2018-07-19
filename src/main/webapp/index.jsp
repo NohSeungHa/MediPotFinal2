@@ -6,7 +6,7 @@
 <c:set var="path" value="<%=request.getContextPath() %>" />
 
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
-
+<!-- 동혁스테스트 -->
 <div class="container">
 	<!-- 		<div class="jumbotron">
 			<h1 class="text-center">Hello MediPot</h1>
@@ -32,7 +32,6 @@
               {$Duration:1500,x:0.3,y:-0.3,$Delay:20,$Cols:10,$Rows:5,$Opacity:2,$Clip:15,$During:{$Left:[0.2,0.8],$Top:[0.2,0.8]},$Formation:$JssorSlideshowFormations$.$FormationStraightStairs,$Assembly:260,$Easing:{$Left:$Jease$.$InJump,$Top:$Jease$.$InJump,$Clip:$Jease$.$OutQuad},$Round:{$Left:0.8,$Top:2.5}},
               {$Duration:1500,x:0.3,y:-0.3,$Delay:20,$Cols:10,$Rows:5,$Opacity:2,$Clip:15,$During:{$Left:[0.1,0.9],$Top:[0.1,0.9]},$SlideOut:true,$Formation:$JssorSlideshowFormations$.$FormationStraightStairs,$Assembly:260,$Easing:{$Left:$Jease$.$InJump,$Top:$Jease$.$InJump,$Clip:$Jease$.$OutQuad},$Round:{$Left:0.8,$Top:2.5}}
             ];
-
             var jssor_1_options = {
               $AutoPlay: 1,
               $SlideshowOptions: {
