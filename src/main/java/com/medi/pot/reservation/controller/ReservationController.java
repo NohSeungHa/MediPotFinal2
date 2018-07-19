@@ -9,7 +9,7 @@ public class ReservationController {
 	@RequestMapping("/medi/medireser.do")
 	public String reser() {
 		
-		return "medi_reservation/reservation";
+		return "medi_reservation/mediFindList";
 	}
 
 }
