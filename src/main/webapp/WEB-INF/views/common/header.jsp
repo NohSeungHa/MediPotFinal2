@@ -23,6 +23,13 @@
 	<link rel="stylesheet" href="${path }/resources/css/bootstrap.css"><!-- 외부 스타일 시트 -->
 	<link rel="stylesheet" href="${path }/resources/css/medipotFinal.css">
 	<link href="http://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
+	
+	<!-- Main Javascript 시작-->          
+    <script type="text/javascript" src="assets/plugins/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>     
+    <script type="text/javascript" src="assets/plugins/stickyfill/dist/stickyfill.min.js"></script>                                                                
+    <script type="text/javascript" src="assets/js/main.js"></script>
+    <!-- Main Javascript 끝 -->
 </head>
 <body>
 	<style type="text/css">/*내부 스타일 시트 적용*/
@@ -53,10 +60,7 @@
 				<!-- 네비게이션 바 메디팟 로고  -->
 				<a class="navbar-brand" href="${path }/"><img src="/pot/resources/img/common/MediPot_logo.png" width="250px" height="60px" href="#" style="margin-left:30%;margin-top: 4%;" ></a>
 			</div>
-	<!-- 흐음 -->
-
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
 				<!-- 검색창 만들기 -->
 				<form class="navbar-form navbar-left" style="margin-top: 2%;margin-left:5%;">
 					<input type="text" class="form-control" placeholder="병원이름 검색">
@@ -70,24 +74,21 @@
 				</ul>
 
 
-				<!-- 네비게이션 메뉴 -->
-				<ul class="nav navbar-nav navbar-right" style="font-size:28px;margin-top:2.5%;margin-right:2%;">
+				<!-- 드롭다운 메뉴 -->
+				<ul class="nav navbar-nav navbar-right" style="font-size:35px;margin-top:2.5%;margin-right:2%;">
 					<li><a href="${path}/medi/medireser.do">병원예약</a></li>
 					<!-- 드랍다운 메뉴 만들기 기본 셋팅-->
 					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-						aria-haspopup="true" aria-expanded="false">고객지원<span class="caret"></span></a>
-						<!-- 드랍다운 속성메뉴 리스트 -->
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+						고객지원<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="notice.html?noticeName=notice">공지사항</a></li>
-							<li><a href="notice.html?noticeName=question">자주묻는 질문</a></li>
-							<li><a href="notice.html?noticeName=free">자유게시판</a></li>
+							<li><a href="#">공지사항</a></li>
+							<li><a href="#">자주묻는 질문</a></li>
+							<li><a href="#">자유게시판</a></li>
 						</ul>
-						<li><a href="reservation.html">HELP ZONE</a></li>
 					</li>
-				</ul>
-
-			
+						<li><a href="#">HELP ZONE</a></li>
+				</ul>			
 			</div>
 
 		</div>		

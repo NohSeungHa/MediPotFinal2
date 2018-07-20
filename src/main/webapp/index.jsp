@@ -20,6 +20,7 @@
 	<!-- Source: https://www.jssor.com -->
 	<script src="resources/js/jquery-1.11.3.min.js" type="text/javascript"></script>
 	<script src="resources/js/jssor.slider-27.4.0.min.js" type="text/javascript"></script>
+
 	<script type="text/javascript">
         jQuery(document).ready(function ($) {
 
@@ -265,81 +266,12 @@ to {
 	</div>
 	<hr>
 	<!-- 중간 부분 끝 -->
-
-	<!-- 판넬부분시작! -->
-	<div class="panel panel-primary">
-		<div class="panel-heading">
-			<h3 class="panel-title">
-				<span class="glyphicon glyphicon-pencil"></span> &nbsp;&nbsp;Health
-				Magazine
-			</h3>
-		</div>
-		<div class="panel-body">
-			<div class="media">
-				<div class="media-left">
-					<a href="#"><img class="media-object"
-						src="${path }/resources/img/common/health.jpeg" width="200px"
-						height="100px" alt="디톡스이미지"></a>
-				</div>
-				<div class="media-body">
-					<h4 class="media-heading">
-						<a href="#">디톡스로 건강되찾기</a>&nbsp;<span class="badge">New</span>
-					</h4>
-					레몬 디톡스로 젊음을 되찾는, 건강지식 정보를 얻어가세요!
-				</div>
-			</div>
-			<hr>
-
-			<div class="media">
-				<div class="media-left">
-					<a href="#"><img class="media-object"
-						src="${path }/resources/img/common/hopital.jpg" width="200px"
-						height="100px" alt="디톡스이미지"></a>
-				</div>
-				<div class="media-body">
-					<h4 class="media-heading">
-						<a href="#">(필독!)건강검진</a>&nbsp;<span class="badge">New</span>
-					</h4>
-					꾸준한 건강검진으로, 건강을 되찾으세요!
-				</div>
-			</div>
-			<hr>
-
-			<div class="media">
-				<div class="media-left">
-					<a href="#"><img class="media-object"
-						src="${path }/resources/img/common/health.jpeg" width="200px"
-						height="100px" alt="디톡스이미지"></a>
-				</div>
-				<div class="media-body">
-					<h4 class="media-heading">
-						<a href="#">디톡스로 건강되찾기</a>&nbsp;<span class="badge">New</span>
-					</h4>
-					레몬 디톡스로 젊음을 되찾는, 건강지식 정보를 얻어가세요!
-				</div>
-			</div>
-			<hr>
-
-			<div class="media">
-				<div class="media-left">
-					<a href="#"><img class="media-object"
-						src="${path }/resources/img/common/hopital.jpg" width="200px"
-						height="100px" alt="디톡스이미지"></a>
-				</div>
-				<div class="media-body">
-					<h4 class="media-heading">
-						<a href="#">(필독!)건강검진</a>&nbsp;<span class="badge">New</span>
-					</h4>
-					꾸준한 건강검진으로, 건강을 되찾으세요!
-				</div>
-			</div>
-
-
-
-
-		</div>
+	<div class="col-md-12">
+		<img src="/pot/resources/img/common/index_1.png" style="margin-bottom: 35px;width:600px;height:600px">
 	</div>
-	<!-- 판넬부분 끝! -->
+
+
+
 </div>
 <!-- class="container" -->
 
