@@ -32,47 +32,21 @@
 		
 		#locList 
 		{
-			position: relative;
-			width: 100%;
-			height: 80px;
+			width: 26%;
+			height: auto;
 			padding: 10px;
-			background: #FFFFFF;
+			background-color:#BEBEBE;
 			-webkit-border-radius: 10px;
 			-moz-border-radius: 10px;
 			border-radius: 10px;
-			border: #00AAFF solid 3px;
-			margin-top:10px;
+			margin-top:5px;
+			display:inline-block;
 		}
 		
-		#locList:after 
-		{
-			content: '';
-			position: absolute;
-			border-style: solid;
-			border-width: 0 22px 14px;
-			border-color: #FFFFFF transparent;
-			display: block;
-			width: 0;
-			z-index: 1;
-			top: -14px;
-			left: 33px;
-		}
 		
-		#locList:before 
-		{
-			content: '';
-			position: absolute;
-			border-style: solid;
-			border-width: 0 24px 16px;
-			border-color: #00AAFF transparent;
-			display: block;
-			width: 0;
-			z-index: 0;
-			top: -19px;
-			left: 31px;
-		}
 		.loc,.sub{
-			width:100px;
+			margin:5px;
+			width:90%;
 			height:50px;
 			font-size:20px;
 		}
@@ -80,79 +54,83 @@
 		
 		#subjectList 
 		{
-			position: relative;
-			width: 100%;
-			height: 80px;
+			width: 72.5%;
+			height: auto;
 			padding: 10px;
-			background: #FFFFFF;
 			-webkit-border-radius: 10px;
 			-moz-border-radius: 10px;
 			border-radius: 10px;
-			border: #00AAFF solid 3px;
-			margin-top:2px;
+			margin-top:5px;
+			margin-left:1.5%;
+			display:inline-block;
+			position:absolute;
+			border: 2px solid #BEBEBE;
 		}
-		
-		#subjectList:after 
-		{
-			content: '';
-			position: absolute;
-			border-style: solid;
-			border-width: 0 22px 14px;
-			border-color: #FFFFFF transparent;
-			display: block;
-			width: 0;
-			z-index: 1;
-			top: -14px;
-			left: 175px;
+		#subjectList>img{
+			margin:9px;
 		}
-		
-		#subjectList:before 
-		{
-			content: '';
-			position: absolute;
-			border-style: solid;
-			border-width: 0 24px 16px;
-			border-color: #00AAFF transparent;
-			display: block;
-			width: 0;
-			z-index: 0;
-			top: -19px;
-			left: 173px;
+		#subjectList>img:hover{
+			cursor:pointer;
+			border:4px solid #BEBEBE;
 		}
 	</style>
 	<br><br><br>
-	<div style="margin-bottom:50px;">
-	<div>
-	<button id="searchLoc" class="btn btn-primary" style="margin-left:1%;width:100px;height:50px;font-size:20px;">지역 검색</button>
+	<div style="margin-bottom:10px;position:relative;height:auto;">
+	<div style="width:100%;height:50px;font-size:20px;text-align:center;background-color:#286090;padding-top:11px;color:white;border-radius:8px;">
+		지역 선택 및 진료과목 선택
 	</div>
-	<div id="locList" style="display: none;text-align: center;">
-		<button class="btn loc">서울</button>
-		<button class="btn loc">인천</button>
-		<button class="btn loc">경기도</button>
-		<button class="btn loc">강원도</button>
-		<button class="btn loc">충청도</button>
-		<button class="btn loc">전라도</button>
-		<button class="btn loc">경상도</button>
-		<button class="btn loc">제주도</button>
-	</div>
-	<div id="subjectList" style="display: none;text-align: center;">
-		<button class="btn sub">내과</button>
-		<button class="btn sub">이빈후과</button>
-	</div>
+		<div id="locList" style="text-align: center;">
+			<button class="btn btn-default loc" value="S1">서울</button><br>
+			<button class="btn btn-default loc" value="I1">인천</button><br>
+			<button class="btn btn-default loc">경기도</button><br>
+			<button class="btn btn-default loc">강원도</button><br>
+			<button class="btn btn-default loc">충청도</button><br>
+			<button class="btn btn-default loc">전라도</button><br>
+			<button class="btn btn-default loc">경상도</button><br>
+			<button class="btn btn-default loc">제주도</button>
+		</div>
+		<div id="subjectList" style="text-align: center;">
+			<img class="subImg" src="${path }/resources/img/reser/h1.png" width="140px;" height="140px;">
+			<img class="subImg" src="${path }/resources/img/reser/h2.png" width="140px;" height="140px;">
+			<img class="subImg" src="${path }/resources/img/reser/h3.png" width="140px;" height="140px;">
+			<img class="subImg" src="${path }/resources/img/reser/h4.png" width="140px;" height="140px;">
+			<img class="subImg" src="${path }/resources/img/reser/h5.png" width="140px;" height="140px;">
+			<img class="subImg" src="${path }/resources/img/reser/h6.png" width="140px;" height="140px;">
+			<img class="subImg" src="${path }/resources/img/reser/h7.png" width="140px;" height="140px;">
+			<img class="subImg" src="${path }/resources/img/reser/h8.png" width="140px;" height="140px;">
+			<img class="subImg" src="${path }/resources/img/reser/h9.png" width="140px;" height="140px;">
+			<img class="subImg" src="${path }/resources/img/reser/h10.png" width="140px;" height="140px;">
+			<img class="subImg" src="${path }/resources/img/reser/h11.png" width="140px;" height="140px;">
+		</div>
+	
 	</div>
 	<script>
-		$(function () {
-			$("#searchLoc").click(function () {
-				$("#subjectList").css("display","none");
-				$("#locList").slideToggle(1000);
+		$(function () {		
+			var loc="";
+			$('.loc').click(function () {
+				if($(this).attr('class').indexOf("btn-primary")>0){
+					$(this).removeClass("btn-primary");
+					$(this).addClass("btn-default");
+					loc="";
+				}else{
+					$(".loc").removeClass("btn-primary");
+					$(".loc").addClass("btn-default");
+					$(this).removeClass("btn-default");
+					$(this).addClass("btn-primary");
+					loc=$(this).val();
+				}
 			});
+			$(".subImg").click(function () {
+				if(loc.length>0){
+					alert("지역선택 완료");
+				}else{
+					alert("지역을 먼저 선택해 주세요");
+				}
+			}); 
 			
-			$(".loc").click(function () {
-				$("#subjectList").css("display","none");
-				$("#subjectList").slideToggle(1000);
-			});
 		});
 	</script>
+	<div style="border:2px solid lightgray;width:100%;"></div>
 		
 </div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
