@@ -150,7 +150,7 @@
 		병원 리스트
 	</div>
 	<div class="mediList" style="display:inline-block;width:49%;position:relative;margin-bottom:20px;">
-		<div style="display: inline-block;"><img src="${path }/resources/img/reser/h1.png" width="200px;" height="200px;"></div>
+		<div style="display: inline-block;"><img src="${path }/resources/img/reser/f1.jpg" width="200px;" height="200px;"></div>
 		<div id="hlist" style="display: inline-block;position:absolute;">
 			<p><span style="font-size:20px;color: #286090">병원명</span>&nbsp;&nbsp;
 			<span style="font-size:20px;">승하병원</span></p>
@@ -166,7 +166,7 @@
 		</div>
 	</div>
 	<div class="mediList" style="display:inline-block;position:relative;width:49%;margin-left:5px;margin-bottom:20px;">
-		<div style="display: inline-block;"><img src="${path }/resources/img/reser/h1.png" width="200px;" height="200px;"></div>
+		<div style="display: inline-block;"><img src="${path }/resources/img/reser/f2.jpg" width="200px;" height="200px;"></div>
 		<div id="hlist" style="display:inline-block;position:absolute;">
 			<p><span style="font-size:20px;color: #286090">병원명</span>&nbsp;&nbsp;
 			<span style="font-size:20px;">승하병원</span></p>
@@ -182,7 +182,7 @@
 		</div>
 	</div>
 	<div class="mediList" style="display:inline-block;width:49%;position:relative;margin-bottom:20px;">
-		<div style="display: inline-block;"><img src="${path }/resources/img/reser/h1.png" width="200px;" height="200px;"></div>
+		<div style="display: inline-block;"><img src="${path }/resources/img/reser/f3.jpg" width="200px;" height="200px;"></div>
 		<div id="hlist" style="display: inline-block;position:absolute;">
 			<p><span style="font-size:20px;color: #286090">병원명</span>&nbsp;&nbsp;
 			<span style="font-size:20px;">승하병원</span></p>
@@ -198,7 +198,7 @@
 		</div>
 	</div>
 	<div class="mediList" style="display:inline-block;position:relative;width:49%;margin-left:5px;margin-bottom:20px;">
-		<div style="display: inline-block;"><img src="${path }/resources/img/reser/h1.png" width="200px;" height="200px;"></div>
+		<div style="display: inline-block;"><img src="${path }/resources/img/reser/f4.jpg" width="200px;" height="200px;"></div>
 		<div id="hlist" style="display:inline-block;position:absolute;">
 			<p><span style="font-size:20px;color: #286090">병원명</span>&nbsp;&nbsp;
 			<span style="font-size:20px;">승하병원</span></p>
