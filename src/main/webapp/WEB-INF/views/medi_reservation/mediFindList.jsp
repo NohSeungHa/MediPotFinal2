@@ -71,10 +71,10 @@
 		}
 		#subjectList>img:hover{
 			cursor:pointer;
-			border:4px solid #BEBEBE;
+			border:5px solid white;
 		}
 	</style>
-	<br><br><br>
+	<br>
 	<div style="margin-bottom:10px;position:relative;height:auto;">
 	<div style="width:100%;height:50px;font-size:20px;text-align:center;background-color:#286090;padding-top:11px;color:white;border-radius:8px;">
 		지역 선택 및 진료과목 선택
@@ -82,31 +82,32 @@
 		<div id="locList" style="text-align: center;">
 			<button class="btn btn-default loc" value="S1">서울</button><br>
 			<button class="btn btn-default loc" value="I1">인천</button><br>
-			<button class="btn btn-default loc">경기도</button><br>
-			<button class="btn btn-default loc">강원도</button><br>
-			<button class="btn btn-default loc">충청도</button><br>
-			<button class="btn btn-default loc">전라도</button><br>
-			<button class="btn btn-default loc">경상도</button><br>
-			<button class="btn btn-default loc">제주도</button>
+			<button class="btn btn-default loc" value="K1">경기도</button><br>
+			<button class="btn btn-default loc" value="K2">강원도</button><br>
+			<button class="btn btn-default loc" value="C1">충청도</button><br>
+			<button class="btn btn-default loc" value="J1">전라도</button><br>
+			<button class="btn btn-default loc" value="K3">경상도</button><br>
+			<button class="btn btn-default loc" value="J1">제주도</button>
 		</div>
 		<div id="subjectList" style="text-align: center;">
-			<img class="subImg" src="${path }/resources/img/reser/h1.png" width="140px;" height="140px;">
-			<img class="subImg" src="${path }/resources/img/reser/h2.png" width="140px;" height="140px;">
-			<img class="subImg" src="${path }/resources/img/reser/h3.png" width="140px;" height="140px;">
-			<img class="subImg" src="${path }/resources/img/reser/h4.png" width="140px;" height="140px;">
-			<img class="subImg" src="${path }/resources/img/reser/h5.png" width="140px;" height="140px;">
-			<img class="subImg" src="${path }/resources/img/reser/h6.png" width="140px;" height="140px;">
-			<img class="subImg" src="${path }/resources/img/reser/h7.png" width="140px;" height="140px;">
-			<img class="subImg" src="${path }/resources/img/reser/h8.png" width="140px;" height="140px;">
-			<img class="subImg" src="${path }/resources/img/reser/h9.png" width="140px;" height="140px;">
-			<img class="subImg" src="${path }/resources/img/reser/h10.png" width="140px;" height="140px;">
-			<img class="subImg" src="${path }/resources/img/reser/h11.png" width="140px;" height="140px;">
+			<img class="subImg" name="J1" src="${path }/resources/img/reser/h1.png" width="140px;" height="140px;">
+			<img class="subImg" name="C1" src="${path }/resources/img/reser/h2.png" width="140px;" height="140px;">
+			<img class="subImg" name="P1" src="${path }/resources/img/reser/h3.png" width="140px;" height="140px;">
+			<img class="subImg" name="S1" src="${path }/resources/img/reser/h4.png" width="140px;" height="140px;">
+			<img class="subImg" name="A1" src="${path }/resources/img/reser/h5.png" width="140px;" height="140px;">
+			<img class="subImg" name="B1" src="${path }/resources/img/reser/h6.png" width="140px;" height="140px;">
+			<img class="subImg" name="S1" src="${path }/resources/img/reser/h7.png" width="140px;" height="140px;">
+			<img class="subImg" name="N1" src="${path }/resources/img/reser/h8.png" width="140px;" height="140px;">
+			<img class="subImg" name="E1" src="${path }/resources/img/reser/h9.png" width="140px;" height="140px;">
+			<img class="subImg" name="H1" src="${path }/resources/img/reser/h10.png" width="140px;" height="140px;">
+			<img class="subImg" name="S2" src="${path }/resources/img/reser/h11.png" width="140px;" height="140px;">
 		</div>
 	
 	</div>
 	<script>
 		$(function () {		
 			var loc="";
+			var sub="";
 			$('.loc').click(function () {
 				if($(this).attr('class').indexOf("btn-primary")>0){
 					$(this).removeClass("btn-primary");
@@ -122,7 +123,8 @@
 			});
 			$(".subImg").click(function () {
 				if(loc.length>0){
-					alert("지역선택 완료");
+					sub=$(this).attr("name");
+					alert(sub);
 				}else{
 					alert("지역을 먼저 선택해 주세요");
 				}
