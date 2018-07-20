@@ -73,6 +73,17 @@
 			cursor:pointer;
 			border:5px solid white;
 		}
+		#hlist{
+			padding-left:20px;
+			padding-top:20px;
+		}
+		.mediList{
+			border:4px solid white;
+		}
+		.mediList:hover{
+			cursor:pointer;
+			border:4px solid #286090;
+		}
 	</style>
 	<br>
 	<div style="margin-bottom:10px;position:relative;height:auto;">
@@ -133,6 +144,81 @@
 		});
 	</script>
 	<div style="border:2px solid lightgray;width:100%;"></div>
-		
-</div>
+	
+	<div style="margin:5px;position:relative;margin-bottom:50px;">
+	<div style="width:100%;height:50px;font-size:20px;text-align:center;background-color:#286090;padding-top:11px;color:white;border-radius:8px;margin-bottom:10px;">
+		병원 리스트
+	</div>
+	<div class="mediList" style="display:inline-block;width:49%;position:relative;margin-bottom:20px;">
+		<div style="display: inline-block;"><img src="${path }/resources/img/reser/h1.png" width="200px;" height="200px;"></div>
+		<div id="hlist" style="display: inline-block;position:absolute;">
+			<p><span style="font-size:20px;color: #286090">병원명</span>&nbsp;&nbsp;
+			<span style="font-size:20px;">승하병원</span></p>
+			
+			<p><span style="font-size:20px;color: #286090">진료과목</span>&nbsp;&nbsp;
+			<span style="font-size:20px;">정형외과</span></p>
+			
+			<p><span style="font-size:20px;color: #286090">전화번호</span>&nbsp;&nbsp;
+			<span style="font-size:20px;">02-123-4567</span></p>
+			
+			<p><span style="font-size:20px;color: #286090">주소</span>&nbsp;&nbsp;
+			<span style="font-size:20px;">서울특별시 관악구 봉천동645-11</span></p>
+		</div>
+	</div>
+	<div class="mediList" style="display:inline-block;position:relative;width:49%;margin-left:5px;margin-bottom:20px;">
+		<div style="display: inline-block;"><img src="${path }/resources/img/reser/h1.png" width="200px;" height="200px;"></div>
+		<div id="hlist" style="display:inline-block;position:absolute;">
+			<p><span style="font-size:20px;color: #286090">병원명</span>&nbsp;&nbsp;
+			<span style="font-size:20px;">승하병원</span></p>
+			
+			<p><span style="font-size:20px;color: #286090">진료과목</span>&nbsp;&nbsp;
+			<span style="font-size:20px;">정형외과</span></p>
+			
+			<p><span style="font-size:20px;color: #286090">전화번호</span>&nbsp;&nbsp;
+			<span style="font-size:20px;">02-123-4567</span></p>
+			
+			<p><span style="font-size:20px;color: #286090">주소</span>&nbsp;&nbsp;
+			<span style="font-size:20px;">서울특별시 관악구 봉천동645-11</span></p>
+		</div>
+	</div>
+	<div class="mediList" style="display:inline-block;width:49%;position:relative;margin-bottom:20px;">
+		<div style="display: inline-block;"><img src="${path }/resources/img/reser/h1.png" width="200px;" height="200px;"></div>
+		<div id="hlist" style="display: inline-block;position:absolute;">
+			<p><span style="font-size:20px;color: #286090">병원명</span>&nbsp;&nbsp;
+			<span style="font-size:20px;">승하병원</span></p>
+			
+			<p><span style="font-size:20px;color: #286090">진료과목</span>&nbsp;&nbsp;
+			<span style="font-size:20px;">정형외과</span></p>
+			
+			<p><span style="font-size:20px;color: #286090">전화번호</span>&nbsp;&nbsp;
+			<span style="font-size:20px;">02-123-4567</span></p>
+			
+			<p><span style="font-size:20px;color: #286090">주소</span>&nbsp;&nbsp;
+			<span style="font-size:20px;">서울특별시 관악구 봉천동645-11</span></p>
+		</div>
+	</div>
+	<div class="mediList" style="display:inline-block;position:relative;width:49%;margin-left:5px;margin-bottom:20px;">
+		<div style="display: inline-block;"><img src="${path }/resources/img/reser/h1.png" width="200px;" height="200px;"></div>
+		<div id="hlist" style="display:inline-block;position:absolute;">
+			<p><span style="font-size:20px;color: #286090">병원명</span>&nbsp;&nbsp;
+			<span style="font-size:20px;">승하병원</span></p>
+			
+			<p><span style="font-size:20px;color: #286090">진료과목</span>&nbsp;&nbsp;
+			<span style="font-size:20px;">정형외과</span></p>
+			
+			<p><span style="font-size:20px;color: #286090">전화번호</span>&nbsp;&nbsp;
+			<span style="font-size:20px;">02-123-4567</span></p>
+			
+			<p><span style="font-size:20px;color: #286090">주소</span>&nbsp;&nbsp;
+			<span style="font-size:20px;">서울특별시 관악구 봉천동645-11</span></p>
+		</div>
+	</div>
+	
+	<script>
+		$(function () {
+			$(".mediList").click
+		});
+	</script>
+	</div>
+	</div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
