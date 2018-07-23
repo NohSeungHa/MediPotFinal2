@@ -8,8 +8,12 @@
 	<c:set var="path" value="<%=request.getContextPath() %>"/>
      <%
      Date day=new Date();
-     SimpleDateFormat today=new SimpleDateFormat("yyyy-MM-dd");
-     String today2=today.format(day);%>
+     SimpleDateFormat today=new SimpleDateFormat("yyyy-MM-dd E");
+     String dt=today.format(day);
+     String d=dt.substring(8, 10);
+     String e=dt.substring(11,12);
+     
+     %>
 
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="Reser" name="pageTitle"/>
@@ -34,7 +38,14 @@
 		cursor: pointer;
 		border: 2px solid #286090;
 	}	
-
+	#tbl-cal{
+		text-align:center;
+		font-size:30px;
+	}
+	#tbl-cal th{
+	text-align:center;
+		width:70px;
+	}
 </style>
 
 <div style="height:1000px;">
@@ -73,8 +84,28 @@
 			날짜 선택
 		</div>
 		<div>
-			<table>
-				
+			<table id="tbl-cal" align="center">
+				<tr>
+					<th colspan="7">7월</th>
+				</tr>
+				<tr>
+					<th><span style="color: red;">일</span></th>
+					<th>월</th>
+					<th>화</th>
+					<th>수</th>
+					<th>목</th>
+					<th>금</th>
+					<th>토</th>
+				</tr>
+				<tr>
+					<td><%=e.equals("일")?d:"" %></td>
+					<td><%=e.equals("월")?d:"" %></td>
+					<td><%=e.equals("화")?d:"" %></td>
+					<td><%=e.equals("수")?d:"" %></td>
+					<td><%=e.equals("목")?d:"" %></td>
+					<td><%=e.equals("금")?d:"" %></td>
+					<td><%=e.equals("토")?d:"" %></td>
+				</tr>
 			</table>
 		</div>
 	</div>
