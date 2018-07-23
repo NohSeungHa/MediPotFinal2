@@ -1,5 +1,7 @@
 package com.medi.pot.reservation.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -10,6 +12,11 @@ public class ReservationController {
 	public String reser() {
 		
 		return "medi_reservation/mediFindList";
+	}
+	
+	@RequestMapping("/medi/mediInfo")
+	public String mediInfo() {
+		return "medi_reservation/mediInfo";
 	}
 
 }

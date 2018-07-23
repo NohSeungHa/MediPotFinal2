@@ -12,7 +12,7 @@
      String today2=today.format(day);%>
 
 <jsp:include page="/WEB-INF/views/common/header.jsp">
-	<jsp:param value=" " name="pageTitle"/>
+	<jsp:param value="" name="pageTitle"/>
 </jsp:include>
  <link href='${path }/resources/css/fullcalendar.min.css' rel='stylesheet' />
 <link href='${path }/resources/css/fullcalendar.print.min.css' rel='stylesheet' media='print' />

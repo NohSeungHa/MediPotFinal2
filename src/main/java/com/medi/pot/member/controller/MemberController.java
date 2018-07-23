@@ -1,5 +1,7 @@
 package com.medi.pot.member.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -13,6 +15,8 @@ public class MemberController {
 			System.out.println("들어옴");
 			return "redirect:/";
 		}
+		
+
 
 
 

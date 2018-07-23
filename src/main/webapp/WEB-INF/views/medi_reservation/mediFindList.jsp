@@ -6,7 +6,7 @@
 
 	<c:set var='path' value="<%=request.getContextPath() %>"></c:set>
 <jsp:include page="/WEB-INF/views/common/header.jsp">
-<jsp:param value="HomeSpring" name="pageTitle"></jsp:param>
+<jsp:param value="Hospital Search" name="pageTitle"></jsp:param>
 </jsp:include>
 	<div class="container">
 	<div id="searchH">
@@ -91,14 +91,14 @@
 		지역 선택 및 진료과목 선택
 	</div>
 		<div id="locList" style="text-align: center;">
-			<button class="btn btn-default loc" value="S1">서울</button><br>
-			<button class="btn btn-default loc" value="I1">인천</button><br>
-			<button class="btn btn-default loc" value="K1">경기도</button><br>
-			<button class="btn btn-default loc" value="K2">강원도</button><br>
-			<button class="btn btn-default loc" value="C1">충청도</button><br>
-			<button class="btn btn-default loc" value="J1">전라도</button><br>
-			<button class="btn btn-default loc" value="K3">경상도</button><br>
-			<button class="btn btn-default loc" value="J1">제주도</button>
+			<button class="btn btn-default loc" value="서울">서울</button><br>
+			<button class="btn btn-default loc" value="인천">인천</button><br>
+			<button class="btn btn-default loc" value="경기">경기도</button><br>
+			<button class="btn btn-default loc" value="강원">강원도</button><br>
+			<button class="btn btn-default loc" value="충청">충청도</button><br>
+			<button class="btn btn-default loc" value="전라">전라도</button><br>
+			<button class="btn btn-default loc" value="경상">경상도</button><br>
+			<button class="btn btn-default loc" value="제주">제주도</button>
 		</div>
 		<div id="subjectList" style="text-align: center;">
 			<img class="subImg" name="J1" src="${path }/resources/img/reser/h1.png" width="140px;" height="140px;">
@@ -135,6 +135,7 @@
 			$(".subImg").click(function () {
 				if(loc.length>0){
 					sub=$(this).attr("name");
+					alert(loc);
 					alert(sub);
 				}else{
 					alert("지역을 먼저 선택해 주세요");
@@ -216,7 +217,9 @@
 	
 	<script>
 		$(function () {
-			$(".mediList").click
+			$(".mediList").click(function () {
+				location.href='${path}/medi/mediInfo';
+			});
 		});
 	</script>
 	</div>

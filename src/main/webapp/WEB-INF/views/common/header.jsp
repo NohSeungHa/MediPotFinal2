@@ -19,7 +19,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width", initial-scale="1">
-	<title>메디팟 인덱스</title>
+	<title>${param.pageTitle }</title>
 	<link rel="stylesheet" href="${path }/resources/css/bootstrap.css"><!-- 외부 스타일 시트 -->
 	<link rel="stylesheet" href="${path }/resources/css/medipotFinal.css">
 	<link href="http://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
