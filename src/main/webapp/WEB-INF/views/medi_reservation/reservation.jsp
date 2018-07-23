@@ -12,113 +12,79 @@
      String today2=today.format(day);%>
 
 <jsp:include page="/WEB-INF/views/common/header.jsp">
-	<jsp:param value=" " name="pageTitle"/>
+	<jsp:param value="Reser" name="pageTitle"/>
 </jsp:include>
- <link href='${path }/resources/css/fullcalendar.min.css' rel='stylesheet' />
-<link href='${path }/resources/css/fullcalendar.print.min.css' rel='stylesheet' media='print' />
-<script src='${path }/resources/js/moment.min.js'></script>
-<script src='${path }/resources/js/jquery.min.js'></script>
-<script src='${path }/resources/js/gcal.js'></script>
-<script src='${path }/resources/js//lang-all.js'></script>
-<script src='${path }/resources/js/fullcalendar.min.js'></script>
-<script>
-
-  $(document).ready(function() {
-
-    $('#calendar').fullCalendar({
-      header: {
-        left: 'prev,next today',
-        center: 'title',
-        right: 'month' /* ,agendaWeek,agendaDay,listWeek */
-      },
-      defaultDate: '<%=today2%>',
-      navLinks: true, // can click day/week names to navigate views
-      lang:"ko",
-      editable: true,
-      eventLimit: true, // allow "more" link when too many events
-      googleCalendarApiKey:"AIzaSyDcnW6WejpTOCffshGDDb4neIrXVUA1EAE",
-      events: [
-    	// 대한민국의 공휴일
-          {
-                googleCalendarId : "ko.south_korea#holiday@group.v.calendar.google.com"
-              , className : "koHolidays"
-              , color : "#FF0000"
-              , textColor : "#FFFFFF"
-          },
-        {
-          title: 'All Day Event',
-          start: '2018-03-01',
-        },
-        {
-          title: 'Long Event',
-          start: '2018-03-07',
-          end: '2018-03-10'
-        },
-        {
-          id: 999,
-          title: 'Repeating Event',
-          start: '2018-03-09T16:00:00'
-        },
-        {
-          id: 999,
-          title: 'Repeating Event',
-          start: '2018-03-16T16:00:00'
-        },
-        {
-          title: 'Conference',
-          start: '2018-03-11',
-          end: '2018-03-13'
-        },
-        {
-          title: 'Meeting',
-          start: '2018-03-12T10:30:00',
-          end: '2018-03-12T12:30:00'
-        },
-        {
-          title: 'Lunch',
-          start: '2018-03-12T12:00:00'
-        },
-        {
-          title: 'Meeting',
-          start: '2018-03-12T14:30:00'
-        },
-        {
-          title: 'Happy Hour',
-          start: '2018-03-12T17:30:00'
-        },
-        {
-          title: 'Dinner',
-          start: '2018-03-12T20:00:00'
-        },
-        {
-          title: 'Birthday Party',
-          start: '2018-03-13T07:00:00'
-        },
-        {
-          title: 'Click for Google',
-          url: 'http://google.com/',
-          start: '2018-03-28'
-        }
-      ]
-    });
-
-  });
-
-</script>
-
 <style>
-
-
-  #calendar {
-    max-width: 400px;
-    margin: 0 auto;
-  }
+	#docInfo{
+		font-size:20px;
+	}
+	#docInfo th{
+		color: #286090;
+	}
+	#docInfo th{
+		text-align:center;
+		width:90px;
+	}
+	#docInfo-div{
+		border:2px solid lightgray;
+		border-radius:5px;
+		box-shadow:2px 2px 5px lightgray;
+	}
+	#docInfo-div:hover{
+		cursor: pointer;
+		border: 2px solid #286090;
+	}	
 
 </style>
 
-<br><br><br><br><br><br><br>
-  <div id='calendar'></div>
-<br><br><br><br><br><br><br>
+<div style="height:1000px;">
+	<div class="col-sm-4">
+		<div style="width:100%;height:50px;font-size:20px;text-align:center;background-color:#286090;padding-top:11px;color:white;border-radius:8px;margin-bottom:10px;">
+			의료진 정보
+		</div>
+		<div id="docInfo-div" style="height:auto;margin-bottom:10px;">
+			<table id="docInfo">
+				<tr>
+					<td rowspan="4"><img src="${path }/resources/img/reser/f2.jpg" width="200px;" height="200px;"></td>
+					<th>이름</th>
+					<td>채슬기</td>
+				</tr>
+				<tr>
+					<th>진료과</th>
+					<td>정신과</td>
+				</tr>
+				<tr>
+					<th>전문분야</th>
+					<td>청소년 정신치료,분노조절장애 치료</td>
+				</tr>
+				<tr>
+					<th>학력/경력</th>
+					<td>한양대 정보융합 졸업<br>
+						석사<br>
+						굳
+					</td>
+				</tr>
+			</table>
+		</div>	
+		
+	</div>
+	<div class="col-sm-4">
+		<div style="width:100%;height:50px;font-size:20px;text-align:center;background-color:#286090;padding-top:11px;color:white;border-radius:8px;margin-bottom:10px;">
+			날짜 선택
+		</div>
+		<div>
+			<table>
+				
+			</table>
+		</div>
+	</div>
+	<div class="col-sm-4">
+		<div style="width:100%;height:50px;font-size:20px;text-align:center;background-color:#286090;padding-top:11px;color:white;border-radius:8px;margin-bottom:10px;">
+			시간 선택
+		</div>
+	</div>
+</div>
+
 
 
 
