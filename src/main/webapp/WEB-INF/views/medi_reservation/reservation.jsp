@@ -12,20 +12,78 @@
      String today2=today.format(day);%>
 
 <jsp:include page="/WEB-INF/views/common/header.jsp">
-	<jsp:param value="" name="pageTitle"/>
+	<jsp:param value="Reser" name="pageTitle"/>
 </jsp:include>
- <link href='${path }/resources/css/fullcalendar.min.css' rel='stylesheet' />
-<link href='${path }/resources/css/fullcalendar.print.min.css' rel='stylesheet' media='print' />
-<script src='${path }/resources/js/moment.min.js'></script>
-<script src='${path }/resources/js/jquery.min.js'></script>
-<script src='${path }/resources/js/gcal.js'></script>
-<script src='${path }/resources/js//lang-all.js'></script>
-<script src='${path }/resources/js/fullcalendar.min.js'></script>
+<style>
+	#docInfo{
+		font-size:20px;
+	}
+	#docInfo th{
+		color: #286090;
+	}
+	#docInfo th{
+		text-align:center;
+		width:90px;
+	}
+	#docInfo-div{
+		border:2px solid lightgray;
+		border-radius:5px;
+		box-shadow:2px 2px 5px lightgray;
+	}
+	#docInfo-div:hover{
+		cursor: pointer;
+		border: 2px solid #286090;
+	}	
 
+</style>
 
-
-
-
+<div style="height:1000px;">
+	<div class="col-sm-4">
+		<div style="width:100%;height:50px;font-size:20px;text-align:center;background-color:#286090;padding-top:11px;color:white;border-radius:8px;margin-bottom:10px;">
+			의료진 정보
+		</div>
+		<div id="docInfo-div" style="height:auto;margin-bottom:10px;">
+			<table id="docInfo">
+				<tr>
+					<td rowspan="4"><img src="${path }/resources/img/reser/f2.jpg" width="200px;" height="200px;"></td>
+					<th>이름</th>
+					<td>채슬기</td>
+				</tr>
+				<tr>
+					<th>진료과</th>
+					<td>정신과</td>
+				</tr>
+				<tr>
+					<th>전문분야</th>
+					<td>청소년 정신치료,분노조절장애 치료</td>
+				</tr>
+				<tr>
+					<th>학력/경력</th>
+					<td>한양대 정보융합 졸업<br>
+						석사<br>
+						굳
+					</td>
+				</tr>
+			</table>
+		</div>	
+		
+	</div>
+	<div class="col-sm-4">
+		<div style="width:100%;height:50px;font-size:20px;text-align:center;background-color:#286090;padding-top:11px;color:white;border-radius:8px;margin-bottom:10px;">
+			날짜 선택
+		</div>
+		<div>
+			<table>
+				
+			</table>
+		</div>
+	</div>
+	<div class="col-sm-4">
+		<div style="width:100%;height:50px;font-size:20px;text-align:center;background-color:#286090;padding-top:11px;color:white;border-radius:8px;margin-bottom:10px;">
+			시간 선택
+		</div>
+	</div>
+</div>
 
 
 
