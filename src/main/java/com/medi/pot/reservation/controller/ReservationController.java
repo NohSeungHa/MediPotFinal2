@@ -18,5 +18,11 @@ public class ReservationController {
 	public String mediInfo() {
 		return "medi_reservation/mediInfo";
 	}
+	
+	@RequestMapping("/medi/reser")
+	public String mediReser() {
+		
+		return "medi_reservation/reservation";
+	}
 
 }

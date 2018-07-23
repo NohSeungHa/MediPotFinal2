@@ -88,7 +88,16 @@
 						</ul>
 					</li>
 						<li><a href="#">HELP ZONE</a></li>
-				</ul>			
+				</ul>
+				<script>
+					$(function () {
+						$('.dropdown-toggle').click(function () {
+							$('.dropdown-toggle').css("background-color","#2C3E50");
+							
+						});
+						
+					});
+				</script>	
 			</div>
 
 		</div>		

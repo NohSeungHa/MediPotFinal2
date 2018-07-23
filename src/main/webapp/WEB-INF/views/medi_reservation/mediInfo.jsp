@@ -120,7 +120,13 @@
 			</table>
 		</div>
 	</div>
-
+<script>
+	$(function () {
+		$('#reser').click(function () {
+			location.href='${path}/medi/reser'
+		});
+	});
+</script>
 		
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
