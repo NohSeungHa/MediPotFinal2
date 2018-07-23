@@ -1,3 +1,6 @@
+<%@page import="java.util.Locale"%>
+<%@page import="java.util.GregorianCalendar"%>
+<%@page import="java.util.Calendar"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -8,11 +11,40 @@
 	<c:set var="path" value="<%=request.getContextPath() %>"/>
      <%
      Date day=new Date();
+     Calendar cal=new GregorianCalendar(Locale.KOREA);
+     cal.setTime(new Date());
      SimpleDateFormat today=new SimpleDateFormat("yyyy-MM-dd E");
      String dt=today.format(day);
+     String mon=dt.substring(5,7);
      String d=dt.substring(8, 10);
      String e=dt.substring(11,12);
-     
+     int dd=cal.get(Calendar.DAY_OF_MONTH);
+     cal.add(Calendar.DAY_OF_YEAR, 1);
+     int dd2=cal.get(Calendar.DAY_OF_MONTH);
+     cal.add(Calendar.DAY_OF_YEAR, 1);
+     int dd3=cal.get(Calendar.DAY_OF_MONTH);
+     cal.add(Calendar.DAY_OF_YEAR, 1);
+     int dd4=cal.get(Calendar.DAY_OF_MONTH);
+     cal.add(Calendar.DAY_OF_YEAR, 1);
+     int dd5=cal.get(Calendar.DAY_OF_MONTH);
+     cal.add(Calendar.DAY_OF_YEAR, 1);
+     int dd6=cal.get(Calendar.DAY_OF_MONTH);
+     cal.add(Calendar.DAY_OF_YEAR, 1);
+     int dd7=cal.get(Calendar.DAY_OF_MONTH);
+     cal.add(Calendar.DAY_OF_YEAR, 1);
+     int dd8=cal.get(Calendar.DAY_OF_MONTH);
+     cal.add(Calendar.DAY_OF_YEAR, 1);
+     int dd9=cal.get(Calendar.DAY_OF_MONTH);
+     cal.add(Calendar.DAY_OF_YEAR, 1);
+     int dd10=cal.get(Calendar.DAY_OF_MONTH);
+     cal.add(Calendar.DAY_OF_YEAR, 1);
+     int dd11=cal.get(Calendar.DAY_OF_MONTH);
+     cal.add(Calendar.DAY_OF_YEAR, 1);
+     int dd12=cal.get(Calendar.DAY_OF_MONTH);
+     cal.add(Calendar.DAY_OF_YEAR, 1);
+     int dd13=cal.get(Calendar.DAY_OF_MONTH);
+     cal.add(Calendar.DAY_OF_YEAR, 1);
+     int dd14=cal.get(Calendar.DAY_OF_MONTH);
      %>
 
 <jsp:include page="/WEB-INF/views/common/header.jsp">
@@ -86,7 +118,7 @@
 		<div>
 			<table id="tbl-cal" align="center">
 				<tr>
-					<th colspan="7">7월</th>
+					<th colspan="7"><%=mon %>월</th>
 				</tr>
 				<tr>
 					<th><span style="color: red;">일</span></th>
@@ -97,15 +129,200 @@
 					<th>금</th>
 					<th>토</th>
 				</tr>
+				<c:if test='<%=e.equals("일")%>'>
 				<tr>
-					<td><%=e.equals("일")?d:"" %></td>
-					<td><%=e.equals("월")?d:"" %></td>
-					<td><%=e.equals("화")?d:"" %></td>
-					<td><%=e.equals("수")?d:"" %></td>
-					<td><%=e.equals("목")?d:"" %></td>
-					<td><%=e.equals("금")?d:"" %></td>
-					<td><%=e.equals("토")?d:"" %></td>
+					<td><%=dd %></td>
+					<td><%=dd2 %></td>
+					<td><%=dd3 %></td>
+					<td><%=dd4 %></td>
+					<td><%=dd5 %></td>
+					<td><%=dd6 %></td>
+					<td><%=dd7 %></td>
 				</tr>
+				<tr>
+					<td><%=dd8%></td>
+					<td><%=dd9 %></td>
+					<td><%=dd10 %></td>
+					<td><%=dd11 %></td>
+					<td><%=dd12 %></td>
+					<td><%=dd13 %></td>
+					<td><%=dd14 %></td>
+				</tr>
+				</c:if>
+				<c:if test='<%=e.equals("월")%>'>
+				<tr>
+					<td></td>
+					<td><%=dd %></td>
+					<td><%=dd2 %></td>
+					<td><%=dd3 %></td>
+					<td><%=dd4 %></td>
+					<td><%=dd5 %></td>
+					<td><%=dd6 %></td>
+				</tr>
+				<tr>
+					<td><%=dd7%></td>
+					<td><%=dd8 %></td>
+					<td><%=dd9 %></td>
+					<td><%=dd10 %></td>
+					<td><%=dd11 %></td>
+					<td><%=dd12 %></td>
+					<td><%=dd13 %></td>
+				</tr>
+				<tr>
+					<td><%=dd14 %></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				</c:if>
+				<c:if test='<%=e.equals("화")%>'>
+				<tr>
+					<td></td>
+					<td></td>
+					<td><%=dd %></td>
+					<td><%=dd2 %></td>
+					<td><%=dd3 %></td>
+					<td><%=dd4 %></td>
+					<td><%=dd5 %></td>
+				</tr>
+				<tr>
+					<td><%=dd6%></td>
+					<td><%=dd7 %></td>
+					<td><%=dd8 %></td>
+					<td><%=dd9 %></td>
+					<td><%=dd10 %></td>
+					<td><%=dd11 %></td>
+					<td><%=dd12 %></td>
+				</tr>
+				<tr>
+					<td><%=dd13 %></td>
+					<td><%=dd14 %></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				</c:if>
+				<c:if test='<%=e.equals("수")%>'>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td><%=dd %></td>
+					<td><%=dd2 %></td>
+					<td><%=dd3 %></td>
+					<td><%=dd4 %></td>
+				</tr>
+				<tr>
+					<td><%=dd5%></td>
+					<td><%=dd6 %></td>
+					<td><%=dd7 %></td>
+					<td><%=dd8 %></td>
+					<td><%=dd9 %></td>
+					<td><%=dd10 %></td>
+					<td><%=dd11 %></td>
+				</tr>
+				<tr>
+					<td><%=dd12 %></td>
+					<td><%=dd13 %></td>
+					<td><%=dd14 %></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				</c:if>
+				<c:if test='<%=e.equals("목")%>'>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td><%=dd %></td>
+					<td><%=dd2 %></td>
+					<td><%=dd3 %></td>
+				</tr>
+				<tr>
+					<td><%=dd4%></td>
+					<td><%=dd5 %></td>
+					<td><%=dd6 %></td>
+					<td><%=dd7 %></td>
+					<td><%=dd8 %></td>
+					<td><%=dd9 %></td>
+					<td><%=dd10 %></td>
+				</tr>
+				<tr>
+					<td><%=dd11 %></td>
+					<td><%=dd12 %></td>
+					<td><%=dd13 %></td>
+					<td><%=dd14 %></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				</c:if>
+				<c:if test='<%=e.equals("금")%>'>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td><%=dd %></td>
+					<td><%=dd2 %></td>
+				</tr>
+				<tr>
+					<td><%=dd3%></td>
+					<td><%=dd4 %></td>
+					<td><%=dd5 %></td>
+					<td><%=dd6 %></td>
+					<td><%=dd7 %></td>
+					<td><%=dd8 %></td>
+					<td><%=dd9 %></td>
+				</tr>
+				<tr>
+					<td><%=dd10 %></td>
+					<td><%=dd11 %></td>
+					<td><%=dd12 %></td>
+					<td><%=dd13 %></td>
+					<td><%=dd14 %></td>
+					<td></td>
+					<td></td>
+				</tr>
+				</c:if>
+				<c:if test='<%=e.equals("토")%>'>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td><%=dd %></td>
+				</tr>
+				<tr>
+					<td><%=dd2%></td>
+					<td><%=dd3 %></td>
+					<td><%=dd4 %></td>
+					<td><%=dd5 %></td>
+					<td><%=dd6 %></td>
+					<td><%=dd7 %></td>
+					<td><%=dd8 %></td>
+				</tr>
+				<tr>
+					<td><%=dd9 %></td>
+					<td><%=dd10 %></td>
+					<td><%=dd11 %></td>
+					<td><%=dd12 %></td>
+					<td><%=dd13 %></td>
+					<td><%=dd14 %></td>
+					<td></td>
+				</tr>
+				</c:if>
 			</table>
 		</div>
 	</div>
