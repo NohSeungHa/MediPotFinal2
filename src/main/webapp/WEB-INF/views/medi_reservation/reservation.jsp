@@ -137,7 +137,7 @@
 	         
 	         
 	        ChineseCalendar chinaCal = new ChineseCalendar();
-	        Calendar cal = Calendar.getInstance() ;
+	        Calendar cal = Calendar.getInstance();
 	         
 	        cal.set(Calendar.YEAR, Integer.parseInt(dt.substring(0, 4)));
 	        cal.set(Calendar.MONTH, Integer.parseInt(dt.substring(5, 7)) - 1);
