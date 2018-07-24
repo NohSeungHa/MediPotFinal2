@@ -261,6 +261,7 @@
 		border-radius:5px;
 		box-shadow:2px 2px 5px lightgray;
 	}
+	
 </style>
 
 <div style="height:1000px;">
@@ -298,7 +299,7 @@
 		<div style="width:100%;height:50px;font-size:20px;text-align:center;background-color:#286090;padding-top:11px;color:white;border-radius:8px;margin-bottom:10px;">
 			날짜 선택
 		</div>
-		<div>
+		<div id="calList">
 			<table id="tbl-cal" align="center">
 				<tr>
 					<th colspan="7"><%=mon %>월</th>
@@ -335,7 +336,7 @@
 				<c:if test='<%=e.equals("월")%>'>
 				<tr>
 					<td></td>
-					<td><%if(!hdc && !hdce){ %><%=dd %><% }else {%><span style="color: red;"><%=dd %></span><%} %></td>
+					<td><%if(!hdc && !hdce){ %><button class="calb" value="<%=y%>"><%=dd %></button><% }else {%><span style="color: red;"><%=dd %></span><%} %></td>
 					<td><%if(!hdc2 && !hdce2){ %><button class="calb" value="<%=y2 %>"><%=dd2 %></button><% }else {%><span style="color: red;"><%=dd2 %></span><%} %></td>
 					<td><%if(!hdc3 && !hdce3){ %><button class="calb" value="<%=y3%>"><%=dd3 %></button><% }else {%><span style="color: red;"><%=dd3 %></span><%} %></td>
 					<td><%if(!hdc4 && !hdce4){ %><button class="calb" value="<%=y4%>"><%=dd4 %></button><% }else {%><span style="color: red;"><%=dd4 %></span><%} %></td>
@@ -510,12 +511,15 @@
 				</c:if>
 			</table>
 		</div>
+		<div style="text-align:center;">
+			<img alt="달력사진" src="${path }/resources/img/reser/reserCalendar.png" height="400px;">
+		</div>
+		
 	</div>
 	<div class="col-sm-4">
 		<div style="width:100%;height:50px;font-size:20px;text-align:center;background-color:#286090;padding-top:11px;color:white;border-radius:8px;margin-bottom:10px;">
 			시간 선택
 		</div>
-		
 	</div>
 </div>
 <script>
