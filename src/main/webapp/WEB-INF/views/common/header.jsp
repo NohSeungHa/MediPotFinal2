@@ -19,7 +19,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width", initial-scale="1">
-	<title>메디팟 인덱스</title>
+	<title>${param.pageTitle }</title>
 	<link rel="stylesheet" href="${path }/resources/css/bootstrap.css"><!-- 외부 스타일 시트 -->
 	<link rel="stylesheet" href="${path }/resources/css/medipotFinal.css">
 	<link href="http://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
@@ -88,7 +88,16 @@
 						</ul>
 					</li>
 						<li><a href="#">HELP ZONE</a></li>
-				</ul>			
+				</ul>
+				<script>
+					$(function () {
+						$('.dropdown-toggle').click(function () {
+							$('.dropdown-toggle').css("background-color","#2C3E50");
+							
+						});
+						
+					});
+				</script>	
 			</div>
 
 		</div>		
