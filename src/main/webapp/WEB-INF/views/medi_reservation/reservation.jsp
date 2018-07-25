@@ -92,7 +92,7 @@
      boolean hdc10=eTest(hd10);
      boolean hdce10=yTest(hd10);
      
-     cal.add(Calendar.DAY_OF_YEAR, 1);   
+     cal.add(Calendar.DAY_OF_YEAR, 1);
      int dd11=cal.get(Calendar.DAY_OF_MONTH);
      String hd11=tod2.format(cal.getTime());
      String y11=tod.format(cal.getTime());
@@ -398,7 +398,7 @@
 					<td></td>
 					<td></td>
 					<td></td>
-					<td><%if(!hdc && !hdce){ %><%=dd %><% }else {%><span style="color: red;"><%=dd %></span><%} %></td>
+					<td><%if(!hdc && !hdce){ %><button class="calb" value="<%=y %>"><%=dd %></button><% }else {%><span style="color: red;"><%=dd %></span><%} %></td>
 					<td><%if(!hdc2 && !hdce2){ %><button class="calb" value="<%=y2 %>"><%=dd2 %></button><% }else {%><span style="color: red;"><%=dd2 %></span><%} %></td>
 					<td><%if(!hdc3 && !hdce3){ %><button class="calb" value="<%=y3%>"><%=dd3 %></button><% }else {%><span style="color: red;"><%=dd3 %></span><%} %></td>
 					<td><%if(!hdc4 && !hdce4){ %><button class="calb" value="<%=y4%>"><%=dd4 %></button><% }else {%><span style="color: red;"><%=dd4 %></span><%} %></td>
