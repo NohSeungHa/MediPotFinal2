@@ -9,6 +9,12 @@
 		  Aliases만 설정해주면됨-->
 	<typeAliases>
 		<typeAlias type="com.medi.pot.notice.vo.HospitalNotice" alias="HospitalNotice"/>
+		<typeAlias alias="member" type="com.medi.pot.member.model.vo.Member" />
+		<typeAlias alias="hospital" type="com.medi.pot.member.model.vo.Hospital" />
 	</typeAliases>
+	
+	
+	
+	
 	
 </configuration>

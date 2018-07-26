@@ -68,10 +68,34 @@
 				</form>
 				<!-- 검색창만들기 끝 -->
 
+
+				<!-- 로그인 전 -->
+				<c:if test="${memberLoggedIn==null }">
 				<ul class="nav navbar-nav navbar-right" style="margin-top:2.5%;margin-right:1%;">
-					<li><a href="reservation.html">로그인</a></li>
-					<li><a href="reservation.html">회원가입</a></li>
+					<li><a href="${pageContext.request.contextPath }/member/memberLogin.do" data-toggle="modal" data-target="#loginModal">로그인</a></li>
+					<li><a href="${pageContext.request.contextPath }/member/join.do">회원가입</a></li>
 				</ul>
+				</c:if>
+				<!-- 로그인 후 -->
+				<c:if test="${memberLoggedIn!=null }">
+					<script>
+					alert(<c:out value="${checkPH}"/>);
+					</script>
+				<ul class="nav navbar-nav navbar-right" style="margin-top:2.5%;margin-right:1%;">
+				
+					<c:if test="${checkPH=='P' }">
+						<li><a href="${pageContext.request.contextPath }/member/mypage.do?user_id=${memberLoggedIn.memberId}">${memberLoggedIn.memberName }&nbsp;님 환영합니다.</a></li>
+					</c:if>
+					
+					<c:if test="${checkPH=='H' }">
+						<li><a href="${pageContext.request.contextPath }/member/mypage.do?user_id=${memberLoggedIn.hospitalId}">${memberLoggedIn.hospitalName }&nbsp;님 환영합니다.</a></li>
+					</c:if>
+					
+					<li><a href="${pageContext.request.contextPath }/member/memberLogout.do">로그아웃</a></li>
+				
+				</ul>
+				</c:if>
+
 
 
 				<!-- 드롭다운 메뉴 -->
@@ -99,6 +123,49 @@
 					});
 				</script>	
 			</div>
-
 		</div>		
+		
+		
+		<!-- 로그인 모달 시작 -->
+		</div>
+		<div class="modal fade" id="loginModal" tabindex="-1" role="dialog"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">로그인</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<form
+						action="${pageContext.request.contextPath}/member/memberLogin.do"
+						method="post">
+						<div class="modal-body">
+							<input type="radio" class="radio-inline" name="PnH" value="P"
+								style="font-size: 20" checked>개인 <input type="radio"
+								class="radio-inline" name="PnH" value="H" style="font-size: 20">병원
+							<br>
+							<br> <input type="text" class="form-control" name="memberId"
+								placeholder="아이디" required> <br> <input
+								type="password" class="form-control" name="memberPw"
+								placeholder="비밀번호" required>
+						</div>
+						<div class="modal-footer">
+							<button type="submit" class="btn btn-outline-success">로그인</button>
+							<button type="button" class="btn btn-outline-success"
+								data-dismiss="modal">취소</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<!-- 로그인 모달 끝 -->
+
+
+
+
+
+
 	</nav>
