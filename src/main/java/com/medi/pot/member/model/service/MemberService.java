@@ -10,6 +10,7 @@ public interface MemberService {
 	/* 아이디 중복검사*/
 	int duplicateMemIdCheck(String memberId);
 	int checkId(String memberId);
+	int checkHospitalId(String hospitalId);
 	
 	/*일반회원*/
 	Member loginMemberCheck(String memberId);
@@ -20,4 +21,6 @@ public interface MemberService {
 	
 	/*병원회원*/
 	Hospital loginHospitalCheck(String userId);
+	int insertHospital(Hospital h);
+	
 }
