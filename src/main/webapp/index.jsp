@@ -10,6 +10,7 @@
 </jsp:include>
 <!-- 채슬기 바보 -->
 <!-- 인정 어 인정 -->
+<!-- committest -->
 <div class="container">
 	<!-- 		<div class="jumbotron">
 			<h1 class="text-center">Hello MediPot</h1>
