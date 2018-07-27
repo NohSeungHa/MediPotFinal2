@@ -4,7 +4,7 @@
 <%@ taglib prefix='fmt' uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix='fn' uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="path" value="<%=request.getContextPath() %>" />
-<!-- 슬기 브런치 -->
+<!-- 동혁오빠안녕 -->
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 <div class="container">
 	<!-- 		<div class="jumbotron">
