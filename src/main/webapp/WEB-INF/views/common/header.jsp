@@ -88,7 +88,12 @@
 					</c:if>
 					
 					<c:if test="${checkPH=='H' }">
-						<li><a href="${pageContext.request.contextPath }/member/mypage.do?user_id=${memberLoggedIn.hospitalId}">${memberLoggedIn.hospitalName }&nbsp;님 환영합니다.</a></li>
+						<c:if test="${hospitalAdmission=='0' }">
+							<li><a style="text-decoration:none">승인대기 중입니다.</a></li>
+						</c:if>	
+						<c:if test="${hospitalAdmission!='0' }">
+							<li><a href="${pageContext.request.contextPath }/member/mypage.do?user_id=${memberLoggedIn.hospitalId}">${memberLoggedIn.hospitalName }&nbsp;님 환영합니다.</a></li>
+						</c:if>
 					</c:if>
 					
 					<li><a href="${pageContext.request.contextPath }/member/memberLogout.do">로그아웃</a></li>

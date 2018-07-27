@@ -21,6 +21,10 @@
 			0
 		)
 	</insert>
+	
+	<select id="loginCheck" parameterType="string" resultType="hospital">
+		select * from hospital where hospitalId=#{userId}
+	</select>
 
 
 
