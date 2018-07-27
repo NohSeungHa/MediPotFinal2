@@ -4,21 +4,14 @@
 <%@ taglib prefix='fmt' uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix='fn' uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="path" value="<%=request.getContextPath() %>" />
-<<<<<<< HEAD
+
 
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 <jsp:param value="MediPot Index" name="pageTitle"></jsp:param>
 </jsp:include>
-<!-- 채슬기 바보 -->
-<<<<<<< HEAD
-<!-- 인정 어 인정 -->
-<!-- committest -->
-=======
-=======
-<!-- 동혁오빠안녕 -->
+
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
->>>>>>> seulgiChae
->>>>>>> b9608e68b2c9b1ec913d2f327d284c6f9520ef03
+
 <div class="container">
 	<!-- 		<div class="jumbotron">
 			<h1 class="text-center">Hello MediPot</h1>
