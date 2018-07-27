@@ -10,7 +10,6 @@
 <jsp:param value="MediPot Index" name="pageTitle"></jsp:param>
 </jsp:include>
 
-<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 
 <div class="container">
 	<!-- 		<div class="jumbotron">

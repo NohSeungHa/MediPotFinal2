@@ -48,13 +48,13 @@
 <script>
 <!-- 비밀번호 유효성 검사 시작 -->
 $(function(){
-   $("#password").blur(function(){
-         var p1=$("#password").val();
+   $("#hospitalPw").blur(function(){
+         var p1=$("#hospitalPw").val();
          if(p1.length!=0){
             if(p1.length<8 || !p1.match(/([a-zA-Z0-9].*[!,@,#,$,%,^,&,*,?,_,~,-])|([!,@,#,$,%,^,&,*,?,_,~,-].*[a-zA-Z0-9])/)) {
                  alert("비밀번호는 영문(대소문자구분),숫자,특수문자(~!@#$%^&*()-_? 만 허용)를 혼용하여 8~16자를 입력해주세요.");
-                 $("#password").val("");
-                 $("#password").focus();
+                 $("#hospitalPw").val("");
+                 $("#hospitalPw").focus();
                 return false;
                }
          }
@@ -65,13 +65,13 @@ $(function(){
    
 <!-- 비밀번호 일치 여부 확인 -->
    $("#password2").blur(function(){
-      var p1=$("#password").val();
+      var p1=$("#hospitalPw").val();
       var p2=$("#password2").val();
         if(p1!=p2)
          {
             alert("패스워드가 일치하지 않습니다.");
-            $("#password").focus();
-            $("#password").val("");
+            $("#hospitalPw").focus();
+            $("#hospitalPw").val("");
             $("#password2").val("");
          }   
    });
@@ -89,7 +89,7 @@ $(function(){
 				return;
 			}
 			$.ajax({
-				url:"${pageContext.request.contextPath}/",
+				url:"${pageContext.request.contextPath}/member/HcheckId.do",
 				data:{memberId:$(this).val()},
 				success:function(data){
 					if(data.trim()=='true'){
@@ -151,7 +151,7 @@ $(function(){
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
                 //document.getElementById('sample4_postcode').value = data.zonecode; //5자리 새우편번호 사용
-                document.getElementById('address').value = fullRoadAddr;
+                document.getElementById('hospitalAddr').value = fullRoadAddr;
                 //document.getElementById('sample4_jibunAddress').value = data.jibunAddress;
 
                 // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
@@ -170,7 +170,7 @@ $(function(){
             }
         }).open();
     }
-    <!-- 다음 주소 API끝 -->
+   <!-- 다음 주소 API끝 -->
 </script>
 
 
@@ -190,7 +190,7 @@ $(function(){
 		
 		<h2>병원 회원가입</h2>
 		<p><b>(*)</b>는 필수 표시사항 입니다.</p>
-			<form name="" action="" method="post" onsubmit="return fn_enroll_validate();" >
+			<form name="" action="${pageContext.request.contextPath }/member/hospitalEnrollEnd.do" method="post" onsubmit="return fn_enroll_validate();" >
 				<table>
 					<tr>
 						<th>병원 아이디<b>(*)</b></th>
@@ -212,7 +212,7 @@ $(function(){
 					<tr>
 						<th>비밀번호<b>(*)</b></th>
 						<td>
-							<input type="password" class="form-control" name="password" id="password" placeholder="8글자 이상(영문,숫자,특수문자)" required>
+							<input type="password" class="form-control" name="hospitalPw" id="hospitalPw" placeholder="8글자 이상(영문,숫자,특수문자)" required>
 						</td>
 					</tr>
 					<tr>
@@ -237,24 +237,24 @@ $(function(){
 					<tr>
 						<th>전화번호<b>(*)</b></th>
 						<td>	
-							<input type="tel" class="form-control" placeholder="(-없이)0212341234" name="phone" id="phone" maxlength="11" required>
+							<input type="tel" class="form-control" placeholder="(-없이)0212341234" name="hospitalTel" id="hospitalTel" maxlength="11" required>
 						</td>
 					</tr>
 					<tr>
 						<th>이메일</th>
 						<td>	
-							<input type="email" class="form-control" placeholder="abc@xyz.com" name="email" id="email">
+							<input type="email" class="form-control" placeholder="abc@xyz.com" name="hospitalEmail" id="hospitalEmail">
 						</td>
 					</tr>
 					<tr>
 						<th>주소</th>
 						<td>
-							<input type="text" class="form-control" name="address" id="address" placeholder="도로명주소" readonly>
+							<input type="text" class="form-control" name="hospitalAddr" id="hospitalAddr" placeholder="도로명주소" readonly>
 						</td>
 						<td>
 							&nbsp;
 							<button type="button" onclick="sample4_execDaumPostcode()" class="btn btn-default" style="margin-bottom:10px;">우편번호 찾기</button> 
-							<span id="guide" style="color: #999"></span>
+							<span style="display: none" id="guide" style="color: #999"></span>
 						</td>
 					</tr>
 				</table>

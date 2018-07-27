@@ -84,8 +84,48 @@ public class MemberController {
 
 	@RequestMapping("/member/joinHospitalStart.do")
 	public String joinHospital1() {
-		System.out.println("회원가입(병원-승인전)으로 들어옴");
 		return "member/hospital";
+	}
+	
+	
+	@RequestMapping("/member/hospitalEnrollEnd.do")
+	public String joinHospital1(Hospital h, Model model) {
+		System.out.println("회원가입(병원-승인전)으로 들어옴");
+
+		String msg="";
+		String loc="";
+
+		boolean checkid = service.checkHospitalId(h.getHospitalId())==0?true:false;
+
+		if(!checkid) {
+			msg = "해당 아이디는 사용이 불가능합니다.";
+
+			model.addAttribute("msg", msg);
+			model.addAttribute("loc", loc);
+
+			return "common/msg";
+		}
+		String oldpw = h.getHospitalPw();
+
+		System.out.println("암호화 전 : " + oldpw);
+
+		h.setHospitalPw(bcrypt.encode(oldpw));
+
+		System.out.println("암호화 후 : " + h.getHospitalPw());
+
+		int result = service.insertHospital(h);
+
+		if(result > 0) {
+			msg = "회원가입이 신청되었습니다. 관리자의 승인을 기다려주십시오.";
+		} else {
+			msg = "회원가입실패!";
+		}
+
+		model.addAttribute("msg", msg);
+		model.addAttribute("loc", loc);
+
+		return "common/msg";
+
 	}
 	
 	@RequestMapping("/member/joinpermission.do")
@@ -183,6 +223,13 @@ public class MemberController {
 		
 		
 		boolean check = service.duplicateMemIdCheck(memberId)==0?true:false;
+		res.getWriter().print(check);
+	}
+	
+	@RequestMapping("/member/HcheckId.do")
+	@ResponseBody
+	public void hospitalcheckId(String hospitalId,HttpServletResponse res) throws Exception{
+		boolean check = service.checkHospitalId(hospitalId)==0?true:false;
 		res.getWriter().print(check);
 	}
 	
