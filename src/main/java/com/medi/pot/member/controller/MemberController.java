@@ -163,21 +163,36 @@ public class MemberController {
 		
 		Member m = new Member();
 		Hospital h = new Hospital();
-		System.out.println(service.loginMemberCheck(memberId));
-		
+
 		if(PnH.equals("P")) {
 			m = service.loginMemberCheck(memberId);
-			if(bcrypt.matches(memberPw, m.getMemberPw())) {
-				model.addAttribute("memberLoggedIn",m);
-				model.addAttribute("checkPH","P");
-				PnHcheck = true;
+			
+			if(m==null) {
+				
+			}else {
+				if(bcrypt.matches(memberPw, m.getMemberPw())) {
+					model.addAttribute("memberLoggedIn",m);
+					model.addAttribute("checkPH","P");
+					PnHcheck = true;
+				}
 			}
-		} else if(PnH.equals("H")){
+			
+		} else{
 			h = service.loginHospitalCheck(memberId);
-			if(bcrypt.matches(memberPw, h.getHospitalPw())) {
-				model.addAttribute("memberLoggedIn",h);
-				model.addAttribute("checkPH","H");
-				PnHcheck = true;
+			if(h==null) {
+				
+			}else {
+				String hos_admi = h.getHospitalAdmission();
+				
+				if(bcrypt.matches(memberPw, h.getHospitalPw())) {
+					model.addAttribute("memberLoggedIn",h);
+					model.addAttribute("checkPH","H");
+					model.addAttribute("hospitalAdmission",hos_admi);
+					PnHcheck = true;
+					if(hos_admi.equals("0")) {
+						return "member/permission";
+					}
+				}
 			}
 		}
 		
