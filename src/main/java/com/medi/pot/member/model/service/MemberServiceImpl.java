@@ -74,5 +74,17 @@ public class MemberServiceImpl implements MemberService {
 		return dao.memberPwUpdate(sqlSession, idpw);
 		
 	}
+
+	@Override
+	public int checkHospitalId(String hospitalId) {
+		return dao.checkHospitalId(sqlSession, hospitalId);
+	}
+
+	@Override
+	public int insertHospital(Hospital h) {
+		return dao.insertHospital(sqlSession, h);
+	}
+	
+	
 	
 }

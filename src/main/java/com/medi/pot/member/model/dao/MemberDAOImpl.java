@@ -67,6 +67,17 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.update("member.newPwUpdate", idpw);
 		
 	}
+
+	@Override
+	public int checkHospitalId(SqlSessionTemplate sqlSession, String hospitalId) {
+		return sqlSession.selectOne("hospital.checkId",hospitalId);
+	}
+
+	@Override
+	public int insertHospital(SqlSessionTemplate sqlSession, Hospital h) {
+		return sqlSession.insert("hospital.insertHospital",h);
+	}
+	
 	
 	
 }

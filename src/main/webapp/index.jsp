@@ -5,10 +5,12 @@
 <%@ taglib prefix='fn' uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="path" value="<%=request.getContextPath() %>" />
 
+
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 <jsp:param value="MediPot Index" name="pageTitle"></jsp:param>
 </jsp:include>
-<!-- 채슬기 바보 -->
+
+
 <div class="container">
 	<!-- 		<div class="jumbotron">
 			<h1 class="text-center">Hello MediPot</h1>

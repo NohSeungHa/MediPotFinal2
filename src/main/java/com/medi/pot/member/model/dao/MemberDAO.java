@@ -12,6 +12,7 @@ public interface MemberDAO {
 	/*아이디중복검사*/
 	int duplicateMemIdCheck(SqlSessionTemplate sqlSession, String memberId);
 	int checkId(SqlSessionTemplate sqlSession, String memberId);
+	int checkHospitalId(SqlSessionTemplate sqlSession, String hospitalId);
 	
 	/*일반회원*/
 	Member loginMemberCheck(SqlSessionTemplate sqlSession, String memberId);
@@ -22,4 +23,5 @@ public interface MemberDAO {
 	
 	/*병원회원*/
 	Hospital loginHospitalCheck(SqlSessionTemplate sqlSession, String userId);
+	int insertHospital(SqlSessionTemplate sqlSession, Hospital h);
 }
