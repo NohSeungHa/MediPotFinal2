@@ -4,4 +4,8 @@
 	<select id="mediList" parameterType="map" resultType="HospitalInfo">
 		select * from hospital join hospitalinfo on(hospitalnum=hospitalinfonum) where hospital.HOSPITALPROFESSIONAL=#{sub} and hospital.hospitaladdr like '%'||#{loc}||'%'
 	</select>
+	
+	<select id="selectCount" parameterType="map" resultType="_int">
+		select count(*) from hospital join hospitalinfo on(hospitalnum=hospitalinfonum) where hospital.HOSPITALPROFESSIONAL=#{sub} and hospital.hospitaladdr like '%'||#{loc}||'%'
+	</select>
 </mapper>

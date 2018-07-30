@@ -16,9 +16,15 @@ public class ReservationServiceImpl implements ReservationService {
 	private ReservationDao reserDAO;
 
 	@Override
-	public List<HospitalInfo> medisearchList(Map<String, String> map) {
-		return reserDAO.medisearchList(map);
+	public List<HospitalInfo> medisearchList(Map<String, String> map,int cPage, int numPerPage) {
+		return reserDAO.medisearchList(map,cPage,numPerPage);
 	}
+
+	@Override
+	public int selectCount(Map<String, String> map) {
+		return reserDAO.selectCount(map);
+	}
+	
 	
 	
 

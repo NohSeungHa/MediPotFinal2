@@ -9,9 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.medi.pot.common.page.PageCreate2;
 import com.medi.pot.reservation.model.service.ReservationService;
 import com.medi.pot.reservation.model.vo.HospitalInfo;
+import com.medi.pot.common.page.PageCreate2;
 
 @Controller
 public class ReservationController {
@@ -37,13 +40,33 @@ public class ReservationController {
 	}
 	
 	@RequestMapping("/medi/medisearchList")
-	public String medisearchList(String loc,String sub,HttpServletRequest req) {
+	public String medisearchList(@RequestParam(value="cPage", required=false,defaultValue="1") int cPage, String loc,String sub,HttpServletRequest req) {
 		Map<String,String> map=new HashMap<String, String>();
 		map.put("loc", loc);
 		map.put("sub", sub);
-		List<HospitalInfo> list=service.medisearchList(map);
+		int numPerPage=6;
+		List<HospitalInfo> list=service.medisearchList(map,cPage,numPerPage);
+		int totalCount=service.selectCount(map);
+		String pageBar=new PageCreate2().getPageBar(cPage, numPerPage,totalCount,req.getContextPath()+"/medi/medisearchList2",loc,sub);
+		req.setAttribute("pageBar", pageBar);
 		req.setAttribute("list", list);
-		return "medi_reservation/mediFindList";
+		req.setAttribute("cPage", cPage);
+		return "medi_reservation/mediList";
+	}
+	
+	@RequestMapping("/medi/medisearchList2")
+	public String medisearchList2(@RequestParam(value="cPage", required=false,defaultValue="1") int cPage, String loc,String sub,HttpServletRequest req) {
+		Map<String,String> map=new HashMap<String, String>();
+		map.put("loc", loc);
+		map.put("sub", sub);
+		int numPerPage=6;
+		List<HospitalInfo> list=service.medisearchList(map,cPage,numPerPage);
+		int totalCount=service.selectCount(map);
+		String pageBar=new PageCreate2().getPageBar(cPage, numPerPage,totalCount,req.getContextPath()+"/medi/medisearchList2",loc,sub);
+		req.setAttribute("pageBar", pageBar);
+		req.setAttribute("list", list);
+		req.setAttribute("cPage", cPage);
+		return "medi_reservation/mediList2";
 	}
 
 }

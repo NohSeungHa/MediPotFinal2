@@ -3,7 +3,7 @@ package com.medi.pot.reservation.model.vo;
 import java.sql.Date;
 
 public class HospitalInfo {
-	private int hspitalNum;
+	private int hospitalNum;
 	private String hospitalId;
 	private String hospitalPw;
 	private String hospitalName;
@@ -24,12 +24,12 @@ public class HospitalInfo {
 		// TODO Auto-generated constructor stub
 	}
 
-	public HospitalInfo(int hspitalNum, String hospitalId, String hospitalPw, String hospitalName,
+	public HospitalInfo(int hospitalNum, String hospitalId, String hospitalPw, String hospitalName,
 			String hospitalLicense, String hospitalTel, String hospitalEmail, String hospitalAddr, Date hospitalDate,
 			int timeInterval, int hospitalLike, String hospitalProfessional, int hospitalInfoNum,
 			String hospitalInfoIntro, String hospitalInfoNotice, String hospitalPhoto) {
 		super();
-		this.hspitalNum = hspitalNum;
+		this.hospitalNum = hospitalNum;
 		this.hospitalId = hospitalId;
 		this.hospitalPw = hospitalPw;
 		this.hospitalName = hospitalName;
@@ -49,7 +49,7 @@ public class HospitalInfo {
 
 	@Override
 	public String toString() {
-		return "HospitalInfo [hspitalNum=" + hspitalNum + ", hospitalId=" + hospitalId + ", hospitalPw=" + hospitalPw
+		return "HospitalInfo [hospitalNum=" + hospitalNum + ", hospitalId=" + hospitalId + ", hospitalPw=" + hospitalPw
 				+ ", hospitalName=" + hospitalName + ", hospitalLicense=" + hospitalLicense + ", hospitalTel="
 				+ hospitalTel + ", hospitalEmail=" + hospitalEmail + ", hospitalAddr=" + hospitalAddr
 				+ ", hospitalDate=" + hospitalDate + ", timeInterval=" + timeInterval + ", hospitalLike=" + hospitalLike
@@ -58,12 +58,12 @@ public class HospitalInfo {
 				+ ", hospitalPhoto=" + hospitalPhoto + "]";
 	}
 
-	public int getHspitalNum() {
-		return hspitalNum;
+	public int gethospitalNum() {
+		return hospitalNum;
 	}
 
-	public void setHspitalNum(int hspitalNum) {
-		this.hspitalNum = hspitalNum;
+	public void sethospitalNum(int hospitalNum) {
+		this.hospitalNum = hospitalNum;
 	}
 
 	public String getHospitalId() {
