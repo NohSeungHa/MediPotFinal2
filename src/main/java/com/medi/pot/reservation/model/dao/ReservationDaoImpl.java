@@ -26,6 +26,13 @@ public class ReservationDaoImpl implements ReservationDao {
 	public int selectCount(Map<String, String> map) {
 		return session.selectOne("reser.selectCount", map);
 	}
+
+	@Override
+	public List<HospitalInfo> mediNameSearch(String hName) {
+		return session.selectList("reser.selectName", hName);
+	}
+	
+	
 	
 	
 	

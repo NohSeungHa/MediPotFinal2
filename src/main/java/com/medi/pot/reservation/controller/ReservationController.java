@@ -68,5 +68,13 @@ public class ReservationController {
 		req.setAttribute("cPage", cPage);
 		return "medi_reservation/mediList2";
 	}
+	
+	@RequestMapping("/medi/searchMedi")
+	public String searchMedi(String hName, HttpServletRequest req) {
+		List<HospitalInfo> nameList=service.mediNameSearch(hName);
+		System.out.println(nameList);
+		req.setAttribute("nameList", nameList);
+		return "medi_reservation/mediFindList";
+	}
 
 }

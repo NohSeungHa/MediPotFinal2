@@ -24,6 +24,13 @@ public class ReservationServiceImpl implements ReservationService {
 	public int selectCount(Map<String, String> map) {
 		return reserDAO.selectCount(map);
 	}
+
+	@Override
+	public List<HospitalInfo> mediNameSearch(String hName) {
+		return reserDAO.mediNameSearch(hName);
+	}
+	
+	
 	
 	
 	
