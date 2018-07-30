@@ -12,8 +12,8 @@
 	<div id="searchH">
 			<img alt="searchImg" src="/pot/resources/img/reser/reser.png" width="60%;" height="380px;">
 			<div id="searchH2">
-			<form action="${path }/reservation/searchMedi">
-			<input type="text" name="Hname" class="form-control" placeholder="병원이름 검색" style="width:140%;">
+			<form action="${path }/medi/searchMedi">
+			<input type="text" name="hName" class="form-control" placeholder="병원이름 검색" style="width:140%;">
 			<br>
 			<button type="submit" class="btn btn-default" style="margin-left:40%;width:50%">검색</button>
 			</form>
@@ -86,6 +86,7 @@
 		}
 	</style>
 	<br>
+	<c:if test="${empty nameList }">
 	<div style="margin-bottom:10px;position:relative;height:auto;">
 	<div style="width:100%;height:50px;font-size:20px;text-align:center;background-color:#286090;padding-top:11px;color:white;border-radius:8px;">
 		지역 선택 및 진료과목 선택
@@ -115,6 +116,32 @@
 		</div>
 	
 	</div>
+	</c:if>
+	<c:if test="${not empty nameList }">
+	<div style="width:100%;height:50px;font-size:20px;text-align:center;background-color:#286090;padding-top:11px;color:white;border-radius:8px;margin-bottom:10px;">
+		병원 리스트
+	</div>
+	<c:forEach var="list" items="${nameList }" >
+	<div class="mediList" id="${list.hospitalNum }" style="display:inline-block;width:49%;margin-right:5px; position:relative;margin-bottom:20px;">
+		<div style="display: inline-block;"><img src="${path }/resources/img/reser/${list.hospitalPhoto}" width="200px;" height="200px;"></div>
+		<div id="hlist" style="display: inline-block;position:absolute;">
+			<p><span style="font-size:20px;color: #286090">병원명</span>&nbsp;&nbsp;
+			<span style="font-size:20px;">${list.hospitalName }</span></p>
+			
+			<p><span style="font-size:20px;color: #286090">진료과목</span>&nbsp;&nbsp;
+			<span style="font-size:20px;">
+			${list.hospitalProfessional }
+			</span></p>
+			
+			<p><span style="font-size:20px;color: #286090">전화번호</span>&nbsp;&nbsp;
+			<span style="font-size:20px;">${list.hospitalTel }</span></p>
+			
+			<p><span style="font-size:20px;color: #286090">주소</span>&nbsp;&nbsp;
+			<span style="font-size:20px;">${list.hospitalAddr }</span></p>
+		</div>
+	</div>
+	</c:forEach>
+	</c:if>
 	<script>
 		$(function () {		
 			var loc="";
@@ -135,7 +162,16 @@
 			$(".subImg").click(function () {
 				if(loc.length>0){
 					sub=$(this).attr("name");
-					location.href='${path}/medi/medisearchList?loc='+loc+'&sub='+sub;
+					$.ajax({
+						url:"${path}/medi/medisearchList",
+						data:{loc:loc,sub:sub},
+						dataType:"html",
+						success:function(data){
+							console.log(data);
+							$('#mediListAdd').html(data);
+						}
+					});
+					/* location.href='${path}/medi/medisearchList?loc='+loc+'&sub='+sub; */
 				}else{
 					alert("지역을 먼저 선택해 주세요");
 				}
@@ -144,37 +180,9 @@
 		});
 	</script>
 	<div style="border:2px solid lightgray;width:100%;"></div>
+	<div id="mediListAdd" style="margin:5px;position:relative;margin-bottom:50px;">
 	
-	<c:if test="${not empty list }">
-	<div style="margin:5px;position:relative;margin-bottom:50px;">
-	<div style="width:100%;height:50px;font-size:20px;text-align:center;background-color:#286090;padding-top:11px;color:white;border-radius:8px;margin-bottom:10px;">
-		병원 리스트
 	</div>
-	<div class="mediList" style="display:inline-block;width:49%;margin-right:5px; position:relative;margin-bottom:20px;">
-		<div style="display: inline-block;"><img src="${path }/resources/img/reser/f1.jpg" width="200px;" height="200px;"></div>
-		<div id="hlist" style="display: inline-block;position:absolute;">
-			<p><span style="font-size:20px;color: #286090">병원명</span>&nbsp;&nbsp;
-			<span style="font-size:20px;">승하병원</span></p>
-			
-			<p><span style="font-size:20px;color: #286090">진료과목</span>&nbsp;&nbsp;
-			<span style="font-size:20px;">정형외과</span></p>
-			
-			<p><span style="font-size:20px;color: #286090">전화번호</span>&nbsp;&nbsp;
-			<span style="font-size:20px;">02-123-4567</span></p>
-			
-			<p><span style="font-size:20px;color: #286090">주소</span>&nbsp;&nbsp;
-			<span style="font-size:20px;">서울특별시 관악구 봉천동645-11</span></p>
-		</div>
-	</div>
-	</c:if>
-	
-	<script>
-		$(function () {
-			$(".mediList").click(function () {
-				location.href='${path}/medi/mediInfo';
-			});
-		});
-	</script>
-	</div>
+
 	</div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
