@@ -6,9 +6,6 @@
 
 
 
-
-
-
 <c:set var="path" value="<%=request.getContextPath() %>"/>
 <!DOCTYPE html>
 <html>
@@ -116,7 +113,7 @@
 							<li><a href="#">자유게시판</a></li>
 						</ul>
 					</li>
-						<li><a href="#">HELP ZONE</a></li>
+						<li><a href="${path}/helpZone/helpZoneList.do">HELP ZONE</a></li>
 				</ul>
 				<script>
 					$(function () {
