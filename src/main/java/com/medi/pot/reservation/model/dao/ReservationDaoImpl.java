@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.medi.pot.reservation.model.vo.DoctorInfo;
 import com.medi.pot.reservation.model.vo.HospitalInfo;
 
 @Repository
@@ -36,6 +37,12 @@ public class ReservationDaoImpl implements ReservationDao {
 	public HospitalInfo mediInfo(int num) {
 		return session.selectOne("reser.selectMedi", num);
 	}
+
+	@Override
+	public List<DoctorInfo> selectDoctorList(int num) {
+		return session.selectList("reser.selectDoctor", num);
+	}
+	
 	
 	
 	

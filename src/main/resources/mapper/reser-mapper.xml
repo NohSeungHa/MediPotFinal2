@@ -16,4 +16,8 @@
 	<select id="selectMedi" parameterType="_int" resultType="HospitalInfo">
 		select * from hospital join hospitalinfo on(hospitalnum=hospitalinfonum) where hospital.hospitalnum=#{num}
 	</select>
+	
+	<select id="selectDoctor" parameterType="_int" resultType="DoctorInfo">
+		select * from DOCTORINFO where hospitalno=#{num}
+	</select>
 </mapper>

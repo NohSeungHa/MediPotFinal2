@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.medi.pot.reservation.model.dao.ReservationDao;
+import com.medi.pot.reservation.model.vo.DoctorInfo;
 import com.medi.pot.reservation.model.vo.HospitalInfo;
 
 @Service
@@ -33,6 +34,11 @@ public class ReservationServiceImpl implements ReservationService {
 	@Override
 	public HospitalInfo mediInfo(int num) {
 		return reserDAO.mediInfo(num);
+	}
+
+	@Override
+	public List<DoctorInfo> selectDoctorList(int num) {
+		return reserDAO.selectDoctorList(num);
 	}
 	
 	

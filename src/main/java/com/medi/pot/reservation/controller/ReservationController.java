@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.medi.pot.common.page.PageCreate2;
 import com.medi.pot.reservation.model.service.ReservationService;
+import com.medi.pot.reservation.model.vo.DoctorInfo;
 import com.medi.pot.reservation.model.vo.HospitalInfo;
 import com.medi.pot.common.page.PageCreate2;
 
@@ -39,7 +40,8 @@ public class ReservationController {
 	@RequestMapping("/medi/reser")
 	public String mediReser(String no,HttpServletRequest req) {
 		int num=Integer.parseInt(no);
-		List<>
+		List<DoctorInfo> list=service.selectDoctorList(num);
+		req.setAttribute("list", list);
 		return "medi_reservation/reservation";
 	}
 	
