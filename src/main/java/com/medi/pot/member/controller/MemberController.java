@@ -71,9 +71,9 @@ public class MemberController {
 		int result = service.insertMember(m);
 		
 		if(result > 0) {
-			msg = "회원가입성공!";
+			msg = "회원가입 성공!";
 		} else {
-			msg = "회원가입실패!";
+			msg = "회원가입 실패!";
 		}
 		
 		model.addAttribute("msg", msg);
@@ -90,7 +90,7 @@ public class MemberController {
 	
 	@RequestMapping("/member/hospitalEnrollEnd.do")
 	public String joinHospital1(Hospital h, Model model) {
-		System.out.println("회원가입(병원-승인전)으로 들어옴");
+		System.out.println("회원가입(병원-승인중)으로 들어옴");
 
 		String msg="";
 		String loc="";
@@ -118,7 +118,7 @@ public class MemberController {
 		if(result > 0) {
 			msg = "회원가입이 신청되었습니다. 관리자의 승인을 기다려주십시오.";
 		} else {
-			msg = "회원가입실패!";
+			msg = "회원가입 실패!";
 		}
 
 		model.addAttribute("msg", msg);
@@ -130,7 +130,7 @@ public class MemberController {
 	
 	@RequestMapping("/member/joinpermission.do")
 	public String joinPermission() {
-		System.out.println("회원가입(병원-승인중)으로 들어옴");
+		System.out.println("회원가입(병원-승인전)으로 들어옴");
 		return "member/permission";
 	}
 	
@@ -211,9 +211,9 @@ public class MemberController {
 	public String logout(SessionStatus sessionStatus) {
 		System.out.println("로그아웃을 진행");
 		if(!sessionStatus.isComplete()) {
-			// 세션이 진행중이라면 (존재한다면)
+			// 세션이 진행중이라면(존재한다면)
 			sessionStatus.setComplete();
-			// 세션을 완료시킨다 (끝낸다)
+			// 세션을 완료시킨다(끝낸다)
 		}
 		
 		return "redirect:/";
@@ -265,12 +265,12 @@ public class MemberController {
 	
 	@RequestMapping("/member/memberPageUpdate.do")
 	public String memberPageUpdate(Member m, Model model) {
-		String msg = "수정 실패";
+		String msg = "수정 실패!";
 		String loc = "";
 		int result = service.memberPageUpdate(m);
 		
 		if(result > 0) {
-			msg = "수정 성공";
+			msg = "수정 성공!";
 			model.addAttribute("memberLoggedIn", m);
 		}
 		
@@ -328,5 +328,7 @@ public class MemberController {
 
 		return "redirect:/";
 	}
+	
+	
 	
 }
