@@ -6,55 +6,188 @@
 
 	<c:set var='path' value="<%=request.getContextPath() %>"></c:set>
 <jsp:include page="/WEB-INF/views/common/header.jsp">
-<jsp:param value="HomeSpring" name="pageTitle"></jsp:param>
+<jsp:param value="Hospital Search" name="pageTitle"></jsp:param>
 </jsp:include>
+	<div class="container">
 	<div id="searchH">
-			<input type="text" size="30">
+			<img alt="searchImg" src="/pot/resources/img/reser/reser.png" width="60%;" height="380px;">
+			<div id="searchH2">
+			<form action="${path }/medi/searchMedi">
+			<input type="text" name="hName" class="form-control" placeholder="병원이름 검색" style="width:140%;">
+			<br>
+			<button type="submit" class="btn btn-default" style="margin-left:40%;width:50%">검색</button>
+			</form>
+			</div>
 	</div>
 	<style>
 		#searchH{
-			margin-left:400px;
-			text-align:center;
-			padding-left:430px;
-			padding-top:250px;
-			background-image: url("/pot/resources/img/reser/reser.png");
-			width:850px;
-			height:450px;
-			background-size:cover;
-			background-repeat:no-repeat;
+			position:relative;
+			text-align: center;
+		}
+		#searchH2{
+			position:absolute;
+			top:53%;
+			left:57%; 
+		}
 		
+		#locList 
+		{
+			width: 26%;
+			height: auto;
+			padding: 10px;
+			background-color:#BEBEBE;
+			-webkit-border-radius: 10px;
+			-moz-border-radius: 10px;
+			border-radius: 10px;
+			margin-top:5px;
+			display:inline-block;
+		}
+		
+		
+		.loc,.sub{
+			margin:5px;
+			width:90%;
+			height:50px;
+			font-size:20px;
+		}
+		
+		
+		#subjectList 
+		{
+			width: 72.5%;
+			height: auto;
+			padding: 10px;
+			-webkit-border-radius: 10px;
+			-moz-border-radius: 10px;
+			border-radius: 10px;
+			margin-top:5px;
+			margin-left:1.5%;
+			display:inline-block;
+			position:absolute;
+			border: 2px solid #BEBEBE;
+		}
+		#subjectList>img{
+			margin:9px;
+		}
+		#subjectList>img:hover{
+			cursor:pointer;
+			border:5px solid white;
+		}
+		#hlist{
+			padding-left:20px;
+			padding-top:20px;
+		}
+		.mediList{
+			border:4px solid white;
+		}
+		.mediList:hover{
+			cursor:pointer;
+			border:4px solid #286090;
 		}
 	</style>
-	<br><br><br>
-	<div style="text-align: center;">
-	<button id="searchLoc" class="btn">지역 검색</button>
+	<br>
+	<c:if test="${empty nameList }">
+	<div style="margin-bottom:10px;position:relative;height:auto;">
+	<div style="width:100%;height:50px;font-size:20px;text-align:center;background-color:#286090;padding-top:11px;color:white;border-radius:8px;">
+		지역 선택 및 진료과목 선택
 	</div>
-	<div id="locList" style="display: none;text-align: center;border:2px solid lightgray;">
-		<button class="btn loc">서울</button>
-		<button class="btn loc">인천</button>
-		<button class="btn loc">경기도</button>
-		<button class="btn loc">강원도</button>
-		<button class="btn loc">충청도</button>
-		<button class="btn loc">전라도</button>
-		<button class="btn loc">경상도</button>
-		<button class="btn loc">제주도</button>
+		<div id="locList" style="text-align: center;">
+			<button class="btn btn-default loc" value="서울">서울</button><br>
+			<button class="btn btn-default loc" value="인천">인천</button><br>
+			<button class="btn btn-default loc" value="경기">경기도</button><br>
+			<button class="btn btn-default loc" value="강원">강원도</button><br>
+			<button class="btn btn-default loc" value="충청">충청도</button><br>
+			<button class="btn btn-default loc" value="전라">전라도</button><br>
+			<button class="btn btn-default loc" value="경상">경상도</button><br>
+			<button class="btn btn-default loc" value="제주">제주도</button>
+		</div>
+		<div id="subjectList" style="text-align: center;">
+			<img class="subImg" name="J1" src="${path }/resources/img/reser/h1.png" width="140px;" height="140px;">
+			<img class="subImg" name="C1" src="${path }/resources/img/reser/h2.png" width="140px;" height="140px;">
+			<img class="subImg" name="P1" src="${path }/resources/img/reser/h3.png" width="140px;" height="140px;">
+			<img class="subImg" name="S1" src="${path }/resources/img/reser/h4.png" width="140px;" height="140px;">
+			<img class="subImg" name="A1" src="${path }/resources/img/reser/h5.png" width="140px;" height="140px;">
+			<img class="subImg" name="B1" src="${path }/resources/img/reser/h6.png" width="140px;" height="140px;">
+			<img class="subImg" name="S1" src="${path }/resources/img/reser/h7.png" width="140px;" height="140px;">
+			<img class="subImg" name="N1" src="${path }/resources/img/reser/h8.png" width="140px;" height="140px;">
+			<img class="subImg" name="E1" src="${path }/resources/img/reser/h9.png" width="140px;" height="140px;">
+			<img class="subImg" name="H1" src="${path }/resources/img/reser/h10.png" width="140px;" height="140px;">
+			<img class="subImg" name="S2" src="${path }/resources/img/reser/h11.png" width="140px;" height="140px;">
+		</div>
+	
 	</div>
-	<div id="subjectList" style="display: none;text-align: center;border:2px solid lightgray;">
-		<button class="btn">내과</button>
-		<button class="btn">이빈후과</button>
+	</c:if>
+	<c:if test="${not empty nameList }">
+	<div style="width:100%;height:50px;font-size:20px;text-align:center;background-color:#286090;padding-top:11px;color:white;border-radius:8px;margin-bottom:10px;">
+		병원 리스트
 	</div>
+	<c:forEach var="list" items="${nameList }" >
+	<div class="mediList" id="${list.hospitalNum }" style="display:inline-block;width:49%;margin-right:5px; position:relative;margin-bottom:20px;">
+		<div style="display: inline-block;"><img src="${path }/resources/img/reser/${list.hospitalPhoto}" width="200px;" height="200px;"></div>
+		<div id="hlist" style="display: inline-block;position:absolute;">
+			<p><span style="font-size:20px;color: #286090">병원명</span>&nbsp;&nbsp;
+			<span style="font-size:20px;">${list.hospitalName }</span></p>
+			
+			<p><span style="font-size:20px;color: #286090">진료과목</span>&nbsp;&nbsp;
+			<span style="font-size:20px;">
+			${list.hospitalProfessional }
+			</span></p>
+			
+			<p><span style="font-size:20px;color: #286090">전화번호</span>&nbsp;&nbsp;
+			<span style="font-size:20px;">${list.hospitalTel }</span></p>
+			
+			<p><span style="font-size:20px;color: #286090">주소</span>&nbsp;&nbsp;
+			<span style="font-size:20px;">${list.hospitalAddr }</span></p>
+		</div>
+	</div>
+	</c:forEach>
+	</c:if>
 	<script>
 		$(function () {
-			$("#searchLoc").click(function () {
-				$("#subjectList").css("display","none");
-				$("#locList").slideToggle(1000);
-			});
-			$(".loc").click(function () {
-				$("#subjectList").css("display","none");
-				$("#subjectList").slideToggle(1000);
+			$(".mediList").click(function () {
+				location.href='${path}/medi/mediInfo?no='+$('.mediList').attr('id');
 			});
 		});
+		$(function () {		
+			var loc="";
+			var sub="";
+			$('.loc').click(function () {
+				if($(this).attr('class').indexOf("btn-primary")>0){
+					$(this).removeClass("btn-primary");
+					$(this).addClass("btn-default");
+					loc="";
+				}else{
+					$(".loc").removeClass("btn-primary");
+					$(".loc").addClass("btn-default");
+					$(this).removeClass("btn-default");
+					$(this).addClass("btn-primary");
+					loc=$(this).val();
+				}
+			});
+			$(".subImg").click(function () {
+				if(loc.length>0){
+					sub=$(this).attr("name");
+					$.ajax({
+						url:"${path}/medi/medisearchList",
+						data:{loc:loc,sub:sub},
+						dataType:"html",
+						success:function(data){
+							console.log(data);
+							$('#mediListAdd').html(data);
+						}
+					});
+					/* location.href='${path}/medi/medisearchList?loc='+loc+'&sub='+sub; */
+				}else{
+					alert("지역을 먼저 선택해 주세요");
+				}
+			}); 
+			
+		});
 	</script>
-		
+	<div style="border:2px solid lightgray;width:100%;"></div>
+	<div id="mediListAdd" style="margin:5px;position:relative;margin-bottom:50px;">
+	
+	</div>
 
+	</div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
