@@ -30,8 +30,7 @@
 	<script>
 	$(function () {
 		$(".mediList").click(function () {
-			alert($(this).attr('id'));
-			/* location.href='${path}/medi/mediInfo?no='+$('.mediList').id; */
+			location.href='${path}/medi/mediInfo?no='+$(this).attr('id');
 		});
 	});
 	</script>
