@@ -5,25 +5,29 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <jsp:include page="/WEB-INF/views/common/header.jsp">
-	<jsp:param value="" name="pageTitle"/>
+	<jsp:param value="관리자 페이지" name="pageTitle"/>
 </jsp:include>
 <c:if test="${memberLoggedIn.memberId=='admin' }">
-<table>
+
+<div style="height:100px">
+	<h1 style="text-align: center">관리자 페이지(병원회원, 일반회원)</h1>
+	<h4 style="text-align: center">병원회원과 일반회원을 한번에 관리할 수 있습니다.</h4>
+	<h4 style="text-align: center">현재 승인 대기중인 병원 회원 : </h4>
+</div>
+
+<br><br>
+
+<table style="margin: 0 auto;">
 	<tr>
 		<td>
-			<img src="${pageContext.request.contextPath }/resources/img/member/person.PNG">		
+			<a href="${pageContext.request.contextPath }/adminPage/memberList.do">
+				<img src="${pageContext.request.contextPath }/resources/img/member/person.PNG"></a>		
 		</td>
 		<td>
-			<h2>관리자</h2>
+			<a href="${pageContext.request.contextPath }/adminPage/hospitalList.do">
+				<img src="${pageContext.request.contextPath }/resources/img/member/hospital.png"></a>
 		</td>
-	</tr>
-	<tr>
-		<td>
-			<img src="${pageContext.request.contextPath }/resources/img/member/hospital.png">
-		</td>
-		<td rowspan="5">
-			<img src="${pageContext.request.contextPath }/resources/img/member/permi.gif">
-		</td>
+	
 	</tr>
 </table>
 
@@ -37,5 +41,10 @@
 		})
 	</script>
 </c:if>
+
+
+
+
+<div style="height:150px"></div>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
