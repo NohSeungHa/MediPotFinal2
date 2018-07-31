@@ -8,6 +8,7 @@
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
+
 	<!-- java버전설정 1.6에서 1.8로변경 -->
 		<java-version>1.8</java-version>
 		<!-- spring버전설정 : 3.1.1에서 5.0.6으로변경 -->
@@ -15,6 +16,8 @@
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
+
+
 	
 			<!-- ojdbc 받아오는 새로운 repository
 		 dependencies 태그 안에 있으면 안됨!! -->
