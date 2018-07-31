@@ -37,8 +37,9 @@ public class ReservationController {
 	}
 	
 	@RequestMapping("/medi/reser")
-	public String mediReser() {
-		
+	public String mediReser(String no,HttpServletRequest req) {
+		int num=Integer.parseInt(no);
+		List<>
 		return "medi_reservation/reservation";
 	}
 	
