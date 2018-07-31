@@ -36,12 +36,9 @@
 
 <div class="jumbotron">
   <div class="container text-center">
-    <h1>Help Zone</h1>      
-<<<<<<< HEAD
+    <h1>Help Zone</h1>
     <p>(테스트멘트)안녕하세요 헬프존입니다. 의학전문가에게 무엇이든 물어보세요!ㅎㅇㅎㅇ나나나나나난ㄴ나채슬기라능 나는 승하라능능</p>
-=======
-    <p>(테스트멘트)안녕하세요 헬프존입니다. 의학전문가에게 무엇이든 물어보세요!안녕 난 슬기얌</p>
->>>>>>> seulgiChae
+
   </div>
 </div>
 
