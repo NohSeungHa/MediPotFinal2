@@ -143,6 +143,11 @@
 	</c:forEach>
 	</c:if>
 	<script>
+		$(function () {
+			$(".mediList").click(function () {
+				location.href='${path}/medi/mediInfo?no='+$('.mediList').attr('id');
+			});
+		});
 		$(function () {		
 			var loc="";
 			var sub="";
