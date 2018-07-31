@@ -98,14 +98,14 @@
 				</tr>
 				<tr>
 					<th>진료시간</th>
-					<td>평일 9시 부터 18시까지, 토요일 9시부터 14시까지</td>
+					<td>${hi.hospitalInfoUsetime }</td>
 				</tr>
 				<tr>
 					<td colspan="2"><hr style="border:1px solid lightgray;"></td>
 				</tr>
 				<tr>
 					<th>점심시간</th>
-					<td>12시 30분부터 2시까지</td>
+					<td>${hi.hospitalInfoLunchtime }</td>
 				</tr>
 				<tr>
 					<td colspan="2"><hr style="border:1px solid lightgray;"></td>
@@ -123,7 +123,7 @@
 <script>
 	$(function () {
 		$('#reser').click(function () {
-			location.href='${path}/medi/reser'
+			location.href='${path}/medi/reser?no='+${hi.hospitalNum}
 		});
 	});
 </script>

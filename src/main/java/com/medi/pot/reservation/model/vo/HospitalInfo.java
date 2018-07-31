@@ -19,6 +19,8 @@ public class HospitalInfo {
 	private String hospitalInfoIntro;
 	private String hospitalInfoNotice;
 	private String hospitalPhoto;
+	private String hospitalInfoUsetime;
+	private String hospitalInfoLunchtime;
 	
 	public HospitalInfo() {
 		// TODO Auto-generated constructor stub
@@ -27,7 +29,8 @@ public class HospitalInfo {
 	public HospitalInfo(int hospitalNum, String hospitalId, String hospitalPw, String hospitalName,
 			String hospitalLicense, String hospitalTel, String hospitalEmail, String hospitalAddr, Date hospitalDate,
 			int timeInterval, int hospitalLike, String hospitalProfessional, int hospitalInfoNum,
-			String hospitalInfoIntro, String hospitalInfoNotice, String hospitalPhoto) {
+			String hospitalInfoIntro, String hospitalInfoNotice, String hospitalPhoto, String hospitalInfoUsetime,
+			String hospitalInfoLunchtime) {
 		super();
 		this.hospitalNum = hospitalNum;
 		this.hospitalId = hospitalId;
@@ -45,6 +48,8 @@ public class HospitalInfo {
 		this.hospitalInfoIntro = hospitalInfoIntro;
 		this.hospitalInfoNotice = hospitalInfoNotice;
 		this.hospitalPhoto = hospitalPhoto;
+		this.hospitalInfoUsetime = hospitalInfoUsetime;
+		this.hospitalInfoLunchtime = hospitalInfoLunchtime;
 	}
 
 	@Override
@@ -55,14 +60,15 @@ public class HospitalInfo {
 				+ ", hospitalDate=" + hospitalDate + ", timeInterval=" + timeInterval + ", hospitalLike=" + hospitalLike
 				+ ", hospitalProfessional=" + hospitalProfessional + ", hospitalInfoNum=" + hospitalInfoNum
 				+ ", hospitalInfoIntro=" + hospitalInfoIntro + ", hospitalInfoNotice=" + hospitalInfoNotice
-				+ ", hospitalPhoto=" + hospitalPhoto + "]";
+				+ ", hospitalPhoto=" + hospitalPhoto + ", hospitalInfoUsetime=" + hospitalInfoUsetime
+				+ ", hospitalInfoLunchtime=" + hospitalInfoLunchtime + "]";
 	}
 
-	public int gethospitalNum() {
+	public int getHospitalNum() {
 		return hospitalNum;
 	}
 
-	public void sethospitalNum(int hospitalNum) {
+	public void setHospitalNum(int hospitalNum) {
 		this.hospitalNum = hospitalNum;
 	}
 
@@ -185,9 +191,24 @@ public class HospitalInfo {
 	public void setHospitalPhoto(String hospitalPhoto) {
 		this.hospitalPhoto = hospitalPhoto;
 	}
-	
-	
 
+	public String getHospitalInfoUsetime() {
+		return hospitalInfoUsetime;
+	}
+
+	public void setHospitalInfoUsetime(String hospitalInfoUsetime) {
+		this.hospitalInfoUsetime = hospitalInfoUsetime;
+	}
+
+	public String getHospitalInfoLunchtime() {
+		return hospitalInfoLunchtime;
+	}
+
+	public void setHospitalInfoLunchtime(String hospitalInfoLunchtime) {
+		this.hospitalInfoLunchtime = hospitalInfoLunchtime;
+	}
+	
+	
 	
 	
 	
