@@ -15,7 +15,6 @@ public class DoctorInfo {
 	private String satEtime;
 	private String closed;
 	private String specialized;
-	private String doctorPhoto;
 	
 	public DoctorInfo() {
 		// TODO Auto-generated constructor stub
@@ -23,7 +22,7 @@ public class DoctorInfo {
 
 	public DoctorInfo(int doctorNum, String doctorName, String doctorCareer, int hospitalNo, String professional,
 			String doctorSlunch, String doctorElunch, String weekdayStime, String weekdayEtime, String satStime,
-			String satEtime, String closed, String specialized, String doctorPhoto) {
+			String satEtime, String closed, String specialized) {
 		super();
 		this.doctorNum = doctorNum;
 		this.doctorName = doctorName;
@@ -38,7 +37,6 @@ public class DoctorInfo {
 		this.satEtime = satEtime;
 		this.closed = closed;
 		this.specialized = specialized;
-		this.doctorPhoto = doctorPhoto;
 	}
 
 	@Override
@@ -47,7 +45,7 @@ public class DoctorInfo {
 				+ ", hospitalNo=" + hospitalNo + ", professional=" + professional + ", doctorSlunch=" + doctorSlunch
 				+ ", doctorElunch=" + doctorElunch + ", weekdayStime=" + weekdayStime + ", weekdayEtime=" + weekdayEtime
 				+ ", satStime=" + satStime + ", satEtime=" + satEtime + ", closed=" + closed + ", specialized="
-				+ specialized + ", doctorPhoto=" + doctorPhoto + "]";
+				+ specialized + "]";
 	}
 
 	public int getDoctorNum() {
@@ -153,16 +151,6 @@ public class DoctorInfo {
 	public void setSpecialized(String specialized) {
 		this.specialized = specialized;
 	}
-
-	public String getDoctorPhoto() {
-		return doctorPhoto;
-	}
-
-	public void setDoctorPhoto(String doctorPhoto) {
-		this.doctorPhoto = doctorPhoto;
-	}
-
-	
 	
 	
 
