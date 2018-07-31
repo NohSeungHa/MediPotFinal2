@@ -38,6 +38,9 @@
   <div class="container text-center">
     <h1>Help Zone</h1>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> master
     <p>(테스트멘트)안녕하세요 헬프존입니다. 의학전문가에게 무엇이든 물어보세요!</p>
 
   </div>

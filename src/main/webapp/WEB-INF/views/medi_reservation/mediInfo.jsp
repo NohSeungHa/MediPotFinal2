@@ -62,36 +62,36 @@
 		<div id="mediInfo">
 			<table id="tblInfo" align="center">
 				<tr>
-					<th style="width:350px;"><img src="${path }/resources/img/reser/f1.jpg" width="300px;" height="230px;"></th>
-					<td style="text-align:center;"><div id="notice"><p style="color: black;"><공 지></p><p style="color:white;">금주 수요일은 병원 휴진입니다.</p></div></td>
+					<th style="width:350px;"><img src="${path }/resources/img/reser/${hi.hospitalPhoto }" width="300px;" height="230px;"></th>
+					<td style="text-align:center;"><div id="notice"><p style="color: black;"><공 지></p><p style="color:white;">${hi.hospitalInfoNotice }</p></div></td>
 				</tr>
 				<tr>
 					<td colspan="2"><hr style="border:1px solid lightgray;"></td>
 				</tr>
 				<tr>
 					<th>병원명</th>
-					<td>승하병원</td>
+					<td>${hi.hospitalName }</td>
 				</tr>
 				<tr>
 					<td colspan="2"><hr style="border:1px solid lightgray;"></td>
 				</tr>
 				<tr>
 					<th>전화번호</th>
-					<td>02-1234-5678</td>
+					<td>${hi.hospitalTel }</td>
 				</tr>
 				<tr>
 					<td colspan="2"><hr style="border:1px solid lightgray;"></td>
 				</tr>
 				<tr>
 					<th>주소</th>
-					<td>서울특별시 관악구 봉천동 645-11</td>
+					<td>${hi.hospitalAddr }</td>
 				</tr>
 				<tr>
 					<td colspan="2"><hr style="border:1px solid lightgray;"></td>
 				</tr>
 				<tr>
 					<th>진료과목</th>
-					<td>피부과</td>
+					<td>${hi.hospitalProfessional }</td>
 				</tr>
 				<tr>
 					<td colspan="2"><hr style="border:1px solid lightgray;"></td>
@@ -112,7 +112,7 @@
 				</tr>
 				<tr>
 					<th>병원 소개</th>
-					<td>우리 병원은 2명의 전문의 원장님이 운영하시는 전문적인 피부과입니다.</td>
+					<td>${hi.hospitalInfoIntro }</td>
 				</tr>
 				<tr>
 					<td colspan="2" style="text-align:center;height:150px;"><button id="reser">예약하러가기</button></td>

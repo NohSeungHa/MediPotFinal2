@@ -29,7 +29,10 @@ public class ReservationController {
 	}
 	
 	@RequestMapping("/medi/mediInfo")
-	public String mediInfo() {
+	public String mediInfo(String no,HttpServletRequest req) {
+		int num=Integer.parseInt(no);
+		HospitalInfo hi=service.mediInfo(num);
+		req.setAttribute("hi", hi);
 		return "medi_reservation/mediInfo";
 	}
 	

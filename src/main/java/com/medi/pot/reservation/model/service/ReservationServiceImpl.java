@@ -29,6 +29,13 @@ public class ReservationServiceImpl implements ReservationService {
 	public List<HospitalInfo> mediNameSearch(String hName) {
 		return reserDAO.mediNameSearch(hName);
 	}
+
+	@Override
+	public HospitalInfo mediInfo(int num) {
+		return reserDAO.mediInfo(num);
+	}
+	
+	
 	
 	
 	
