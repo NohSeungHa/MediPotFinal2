@@ -1,5 +1,6 @@
 package com.medi.pot.member.model.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -20,6 +21,8 @@ public interface MemberDAO {
 	int memberPageUpdate(SqlSessionTemplate sqlSession, Member m);
 	Member selectMember(SqlSessionTemplate sqlSession, String memberId);
 	int memberPwUpdate(SqlSessionTemplate sqlSession, Map<String, String> idpw);
+	List<Member> selectMemberList(SqlSessionTemplate sqlSession, int cPage, int numPerPage);
+	int selectCount(SqlSessionTemplate sqlSession);
 	
 	/*병원회원*/
 	Hospital loginHospitalCheck(SqlSessionTemplate sqlSession, String userId);

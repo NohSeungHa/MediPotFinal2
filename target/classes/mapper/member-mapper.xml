@@ -46,4 +46,12 @@
 		update member set memberPw=#{newPassword} where memberId=#{memberId}
 	</update>
 	
+	<select id="selectMemberList" resultType="member">
+		select A.* from member A order by memberDate DESC
+	</select>
+	
+	<select id="selectCount" resultType="_int">
+ 		select count(*) from member
+ 	</select>
+	
 </mapper>

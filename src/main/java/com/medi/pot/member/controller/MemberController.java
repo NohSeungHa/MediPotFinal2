@@ -2,6 +2,7 @@ package com.medi.pot.member.controller;
 
 import java.awt.Window;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
@@ -13,10 +14,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.medi.pot.common.page.PageCreate;
 import com.medi.pot.member.model.service.MemberService;
 import com.medi.pot.member.model.vo.Hospital;
 import com.medi.pot.member.model.vo.Member;
@@ -224,7 +228,7 @@ public class MemberController {
 		System.out.println("마이페이지 들어옴");
 		String view = "";
 		if(user_id.equals("admin")) {
-			view = "member/adminpage";
+			view = "member/adminPage";
 		} else {
 			view = "member/memberPage";
 		}
@@ -329,6 +333,28 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
+	@RequestMapping("/adminPage/memberList.do")
+	public ModelAndView memberList(@RequestParam(value="cPage",required=false,defaultValue="1") int cPage) {
+		ModelAndView mv=new ModelAndView();
+		int numPerPage=10;
+		List<Member> list=service.selectMemberList(cPage,numPerPage);
+		
+		int totalCount=service.selectCount();
+		
+		String pageBar=new PageCreate().getPageBar(cPage, numPerPage,totalCount,"memberList.do");
+		
+		mv.addObject("pageBar", pageBar);
+		mv.addObject("list",list);
+		mv.addObject("cPage", cPage);
+		mv.addObject("totalCount", totalCount);
+		mv.setViewName("/member/adminPageMember");		
+		
+		return mv;
+	}
 	
+	/*@RequestMapping("/adminPage/hospitalList.do")
+	public String hospitalList() {
+		
+	}*/
 	
 }

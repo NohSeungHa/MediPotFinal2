@@ -1,5 +1,6 @@
 package com.medi.pot.member.model.service;
 
+import java.util.List;
 import java.util.Map;
 
 import com.medi.pot.member.model.vo.Hospital;
@@ -18,6 +19,8 @@ public interface MemberService {
 	int memberPageUpdate(Member m);
 	Member selectMember(String memberId);
 	int memberPwUpdate(Map<String, String> idpw);
+	List<Member> selectMemberList(int cPage, int numPerPage);
+	int selectCount();
 	
 	/*병원회원*/
 	Hospital loginHospitalCheck(String userId);

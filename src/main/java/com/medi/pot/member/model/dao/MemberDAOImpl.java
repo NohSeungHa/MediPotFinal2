@@ -1,7 +1,9 @@
 package com.medi.pot.member.model.dao;
 
+import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -76,6 +78,17 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public int insertHospital(SqlSessionTemplate sqlSession, Hospital h) {
 		return sqlSession.insert("hospital.insertHospital",h);
+	}
+
+	@Override
+	public List<Member> selectMemberList(SqlSessionTemplate sqlSession, int cPage, int numPerPage) {
+		RowBounds rb=new RowBounds((cPage-1)*numPerPage,numPerPage);
+		return sqlSession.selectList("member.selectMemberList",null,rb);
+	}
+
+	@Override
+	public int selectCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("member.selectCount");
 	}
 	
 	

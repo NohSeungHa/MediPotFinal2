@@ -1,5 +1,6 @@
 package com.medi.pot.member.model.service;
 
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -83,6 +84,16 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int insertHospital(Hospital h) {
 		return dao.insertHospital(sqlSession, h);
+	}
+
+	@Override
+	public List<Member> selectMemberList(int cPage, int numPerPage) {
+		return dao.selectMemberList(sqlSession,cPage,numPerPage);
+	}
+
+	@Override
+	public int selectCount() {
+		return dao.selectCount(sqlSession);
 	}
 	
 	
