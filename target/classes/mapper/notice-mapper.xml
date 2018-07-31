@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="notice">
+	<select id="hospitalNoticeList" resultType="HospitalNotice">
+		<!-- select * from hospital_notice -->
+		select * from HospitalNotice order by hospitalNoticeDate desc
+	</select>
+	<insert id="hospitalNoticeInsert" parameterType="HospitalNotice">
+		insert into HospitalNotice VALUES(HospitalNotice_SEQ.nextval, #{hospitalNoticeTitle}, #{hospitalNoticeWriter}, #{hospitalNoticeContent}, #{hospitalNoticeFile},#{hospitalNoticeRefile},0,sysdate)
+	</insert>
+	<select id="selectOneNotice" resultType="HospitalNotice" parameterType="_int">
+		select * from hospitalNotice where hospitalNoticeNum=#{no}
+	</select>
+	<update id="updateCount" parameterType="HospitalNotice">
+		UPDATE hospitalNotice SET hospitalNoticeReadcount=hospitalNoticeReadcount + 1 WHERE hospitalNoticeNum = #{no}
+	</update>
+	<select id="selectCount" resultType="_int">
+		select count(*) from HospitalNotice
+	</select>
+	<select id="selectNoticeNumber" resultType="_int">
+		select hospitalNoticeNum from HospitalNotice order by hospitalNoticeDate desc
+	</select>
+</mapper>
