@@ -12,11 +12,6 @@
 
 
 <div class="container">
-	<!-- 		<div class="jumbotron">
-			<h1 class="text-center">Hello MediPot</h1>
-			<p class="text-center">메디팟은 병원 예약 서비스를 제공합니다.</p>
-			<p class="text-center"><a class="btn btn-primary btn-lg" href="reservation.html" role="button">예약하러가기</a>
-		</div> -->
 
 	<!-- 캐러셀 시작 -->
 	<!-- #region Jssor Slider Begin -->

@@ -13,9 +13,18 @@
   <style>
        
     /* Remove the jumbotron's default bottom margin */ 
-     .jumbotron2 {
+     .jumbotron {
       margin-bottom: 0;
-      background-img : url('/pot/resources/img/helpZone/jumbotron2.jpg');
+      background-image : url('/pot/resources/img/helpZone/jumbotron2.jpg');
+      background-size: cover;
+    }
+    .jumbotron p{
+    	color: white;
+    	font-size: 2em;
+    }
+    .jumbotron h1{
+    	color: white;
+    	font-size: 7em;
     }
 
   </style>
@@ -25,10 +34,10 @@
 <!--헤더부분 추가하기 -->
 
 
-<div class="jumbotron2">
+<div class="jumbotron">
   <div class="container text-center">
     <h1>Help Zone</h1>      
-    <p>(테스트멘트)안녕하세요 헬프존입니다. 의학전문가에게 무엇이든 물어보세요!</p>
+    <p>(테스트멘트)안녕하세요 헬프존입니다. 의학전문가에게 무엇이든 물어보세요!ㅎㅇㅎㅇ</p>
   </div>
 </div>
 
@@ -106,6 +115,9 @@
 
 </footer>
 
+
+<br>            
+	  ${pageBar }
 </body>
 
 

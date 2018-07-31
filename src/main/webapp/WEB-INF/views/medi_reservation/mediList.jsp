@@ -38,8 +38,7 @@
 	<script>
 		$(function () {
 			$(".mediList").click(function () {
-				alert($(this).attr('id'));
-				/* location.href='${path}/medi/mediInfo?no='+$('.mediList').id; */
+				location.href='${path}/medi/mediInfo?no='+$('.mediList').attr('id');
 			});
 		});
 		function fn_paging(cPage,loc,sub){
