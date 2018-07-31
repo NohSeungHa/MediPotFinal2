@@ -37,7 +37,7 @@
 <div class="jumbotron">
   <div class="container text-center">
     <h1>Help Zone</h1>      
-    <p>(테스트멘트)안녕하세요 헬프존입니다. 의학전문가에게 무엇이든 물어보세요!ㅎㅇㅎㅇ</p>
+    <p>(테스트멘트)안녕하세요 헬프존입니다. 의학전문가에게 무엇이든 물어보세요!ㅎㅇㅎㅇ 노승하입니다.</p>
   </div>
 </div>
 
