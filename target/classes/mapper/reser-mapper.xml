@@ -12,4 +12,8 @@
 	<select id="selectName" parameterType="String" resultType="HospitalInfo">
 		select * from hospital join hospitalinfo on(hospitalnum=hospitalinfonum) where hospital.hospitalName like '%'||#{hName}||'%'
 	</select>
+	
+	<select id="selectMedi" parameterType="_int" resultType="HospitalInfo">
+		select * from hospital join hospitalinfo on(hospitalnum=hospitalinfonum) where hospital.hospitalnum=#{num}
+	</select>
 </mapper>

@@ -31,6 +31,13 @@ public class ReservationDaoImpl implements ReservationDao {
 	public List<HospitalInfo> mediNameSearch(String hName) {
 		return session.selectList("reser.selectName", hName);
 	}
+
+	@Override
+	public HospitalInfo mediInfo(int num) {
+		return session.selectOne("reser.selectMedi", num);
+	}
+	
+	
 	
 	
 	
