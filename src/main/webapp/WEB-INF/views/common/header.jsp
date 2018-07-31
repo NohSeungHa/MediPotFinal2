@@ -30,13 +30,6 @@
 </head>
 <body>
 	<style type="text/css">/*내부 스타일 시트 적용*/
-		.jumbotron
-		{
-			background-image: url('/pot/resources/img/common/hopital.jpg'); 
-			background-size: cover;
-			text-shadow: black 0.2em 0.2em 0.2em;
-			color : white;
-		}
 		*{
 			font-family:Jua;
 		}
