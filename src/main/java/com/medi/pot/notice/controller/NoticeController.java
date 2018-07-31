@@ -31,7 +31,7 @@ public class NoticeController {
 	@Autowired
 	private NoticeService service;
 	
-	
+	//공지사항 페이징처리 메서드
 	@RequestMapping("/notice/noticeList.do")
 	public ModelAndView noticeList(@RequestParam(value="cPage",required=false,defaultValue="1") int cPage) {
 		ModelAndView mv=new ModelAndView();
@@ -44,7 +44,7 @@ public class NoticeController {
 		mv.addObject("list",list);
 		mv.addObject("cPage", cPage);
 		mv.addObject("totalCount", totalCount);
-		mv.setViewName("notice/hospital_notice");	
+		mv.setViewName("notice/hospital_notice");
 		
 		return mv;
 	}
