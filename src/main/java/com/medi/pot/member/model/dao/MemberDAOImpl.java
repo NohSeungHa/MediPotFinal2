@@ -101,6 +101,11 @@ public class MemberDAOImpl implements MemberDAO {
 	public int selectHospitalCount(SqlSessionTemplate sqlSession) {
 		return sqlSession.selectOne("hospital.selectCount");
 	}
+
+	@Override
+	public int updateAdmission(SqlSessionTemplate sqlSession, int hospitalNum) {
+		return sqlSession.update("hospital.updateAdmission",hospitalNum);
+	}
 	
 	
 	

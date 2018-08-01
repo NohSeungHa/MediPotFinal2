@@ -42,12 +42,29 @@
 					<td>${h.hospitalEmail }</td>
 					<td>${h.hospitalAddr }</td>
 					<td>${h.hospitalDate }</td>
-					<td>${h.hospitalAdmission }</td>
+					<td>
+						<c:if test="${h.hospitalAdmission==0}">
+							<button class="btn btn-default" onclick="movePage(${h.hospitalNum })">승인 대기중</button>
+						</c:if>
+						<c:if test="${h.hospitalAdmission==1 }">
+							승인완료
+						</c:if>
+					</td>
 				</tr>	
 			</c:forEach>
 		</c:if>
 	</table>
 	${pageBar }
 </section>
+
+<script>
+	function movePage(e){
+		console.log(e);
+		location.href="${pageContext.request.contextPath}/adminPage/admission.do?hospitalNum="+e;
+	}
+</script>
+
+
+
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

@@ -371,4 +371,23 @@ public class MemberController {
 		return mv;
 	}
 	
+	@RequestMapping("/adminPage/admission.do")
+	public String admission(int hospitalNum, Model model) {
+		int result = service.updateAdmission(hospitalNum);
+		String msg="";
+		String loc="adminPage/hospitalList.do";
+		
+		if(result>0) {
+			msg="해당 병원을 승인하였습니다.";
+		}else {
+			msg="병원 승인에 실패하였습니다.";
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("loc", loc);
+		
+		return "common/msg";
+	}
+	
+	
 }

@@ -68,9 +68,7 @@
 				</c:if>
 				<!-- 로그인 후 -->
 				<c:if test="${memberLoggedIn!=null }">
-					<script>
-					alert(<c:out value="${checkPH}"/>);
-					</script>
+					
 				<ul class="nav navbar-nav navbar-right" style="margin-top:2.5%;margin-right:1%;">
 				
 					<c:if test="${checkPH=='P' }">

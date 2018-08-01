@@ -27,5 +27,6 @@ public interface MemberService {
 	int insertHospital(Hospital h);
 	List<Hospital> selectHospitalList(int cPage, int numPerPage);
 	int selectHospitalCount();
+	int updateAdmission(int hospitalNum);
 	
 }
