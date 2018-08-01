@@ -77,7 +77,7 @@
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
                 //document.getElementById('sample4_postcode').value = data.zonecode; //5자리 새우편번호 사용
-                document.getElementById('address').value = fullRoadAddr;
+                document.getElementById('hospitalAddr').value = fullRoadAddr;
                 //document.getElementById('sample4_jibunAddress').value = data.jibunAddress;
 
                 // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
@@ -122,39 +122,39 @@
 						<th>병원 아이디<b>(*)</b></th>
 						<td>
 							<div id="hospitalId-container">
-								<input type="text" class="form-control" placeholder="4글자이상" name="hospitalId" id="hospitalId_" value="${hospital.hospitalId }" readonly>
+								<input type="text" class="form-control" placeholder="4글자이상" name="hospitalId" id="hospitalId_" value="${memberLoggedIn.hospitalId }" readonly>
 							</div>
 						</td>
 					</tr>
 					<tr>
 						<th>병원명<b>(*)</b></th>
 						<td>	
-						<input type="text" class="form-control" name="hospitalName" id="hospitalName" value="${hospital.hospitalName }" required>
+						<input type="text" class="form-control" name="hospitalName" id="hospitalName" value="${memberLoggedIn.hospitalName }" required>
 						</td>
 					</tr>
 					<tr>
 						<th>사업자번호<b>(*)</b></th>
 						<td>	
 						<input type="text" class="form-control" name="hospitalLicense" id="hospitalLicense" 
-							maxlength="6" placeholder="6자리로 입력해주십시오." value="${hospital.hospitalLicense }" readonly>
+							maxlength="6" placeholder="6자리로 입력해주십시오." value="${memberLoggedIn.hospitalLicense }" readonly>
 						</td>
 					</tr>
 					<tr>
 						<th>전화번호<b>(*)</b></th>
 						<td>	
-							<input type="tel" class="form-control" placeholder="(-없이)0212341234" name="phone" id="phone" maxlength="11" valuse="${hospital.hospitalTel }" required>
+							<input type="tel" class="form-control" placeholder="(-없이)0212341234" name="hospitalTel" id="hospitalTel" maxlength="11" value="${memberLoggedIn.hospitalTel }" required>
 						</td>
 					</tr>
 					<tr>
 						<th>이메일</th>
 						<td>	
-							<input type="email" class="form-control" placeholder="abc@xyz.com" name="email" value="${hospital.hospitalEmail }" id="email">
+							<input type="email" class="form-control" placeholder="abc@xyz.com" name="hospitalEmail" value="${memberLoggedIn.hospitalEmail }" id="hospitalEmail">
 						</td>
 					</tr>
 					<tr>
 						<th>주소</th>
 						<td>
-							<input type="text" class="form-control" name="address" id="address" placeholder="도로명주소" value="${hospital.hospitalAddr }" readonly>
+							<input type="text" class="form-control" name="hospitalAddr" id="hospitalAddr" placeholder="도로명주소" value="${memberLoggedIn.hospitalAddr }" readonly>
 						</td>
 						<td>
 							&nbsp;

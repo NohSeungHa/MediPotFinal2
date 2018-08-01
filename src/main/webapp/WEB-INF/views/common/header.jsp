@@ -72,7 +72,7 @@
 				<ul class="nav navbar-nav navbar-right" style="margin-top:2.5%;margin-right:1%;">
 				
 					<c:if test="${checkPH=='P' }">
-						<li><a href="${pageContext.request.contextPath }/member/mypage.do?user_id=${memberLoggedIn.memberId}">${memberLoggedIn.memberName }&nbsp;님 환영합니다.</a></li>
+						<li><a href="${pageContext.request.contextPath }/member/mypage.do?user_id=${memberLoggedIn.memberId}&checkPH=${checkPH}">${memberLoggedIn.memberName }&nbsp;님 환영합니다.</a></li>
 					</c:if>
 					
 					<c:if test="${checkPH=='H' }">
@@ -80,7 +80,7 @@
 							<li><a style="text-decoration:none">승인대기 중입니다.</a></li>
 						</c:if>	
 						<c:if test="${hospitalAdmission!='0' }">
-							<li><a href="${pageContext.request.contextPath }/member/mypage.do?user_id=${memberLoggedIn.hospitalId}">${memberLoggedIn.hospitalName }&nbsp;님 환영합니다.</a></li>
+							<li><a href="${pageContext.request.contextPath }/member/mypage.do?user_id=${memberLoggedIn.hospitalId}&checkPH=${checkPH}">${memberLoggedIn.hospitalName }&nbsp;님 환영합니다.</a></li>
 						</c:if>
 					</c:if>
 					
@@ -146,6 +146,8 @@
 								placeholder="비밀번호" required>
 						</div>
 						<div class="modal-footer">
+							<a href="${pageContext.request.contextPath}/member/findId.do" style="color: #000F75">아이디 찾기</a>
+							<a href="${pageContext.request.contextPath}/member/findPassword.do" style="margin-right: 300px; color: #000F75">비밀번호 찾기</a>
 							<button type="submit" class="btn btn-outline-success">로그인</button>
 							<button type="button" class="btn btn-outline-success"
 								data-dismiss="modal">취소</button>

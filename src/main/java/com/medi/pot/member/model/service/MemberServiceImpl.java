@@ -110,7 +110,55 @@ public class MemberServiceImpl implements MemberService {
 	public int updateAdmission(int hospitalNum) {
 		return dao.updateAdmission(sqlSession, hospitalNum);
 	}
-	
+
+	@Override
+	public int duplicateMemEmailCheck(String memberEmail) {
+		
+		return dao.duplicateMemEmailCheck(sqlSession, memberEmail);
+		
+	}
+
+	@Override
+	public int checkEmail(String memberEmail) {
+		
+		return dao.checkEmail(sqlSession, memberEmail);
+		
+	}
+
+	@Override
+	public int FindMemEmailCheck(String memberEmail) {
+		
+		return dao.FindMemEmailCheck(sqlSession, memberEmail);
+		
+	}
+
+	@Override
+	public String FindId(Member m) {
+		
+		return dao.FindId(sqlSession, m);
+		
+	}
+
+	@Override
+	public Member searchName(String findname) {
+		
+		return dao.searchName(sqlSession, findname);
+		
+	}
+
+	@Override
+	public Member searchID(String findid) {
+		
+		return dao.searchID(sqlSession, findid);
+		
+	}
+
+	@Override
+	public int MemberUpdate(Member m) {
+		
+		return dao.MemberUpdate(sqlSession, m);
+		
+	}
 	
 	
 	

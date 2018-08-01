@@ -16,7 +16,7 @@
 		border-top-right-radius: 50px;
 		border-bottom-right-radius: 50px;
 		width: 500px;
-		height: 600px;
+		height: 550px;
 		margin: 0 auto;
 	}
 	
@@ -31,7 +31,7 @@
 
 <div class="findid">
 	<br><br><br><br>
-	<form action="${pageContext.request.contextPath }/member/memberFindId.do">
+	<form action="${pageContext.request.contextPath }/member/memberFindPw.do">
 	<table style="margin: 0 auto;">
 	<tr>
 		<td></td>
@@ -47,9 +47,9 @@
 	</tr>
 	<tr>
 		<td> </td>
-		<td> <b>이름</b> </td>
+		<td> <b>아이디</b> </td>
 		<td> &nbsp; : &nbsp; </td>
-		<td> <input class="form-control" type="text" placeholder="이름을 입력해주세요." style="width: 250px" maxlength="15" id="findname" name="findname"> </td>
+		<td> <input class="form-control" type="text" placeholder="아이디를 입력해주세요." style="width: 250px" maxlength="30" id="findid" name="findid"> </td>
 		<td> </td>
 	</tr>
 	<tr>
@@ -61,7 +61,7 @@
 		<td> </td>
 		<td> <b>이메일</b> </td>
 		<td> &nbsp;:&nbsp; </td>
-		<td> <input class="form-control" type="email" placeholder="abc@xyz.com" maxlength="30" id="findemail" name="findemail"> </td>
+		<td> <input class="form-control" type="email" placeholder="abc@xyz.com" maxlength="50" id="findemail" name="findemail"> </td>
 		<td style="width: 100px"> </td>
 	</tr>	
 	<tr>
@@ -89,7 +89,7 @@
 	<tr>
 		<td colspan="5" style="text-align: right;">
 			<br><br>
-			<a href="${pageContext.request.contextPath }">비밀번호를 잃어버리셨나요?</a>
+			<a href="${pageContext.request.contextPath }/member/join.do">회원이 아니신가요?</a>
 		</td>
 	</tr>
 	</table>
@@ -127,35 +127,51 @@
 			url:"${pageContext.request.contextPath}/member/findCheckEmail.do?PnH="+$('#findP').val(),
 			data:{memberEmail:$('#findemail').val()},
 			success:function(data){
-				if(data == 'true'){
-					alert("등록된 이메일과 일치합니다");
-					if($('#successEmail').css("display")=='none'){
-						$('#emailAuther').css("display","block");					
-					} else {
-						$('#emailAuther').css("display","none");
+				if(email.length > 0){
+					if(data == 'true'){
+						alert("등록된 이메일과 일치합니다");
+						if($('#successEmail').css("display")=='none'){
+							$('#emailAuther').css("display","block");					
+						} else {
+							$('#emailAuther').css("display","none");
+						}
+						return true;
+					} else{
+						alert("등록되지 않은 이메일입니다.");
+						$("#findemail").val("");
+		                $("#findemail").focus();
+		                return false;
 					}
-				} else{
-					alert("등록되지 않은 이메일입니다.");
-					$("#findemail").val("");
-	                $("#findemail").focus();
 				}
 			}
          })
 	});
 	
-	// 이름 유효성검사
-    $("#findname").blur(function(){
-      var name=$("#findname").val();
-         if(name.length!=0){
-            if(name.match(/([0-9])|([!,@,#,$,%,^,&,*,?,_,~,-])/)) {
-                 alert("이름은 영문과 한글만 입력 가능합니다.");
-                 $("#findname").val("");
-                 $("#findname").focus();
-                return false;
-               }
-         }
-         return true;
-    });
+	// 아이디 유효성검사
+	$(function(){
+		$('#findId').on("keyup",function(){
+			var memberId=$('#findId').val();
+			if(memberId.length!=0){
+				if(memberId.match(/([ㄱ-ㅎ|가-힣]|([!,@,#,$,%,^,&,*,?,_,~,-]))/) || (memberId.match(/([0-9])/) && (memberId.match(/([a-zA-Z])/))==null)){
+					alert("아이디는 영문과 숫자로 입력해야합니다.");
+					$('#findId').val("");
+					$('#findId').focus();
+					return;
+				}
+			}
+			$.ajax({
+				url:"${pageContext.request.contextPath}/member/PcheckId.do",
+				data:{memberId:$(this).val()},
+				success:function(data){
+					if(data == 'true'){
+						alert("아이디가 존재하지 않습니다.");
+					}else{
+						alert("아이디가 존재합니다.");
+					}
+				}
+			})
+		});
+	});
 	
 	function emailAuther(){
 		var nowemail = $('#findemail').val();

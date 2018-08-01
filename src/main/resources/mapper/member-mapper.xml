@@ -46,6 +46,34 @@
 		update member set memberPw=#{newPassword} where memberId=#{memberId}
 	</update>
 	
+	<select id="duplicateEmail" parameterType="string" resultType="_int">
+		select count(*) from member where memberEmail=#{memberEmail}
+	</select>
+	
+	<select id="checkEmail" parameterType="string" resultType="_int">
+		select count(*) from member where memberEmail=#{memberEmail}
+	</select>
+	
+	<select id="FindEmail" parameterType="string" resultType="_int">
+		select count(*) from member where memberEmail=#{memberEmail}
+	</select>
+	
+	<select id="FindId" parameterType="member" resultType="string">
+		select rpad(substr(memberId,1,3),length(memberId),'*') from member where memberName=#{memberName} and memberEmail=#{memberEmail}
+	</select>
+	
+	<select id="searchName" parameterType="string" resultType="member">
+		select * from member where memberName=#{memberName}
+	</select>
+	
+	<select id="searchID" parameterType="string" resultType="member">
+		select * from member where memberId=#{memberId}
+	</select>
+	
+	<update id="MemberUpdate" parameterType="member">
+		update member set memberPw=#{memberPw} where memberId=#{memberId}
+	</update>
+	
 	<select id="selectMemberList" resultType="member">
 		select A.* from member A order by memberDate DESC
 	</select>
@@ -53,5 +81,4 @@
 	<select id="selectCount" resultType="_int">
  		select count(*) from member
  	</select>
- 	
 </mapper>

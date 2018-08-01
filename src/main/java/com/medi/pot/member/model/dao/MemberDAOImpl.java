@@ -106,7 +106,55 @@ public class MemberDAOImpl implements MemberDAO {
 	public int updateAdmission(SqlSessionTemplate sqlSession, int hospitalNum) {
 		return sqlSession.update("hospital.updateAdmission",hospitalNum);
 	}
+
+	@Override
+	public int duplicateMemEmailCheck(SqlSessionTemplate sqlSession, String memberEmail) {
+		System.out.println("duplicate Email : " + memberEmail);
+		return sqlSession.selectOne("member.duplicateEmail", memberEmail);
+		
+	}
 	
-	
+	@Override
+	public int checkEmail(SqlSessionTemplate sqlSession, String memberEmail) {
+		System.out.println("check Email : " + memberEmail);
+		return sqlSession.selectOne("member.checkEmail",memberEmail);
+		
+	}
+
+	@Override
+	public int FindMemEmailCheck(SqlSessionTemplate sqlSession, String memberEmail) {
+		
+		return sqlSession.selectOne("member.FindEmail", memberEmail);
+		
+	}
+
+	@Override
+	public String FindId(SqlSessionTemplate sqlSession, Member m) {
+		
+		return sqlSession.selectOne("member.FindId", m);
+		
+	}
+
+	@Override
+	public Member searchName(SqlSessionTemplate sqlSession, String findname) {
+		
+		return sqlSession.selectOne("member.searchName", findname);
+		
+	}
+
+	@Override
+	public Member searchID(SqlSessionTemplate sqlSession, String findid) {
+		
+		return sqlSession.selectOne("member.searchID", findid);
+		
+	}
+
+	@Override
+	public int MemberUpdate(SqlSessionTemplate sqlSession, Member m) {
+		
+		return sqlSession.update("member.MemberUpdate", m);
+		
+	}
+
 	
 }
