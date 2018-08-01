@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.medi.pot.reservation.model.vo.DoctorInfo;
+import com.medi.pot.reservation.model.vo.DoctorSchedule;
 import com.medi.pot.reservation.model.vo.HospitalInfo;
 
 @Repository
@@ -42,6 +43,17 @@ public class ReservationDaoImpl implements ReservationDao {
 	public List<DoctorInfo> selectDoctorList(int num) {
 		return session.selectList("reser.selectDoctor", num);
 	}
+
+	@Override
+	public DoctorInfo selectDoctor(int docNo) {
+		return session.selectOne("reser.selectDoc", docNo);
+	}
+
+	@Override
+	public DoctorSchedule selectDocSche(int docNo) {
+		return session.selectOne("reser.selectDocSche", docNo);
+	}
+	
 	
 	
 	

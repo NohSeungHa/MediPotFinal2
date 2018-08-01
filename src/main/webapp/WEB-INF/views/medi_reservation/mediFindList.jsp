@@ -102,17 +102,17 @@
 			<button class="btn btn-default loc" value="제주">제주도</button>
 		</div>
 		<div id="subjectList" style="text-align: center;">
-			<img class="subImg" name="J1" src="${path }/resources/img/reser/h1.png" width="140px;" height="140px;">
-			<img class="subImg" name="C1" src="${path }/resources/img/reser/h2.png" width="140px;" height="140px;">
-			<img class="subImg" name="P1" src="${path }/resources/img/reser/h3.png" width="140px;" height="140px;">
-			<img class="subImg" name="S1" src="${path }/resources/img/reser/h4.png" width="140px;" height="140px;">
-			<img class="subImg" name="A1" src="${path }/resources/img/reser/h5.png" width="140px;" height="140px;">
-			<img class="subImg" name="B1" src="${path }/resources/img/reser/h6.png" width="140px;" height="140px;">
-			<img class="subImg" name="S1" src="${path }/resources/img/reser/h7.png" width="140px;" height="140px;">
-			<img class="subImg" name="N1" src="${path }/resources/img/reser/h8.png" width="140px;" height="140px;">
-			<img class="subImg" name="E1" src="${path }/resources/img/reser/h9.png" width="140px;" height="140px;">
-			<img class="subImg" name="H1" src="${path }/resources/img/reser/h10.png" width="140px;" height="140px;">
-			<img class="subImg" name="S2" src="${path }/resources/img/reser/h11.png" width="140px;" height="140px;">
+			<img class="subImg" name="정형외과" src="${path }/resources/img/reser/h1.png" width="140px;" height="140px;">
+			<img class="subImg" name="치과" src="${path }/resources/img/reser/h2.png" width="140px;" height="140px;">
+			<img class="subImg" name="피부과" src="${path }/resources/img/reser/h3.png" width="140px;" height="140px;">
+			<img class="subImg" name="성형외과" src="${path }/resources/img/reser/h4.png" width="140px;" height="140px;">
+			<img class="subImg" name="안과" src="${path }/resources/img/reser/h5.png" width="140px;" height="140px;">
+			<img class="subImg" name="비뇨기과" src="${path }/resources/img/reser/h6.png" width="140px;" height="140px;">
+			<img class="subImg" name="신경외과" src="${path }/resources/img/reser/h7.png" width="140px;" height="140px;">
+			<img class="subImg" name="내과" src="${path }/resources/img/reser/h8.png" width="140px;" height="140px;">
+			<img class="subImg" name="이비인후과" src="${path }/resources/img/reser/h9.png" width="140px;" height="140px;">
+			<img class="subImg" name="한의원" src="${path }/resources/img/reser/h10.png" width="140px;" height="140px;">
+			<img class="subImg" name="산부인과" src="${path }/resources/img/reser/h11.png" width="140px;" height="140px;">
 		</div>
 	
 	</div>
@@ -166,6 +166,7 @@
 			});
 			$(".subImg").click(function () {
 				if(loc.length>0){
+					 
 					sub=$(this).attr("name");
 					$.ajax({
 						url:"${path}/medi/medisearchList",
@@ -176,6 +177,8 @@
 							$('#mediListAdd').html(data);
 						}
 					});
+					
+					 
 					/* location.href='${path}/medi/medisearchList?loc='+loc+'&sub='+sub; */
 				}else{
 					alert("지역을 먼저 선택해 주세요");

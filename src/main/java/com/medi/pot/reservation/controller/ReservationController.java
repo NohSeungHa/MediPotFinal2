@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.medi.pot.common.page.PageCreate2;
 import com.medi.pot.reservation.model.service.ReservationService;
 import com.medi.pot.reservation.model.vo.DoctorInfo;
+import com.medi.pot.reservation.model.vo.DoctorSchedule;
 import com.medi.pot.reservation.model.vo.HospitalInfo;
 import com.medi.pot.common.page.PageCreate2;
 
@@ -81,6 +82,23 @@ public class ReservationController {
 		System.out.println(nameList);
 		req.setAttribute("nameList", nameList);
 		return "medi_reservation/mediFindList";
+	}
+	
+	@RequestMapping("/medi/doctorS")
+	public String doctorSca(String docNum,String hosNum,HttpServletRequest req) {
+		int num=Integer.parseInt(hosNum);
+		int docNo=Integer.parseInt(docNum);
+		List<DoctorInfo> list=service.selectDoctorList(num);
+		DoctorInfo doctor=service.selectDoctor(docNo);
+		DoctorSchedule docSche=service.selectDocSche(docNo);
+		System.out.println(list);
+		System.out.println(doctor);
+		System.out.println(docSche);
+		req.setAttribute("list", list);
+		req.setAttribute("doctor", doctor);
+		req.setAttribute("docSche", docSche);
+		
+		return "medi_reservation/reservation";
 	}
 
 }

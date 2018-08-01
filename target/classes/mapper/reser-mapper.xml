@@ -20,4 +20,10 @@
 	<select id="selectDoctor" parameterType="_int" resultType="DoctorInfo">
 		select * from DOCTORINFO where hospitalno=#{num}
 	</select>
+	<select id="selectDoc" parameterType="_int" resultType="DoctorInfo">
+		select * from DOCTORINFO where doctornum=#{docNo}
+	</select>
+	<select id="selectDocSche" parameterType="_int" resultType="DoctorSchedule">
+		select * from RESERVATIONBLOCK where blockdoctor=#{docNo}
+	</select>
 </mapper>

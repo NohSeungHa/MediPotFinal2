@@ -271,30 +271,34 @@
 		<div style="width:100%;height:50px;font-size:20px;text-align:center;background-color:#286090;padding-top:11px;color:white;border-radius:8px;margin-bottom:10px;">
 			의료진 정보
 		</div>
-		<div id="docInfo-div" style="height:auto;margin-bottom:10px;">
-			<table id="docInfo">
+		
+		<c:forEach var="list" items="${list }">
+		<div id="docInfo-div" style="height:auto;margin-bottom:10px;" class="${list.doctorNum }">
+			<table id="docInfo" class="${list.hospitalNo }">
 				<tr>
-					<td rowspan="4"><img src="${path }/resources/img/reser/f1.jpg" width="200px;" height="250px;"></td>
+					<td rowspan="4"><img src="${path }/resources/img/reser/${list.doctorPhoto }" width="200px;" height="250px;"></td>
 					<th>이름</th>
-					<td>채슬기</td>
+					<td>${list.doctorName }</td>
 				</tr>
 				<tr>
 					<th>진료과</th>
-					<td>정신과</td>
+					<td>${list.professional }</td>
 				</tr>
 				<tr>
 					<th>전문분야</th>
-					<td>청소년 정신치료,분노조절장애 치료</td>
+					<td>${list.specialized }</td>
 				</tr>
 				<tr>
 					<th>학력/경력</th>
-					<td>한양대 정보융합 졸업<br>
-						석사<br>
-						굳
+					<td>
+					 <c:forEach var="s" items="${fn:split(list.doctorCareer, ',')}">
+					 ${s }<br>
+					 </c:forEach>
 					</td>
 				</tr>
 			</table>
 		</div>	
+		</c:forEach>
 		
 	</div>
 	<div class="col-sm-4">
@@ -528,6 +532,9 @@
 	$(function () {
 		$('.calb').click(function () {
 			alert($(this).val());
+		});
+		$('#docInfo-div').click(function () {
+			location.href='${path}/medi/doctorS?docNum='+$(this).attr('class')+'&hosNum='+$('#docInfo').attr('class');
 		});
 	});
 </script>

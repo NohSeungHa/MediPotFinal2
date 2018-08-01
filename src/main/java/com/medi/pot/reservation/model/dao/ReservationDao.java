@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.medi.pot.reservation.model.vo.DoctorInfo;
+import com.medi.pot.reservation.model.vo.DoctorSchedule;
 import com.medi.pot.reservation.model.vo.HospitalInfo;
 
 public interface ReservationDao {
@@ -13,5 +14,7 @@ public interface ReservationDao {
 	List<HospitalInfo> mediNameSearch(String hName);
 	HospitalInfo mediInfo(int num);
 	List<DoctorInfo> selectDoctorList(int num);
+	DoctorInfo selectDoctor(int docNo);
+	DoctorSchedule selectDocSche(int docNo);
 
 }

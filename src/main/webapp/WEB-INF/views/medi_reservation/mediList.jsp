@@ -7,7 +7,7 @@
 	<c:set var='path' value="<%=request.getContextPath() %>"></c:set>
 	
 
-	<div style="width:100%;height:50px;font-size:20px;text-align:center;background-color:#286090;padding-top:11px;color:white;border-radius:8px;margin-bottom:10px;">
+	<div id="listId" style="width:100%;height:50px;font-size:20px;text-align:center;background-color:#286090;padding-top:11px;color:white;border-radius:8px;margin-bottom:10px;">
 		병원 리스트
 	</div>
 	<div id="changeList">
@@ -36,7 +36,11 @@
 	</div>
 	
 	<script>
+	
 		$(function () {
+			var offset = $("#listId").offset();
+			$('html, body').animate({scrollTop : offset.top}, 600);
+			
 			$(".mediList").click(function () {
 				location.href='${path}/medi/mediInfo?no='+$(this).attr('id');
 			});
