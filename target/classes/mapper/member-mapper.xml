@@ -53,6 +53,5 @@
 	<select id="selectCount" resultType="_int">
  		select count(*) from member
  	</select>
- 	<!-- zz -->
 	
 </mapper>
