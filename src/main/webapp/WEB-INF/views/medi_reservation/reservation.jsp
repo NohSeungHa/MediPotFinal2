@@ -336,7 +336,7 @@
 				<c:if test='<%=e.equals("월")%>'>
 				<tr>
 					<td></td>
-					<td><%if(!hdc && !hdce){ %><button class="calb" value="<%=y%>"><%=dd %></button><% }else {%><span style="color: red;"><%=dd %></span><%} %></td>
+					<td><%if(!hdc && !hdce){ %><%=dd %><% }else {%><span style="color: red;"><%=dd %></span><%} %></td>
 					<td><%if(!hdc2 && !hdce2){ %><button class="calb" value="<%=y2 %>"><%=dd2 %></button><% }else {%><span style="color: red;"><%=dd2 %></span><%} %></td>
 					<td><%if(!hdc3 && !hdce3){ %><button class="calb" value="<%=y3%>"><%=dd3 %></button><% }else {%><span style="color: red;"><%=dd3 %></span><%} %></td>
 					<td><%if(!hdc4 && !hdce4){ %><button class="calb" value="<%=y4%>"><%=dd4 %></button><% }else {%><span style="color: red;"><%=dd4 %></span><%} %></td>
@@ -367,7 +367,7 @@
 				<tr>
 					<td></td>
 					<td></td>
-					<td><%if(!hdc && !hdce){ %><button class="calb" value="<%=y%>"><%=dd %></button><% }else {%><span style="color: red;"><%=dd %></span><%} %></td>
+					<td><%if(!hdc && !hdce){ %><%=dd %><% }else {%><span style="color: red;"><%=dd %></span><%} %></td>
 					<td><%if(!hdc2 && !hdce2){ %><button class="calb" value="<%=y2 %>"><%=dd2 %></button><% }else {%><span style="color: red;"><%=dd2 %></span><%} %></td>
 					<td><%if(!hdc3 && !hdce3){ %><button class="calb" value="<%=y3%>"><%=dd3 %></button><% }else {%><span style="color: red;"><%=dd3 %></span><%} %></td>
 					<td><%if(!hdc4 && !hdce4){ %><button class="calb" value="<%=y4%>"><%=dd4 %></button><% }else {%><span style="color: red;"><%=dd4 %></span><%} %></td>
@@ -398,7 +398,7 @@
 					<td></td>
 					<td></td>
 					<td></td>
-					<td><%if(!hdc && !hdce){ %><button class="calb" value="<%=y %>"><%=dd %></button><% }else {%><span style="color: red;"><%=dd %></span><%} %></td>
+					<td><%if(!hdc && !hdce){ %><%=dd %><% }else {%><span style="color: red;"><%=dd %></span><%} %></td>
 					<td><%if(!hdc2 && !hdce2){ %><button class="calb" value="<%=y2 %>"><%=dd2 %></button><% }else {%><span style="color: red;"><%=dd2 %></span><%} %></td>
 					<td><%if(!hdc3 && !hdce3){ %><button class="calb" value="<%=y3%>"><%=dd3 %></button><% }else {%><span style="color: red;"><%=dd3 %></span><%} %></td>
 					<td><%if(!hdc4 && !hdce4){ %><button class="calb" value="<%=y4%>"><%=dd4 %></button><% }else {%><span style="color: red;"><%=dd4 %></span><%} %></td>
@@ -428,7 +428,7 @@
 					<td></td>
 					<td></td>
 					<td></td>
-					<td><%if(!hdc && !hdce){ %><button class="calb" value="<%=y %>"><%=dd %></button><% }else {%><span style="color: red;"><%=dd %></span><%} %></td>
+					<td><%if(!hdc && !hdce){ %><%=dd %><% }else {%><span style="color: red;"><%=dd %></span><%} %></td>
 					<td><%if(!hdc2 && !hdce2){ %><button class="calb" value="<%=y2 %>"><%=dd2 %></button><% }else {%><span style="color: red;"><%=dd2 %></span><%} %></td>
 					<td><%if(!hdc3 && !hdce3){ %><button class="calb" value="<%=y3%>"><%=dd3 %></button><% }else {%><span style="color: red;"><%=dd3 %></span><%} %></td>
 				</tr>
@@ -458,7 +458,7 @@
 					<td></td>
 					<td></td>
 					<td></td>
-					<td><%if(!hdc && !hdce){ %><button class="calb" value="<%=y %>"><%=dd %></button><% }else {%><span style="color: red;"><%=dd %></span><%} %></td>
+					<td><%if(!hdc && !hdce){ %><%=dd %><% }else {%><span style="color: red;"><%=dd %></span><%} %></td>
 					<td><%if(!hdc2 && !hdce2){ %><button class="calb" value="<%=y2 %>"><%=dd2 %></button><% }else {%><span style="color: red;"><%=dd2 %></span><%} %></td>
 				</tr>
 				<tr>
@@ -488,7 +488,7 @@
 					<td></td>
 					<td></td>
 					<td></td>
-					<td><%if(!hdc && !hdce){ %><button class="calb" value="<%=y %>"><%=dd %></button><% }else {%><span style="color: red;"><%=dd %></span><%} %></td>
+					<td><%if(!hdc && !hdce){ %><%=dd %><% }else {%><span style="color: red;"><%=dd %></span><%} %></td>
 				</tr>
 				<tr>
 					<td style="color: red;"><%if(!hdc2 && !hdce2){ %><%=dd2 %><% }else {%><span style="color: red;"><%=dd2 %></span><%} %></td>
