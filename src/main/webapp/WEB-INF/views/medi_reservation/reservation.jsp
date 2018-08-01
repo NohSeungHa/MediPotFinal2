@@ -261,7 +261,9 @@
 		border-radius:5px;
 		box-shadow:2px 2px 5px lightgray;
 	}
-	
+	#calList{
+		display:none;
+	}
 </style>
 
 <div style="height:1000px;">
