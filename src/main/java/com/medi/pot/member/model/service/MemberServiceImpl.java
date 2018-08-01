@@ -1,5 +1,6 @@
 package com.medi.pot.member.model.service;
 
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -83,6 +84,80 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int insertHospital(Hospital h) {
 		return dao.insertHospital(sqlSession, h);
+	}
+
+	@Override
+	public List<Member> selectMemberList(int cPage, int numPerPage) {
+		return dao.selectMemberList(sqlSession,cPage,numPerPage);
+	}
+
+	@Override
+	public int selectCount() {
+		return dao.selectCount(sqlSession);
+	}
+
+	@Override
+	public List<Hospital> selectHospitalList(int cPage, int numPerPage) {
+		return dao.selectHospitalList(sqlSession, cPage, numPerPage);
+	}
+
+	@Override
+	public int selectHospitalCount() {
+		return dao.selectHospitalCount(sqlSession);
+	}
+
+	@Override
+	public int updateAdmission(int hospitalNum) {
+		return dao.updateAdmission(sqlSession, hospitalNum);
+	}
+
+	@Override
+	public int duplicateMemEmailCheck(String memberEmail) {
+		
+		return dao.duplicateMemEmailCheck(sqlSession, memberEmail);
+		
+	}
+
+	@Override
+	public int checkEmail(String memberEmail) {
+		
+		return dao.checkEmail(sqlSession, memberEmail);
+		
+	}
+
+	@Override
+	public int FindMemEmailCheck(String memberEmail) {
+		
+		return dao.FindMemEmailCheck(sqlSession, memberEmail);
+		
+	}
+
+	@Override
+	public String FindId(Member m) {
+		
+		return dao.FindId(sqlSession, m);
+		
+	}
+
+	@Override
+	public Member searchName(String findname) {
+		
+		return dao.searchName(sqlSession, findname);
+		
+	}
+
+	@Override
+	public Member searchID(String findid) {
+		
+		return dao.searchID(sqlSession, findid);
+		
+	}
+
+	@Override
+	public int MemberUpdate(Member m) {
+		
+		return dao.MemberUpdate(sqlSession, m);
+		
 	}
 	
 	

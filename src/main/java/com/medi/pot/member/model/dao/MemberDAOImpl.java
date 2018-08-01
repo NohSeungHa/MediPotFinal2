@@ -1,7 +1,9 @@
 package com.medi.pot.member.model.dao;
 
+import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -77,7 +79,82 @@ public class MemberDAOImpl implements MemberDAO {
 	public int insertHospital(SqlSessionTemplate sqlSession, Hospital h) {
 		return sqlSession.insert("hospital.insertHospital",h);
 	}
+
+	@Override
+	public List<Member> selectMemberList(SqlSessionTemplate sqlSession, int cPage, int numPerPage) {
+		RowBounds rb=new RowBounds((cPage-1)*numPerPage,numPerPage);
+		return sqlSession.selectList("member.selectMemberList",null,rb);
+	}
+
+	@Override
+	public int selectCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("member.selectCount");
+	}
+
+	@Override
+	public List<Hospital> selectHospitalList(SqlSessionTemplate sqlSession, int cPage, int numPerPage) {
+		RowBounds rb=new RowBounds((cPage-1)*numPerPage,numPerPage);
+		return sqlSession.selectList("hospital.selectHospitalList",null,rb);
+	}
+
+	@Override
+	public int selectHospitalCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("hospital.selectCount");
+	}
+
+	@Override
+	public int updateAdmission(SqlSessionTemplate sqlSession, int hospitalNum) {
+		return sqlSession.update("hospital.updateAdmission",hospitalNum);
+	}
+
+	@Override
+	public int duplicateMemEmailCheck(SqlSessionTemplate sqlSession, String memberEmail) {
+		System.out.println("duplicate Email : " + memberEmail);
+		return sqlSession.selectOne("member.duplicateEmail", memberEmail);
+		
+	}
 	
-	
+	@Override
+	public int checkEmail(SqlSessionTemplate sqlSession, String memberEmail) {
+		System.out.println("check Email : " + memberEmail);
+		return sqlSession.selectOne("member.checkEmail",memberEmail);
+		
+	}
+
+	@Override
+	public int FindMemEmailCheck(SqlSessionTemplate sqlSession, String memberEmail) {
+		
+		return sqlSession.selectOne("member.FindEmail", memberEmail);
+		
+	}
+
+	@Override
+	public String FindId(SqlSessionTemplate sqlSession, Member m) {
+		
+		return sqlSession.selectOne("member.FindId", m);
+		
+	}
+
+	@Override
+	public Member searchName(SqlSessionTemplate sqlSession, String findname) {
+		
+		return sqlSession.selectOne("member.searchName", findname);
+		
+	}
+
+	@Override
+	public Member searchID(SqlSessionTemplate sqlSession, String findid) {
+		
+		return sqlSession.selectOne("member.searchID", findid);
+		
+	}
+
+	@Override
+	public int MemberUpdate(SqlSessionTemplate sqlSession, Member m) {
+		
+		return sqlSession.update("member.MemberUpdate", m);
+		
+	}
+
 	
 }

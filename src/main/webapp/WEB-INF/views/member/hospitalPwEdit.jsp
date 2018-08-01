@@ -105,7 +105,7 @@ function fn_update_password() {
 						</td>
 					</tr>
 					<tr>
-						<th>변결할 비밀번호</th>
+						<th>변경할 비밀번호</th>
 						<td>
 							<input type="password" class="form-control" name="newPw" id="newPw" required>
 						</td>
