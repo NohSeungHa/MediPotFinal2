@@ -18,13 +18,26 @@
 			#{hospitalAddr},
 			sysdate,
 			#{hospitalLike},
-			0
+			0,
+			#{hospitalProfessional}
 		)
 	</insert>
 	
 	<select id="loginCheck" parameterType="string" resultType="hospital">
 		select * from hospital where hospitalId=#{userId}
 	</select>
+	
+	<select id="selectHospitalList" resultType="hospital">
+		select A.* from hospital A order by hospitalDate DESC
+	</select>
+	
+	<select id="selectCount" resultType="_int">
+ 		select count(*) from hospital
+ 	</select>
+ 	
+ 	<update id="updateAdmission">
+ 		update hospital set hospitalAdmission=1 where hospitalNum=#{hospitalNum}
+ 	</update>
 
 
 

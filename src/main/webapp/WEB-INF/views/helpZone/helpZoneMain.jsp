@@ -27,6 +27,10 @@
     	color: white;
     	font-size: 7em;
     }
+    .search_btn {
+    	display: inline-block;
+    }
+    
 
   </style>
 </head>
@@ -55,10 +59,14 @@
 			<img src="/pot/resources/img/notice/home.jpg" style="width: 30%; height:30%;"> 홈으로</a>
 			
 		</div>
-		<br>
+		<br><br>
 		
-		<input class="form-control mr-sm-2" type="text" placeholder="키워드로 검색하기" style="width: 30%; height: 45px; float: left; margin-left: 350px;">
+
+		<input class="form-control mr-sm-2" type="text" placeholder="키워드로 검색하기" style="width: 280px; height: 45px; float: left;">
 		<button class="btn btn-info btn-lg" type="submit" style="margin-left: 5px;">검색</button>
+		
+		<button class="btn btn-info btn-lg pull-right" type="submit" onclick="insert()">질문 등록</button>
+
 		<br><br>
 		
 	<!-- 질문글 시작 -->
@@ -112,7 +120,7 @@
       </div>
     </div>
   </div>
-  <button class="btn btn-info btn-lg" type="submit" style="margin-left: 45%;" onclick="insert()">질문 등록</button>
+  
 <br>            
 	  ${pageBar }
 </div><br><br><!-- container끝 -->

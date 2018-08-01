@@ -1,10 +1,17 @@
 package com.medi.pot.member.controller;
 
-import java.awt.Window;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import javax.mail.Message;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeUtility;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -13,10 +20,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.medi.pot.common.page.PageCreate;
 import com.medi.pot.member.model.service.MemberService;
 import com.medi.pot.member.model.vo.Hospital;
 import com.medi.pot.member.model.vo.Member;
@@ -39,8 +49,9 @@ public class MemberController {
 	}
 
 	@RequestMapping("/member/joinMember.do")
-	public String joinMemeber() {
+	public String joinMemeber(Model model) {
 		System.out.println("회원가입(개인)으로 들어옴");
+		
 		return "member/member";
 	}
 	
@@ -51,9 +62,19 @@ public class MemberController {
 		String loc = "";
 		
 		boolean checkid = service.checkId(m.getMemberId())==0?true:false;
+		boolean checkemail = service.checkEmail(m.getMemberEmail())==0?true:false;
 		
 		if(!checkid) {
-			msg = "해당 아이디는 사용이 불가능합니다.";
+			msg = "해당 아이디는 이미 존재합니다.";
+			
+			model.addAttribute("msg", msg);
+			model.addAttribute("loc", loc);
+			
+			return "common/msg";
+		}
+		
+		if(!checkemail) {
+			msg = "해당 이메일은 이미 존재합니다.";
 			
 			model.addAttribute("msg", msg);
 			model.addAttribute("loc", loc);
@@ -71,9 +92,9 @@ public class MemberController {
 		int result = service.insertMember(m);
 		
 		if(result > 0) {
-			msg = "회원가입 성공!";
+			msg = "회원가입성공!";
 		} else {
-			msg = "회원가입 실패!";
+			msg = "회원가입실패!";
 		}
 		
 		model.addAttribute("msg", msg);
@@ -84,9 +105,9 @@ public class MemberController {
 
 	@RequestMapping("/member/joinHospitalStart.do")
 	public String joinHospital1() {
+		System.out.println("회원가입(병원-승인전)으로 들어옴");
 		return "member/hospital";
 	}
-	
 	
 	@RequestMapping("/member/hospitalEnrollEnd.do")
 	public String joinHospital1(Hospital h, Model model) {
@@ -127,13 +148,13 @@ public class MemberController {
 		return "common/msg";
 
 	}
-	
+
 	@RequestMapping("/member/joinpermission.do")
 	public String joinPermission() {
-		System.out.println("회원가입(병원-승인전)으로 들어옴");
+		System.out.println("회원가입(병원-승인중)으로 들어옴");
 		return "member/permission";
 	}
-	
+
 	@RequestMapping("/member/joinHospitalEnd.do")
 	public String joinHospital2() {
 		System.out.println("회원가입(병원-승인중)으로 들어옴");
@@ -149,7 +170,7 @@ public class MemberController {
 	@RequestMapping("/member/findPassword.do")
 	public String findpassword() {
 		System.out.println("비밀번호찾기로 들어옴");
-		return "member/findpassword";
+		return "member/findPassword";
 	}
 	
 	@RequestMapping("/member/memberLogin.do")
@@ -163,7 +184,8 @@ public class MemberController {
 		
 		Member m = new Member();
 		Hospital h = new Hospital();
-
+		System.out.println(service.loginMemberCheck(memberId));
+		
 		if(PnH.equals("P")) {
 			m = service.loginMemberCheck(memberId);
 			
@@ -211,22 +233,26 @@ public class MemberController {
 	public String logout(SessionStatus sessionStatus) {
 		System.out.println("로그아웃을 진행");
 		if(!sessionStatus.isComplete()) {
-			// 세션이 진행중이라면(존재한다면)
+			// 세션이 진행중이라면 (존재한다면)
 			sessionStatus.setComplete();
-			// 세션을 완료시킨다(끝낸다)
+			// 세션을 완료시킨다 (끝낸다)
 		}
 		
 		return "redirect:/";
 	}
 	
 	@RequestMapping("/member/mypage.do")
-	public String adminPage(String user_id) {
+	public String adminPage(String user_id, String checkPH) {
 		System.out.println("마이페이지 들어옴");
 		String view = "";
 		if(user_id.equals("admin")) {
-			view = "member/adminpage";
+			view = "member/adminPage";
 		} else {
-			view = "member/memberPage";
+			if(checkPH.equals("P")) {
+				view = "member/memberPage";
+			}else {
+				view = "member/hospitalPage";
+			}
 		}
 		
 		return view;
@@ -248,29 +274,14 @@ public class MemberController {
 		res.getWriter().print(check);
 	}
 	
-	/*@RequestMapping("/member/HcheckId.do")
-	public String hospitalcheckId(String memberId) throws Exception {
-		Map map = new HashMap();
-		
-		ObjectMapper mapper = new ObjectMapper();
-		String jsonstr = "";
-		
-		boolean check = service.duplicateIdHosCheck(memberId)==0?true:false;
-		
-		map.put("check", check);
-		
-		jsonstr = mapper.writeValueAsString(map);
-		return jsonstr;
-	}*/
-	
 	@RequestMapping("/member/memberPageUpdate.do")
 	public String memberPageUpdate(Member m, Model model) {
-		String msg = "수정 실패!";
+		String msg = "수정 실패";
 		String loc = "";
 		int result = service.memberPageUpdate(m);
 		
 		if(result > 0) {
-			msg = "수정 성공!";
+			msg = "수정 성공";
 			model.addAttribute("memberLoggedIn", m);
 		}
 		
@@ -291,7 +302,7 @@ public class MemberController {
 		if(bcrypt.matches(originPw, m.getMemberPw())) {
 			String newPassword = bcrypt.encode(newPw);
 			idpw.put("memberId", memberId);
-			idpw.put("newPassword",	newPassword);
+			idpw.put("newPassword", newPassword);
 			int result = service.memberPwUpdate(idpw);
 			if(result > 0) {
 				msg = "비밀번호 수정 성공!";	
@@ -322,13 +333,261 @@ public class MemberController {
 		return view;
 	}
 	
-	@RequestMapping("/member/emailCodeResponse.do")
-	public String emailResponse() {
+	@RequestMapping("/member/emailEnd.do")
+	public String emailResponse(String memberEmail, Model model) {
 
+		Properties prop = new Properties();
+		prop.put("mail.smtp.host", "smtp.gmail.com");
+		prop.put("mail.smtp.port", 465);
+		prop.put("mail.smtp.auth", "true");
+		prop.put("mail.smtp.ssl.enable", "true");
+		prop.put("mail.smtp.ssl.trust", "smtp.gmail.com");
 
-		return "redirect:/";
+		Session session = Session.getDefaultInstance(prop, new javax.mail.Authenticator() {
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication("ppj1017@gmail.com", "ahfmrqhd1!a");
+			}
+		});
+		int ra=0;
+	      
+		try {
+			MimeMessage message = new MimeMessage(session);
+			message.setFrom(new InternetAddress("ppj1017@gmail.com",MimeUtility.encodeText("MediPot 관리자","UTF-8","B")));
+	            
+
+			//수신자메일주소
+			message.addRecipient(Message.RecipientType.TO, new InternetAddress(memberEmail)); 
+
+			// Subject
+			message.setSubject("MediPot 메일 인증"); //메일 제목을 입력
+
+			// Text
+	               
+			while(true) {
+				ra=(int)(Math.random()*10000);
+				if(ra>1000) {
+					break;
+				}
+			}
+			message.setText("인증번호["+ra+"]");    //메일 내용을 입력
+			
+			
+			// send the message
+			Transport.send(message); ////전송
+			
+			
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+		model.addAttribute("ra", ra);
+		
+		return "member/emailEnd";
 	}
 	
+	@RequestMapping("/member/PcheckEmail.do")
+	@ResponseBody
+	public void membercheckEmail(String memberEmail,HttpServletResponse res) throws Exception {
+		
+		boolean check = service.duplicateMemEmailCheck(memberEmail)==0?true:false;
+		res.getWriter().print(check);
+	}
 	
+	@RequestMapping("/member/findCheckEmail.do")
+	@ResponseBody
+	public void memberFindCheckEmail(String PnH, String memberEmail,HttpServletResponse res) throws Exception {
+		boolean check = false;
+		if(PnH.equals("P")) {
+			check = service.FindMemEmailCheck(memberEmail)==1?true:false;			
+		} else {
+			//check = service.FindHosmEmailCheck(memberEmail)==1?true:false;
+		}
+		res.getWriter().print(check);
+	}
 	
+	@RequestMapping("/member/FindemailEnd.do")
+	public String FindemailResponse(String memberEmail, Model model) {
+
+		Properties prop = new Properties();
+		prop.put("mail.smtp.host", "smtp.gmail.com");
+		prop.put("mail.smtp.port", 465);
+		prop.put("mail.smtp.auth", "true");
+		prop.put("mail.smtp.ssl.enable", "true");
+		prop.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+
+		Session session = Session.getDefaultInstance(prop, new javax.mail.Authenticator() {
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication("ppj1017@gmail.com", "ahfmrqhd1!a");
+			}
+		});
+		int ra=0;
+	      
+		try {
+			MimeMessage message = new MimeMessage(session);
+			message.setFrom(new InternetAddress("ppj1017@gmail.com",MimeUtility.encodeText("MediPot 관리자","UTF-8","B")));
+	            
+
+			//수신자메일주소
+			message.addRecipient(Message.RecipientType.TO, new InternetAddress(memberEmail)); 
+
+			// Subject
+			message.setSubject("MediPot 메일 인증"); //메일 제목을 입력
+
+			// Text
+	               
+			while(true) {
+				ra=(int)(Math.random()*10000);
+				if(ra>1000) {
+					break;
+				}
+			}
+			message.setText("인증번호["+ra+"]");    //메일 내용을 입력
+			
+			
+			// send the message
+			Transport.send(message); ////전송
+			
+			
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+		model.addAttribute("ra", ra);
+		
+		return "member/emailEnd";
+	}
+	
+	@RequestMapping("/member/memberFindId.do")
+	public String FindIdprint(String findname, String findemail, Model model) {
+		System.out.println("아이디를 찾음");
+		String view="";
+		Member m = service.searchName(findname);
+		String findid = service.FindId(m);
+		
+		if(findid.equals(null)) {
+			String msg = "회원 정보와 일치하는 아이디가 존재하지 않습니다.";
+			String loc = "member/findid";
+			model.addAttribute("msg",msg);
+			model.addAttribute("loc",loc);
+			view = "common/msg";
+			return view;
+		}
+		else {
+			view="member/findidprint";
+		}
+		
+		model.addAttribute("findid",findid);
+		
+		return view;
+	}
+	
+	@RequestMapping("/member/memberFindPw.do")
+	public String memberFindPw(String findid, String findemail, Model model) {
+		System.out.println("비밀번호를 찾음");
+		String view="";
+		System.out.println("아이디는?? " + findid);
+		Member m = service.searchID(findid);
+		
+		if(m.getMemberEmail().equals(findemail)) {
+			System.out.println("회원정보가 일치");
+			view = "member/findPasswordprint";
+			model.addAttribute("findid",findid);
+			return view;
+		}
+		else {
+			String msg = "회원정보가 일치하지 않습니다.\n이유 : 이메일이 다르다거나, 아이디가 다름";
+			String loc = "member/findPassword";
+			model.addAttribute("msg",msg);
+			model.addAttribute("loc",loc);
+			view="common/msg";
+		}
+		
+		return view;
+	}
+	
+	@RequestMapping("/member/FindPwUpdate.do")
+	public String FindPwUpdate(String newPw, String memberId, Model model) {
+		System.out.println("비밀번호 찾을 때 가져온 아이디 : " + memberId);
+		Member m = service.searchID(memberId);
+		System.out.println("새로운 비밀번호 : " + newPw);
+		m.setMemberPw(bcrypt.encode(newPw));
+		
+		String msg = "";
+		String loc = "";
+		
+		int result = service.MemberUpdate(m);
+		
+		if(result>0) {
+			msg = "이제 로그인 하시면 됩니다.";
+		}
+		else {
+			msg = "새로운 비밀번호를 받는 도중에 오류가 발생했습니다.";
+		}
+		
+		model.addAttribute("msg",msg);
+		model.addAttribute("loc",loc);
+		
+		return "common/msg";
+	}
+
+	@RequestMapping("/adminPage/memberList.do")
+	public ModelAndView memberList(@RequestParam(value="cPage",required=false,defaultValue="1") int cPage) {
+		ModelAndView mv=new ModelAndView();
+		int numPerPage=10;
+		List<Member> list=service.selectMemberList(cPage,numPerPage);
+		
+		int totalCount=service.selectCount();
+		
+		String pageBar=new PageCreate().getPageBar(cPage, numPerPage,totalCount,"memberList.do");
+		
+		mv.addObject("pageBar", pageBar);
+		mv.addObject("list",list);
+		mv.addObject("cPage", cPage);
+		mv.addObject("totalCount", totalCount);
+		mv.setViewName("/member/adminPageMember");		
+		
+		return mv;
+	}
+	
+	@RequestMapping("/adminPage/hospitalList.do")
+	public ModelAndView hospitalList(@RequestParam(value="cPage",required=false,defaultValue="1") int cPage) {
+		ModelAndView mv=new ModelAndView();
+		int numPerPage=10;
+		List<Hospital> list=service.selectHospitalList(cPage,numPerPage);
+		
+		int totalCount=service.selectHospitalCount();
+		
+		String pageBar=new PageCreate().getPageBar(cPage, numPerPage,totalCount,"hospitalList.do");
+		
+		mv.addObject("pageBar", pageBar);
+		mv.addObject("list",list);
+		mv.addObject("cPage", cPage);
+		mv.addObject("totalCount", totalCount);
+		mv.setViewName("/member/adminPageHospital");		
+		
+		return mv;
+	}
+	
+	@RequestMapping("/adminPage/admission.do")
+	public String admission(int hospitalNum, Model model) {
+		int result = service.updateAdmission(hospitalNum);
+		String msg="";
+		String loc="adminPage/hospitalList.do";
+		
+		if(result>0) {
+			msg="해당 병원을 승인하였습니다.";
+		}else {
+			msg="병원 승인에 실패하였습니다.";
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("loc", loc);
+		
+		return "common/msg";
+	}
+
 }

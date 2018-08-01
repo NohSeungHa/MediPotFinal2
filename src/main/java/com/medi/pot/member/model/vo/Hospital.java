@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class Hospital {
 	
-	private int hospitalNo;
+	private int hospitalNum;
 	private String hospitalId;
 	private String hospitalPw;
 	private String hospitalName;
@@ -12,18 +12,19 @@ public class Hospital {
 	private String hospitalTel;
 	private String hospitalEmail;
 	private String hospitalAddr;
-	private Date memberDate;
+	private Date hospitalDate;
 	private int hospitalLike;
 	private String hospitalAdmission;
+	private String hospitalProfessional;
 	
 	public Hospital() {}
 
-	public int getHospitalNo() {
-		return hospitalNo;
+	public int getHospitalNum() {
+		return hospitalNum;
 	}
 
-	public void setHospitalNo(int hospitalNo) {
-		this.hospitalNo = hospitalNo;
+	public void setHospitalNum(int hospitalNum) {
+		this.hospitalNum = hospitalNum;
 	}
 
 	public String getHospitalId() {
@@ -82,12 +83,12 @@ public class Hospital {
 		this.hospitalAddr = hospitalAddr;
 	}
 
-	public Date getMemberDate() {
-		return memberDate;
+	public Date getHospitalDate() {
+		return hospitalDate;
 	}
 
-	public void setMemberDate(Date memberDate) {
-		this.memberDate = memberDate;
+	public void setHospitalDate(Date hospitalDate) {
+		this.hospitalDate = hospitalDate;
 	}
 
 	public int getHospitalLike() {
@@ -106,19 +107,28 @@ public class Hospital {
 		this.hospitalAdmission = hospitalAdmission;
 	}
 
-	@Override
-	public String toString() {
-		return "Hospital [hospitalNo=" + hospitalNo + ", hospitalId=" + hospitalId + ", hospitalPw=" + hospitalPw
-				+ ", hospitalName=" + hospitalName + ", hospitalLicense=" + hospitalLicense + ", hospitalTel="
-				+ hospitalTel + ", hospitalEmail=" + hospitalEmail + ", hospitalAddr=" + hospitalAddr + ", memberDate="
-				+ memberDate + ", hospitalLike=" + hospitalLike + ", hospitalAdmission=" + hospitalAdmission + "]";
+	public String getHospitalProfessional() {
+		return hospitalProfessional;
 	}
 
-	public Hospital(int hospitalNo, String hospitalId, String hospitalPw, String hospitalName, String hospitalLicense,
-			String hospitalTel, String hospitalEmail, String hospitalAddr, Date memberDate, int hospitalLike,
-			String hospitalAdmission) {
+	public void setHospitalProfessional(String hospitalProfessional) {
+		this.hospitalProfessional = hospitalProfessional;
+	}
+
+	@Override
+	public String toString() {
+		return "Hospital [hospitalNum=" + hospitalNum + ", hospitalId=" + hospitalId + ", hospitalPw=" + hospitalPw
+				+ ", hospitalName=" + hospitalName + ", hospitalLicense=" + hospitalLicense + ", hospitalTel="
+				+ hospitalTel + ", hospitalEmail=" + hospitalEmail + ", hospitalAddr=" + hospitalAddr
+				+ ", hospitalDate=" + hospitalDate + ", hospitalLike=" + hospitalLike + ", hospitalAdmission="
+				+ hospitalAdmission + ", hospitalProfessional=" + hospitalProfessional + "]";
+	}
+
+	public Hospital(int hospitalNum, String hospitalId, String hospitalPw, String hospitalName, String hospitalLicense,
+			String hospitalTel, String hospitalEmail, String hospitalAddr, Date hospitalDate, int hospitalLike,
+			String hospitalAdmission, String hospitalProfessional) {
 		super();
-		this.hospitalNo = hospitalNo;
+		this.hospitalNum = hospitalNum;
 		this.hospitalId = hospitalId;
 		this.hospitalPw = hospitalPw;
 		this.hospitalName = hospitalName;
@@ -126,9 +136,10 @@ public class Hospital {
 		this.hospitalTel = hospitalTel;
 		this.hospitalEmail = hospitalEmail;
 		this.hospitalAddr = hospitalAddr;
-		this.memberDate = memberDate;
+		this.hospitalDate = hospitalDate;
 		this.hospitalLike = hospitalLike;
 		this.hospitalAdmission = hospitalAdmission;
+		this.hospitalProfessional = hospitalProfessional;
 	}
 
 }

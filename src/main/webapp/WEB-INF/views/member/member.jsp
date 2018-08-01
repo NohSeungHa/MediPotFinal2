@@ -265,15 +265,15 @@ $(function(){
 					<tr>
 						<th>이메일</th>
 						<td>	
-							<input type="email" class="form-control" placeholder="abc@xyz.com" name="memberEmail" id="email">
+							<input type="email" class="form-control" placeholder="abc@xyz.com" name="memberEmail" id="Memail">
 						</td>
 						<td style="text-align: center">
-							<c:if test="${emailCheck!=true }">
-								<a href="${pageContext.request.contextPath }/member/emailEnd.do" data-toggle="modal" data-target="#emailModal">이메일 인증</a>
-							</c:if>
-							<c:if test="${emailCheck==true }">
-								<span><b>인증 완료!</b></span>
-							</c:if>
+							
+								<%-- <a href="${pageContext.request.contextPath }/member/emailEnd.do" data-toggle="modal" data-target="#emailModal" id="emailAuther" style="display: none">이메일 인증</a> --%>
+								<a id="emailAuther" style="display: none" onclick="emailRequest()">이메일 인증</a>
+							
+								<span id="successEmail" style="display: none"><b>인증 완료!</b></span>
+							
 						</td>
 					</tr>
 					<tr>
@@ -300,7 +300,7 @@ $(function(){
 		</div>
 	</div>
 	
-	<div class="modal fade" id="emailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<%-- <div class="modal fade" id="emailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 					<div class="modal-dialog" role="document">
 						<div class="modal-content">
 							<div class="modal-header">
@@ -311,19 +311,68 @@ $(function(){
 								<div class="modal-body" style="text-align: center">
 									<br><br>
 									<span style="display: inline-block;">인증코드 &nbsp;</span>
-									<input style="width: 70%; margin: 0 auto; display: inline-block;"type="text" class="form-control" name="emailCode" placeholder="발송된 코드를 입력해주세요." required>
-									<a href="${pageContext.request.contextPath }/member/emailCodeResponse.do">인증코드발송</a>
+									<input style="width: 70%; margin: 0 auto; display: inline-block;"type="text" class="form-control" id="emailCode" name="emailCode" placeholder="발송된 코드를 입력해주세요." required>
+									<a href="${pageContext.request.contextPath }/member/emailCodeResponse.do?email=${memberEmail}">인증코드발송</a>
 									<br><br>
 								</div>
 								<div class="modal-footer">
-									<button type="submit" class="btn btn-outline-success">확인</button>
+									<button onclick="auther()" type="submit" class="btn btn-outline-success">확인</button>
 									<button type="button" class="btn btn-outline-success"
 										data-dismiss="modal">취소</button>
 								</div>
 							</form>
 						</div>
 					</div>
-				</div>
+				</div> --%>
+				<c:forEach var="member" items="${members}" varStatus="vs">
+					<input type="hidden" value="${member.memberEmail }" name="emails">
+				</c:forEach>
+				<script>
+				$("#Memail").blur(function(){
+				      var email=$("#Memail").val();
+				         if(email.length!=0){
+				            if(email.match(/([@])/)){
+								if($('#successEmail').css("display")=="none"){
+					            	$("#emailAuther").css("display","block");								
+								} else{
+									$("#emailAuther").css("display","none");
+								}
+				            } 
+				         	else if(email.match(/([!,#,$,%,^,&,*,?,~,-])/)) {
+								alert("온전하지 못한 이메일입니다. ('@'를 제외한 특수문자가 존재합니다.)");
+								$("#Memail").val("");
+				                $("#Memail").focus();
+				                return false;
+				            } else {
+				            	alert("온전하지 못한 이메일입니다. 다시 한 번 입력해주세요.");
+				            	$("#Memail").val("");
+				                $("#Memail").focus();
+				            }
+				         }
+				         return true;
+				         $.ajax({
+							url:"${pageContext.request.contextPath}/member/PcheckEmail.do",
+							data:{memberEmail:$('#Memail').val()},
+							success:function(data){
+								if(data == 'true'){
+									alert("사용가능한 이메일입니다.");
+								} else{
+									alert("이메일이 중복되었습니다. 다른 이메일을 입력해주세요.");
+									$("#Memail").val("");
+					                $("#Memail").focus();
+								}
+							}
+				         })
+				    });
+				
+				function emailRequest(){
+					var nowemail = $('#Memail').val();
+					var url="${pageContext.request.contextPath }/member/emailEnd.do?memberEmail="+nowemail;
+					var title="emailAuther";
+					var status="left=500px, top=100px, width=600px, height=200px";
+					var popup=window.open(url,title,status);
+				}
+				</script>
 	
 	<div style="height: 100px"></div>
 
