@@ -24,6 +24,6 @@
 		select * from DOCTORINFO where doctornum=#{docNo}
 	</select>
 	<select id="selectDocSche" parameterType="_int" resultType="DoctorSchedule">
-		select * from RESERVATIONBLOCK where blockdoctor=#{docNo}
+		select * from RESERVATIONBLOCK where blockdoctor=1 and blockcheck='Y'
 	</select>
 </mapper>
