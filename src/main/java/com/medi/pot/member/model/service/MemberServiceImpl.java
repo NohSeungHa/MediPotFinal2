@@ -95,6 +95,17 @@ public class MemberServiceImpl implements MemberService {
 	public int selectCount() {
 		return dao.selectCount(sqlSession);
 	}
+
+	@Override
+	public List<Hospital> selectHospitalList(int cPage, int numPerPage) {
+		return dao.selectHospitalList(sqlSession, cPage, numPerPage);
+	}
+
+	@Override
+	public int selectHospitalCount() {
+		return dao.selectHospitalCount(sqlSession);
+	}
+	
 	
 	
 	

@@ -32,37 +32,22 @@
 			<th>가입일</th>			
 		</tr>
 		<c:if test="${not empty list }">
-			<c:forEach var='member' items='${list }' varStatus="vs">
+			<c:forEach var='m' items='${list }' varStatus="vs">
 				<tr>
-					<td>${member.MEMBERNUM }</td>
-					<td>${member.MEMBERID }</td>
-					<td>${member.MEMBERNAME }</td>
-					<td>${member.MEMBERGENDER }</td>
-					<td>${member.MEMBERBIRTH }</td>
-					<td>${member.MEMBERPHONE }</td>
-					<td>${member.MEMBEREMAIL }</td>
-					<td>${member.MEMBERADDR }</td>
-					<td>${member.MEMBERDATE }</td>
+					<td>${m.memberNum }</td>
+					<td>${m.memberId }</td>
+					<td>${m.memberName }</td>
+					<td>${m.memberGender }</td>
+					<td>${m.memberBirth }</td>
+					<td>${m.memberPhone }</td>
+					<td>${m.memberEmail }</td>
+					<td>${m.memberAddr }</td>
+					<td>${m.memberDate }</td>
 				</tr>	
 			</c:forEach>
 		</c:if>
 	</table>
 	${pageBar }
 </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

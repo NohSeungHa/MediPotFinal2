@@ -27,4 +27,6 @@ public interface MemberDAO {
 	/*병원회원*/
 	Hospital loginHospitalCheck(SqlSessionTemplate sqlSession, String userId);
 	int insertHospital(SqlSessionTemplate sqlSession, Hospital h);
+	List<Hospital> selectHospitalList(SqlSessionTemplate sqlSession, int cPage, int numPerPage);
+	int selectHospitalCount(SqlSessionTemplate sqlSession);
 }

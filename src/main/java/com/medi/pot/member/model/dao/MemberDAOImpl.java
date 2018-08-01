@@ -90,6 +90,17 @@ public class MemberDAOImpl implements MemberDAO {
 	public int selectCount(SqlSessionTemplate sqlSession) {
 		return sqlSession.selectOne("member.selectCount");
 	}
+
+	@Override
+	public List<Hospital> selectHospitalList(SqlSessionTemplate sqlSession, int cPage, int numPerPage) {
+		RowBounds rb=new RowBounds((cPage-1)*numPerPage,numPerPage);
+		return sqlSession.selectList("hospital.selectHospitalList",null,rb);
+	}
+
+	@Override
+	public int selectHospitalCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("hospital.selectCount");
+	}
 	
 	
 	

@@ -25,5 +25,7 @@ public interface MemberService {
 	/*병원회원*/
 	Hospital loginHospitalCheck(String userId);
 	int insertHospital(Hospital h);
+	List<Hospital> selectHospitalList(int cPage, int numPerPage);
+	int selectHospitalCount();
 	
 }

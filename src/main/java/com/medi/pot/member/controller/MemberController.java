@@ -352,9 +352,23 @@ public class MemberController {
 		return mv;
 	}
 	
-	/*@RequestMapping("/adminPage/hospitalList.do")
-	public String hospitalList() {
+	@RequestMapping("/adminPage/hospitalList.do")
+	public ModelAndView hospitalList(@RequestParam(value="cPage",required=false,defaultValue="1") int cPage) {
+		ModelAndView mv=new ModelAndView();
+		int numPerPage=10;
+		List<Hospital> list=service.selectHospitalList(cPage,numPerPage);
 		
-	}*/
+		int totalCount=service.selectHospitalCount();
+		
+		String pageBar=new PageCreate().getPageBar(cPage, numPerPage,totalCount,"hospitalList.do");
+		
+		mv.addObject("pageBar", pageBar);
+		mv.addObject("list",list);
+		mv.addObject("cPage", cPage);
+		mv.addObject("totalCount", totalCount);
+		mv.setViewName("/member/adminPageHospital");		
+		
+		return mv;
+	}
 	
 }

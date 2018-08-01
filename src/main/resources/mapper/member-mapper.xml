@@ -54,6 +54,4 @@
  		select count(*) from member
  	</select>
  	
- 	<!-- zz -->
-	
 </mapper>
