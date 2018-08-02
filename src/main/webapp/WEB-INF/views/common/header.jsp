@@ -99,7 +99,13 @@
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 						고객지원<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="${path}/notice/noticeList.do">공지사항</a></li>
+							<c:if test="${memberLoggedIn.memberId=='admin' }">
+								<li><a href="${path}/notice/noticeList.do?checkPH=H&id=${memberLoggedIn.memberId}">병원 공지사항</a></li>
+								<li><a href="${path}/notice/noticeList.do?checkPH=P&id=${memberLoggedIn.memberId}">일반 공지사항</a></li>
+							</c:if>
+							<c:if test="${memberLoggedIn.memberId!='admin' }">
+								<li><a href="${path}/notice/noticeList.do?checkPH=${checkPH}">공지사항</a></li>
+							</c:if>
 							<li><a href="#">자주묻는 질문</a></li>
 							<li><a href="#">자유게시판</a></li>
 						</ul>

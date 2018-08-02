@@ -8,7 +8,10 @@
 		<!-- 이전 config에서 설정했던 내용을 root-context.xml에서 이미 다 설정했기때문에 따로 설정해줄건 없음!!
 		  Aliases만 설정해주면됨-->
 	<typeAliases>
-		<typeAlias type="com.medi.pot.notice.vo.HospitalNotice" alias="HospitalNotice"/>
+		<!-- 병원 공지사항 -->
+		<typeAlias alias="HospitalNotice" type="com.medi.pot.notice.vo.HospitalNotice"/>
+		<!-- 일반 공지사항 -->
+		<typeAlias alias="MemberNotice" type="com.medi.pot.notice.vo.MemberNotice"/>
 		<typeAlias alias="member" type="com.medi.pot.member.model.vo.Member" />
 		<typeAlias alias="hospital" type="com.medi.pot.member.model.vo.Hospital" />
 		<typeAlias alias="HospitalInfo" type="com.medi.pot.reservation.model.vo.HospitalInfo" />
