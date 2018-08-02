@@ -10,7 +10,7 @@
 </jsp:include>
 	<div class="container">
 	<div id="searchH">
-			<img alt="searchImg" src="/pot/resources/img/reser/reser.png" width="60%;" height="380px;">
+			<img alt="searchImg" src="${path }/resources/img/reser/reser.png" width="60%;" height="380px;">
 			<div id="searchH2">
 			<form action="${path }/medi/searchMedi">
 			<input type="text" name="hName" class="form-control" placeholder="병원이름 검색" style="width:140%;">
