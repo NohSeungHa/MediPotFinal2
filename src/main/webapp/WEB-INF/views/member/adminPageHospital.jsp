@@ -22,6 +22,7 @@
 
 	<div style="height:100px">
 		<h1>병원 회원 관리 페이지</h1>
+		*'승인 대기 중' 버튼을 클릭하면 해당 병원을 가입 승인 처리할 수 있습니다.
 	</div>
 
 
@@ -64,7 +65,7 @@
 	</table>
 	${pageBar }
 	
-	
+		<button class="btn btn-default" onclick="movePage2()">돌아가기</button>
 	<div style="height:100px"></div>
 </section>
 
@@ -72,6 +73,9 @@
 	function movePage(e){
 		console.log(e);
 		location.href="${pageContext.request.contextPath}/adminPage/admission.do?hospitalNum="+e;
+	}
+	function movePage2(){
+		location.href="${pageContext.request.contextPath}/member/adminPage.jsp";
 	}
 </script>
 

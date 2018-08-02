@@ -19,6 +19,12 @@
 </style>
 <section id='board-contianer' class='container'>
 
+
+	<div style="height:100px">
+		<h1>일반 회원 관리 페이지</h1>
+	</div>
+
+
 	<table id='tbl-board' class='table table-striped table-hover'>
 		<tr>
 			<th>회원번호</th>
@@ -48,6 +54,7 @@
 		</c:if>
 	</table>
 	${pageBar }
+	<div style="height:100px"></div>
 </section>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
