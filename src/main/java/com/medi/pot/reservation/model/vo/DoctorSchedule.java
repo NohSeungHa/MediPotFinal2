@@ -5,7 +5,7 @@ import java.sql.Date;
 public class DoctorSchedule {
 	private int blockDoctor;
 	private int blockHospital;
-	private Date blockDate;
+	private String blockDate;
 	private String blockTime;
 	private String blockCheck;
 	
@@ -13,7 +13,7 @@ public class DoctorSchedule {
 		// TODO Auto-generated constructor stub
 	}
 
-	public DoctorSchedule(int blockDoctor, int blockHospital, Date blockDate, String blockTime, String blockCheck) {
+	public DoctorSchedule(int blockDoctor, int blockHospital, String blockDate, String blockTime, String blockCheck) {
 		super();
 		this.blockDoctor = blockDoctor;
 		this.blockHospital = blockHospital;
@@ -44,11 +44,11 @@ public class DoctorSchedule {
 		this.blockHospital = blockHospital;
 	}
 
-	public Date getBlockDate() {
+	public String getBlockDate() {
 		return blockDate;
 	}
 
-	public void setBlockDate(Date blockDate) {
+	public void setBlockDate(String blockDate) {
 		this.blockDate = blockDate;
 	}
 
@@ -67,6 +67,7 @@ public class DoctorSchedule {
 	public void setBlockCheck(String blockCheck) {
 		this.blockCheck = blockCheck;
 	}
+
 	
 	
 
