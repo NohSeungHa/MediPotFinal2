@@ -15,6 +15,7 @@
 	
      <%
      String close="";
+     String bDate="";
      DoctorInfo docInfo=null;
      DoctorSchedule docSche=null;
      if((DoctorInfo)request.getAttribute("doctor")!=null){
@@ -23,6 +24,7 @@
      }
      if((DoctorSchedule)request.getAttribute("docSche")!=null){
      docSche=(DoctorSchedule)request.getAttribute("docSche");
+     bDate=docSche.getBlockDate();
      }
      
      Date day=new Date();
@@ -41,6 +43,7 @@
      String hd=tod2.format(cal.getTime());
      String y=tod.format(cal.getTime());
      String daye=tod3.format(cal.getTime());
+     boolean checkDate=bDate.equals(hd);
      boolean check=close.contains(daye);
      boolean hdc=eTest(hd);
      boolean hdce=yTest(hd);
@@ -50,6 +53,7 @@
      String hd2=tod2.format(cal.getTime());
      String y2=tod.format(cal.getTime());
      String daye2=tod3.format(cal.getTime());
+     boolean checkDate2=bDate.equals(hd2);
      boolean check2=close.contains(daye2);
      boolean hdc2=eTest(hd2);
      boolean hdce2=yTest(hd2);
@@ -59,6 +63,7 @@
      String hd3=tod2.format(cal.getTime());
      String y3=tod.format(cal.getTime());
      String daye3=tod3.format(cal.getTime());
+     boolean checkDate3=bDate.equals(hd3);
      boolean check3=close.contains(daye3);
      boolean hdc3=eTest(hd3);
      boolean hdce3=yTest(hd3);
@@ -68,6 +73,7 @@
      String hd4=tod2.format(cal.getTime());
      String y4=tod.format(cal.getTime());
      String daye4=tod3.format(cal.getTime());
+     boolean checkDate4=bDate.equals(hd4);
      boolean check4=close.contains(daye4);
      boolean hdc4=eTest(hd4);
      boolean hdce4=yTest(hd4);
@@ -77,6 +83,7 @@
      String hd5=tod2.format(cal.getTime());
      String y5=tod.format(cal.getTime());
      String daye5=tod3.format(cal.getTime());
+     boolean checkDate5=bDate.equals(hd5);
      boolean check5=close.contains(daye5);
      boolean hdc5=eTest(hd5);
      boolean hdce5=yTest(hd5);
@@ -86,6 +93,7 @@
      String hd6=tod2.format(cal.getTime());
      String y6=tod.format(cal.getTime());
      String daye6=tod3.format(cal.getTime());
+     boolean checkDate6=bDate.equals(hd6);
      boolean check6=close.contains(daye6);
      boolean hdc6=eTest(hd6);
      boolean hdce6=yTest(hd6);
@@ -95,6 +103,7 @@
      String hd7=tod2.format(cal.getTime());
      String y7=tod.format(cal.getTime());
      String daye7=tod3.format(cal.getTime());
+     boolean checkDate7=bDate.equals(hd7);
      boolean check7=close.contains(daye7);
      boolean hdc7=eTest(hd7);
      boolean hdce7=yTest(hd7);
@@ -104,6 +113,7 @@
      String hd8=tod2.format(cal.getTime());
      String y8=tod.format(cal.getTime());
      String daye8=tod3.format(cal.getTime());
+     boolean checkDate8=bDate.equals(hd8);
      boolean check8=close.contains(daye8);
      boolean hdc8=eTest(hd8);
      boolean hdce8=yTest(hd8);
@@ -113,6 +123,7 @@
      String hd9=tod2.format(cal.getTime());
      String y9=tod.format(cal.getTime());
      String daye9=tod3.format(cal.getTime());
+     boolean checkDate9=bDate.equals(hd9);
      boolean check9=close.contains(daye9);
      boolean hdc9=eTest(hd9);
      boolean hdce9=yTest(hd9);
@@ -122,6 +133,7 @@
      String hd10=tod2.format(cal.getTime());
      String y10=tod.format(cal.getTime());
      String daye10=tod3.format(cal.getTime());
+     boolean checkDate10=bDate.equals(hd10);
      boolean check10=close.contains(daye10);
      boolean hdc10=eTest(hd10);
      boolean hdce10=yTest(hd10);
@@ -131,6 +143,7 @@
      String hd11=tod2.format(cal.getTime());
      String y11=tod.format(cal.getTime());
      String daye11=tod3.format(cal.getTime());
+     boolean checkDate11=bDate.equals(hd11);
      boolean check11=close.contains(daye11);
      boolean hdc11=eTest(hd11);
      boolean hdce11=yTest(hd11);
@@ -140,6 +153,7 @@
      String hd12=tod2.format(cal.getTime());
      String y12=tod.format(cal.getTime());
      String daye12=tod3.format(cal.getTime());
+     boolean checkDate12=bDate.equals(hd12);
      boolean check12=close.contains(daye12);
      boolean hdc12=eTest(hd12);
      boolean hdce12=yTest(hd12);
@@ -149,6 +163,7 @@
      String hd13=tod2.format(cal.getTime());
      String y13=tod.format(cal.getTime());
      String daye13=tod3.format(cal.getTime());
+     boolean checkDate13=bDate.equals(hd13);
      boolean check13=close.contains(daye13);
      boolean hdc13=eTest(hd13);
      boolean hdce13=yTest(hd13);
@@ -158,6 +173,7 @@
      String hd14=tod2.format(cal.getTime());
      String y14=tod.format(cal.getTime());
      String daye14=tod3.format(cal.getTime());
+     boolean checkDate14=bDate.equals(hd14);
      boolean check14=close.contains(daye14);
      boolean hdc14=eTest(hd14);
      boolean hdce14=yTest(hd14);
@@ -363,46 +379,46 @@
 				</tr>
 				<c:if test='<%=e.equals("일")%>'>
 				<tr>
-					<td style="color: red;"><%if(!hdc && !hdce && !check){ %><%=dd %><% }else {%><span style="color: red;"><%=dd %></span><%} %></td>
-					<td><%if(!hdc2 && !hdce2 && !check2){ %><button class="calb" value="<%=y2%>"><%=dd2 %></button><% }else if(check2) {%><%=dd2 %><% }else {%><span style="color: red;"><%=dd2 %></span><%} %></td>
-					<td><%if(!hdc3 && !hdce3 && !check3){ %><button class="calb" value="<%=y3%>"><%=dd3 %></button><% }else if(check3) {%><%=dd3 %><% }else {%><span style="color: red;"><%=dd3 %></span><%} %></td>
-					<td><%if(!hdc4 && !hdce4 && !check4){ %><button class="calb" value="<%=y4%>"><%=dd4 %></button><% }else if(check4) {%><%=dd4 %><% }else {%><span style="color: red;"><%=dd4 %></span><%} %></td>
-					<td><%if(!hdc5 && !hdce5 && !check5){ %><button class="calb" value="<%=y5%>"><%=dd5 %></button><% }else if(check5) {%><%=dd5 %><% }else {%><span style="color: red;"><%=dd5 %></span><%} %></td>
-					<td><%if(!hdc6 && !hdce6 && !check6){ %><button class="calb" value="<%=y6%>"><%=dd6 %></button><% }else if(check6) {%><%=dd6 %><% }else {%><span style="color: red;"><%=dd6 %></span><%} %></td>
-					<td><%if(!hdc7 && !hdce7 && !check7){ %><button class="calb" value="<%=y7%>"><%=dd7 %></button><% }else if(check7) {%><%=dd7 %><% }else {%><span style="color: red;"><%=dd7 %></span><%} %></td>
+					<td style="color: red;"><%if(!hdc && !hdce && !check && !checkDate){ %><%=dd %><% }else {%><span style="color: red;"><%=dd %></span><%} %></td>
+					<td><%if(!hdc2 && !hdce2 && !check2 && !checkDate2){ %><button class="calb" value="<%=y2%>"><%=dd2 %></button><% }else if(check2 || checkDate2) {%><%=dd2 %><% }else {%><span style="color: red;"><%=dd2 %></span><%} %></td>
+					<td><%if(!hdc3 && !hdce3 && !check3 && !checkDate3){ %><button class="calb" value="<%=y3%>"><%=dd3 %></button><% }else if(check3 || checkDate3) {%><%=dd3 %><% }else {%><span style="color: red;"><%=dd3 %></span><%} %></td>
+					<td><%if(!hdc4 && !hdce4 && !check4 && !checkDate4){ %><button class="calb" value="<%=y4%>"><%=dd4 %></button><% }else if(check4 || checkDate4) {%><%=dd4 %><% }else {%><span style="color: red;"><%=dd4 %></span><%} %></td>
+					<td><%if(!hdc5 && !hdce5 && !check5 && !checkDate5){ %><button class="calb" value="<%=y5%>"><%=dd5 %></button><% }else if(check5 || checkDate5) {%><%=dd5 %><% }else {%><span style="color: red;"><%=dd5 %></span><%} %></td>
+					<td><%if(!hdc6 && !hdce6 && !check6 && !checkDate6){ %><button class="calb" value="<%=y6%>"><%=dd6 %></button><% }else if(check6 || checkDate6) {%><%=dd6 %><% }else {%><span style="color: red;"><%=dd6 %></span><%} %></td>
+					<td><%if(!hdc7 && !hdce7 && !check7 && !checkDate7){ %><button class="calb" value="<%=y7%>"><%=dd7 %></button><% }else if(check7 || checkDate7) {%><%=dd7 %><% }else {%><span style="color: red;"><%=dd7 %></span><%} %></td>
 				</tr>
 				<tr>
-					<td style="color: red;"><%if(!hdc8 && !hdce8 && !check8){ %><%=dd8 %><% }else {%><span style="color: red;"><%=dd8 %></span><%} %></td>
-					<td><%if(!hdc9 && !hdce9 && !check9){ %><button class="calb" value="<%=y9%>"><%=dd9 %></button><% }else if(check9) {%><%=dd9 %><% }else {%><span style="color: red;"><%=dd9 %></span><%} %></td>
-					<td><%if(!hdc10 && !hdce10 && !check10){ %><button class="calb" value="<%=y10%>"><%=dd10 %></button><% }else if(check10) {%><%=dd10 %><% }else {%><span style="color: red;"><%=dd10 %></span><%} %></td>
-					<td><%if(!hdc11 && !hdce11 && !check11){ %><button class="calb" value="<%=y11%>"><%=dd11 %></button><% }else if(check11) {%><%=dd11 %><% }else {%><span style="color: red;"><%=dd11 %></span><%} %></td>
-					<td><%if(!hdc12 && !hdce12 && !check12){ %><button class="calb" value="<%=y12%>"><%=dd12 %></button><% }else if(check12) {%><%=dd12 %><% }else {%><span style="color: red;"><%=dd12 %></span><%} %></td>
-					<td><%if(!hdc13 && !hdce13 && !check13){ %><button class="calb" value="<%=y13%>"><%=dd13 %></button><% }else if(check13) {%><%=dd13 %><% }else {%><span style="color: red;"><%=dd13 %></span><%} %></td>
-					<td><%if(!hdc14 && !hdce14 && !check14){ %><button class="calb" value="<%=y14%>"><%=dd14 %></button><% }else if(check14) {%><%=dd14 %><% }else {%><span style="color: red;"><%=dd14 %></span><%} %></td>
+					<td style="color: red;"><%if(!hdc8 && !hdce8 && !check8 && !checkDate8){ %><%=dd8 %><% }else {%><span style="color: red;"><%=dd8 %></span><%} %></td>
+					<td><%if(!hdc9 && !hdce9 && !check9 && !checkDate9){ %><button class="calb" value="<%=y9%>"><%=dd9 %></button><% }else if(check9 || checkDate9) {%><%=dd9 %><% }else {%><span style="color: red;"><%=dd9 %></span><%} %></td>
+					<td><%if(!hdc10 && !hdce10 && !check10 && !checkDate10){ %><button class="calb" value="<%=y10%>"><%=dd10 %></button><% }else if(check10 || checkDate10) {%><%=dd10 %><% }else {%><span style="color: red;"><%=dd10 %></span><%} %></td>
+					<td><%if(!hdc11 && !hdce11 && !check11 && !checkDate11){ %><button class="calb" value="<%=y11%>"><%=dd11 %></button><% }else if(check11 || checkDate11) {%><%=dd11 %><% }else {%><span style="color: red;"><%=dd11 %></span><%} %></td>
+					<td><%if(!hdc12 && !hdce12 && !check12 && !checkDate12){ %><button class="calb" value="<%=y12%>"><%=dd12 %></button><% }else if(check12 || checkDate12) {%><%=dd12 %><% }else {%><span style="color: red;"><%=dd12 %></span><%} %></td>
+					<td><%if(!hdc13 && !hdce13 && !check13 && !checkDate13){ %><button class="calb" value="<%=y13%>"><%=dd13 %></button><% }else if(check13 || checkDate13) {%><%=dd13 %><% }else {%><span style="color: red;"><%=dd13 %></span><%} %></td>
+					<td><%if(!hdc14 && !hdce14 && !check14 && !checkDate14){ %><button class="calb" value="<%=y14%>"><%=dd14 %></button><% }else if(check14 || checkDate14) {%><%=dd14 %><% }else {%><span style="color: red;"><%=dd14 %></span><%} %></td>
 				</tr>
 				</c:if>
 				<c:if test='<%=e.equals("월")%>'>
 				<tr>
 					<td></td>
-					<td><%if(!hdc && !hdce && !check){ %><%=dd %><% }else {%><span style="color: red;"><%=dd %></span><%} %></td>
-					<td><%if(!hdc2 && !hdce2 && !check2){ %><button class="calb" value="<%=y2 %>"><%=dd2 %></button><% }else if(check2) {%><%=dd2 %><% }else {%><span style="color: red;"><%=dd2 %></span><%} %></td>
-					<td><%if(!hdc3 && !hdce3 && !check3){ %><button class="calb" value="<%=y3%>"><%=dd3 %></button><% }else if(check3) {%><%=dd3 %><% }else {%><span style="color: red;"><%=dd3 %></span><%} %></td>
-					<td><%if(!hdc4 && !hdce4 && !check4){ %><button class="calb" value="<%=y4%>"><%=dd4 %></button><% }else if(check4) {%><%=dd4 %><% }else {%><span style="color: red;"><%=dd4 %></span><%} %></td>
-					<td><%if(!hdc5 && !hdce5 && !check5){ %><button class="calb" value="<%=y5%>"><%=dd5 %></button><% }else if(check5) {%><%=dd5 %><% }else {%><span style="color: red;"><%=dd5 %></span><%} %></td>
-					<td><%if(!hdc6 && !hdce6 && !check6){ %><button class="calb" value="<%=y6%>"><%=dd6 %></button><% }else if(check6) {%><%=dd6 %><% }else {%><span style="color: red;"><%=dd6 %></span><%} %></td>
+					<td><%if(!hdc && !hdce && !check && !checkDate){ %><%=dd %><% }else {%><span style="color: red;"><%=dd %></span><%} %></td>
+					<td><%if(!hdc2 && !hdce2 && !check2 && !checkDate2){ %><button class="calb" value="<%=y2 %>"><%=dd2 %></button><% }else if(check2 || checkDate2) {%><%=dd2 %><% }else {%><span style="color: red;"><%=dd2 %></span><%} %></td>
+					<td><%if(!hdc3 && !hdce3 && !check3 && !checkDate3){ %><button class="calb" value="<%=y3%>"><%=dd3 %></button><% }else if(check3 || checkDate3) {%><%=dd3 %><% }else {%><span style="color: red;"><%=dd3 %></span><%} %></td>
+					<td><%if(!hdc4 && !hdce4 && !check4 && !checkDate4){ %><button class="calb" value="<%=y4%>"><%=dd4 %></button><% }else if(check4 || checkDate4) {%><%=dd4 %><% }else {%><span style="color: red;"><%=dd4 %></span><%} %></td>
+					<td><%if(!hdc5 && !hdce5 && !check5 && !checkDate5){ %><button class="calb" value="<%=y5%>"><%=dd5 %></button><% }else if(check5 || checkDate5) {%><%=dd5 %><% }else {%><span style="color: red;"><%=dd5 %></span><%} %></td>
+					<td><%if(!hdc6 && !hdce6 && !check6 && !checkDate6){ %><button class="calb" value="<%=y6%>"><%=dd6 %></button><% }else if(check6 || checkDate6) {%><%=dd6 %><% }else {%><span style="color: red;"><%=dd6 %></span><%} %></td>
 
 				</tr>
 				<tr>
 					<td style="color: red;"><%if(!hdc7 && !hdce6){ %><%=dd7 %><% }else {%><span style="color: red;"><%=dd7 %></span><%} %></td>
-					<td><%if(!hdc8 && !hdce8 && !check8){ %><button class="calb" value="<%=y8%>"><%=dd8 %></button><% }else if(check8) {%><%=dd8 %><% }else {%><span style="color: red;"><%=dd8 %></span><%} %></td>
-					<td><%if(!hdc9 && !hdce9 && !check9){ %><button class="calb" value="<%=y9%>"><%=dd9 %></button><% }else if(check9) {%><%=dd9 %><% }else {%><span style="color: red;"><%=dd9 %></span><%} %></td>
-					<td><%if(!hdc10 && !hdce10 && !check10){ %><button class="calb" value="<%=y10%>"><%=dd10 %></button><% }else if(check10) {%><%=dd10 %><% }else {%><span style="color: red;"><%=dd10 %></span><%} %></td>
-					<td><%if(!hdc11 && !hdce11 && !check11){ %><button class="calb" value="<%=y11%>"><%=dd11 %></button><% }else if(check11) {%><%=dd11 %><% }else {%><span style="color: red;"><%=dd11 %></span><%} %></td>
-					<td><%if(!hdc12 && !hdce12 && !check12){ %><button class="calb" value="<%=y12%>"><%=dd12 %></button><% }else if(check12) {%><%=dd12 %><% }else {%><span style="color: red;"><%=dd12 %></span><%} %></td>
-					<td><%if(!hdc13 && !hdce13 && !check13){ %><button class="calb" value="<%=y13%>"><%=dd13 %></button><% }else if(check13) {%><%=dd13 %><% }else {%><span style="color: red;"><%=dd13 %></span><%} %></td>
+					<td><%if(!hdc8 && !hdce8 && !check8 && !checkDate8){ %><button class="calb" value="<%=y8%>"><%=dd8 %></button><% }else if(check8 || checkDate8) {%><%=dd8 %><% }else {%><span style="color: red;"><%=dd8 %></span><%} %></td>
+					<td><%if(!hdc9 && !hdce9 && !check9 && !checkDate9){ %><button class="calb" value="<%=y9%>"><%=dd9 %></button><% }else if(check9 || checkDate9) {%><%=dd9 %><% }else {%><span style="color: red;"><%=dd9 %></span><%} %></td>
+					<td><%if(!hdc10 && !hdce10 && !check10 && !checkDate10){ %><button class="calb" value="<%=y10%>"><%=dd10 %></button><% }else if(check10 || checkDate10) {%><%=dd10 %><% }else {%><span style="color: red;"><%=dd10 %></span><%} %></td>
+					<td><%if(!hdc11 && !hdce11 && !check11 && !checkDate11){ %><button class="calb" value="<%=y11%>"><%=dd11 %></button><% }else if(check11 || checkDate11) {%><%=dd11 %><% }else {%><span style="color: red;"><%=dd11 %></span><%} %></td>
+					<td><%if(!hdc12 && !hdce12 && !check12 && !checkDate12){ %><button class="calb" value="<%=y12%>"><%=dd12 %></button><% }else if(check12 || checkDate12) {%><%=dd12 %><% }else {%><span style="color: red;"><%=dd12 %></span><%} %></td>
+					<td><%if(!hdc13 && !hdce13 && !check13 && !checkDate13){ %><button class="calb" value="<%=y13%>"><%=dd13 %></button><% }else if(check13 || checkDate13) {%><%=dd13 %><% }else {%><span style="color: red;"><%=dd13 %></span><%} %></td>
 				</tr>
 				<tr>
-					<td style="color: red;"><%if(!hdc14 && !hdce14 && !check14){ %><%=dd14 %><% }else {%><span style="color: red;"><%=dd14 %></span><%} %></td>
+					<td style="color: red;"><%if(!hdc14 && !hdce14 && !check14 && !checkDate14){ %><%=dd14 %><% }else {%><span style="color: red;"><%=dd14 %></span><%} %></td>
 					<td></td>
 					<td></td>
 					<td></td>
@@ -415,25 +431,25 @@
 				<tr>
 					<td></td>
 					<td></td>
-					<td><%if(!hdc && !hdce && !check){ %><%=dd %><% }else {%><span style="color: red;"><%=dd %></span><%} %></td>
-					<td><%if(!hdc2 && !hdce2 && !check2){ %><button class="calb" value="<%=y2 %>"><%=dd2 %></button><% }else if(check2) {%><%=dd2 %><% }else {%><span style="color: red;"><%=dd2 %></span><%} %></td>
-					<td><%if(!hdc3 && !hdce3 && !check3){ %><button class="calb" value="<%=y3%>"><%=dd3 %></button><% }else if(check3) {%><%=dd3 %><% }else {%><span style="color: red;"><%=dd3 %></span><%} %></td>
-					<td><%if(!hdc4 && !hdce4 && !check4){ %><button class="calb" value="<%=y4%>"><%=dd4 %></button><% }else if(check4) {%><%=dd4 %><% }else {%><span style="color: red;"><%=dd4 %></span><%} %></td>
-					<td><%if(!hdc5 && !hdce5 && !check5){ %><button class="calb" value="<%=y5%>"><%=dd5 %></button><% }else if(check5) {%><%=dd5 %><% }else {%><span style="color: red;"><%=dd5 %></span><%} %></td>
+					<td><%if(!hdc && !hdce && !check && !checkDate){ %><%=dd %><% }else {%><span style="color: red;"><%=dd %></span><%} %></td>
+					<td><%if(!hdc2 && !hdce2 && !check2 && !checkDate2){ %><button class="calb" value="<%=y2 %>"><%=dd2 %></button><% }else if(check2 || checkDate2) {%><%=dd2 %><% }else {%><span style="color: red;"><%=dd2 %></span><%} %></td>
+					<td><%if(!hdc3 && !hdce3 && !check3 && !checkDate3){ %><button class="calb" value="<%=y3%>"><%=dd3 %></button><% }else if(check3 || checkDate3) {%><%=dd3 %><% }else {%><span style="color: red;"><%=dd3 %></span><%} %></td>
+					<td><%if(!hdc4 && !hdce4 && !check4 && !checkDate4){ %><button class="calb" value="<%=y4%>"><%=dd4 %></button><% }else if(check4 || checkDate4) {%><%=dd4 %><% }else {%><span style="color: red;"><%=dd4 %></span><%} %></td>
+					<td><%if(!hdc5 && !hdce5 && !check5 && !checkDate5){ %><button class="calb" value="<%=y5%>"><%=dd5 %></button><% }else if(check5 || checkDate5) {%><%=dd5 %><% }else {%><span style="color: red;"><%=dd5 %></span><%} %></td>
 				</tr>
 				<tr>
-					<td style="color: red;"><%if(!hdc6 && !hdce6 && !check6){ %><%=dd6 %><% }else {%><span style="color: red;"><%=dd6 %></span><%} %></td>
-					<td><%if(!hdc7 && !hdce7 && !check7){ %><button class="calb" value="<%=y7%>"><%=dd7 %></button><% }else if(check7) {%><%=dd7 %><% }else {%><span style="color: red;"><%=dd7 %></span><%} %></td>
-					<td><%if(!hdc8 && !hdce8 && !check8){ %><button class="calb" value="<%=y8%>"><%=dd8 %></button><% }else if(check8) {%><%=dd8 %><% }else {%><span style="color: red;"><%=dd8 %></span><%} %></td>
-					<td><%if(!hdc9 && !hdce9 && !check9){ %><button class="calb" value="<%=y9%>"><%=dd9 %></button><% }else if(check9) {%><%=dd9 %><% }else {%><span style="color: red;"><%=dd9 %></span><%} %></td>
-					<td><%if(!hdc10 && !hdce10 && !check10){ %><button class="calb" value="<%=y10%>"><%=dd10 %></button><% }else if(check10) {%><%=dd10 %><% }else {%><span style="color: red;"><%=dd10 %></span><%} %></td>
-					<td><%if(!hdc11 && !hdce11 && !check11){ %><button class="calb" value="<%=y11%>"><%=dd11 %></button><% }else if(check11) {%><%=dd11 %><% }else {%><span style="color: red;"><%=dd11 %></span><%} %></td>
-					<td><%if(!hdc12 && !hdce12 && !check12){ %><button class="calb" value="<%=y12%>"><%=dd12 %></button><% }else if(check12) {%><%=dd12 %><% }else {%><span style="color: red;"><%=dd12 %></span><%} %></td>
+					<td style="color: red;"><%if(!hdc6 && !hdce6 && !check6 && !checkDate6){ %><%=dd6 %><% }else {%><span style="color: red;"><%=dd6 %></span><%} %></td>
+					<td><%if(!hdc7 && !hdce7 && !check7 && !checkDate7){ %><button class="calb" value="<%=y7%>"><%=dd7 %></button><% }else if(check7 || checkDate7) {%><%=dd7 %><% }else {%><span style="color: red;"><%=dd7 %></span><%} %></td>
+					<td><%if(!hdc8 && !hdce8 && !check8 && !checkDate8){ %><button class="calb" value="<%=y8%>"><%=dd8 %></button><% }else if(check8 || checkDate8) {%><%=dd8 %><% }else {%><span style="color: red;"><%=dd8 %></span><%} %></td>
+					<td><%if(!hdc9 && !hdce9 && !check9 && !checkDate9){ %><button class="calb" value="<%=y9%>"><%=dd9 %></button><% }else if(check9 || checkDate9) {%><%=dd9 %><% }else {%><span style="color: red;"><%=dd9 %></span><%} %></td>
+					<td><%if(!hdc10 && !hdce10 && !check10 && !checkDate10){ %><button class="calb" value="<%=y10%>"><%=dd10 %></button><% }else if(check10 || checkDate10) {%><%=dd10 %><% }else {%><span style="color: red;"><%=dd10 %></span><%} %></td>
+					<td><%if(!hdc11 && !hdce11 && !check11 && !checkDate11){ %><button class="calb" value="<%=y11%>"><%=dd11 %></button><% }else if(check11 || checkDate11) {%><%=dd11 %><% }else {%><span style="color: red;"><%=dd11 %></span><%} %></td>
+					<td><%if(!hdc12 && !hdce12 && !check12 && !checkDate12){ %><button class="calb" value="<%=y12%>"><%=dd12 %></button><% }else if(check12 || checkDate12) {%><%=dd12 %><% }else {%><span style="color: red;"><%=dd12 %></span><%} %></td>
 			
 				</tr>
 				<tr>
-					<td style="color: red;"><%if(!hdc13 && !hdce13 && !check13){ %><%=dd13 %><% }else {%><span style="color: red;"><%=dd13 %></span><%} %></td>
-					<td><%if(!hdc14 && !hdce14 && !check14){ %><button class="calb" value="<%=y14%>"><%=dd14 %></button><% }else if(check14) {%><%=dd14 %><% }else {%><span style="color: red;"><%=dd14 %></span><%} %></td>
+					<td style="color: red;"><%if(!hdc13 && !hdce13 && !check13 && !checkDate13){ %><%=dd13 %><% }else {%><span style="color: red;"><%=dd13 %></span><%} %></td>
+					<td><%if(!hdc14 && !hdce14 && !check14 && !checkDate14){ %><button class="calb" value="<%=y14%>"><%=dd14 %></button><% }else if(check14 || checkDate14) {%><%=dd14 %><% }else {%><span style="color: red;"><%=dd14 %></span><%} %></td>
 					<td></td>
 					<td></td>
 					<td></td>
@@ -446,24 +462,24 @@
 					<td></td>
 					<td></td>
 					<td></td>
-					<td><%if(!hdc && !hdce && !check){ %><%=dd %><% }else {%><span style="color: red;"><%=dd %></span><%} %></td>
-					<td><%if(!hdc2 && !hdce2 && !check2){ %><button class="calb" value="<%=y2 %>"><%=dd2 %></button><% }else if(check2) {%><%=dd2 %><% }else {%><span style="color: red;"><%=dd2 %></span><%} %></td>
-					<td><%if(!hdc3 && !hdce3 && !check3){ %><button class="calb" value="<%=y3%>"><%=dd3 %></button><% }else if(check3) {%><%=dd3 %><% }else {%><span style="color: red;"><%=dd3 %></span><%} %></td>
-					<td><%if(!hdc4 && !hdce4 && !check4){ %><button class="calb" value="<%=y4%>"><%=dd4 %></button><% }else if(check4) {%><%=dd4 %><% }else {%><span style="color: red;"><%=dd4 %></span><%} %></td>
+					<td><%if(!hdc && !hdce && !check && !checkDate){ %><%=dd %><% }else {%><span style="color: red;"><%=dd %></span><%} %></td>
+					<td><%if(!hdc2 && !hdce2 && !check2 && !checkDate2){ %><button class="calb" value="<%=y2 %>"><%=dd2 %></button><% }else if(check2 || checkDate2) {%><%=dd2 %><% }else {%><span style="color: red;"><%=dd2 %></span><%} %></td>
+					<td><%if(!hdc3 && !hdce3 && !check3 && !checkDate3){ %><button class="calb" value="<%=y3%>"><%=dd3 %></button><% }else if(check3 || checkDate3) {%><%=dd3 %><% }else {%><span style="color: red;"><%=dd3 %></span><%} %></td>
+					<td><%if(!hdc4 && !hdce4 && !check4 && !checkDate4){ %><button class="calb" value="<%=y4%>"><%=dd4 %></button><% }else if(check4 || checkDate4) {%><%=dd4 %><% }else {%><span style="color: red;"><%=dd4 %></span><%} %></td>
 				</tr>
 				<tr>
-					<td style="color: red;"><%if(!hdc5 && !hdce5 && !check5){ %><%=dd5 %><% }else {%><span style="color: red;"><%=dd5 %></span><%} %></td>
-					<td><%if(!hdc6 && !hdce6 && !check6){ %><button class="calb" value="<%=y6%>"><%=dd6 %></button><% }else if(check6) {%><%=dd6 %><% }else {%><span style="color: red;"><%=dd6 %></span><%} %></td>
-					<td><%if(!hdc7 && !hdce7 && !check7){ %><button class="calb" value="<%=y7%>"><%=dd7 %></button><% }else if(check7) {%><%=dd7 %><% }else {%><span style="color: red;"><%=dd7 %></span><%} %></td>
-					<td><%if(!hdc8 && !hdce8 && !check8){ %><button class="calb" value="<%=y8%>"><%=dd8 %></button><% }else if(check8) {%><%=dd8 %><% }else {%><span style="color: red;"><%=dd8 %></span><%} %></td>
-					<td><%if(!hdc9 && !hdce9 && !check9){ %><button class="calb" value="<%=y9%>"><%=dd9 %></button><% }else if(check9) {%><%=dd9 %><% }else {%><span style="color: red;"><%=dd9 %></span><%} %></td>
-					<td><%if(!hdc10 && !hdce10 && !check10){ %><button class="calb" value="<%=y10%>"><%=dd10 %></button><% }else if(check10) {%><%=dd10 %><% }else {%><span style="color: red;"><%=dd10 %></span><%} %></td>
-					<td><%if(!hdc11 && !hdce11 && !check11){ %><button class="calb" value="<%=y11%>"><%=dd11 %></button><% }else if(check11) {%><%=dd11 %><% }else {%><span style="color: red;"><%=dd11 %></span><%} %></td>
+					<td style="color: red;"><%if(!hdc5 && !hdce5 && !check5 && !checkDate5){ %><%=dd5 %><% }else {%><span style="color: red;"><%=dd5 %></span><%} %></td>
+					<td><%if(!hdc6 && !hdce6 && !check6 && !checkDate6){ %><button class="calb" value="<%=y6%>"><%=dd6 %></button><% }else if(check6 || checkDate6) {%><%=dd6 %><% }else {%><span style="color: red;"><%=dd6 %></span><%} %></td>
+					<td><%if(!hdc7 && !hdce7 && !check7 && !checkDate7){ %><button class="calb" value="<%=y7%>"><%=dd7 %></button><% }else if(check7 || checkDate7) {%><%=dd7 %><% }else {%><span style="color: red;"><%=dd7 %></span><%} %></td>
+					<td><%if(!hdc8 && !hdce8 && !check8 && !checkDate8){ %><button class="calb" value="<%=y8%>"><%=dd8 %></button><% }else if(check8 || checkDate8) {%><%=dd8 %><% }else {%><span style="color: red;"><%=dd8 %></span><%} %></td>
+					<td><%if(!hdc9 && !hdce9 && !check9 && !checkDate9){ %><button class="calb" value="<%=y9%>"><%=dd9 %></button><% }else if(check9 || checkDate9) {%><%=dd9 %><% }else {%><span style="color: red;"><%=dd9 %></span><%} %></td>
+					<td><%if(!hdc10 && !hdce10 && !check10 && !checkDate10){ %><button class="calb" value="<%=y10%>"><%=dd10 %></button><% }else if(check10 || checkDate10) {%><%=dd10 %><% }else {%><span style="color: red;"><%=dd10 %></span><%} %></td>
+					<td><%if(!hdc11 && !hdce11 && !check11 && !checkDate11){ %><button class="calb" value="<%=y11%>"><%=dd11 %></button><% }else if(check11 || checkDate11) {%><%=dd11 %><% }else {%><span style="color: red;"><%=dd11 %></span><%} %></td>
 				</tr>
 				<tr>
-					<td style="color: red;"><%if(!hdc12 && !hdce12 && !check12){ %><%=dd12 %><% }else {%><span style="color: red;"><%=dd12 %></span><%} %></td>
-					<td><%if(!hdc13 && !hdce13 && !check13){ %><button class="calb" value="<%=y13%>"><%=dd13 %></button><% }else if(check13) {%><%=dd13 %><% }else {%><span style="color: red;"><%=dd13 %></span><%} %></td>
-					<td><%if(!hdc14 && !hdce14 && !check14){ %><button class="calb" value="<%=y14%>"><%=dd14 %></button><% }else if(check14) {%><%=dd14 %><% }else {%><span style="color: red;"><%=dd14 %></span><%} %></td>
+					<td style="color: red;"><%if(!hdc12 && !hdce12 && !check12 && !checkDate12){ %><%=dd12 %><% }else {%><span style="color: red;"><%=dd12 %></span><%} %></td>
+					<td><%if(!hdc13 && !hdce13 && !check13 && !checkDate13){ %><button class="calb" value="<%=y13%>"><%=dd13 %></button><% }else if(check13 || checkDate13) {%><%=dd13 %><% }else {%><span style="color: red;"><%=dd13 %></span><%} %></td>
+					<td><%if(!hdc14 && !hdce14 && !check14 && !checkDate14){ %><button class="calb" value="<%=y14%>"><%=dd14 %></button><% }else if(check14 || checkDate14) {%><%=dd14 %><% }else {%><span style="color: red;"><%=dd14 %></span><%} %></td>
 					<td></td>
 					<td></td>
 					<td></td>
@@ -476,24 +492,24 @@
 					<td></td>
 					<td></td>
 					<td></td>
-					<td><%if(!hdc && !hdce && !check){ %><%=dd %><% }else {%><span style="color: red;"><%=dd %></span><%} %></td>
-					<td><%if(!hdc2 && !hdce2 && !check2){ %><button class="calb" value="<%=y2 %>"><%=dd2 %></button><% }else if(check2) {%><%=dd2 %><% }else {%><span style="color: red;"><%=dd2 %></span><%} %></td>
-					<td><%if(!hdc3 && !hdce3 && !check3){ %><button class="calb" value="<%=y3%>"><%=dd3 %></button><% }else if(check3) {%><%=dd3 %><% }else {%><span style="color: red;"><%=dd3 %></span><%} %></td>
+					<td><%if(!hdc && !hdce && !check && !checkDate){ %><%=dd %><% }else {%><span style="color: red;"><%=dd %></span><%} %></td>
+					<td><%if(!hdc2 && !hdce2 && !check2 && !checkDate2){ %><button class="calb" value="<%=y2 %>"><%=dd2 %></button><% }else if(check2 || checkDate2) {%><%=dd2 %><% }else {%><span style="color: red;"><%=dd2 %></span><%} %></td>
+					<td><%if(!hdc3 && !hdce3 && !check3 && !checkDate3){ %><button class="calb" value="<%=y3%>"><%=dd3 %></button><% }else if(check3 || checkDate3) {%><%=dd3 %><% }else {%><span style="color: red;"><%=dd3 %></span><%} %></td>
 				</tr>
 				<tr>
-					<td style="color: red;"><%if(!hdc4 && !hdce4 && !check4){ %><%=dd4 %><% }else {%><span style="color: red;"><%=dd4 %></span><%} %></td>
-					<td><%if(!hdc5 && !hdce5 && !check5){ %><button class="calb" value="<%=y5%>"><%=dd5 %></button><% }else if(check5) {%><%=dd5 %><% }else {%><span style="color: red;"><%=dd5 %></span><%} %></td>
-					<td><%if(!hdc6 && !hdce6 && !check6){ %><button class="calb" value="<%=y6%>"><%=dd6 %></button><% }else if(check6) {%><%=dd6 %><% }else {%><span style="color: red;"><%=dd6 %></span><%} %></td>
-					<td><%if(!hdc7 && !hdce7 && !check7){ %><button class="calb" value="<%=y7%>"><%=dd7 %></button><% }else if(check7) {%><%=dd7 %><% }else {%><span style="color: red;"><%=dd7 %></span><%} %></td>
-					<td><%if(!hdc8 && !hdce8 && !check8){ %><button class="calb" value="<%=y8%>"><%=dd8 %></button><% }else if(check8) {%><%=dd8 %><% }else {%><span style="color: red;"><%=dd8 %></span><%} %></td>
-					<td><%if(!hdc9 && !hdce9 && !check9){ %><button class="calb" value="<%=y9%>"><%=dd9 %></button><% }else if(check9) {%><%=dd9 %><% }else {%><span style="color: red;"><%=dd9 %></span><%} %></td>
-					<td><%if(!hdc10 && !hdce10 && !check10){ %><button class="calb" value="<%=y10%>"><%=dd10 %></button><% }else if(check10) {%><%=dd10 %><% }else {%><span style="color: red;"><%=dd10 %></span><%} %></td>
+					<td style="color: red;"><%if(!hdc4 && !hdce4 && !check4 && !checkDate4){ %><%=dd4 %><% }else {%><span style="color: red;"><%=dd4 %></span><%} %></td>
+					<td><%if(!hdc5 && !hdce5 && !check5 && !checkDate5){ %><button class="calb" value="<%=y5%>"><%=dd5 %></button><% }else if(check5 || checkDate5) {%><%=dd5 %><% }else {%><span style="color: red;"><%=dd5 %></span><%} %></td>
+					<td><%if(!hdc6 && !hdce6 && !check6 && !checkDate6){ %><button class="calb" value="<%=y6%>"><%=dd6 %></button><% }else if(check6 || checkDate6) {%><%=dd6 %><% }else {%><span style="color: red;"><%=dd6 %></span><%} %></td>
+					<td><%if(!hdc7 && !hdce7 && !check7 && !checkDate7){ %><button class="calb" value="<%=y7%>"><%=dd7 %></button><% }else if(check7 || checkDate7) {%><%=dd7 %><% }else {%><span style="color: red;"><%=dd7 %></span><%} %></td>
+					<td><%if(!hdc8 && !hdce8 && !check8 && !checkDate8){ %><button class="calb" value="<%=y8%>"><%=dd8 %></button><% }else if(check8 || checkDate8) {%><%=dd8 %><% }else {%><span style="color: red;"><%=dd8 %></span><%} %></td>
+					<td><%if(!hdc9 && !hdce9 && !check9 && !checkDate9){ %><button class="calb" value="<%=y9%>"><%=dd9 %></button><% }else if(check9 || checkDate9) {%><%=dd9 %><% }else {%><span style="color: red;"><%=dd9 %></span><%} %></td>
+					<td><%if(!hdc10 && !hdce10 && !check10 && !checkDate10){ %><button class="calb" value="<%=y10%>"><%=dd10 %></button><% }else if(check10 || checkDate10) {%><%=dd10 %><% }else {%><span style="color: red;"><%=dd10 %></span><%} %></td>
 				</tr>
 				<tr>
-					<td style="color: red;"><%if(!hdc11 && !hdce11 && !check11){ %><%=dd11 %><% }else {%><span style="color: red;"><%=dd11 %></span><%} %></td>
-					<td><%if(!hdc12 && !hdce12 && !check12){ %><button class="calb" value="<%=y12%>"><%=dd12 %></button><% }else if(check12) {%><%=dd12 %><% }else {%><span style="color: red;"><%=dd12 %></span><%} %></td>
-					<td><%if(!hdc13 && !hdce13 && !check13){ %><button class="calb" value="<%=y13%>"><%=dd13 %></button><% }else if(check13) {%><%=dd13 %><% }else {%><span style="color: red;"><%=dd13 %></span><%} %></td>
-					<td><%if(!hdc14 && !hdce14 && !check14){ %><button class="calb" value="<%=y14%>"><%=dd14 %></button><% }else if(check14) {%><%=dd14 %><% }else {%><span style="color: red;"><%=dd14 %></span><%} %></td>
+					<td style="color: red;"><%if(!hdc11 && !hdce11 && !check11 && !checkDate11){ %><%=dd11 %><% }else {%><span style="color: red;"><%=dd11 %></span><%} %></td>
+					<td><%if(!hdc12 && !hdce12 && !check12 && !checkDate12){ %><button class="calb" value="<%=y12%>"><%=dd12 %></button><% }else if(check12 || checkDate12) {%><%=dd12 %><% }else {%><span style="color: red;"><%=dd12 %></span><%} %></td>
+					<td><%if(!hdc13 && !hdce13 && !check13 && !checkDate13){ %><button class="calb" value="<%=y13%>"><%=dd13 %></button><% }else if(check13 || checkDate13) {%><%=dd13 %><% }else {%><span style="color: red;"><%=dd13 %></span><%} %></td>
+					<td><%if(!hdc14 && !hdce14 && !check14 && !checkDate14){ %><button class="calb" value="<%=y14%>"><%=dd14 %></button><% }else if(check14 || checkDate14) {%><%=dd14 %><% }else {%><span style="color: red;"><%=dd14 %></span><%} %></td>
 					<td></td>
 					<td></td>
 					<td></td>
@@ -506,24 +522,24 @@
 					<td></td>
 					<td></td>
 					<td></td>
-					<td><%if(!hdc && !hdce && !check){ %><%=dd %><% }else {%><span style="color: red;"><%=dd %></span><%} %></td>
-					<td><%if(!hdc2 && !hdce2 && !check2){ %><button class="calb" value="<%=y2 %>"><%=dd2 %></button><% }else if(check2) {%><%=dd2 %><% }else {%><span style="color: red;"><%=dd2 %></span><%} %></td>
+					<td><%if(!hdc && !hdce && !check && !checkDate){ %><%=dd %><% }else {%><span style="color: red;"><%=dd %></span><%} %></td>
+					<td><%if(!hdc2 && !hdce2 && !check2 && !checkDate2){ %><button class="calb" value="<%=y2 %>"><%=dd2 %></button><% }else if(check2 || checkDate2) {%><%=dd2 %><% }else {%><span style="color: red;"><%=dd2 %></span><%} %></td>
 				</tr>
 				<tr>
-					<td style="color: red;"><%if(!hdc3 && !hdce3 && !check3){ %><%=dd3 %><% }else {%><span style="color: red;"><%=dd3 %></span><%} %></td>
-					<td><%if(!hdc4 && !hdce4 && !check4){ %><button class="calb" value="<%=y4%>"><%=dd4 %></button><% }else if(check4) {%><%=dd4 %><% }else {%><span style="color: red;"><%=dd4 %></span><%} %></td>
-					<td><%if(!hdc5 && !hdce5 && !check5){ %><button class="calb" value="<%=y5%>"><%=dd5 %></button><% }else if(check5) {%><%=dd5 %><% }else {%><span style="color: red;"><%=dd5 %></span><%} %></td>
-					<td><%if(!hdc6 && !hdce6 && !check6){ %><button class="calb" value="<%=y6%>"><%=dd6 %></button><% }else if(check6) {%><%=dd6 %><% }else {%><span style="color: red;"><%=dd6 %></span><%} %></td>
-					<td><%if(!hdc7 && !hdce7 && !check7){ %><button class="calb" value="<%=y7%>"><%=dd7 %></button><% }else if(check7) {%><%=dd7 %><% }else {%><span style="color: red;"><%=dd7 %></span><%} %></td>
-					<td><%if(!hdc8 && !hdce8 && !check8){ %><button class="calb" value="<%=y8%>"><%=dd8 %></button><% }else if(check8) {%><%=dd8 %><% }else {%><span style="color: red;"><%=dd8 %></span><%} %></td>
-					<td><%if(!hdc9 && !hdce9 && !check9){ %><button class="calb" value="<%=y9%>"><%=dd9 %></button><% }else if(check9) {%><%=dd9 %><% }else {%><span style="color: red;"><%=dd9 %></span><%} %></td>
+					<td style="color: red;"><%if(!hdc3 && !hdce3 && !check3 && !checkDate3){ %><%=dd3 %><% }else {%><span style="color: red;"><%=dd3 %></span><%} %></td>
+					<td><%if(!hdc4 && !hdce4 && !check4 && !checkDate4){ %><button class="calb" value="<%=y4%>"><%=dd4 %></button><% }else if(check4 || checkDate4) {%><%=dd4 %><% }else {%><span style="color: red;"><%=dd4 %></span><%} %></td>
+					<td><%if(!hdc5 && !hdce5 && !check5 && !checkDate5){ %><button class="calb" value="<%=y5%>"><%=dd5 %></button><% }else if(check5 || checkDate5) {%><%=dd5 %><% }else {%><span style="color: red;"><%=dd5 %></span><%} %></td>
+					<td><%if(!hdc6 && !hdce6 && !check6 && !checkDate6){ %><button class="calb" value="<%=y6%>"><%=dd6 %></button><% }else if(check6 || checkDate6) {%><%=dd6 %><% }else {%><span style="color: red;"><%=dd6 %></span><%} %></td>
+					<td><%if(!hdc7 && !hdce7 && !check7 && !checkDate7){ %><button class="calb" value="<%=y7%>"><%=dd7 %></button><% }else if(check7 || checkDate7) {%><%=dd7 %><% }else {%><span style="color: red;"><%=dd7 %></span><%} %></td>
+					<td><%if(!hdc8 && !hdce8 && !check8 && !checkDate8){ %><button class="calb" value="<%=y8%>"><%=dd8 %></button><% }else if(check8 || checkDate8) {%><%=dd8 %><% }else {%><span style="color: red;"><%=dd8 %></span><%} %></td>
+					<td><%if(!hdc9 && !hdce9 && !check9 && !checkDate9){ %><button class="calb" value="<%=y9%>"><%=dd9 %></button><% }else if(check9 || checkDate9) {%><%=dd9 %><% }else {%><span style="color: red;"><%=dd9 %></span><%} %></td>
 				</tr>
 				<tr>
-					<td style="color: red;"><%if(!hdc10 && !hdce10 && !check10){ %><%=dd10 %><% }else {%><span style="color: red;"><%=dd10 %></span><%} %></td>
-					<td><%if(!hdc11 && !hdce11 && !check11){ %><button class="calb" value="<%=y11%>"><%=dd11 %></button><% }else if(check11) {%><%=dd11 %><% }else {%><span style="color: red;"><%=dd11 %></span><%} %></td>
-					<td><%if(!hdc12 && !hdce12 && !check12){ %><button class="calb" value="<%=y12%>"><%=dd12 %></button><% }else if(check12) {%><%=dd12 %><% }else {%><span style="color: red;"><%=dd12 %></span><%} %></td>
-					<td><%if(!hdc13 && !hdce13 && !check13){ %><button class="calb" value="<%=y13%>"><%=dd13 %></button><% }else if(check13) {%><%=dd13 %><% }else {%><span style="color: red;"><%=dd13 %></span><%} %></td>
-					<td><%if(!hdc14 && !hdce14 && !check14){ %><button class="calb" value="<%=y14%>"><%=dd14 %></button><% }else if(check14) {%><%=dd14 %><% }else {%><span style="color: red;"><%=dd14 %></span><%} %></td>
+					<td style="color: red;"><%if(!hdc10 && !hdce10 && !check10 && !checkDate10){ %><%=dd10 %><% }else {%><span style="color: red;"><%=dd10 %></span><%} %></td>
+					<td><%if(!hdc11 && !hdce11 && !check11 && !checkDate11){ %><button class="calb" value="<%=y11%>"><%=dd11 %></button><% }else if(check11 || checkDate11) {%><%=dd11 %><% }else {%><span style="color: red;"><%=dd11 %></span><%} %></td>
+					<td><%if(!hdc12 && !hdce12 && !check12 && !checkDate12){ %><button class="calb" value="<%=y12%>"><%=dd12 %></button><% }else if(check12 || checkDate12) {%><%=dd12 %><% }else {%><span style="color: red;"><%=dd12 %></span><%} %></td>
+					<td><%if(!hdc13 && !hdce13 && !check13 && !checkDate13){ %><button class="calb" value="<%=y13%>"><%=dd13 %></button><% }else if(check13 || checkDate13) {%><%=dd13 %><% }else {%><span style="color: red;"><%=dd13 %></span><%} %></td>
+					<td><%if(!hdc14 && !hdce14 && !check14 && !checkDate14){ %><button class="calb" value="<%=y14%>"><%=dd14 %></button><% }else if(check14 || checkDate14) {%><%=dd14 %><% }else {%><span style="color: red;"><%=dd14 %></span><%} %></td>
 					<td></td>
 					<td></td>
 				</tr>
@@ -536,31 +552,31 @@
 					<td></td>
 					<td></td>
 					<td></td>
-					<td><%if(!hdc && !hdce && !check){ %><%=dd %><% }else {%><span style="color: red;"><%=dd %></span><%} %></td>
+					<td><%if(!hdc && !hdce && !check && !checkDate){ %><%=dd %><% }else {%><span style="color: red;"><%=dd %></span><%} %></td>
 				</tr>
 				<tr>
-					<td style="color: red;"><%if(!hdc2 && !hdce2 && !check2){ %><%=dd2 %><% }else {%><span style="color: red;"><%=dd2 %></span><%} %></td>
-					<td><%if(!hdc3 && !hdce3 && !check3){ %><button class="calb" value="<%=y3%>"><%=dd3 %></button><% }else if(check3) {%><%=dd3 %><% }else {%><span style="color: red;"><%=dd3 %></span><%} %></td>
-					<td><%if(!hdc4 && !hdce4 && !check4){ %><button class="calb" value="<%=y4%>"><%=dd4 %></button><% }else if(check4) {%><%=dd4 %><% }else {%><span style="color: red;"><%=dd4 %></span><%} %></td>
-					<td><%if(!hdc5 && !hdce5 && !check5){ %><button class="calb" value="<%=y5%>"><%=dd5 %></button><% }else if(check5) {%><%=dd5 %><% }else {%><span style="color: red;"><%=dd5 %></span><%} %></td>
-					<td><%if(!hdc6 && !hdce6 && !check6){ %><button class="calb" value="<%=y6%>"><%=dd6 %></button><% }else if(check6) {%><%=dd6 %><% }else {%><span style="color: red;"><%=dd6 %></span><%} %></td>
-					<td><%if(!hdc7 && !hdce7 && !check7){ %><button class="calb" value="<%=y7%>"><%=dd7 %></button><% }else if(check7) {%><%=dd7 %><% }else {%><span style="color: red;"><%=dd7 %></span><%} %></td>
-					<td><%if(!hdc8 && !hdce8 && !check8){ %><button class="calb" value="<%=y8%>"><%=dd8 %></button><% }else if(check8) {%><%=dd8 %><% }else {%><span style="color: red;"><%=dd8 %></span><%} %></td>
+					<td style="color: red;"><%if(!hdc2 && !hdce2 && !check2 && !checkDate2){ %><%=dd2 %><% }else {%><span style="color: red;"><%=dd2 %></span><%} %></td>
+					<td><%if(!hdc3 && !hdce3 && !check3 && !checkDate3){ %><button class="calb" value="<%=y3%>"><%=dd3 %></button><% }else if(check3 || checkDate3) {%><%=dd3 %><% }else {%><span style="color: red;"><%=dd3 %></span><%} %></td>
+					<td><%if(!hdc4 && !hdce4 && !check4 && !checkDate4){ %><button class="calb" value="<%=y4%>"><%=dd4 %></button><% }else if(check4 || checkDate4) {%><%=dd4 %><% }else {%><span style="color: red;"><%=dd4 %></span><%} %></td>
+					<td><%if(!hdc5 && !hdce5 && !check5 && !checkDate5){ %><button class="calb" value="<%=y5%>"><%=dd5 %></button><% }else if(check5 || checkDate5) {%><%=dd5 %><% }else {%><span style="color: red;"><%=dd5 %></span><%} %></td>
+					<td><%if(!hdc6 && !hdce6 && !check6 && !checkDate6){ %><button class="calb" value="<%=y6%>"><%=dd6 %></button><% }else if(check6 || checkDate6) {%><%=dd6 %><% }else {%><span style="color: red;"><%=dd6 %></span><%} %></td>
+					<td><%if(!hdc7 && !hdce7 && !check7 && !checkDate7){ %><button class="calb" value="<%=y7%>"><%=dd7 %></button><% }else if(check7 || checkDate7) {%><%=dd7 %><% }else {%><span style="color: red;"><%=dd7 %></span><%} %></td>
+					<td><%if(!hdc8 && !hdce8 && !check8 && !checkDate8){ %><button class="calb" value="<%=y8%>"><%=dd8 %></button><% }else if(check8 || checkDate8) {%><%=dd8 %><% }else {%><span style="color: red;"><%=dd8 %></span><%} %></td>
 				</tr>
 				<tr>
-					<td style="color: red;"><%if(!hdc9 && !hdce9 && !check9){ %><%=dd9 %><% }else {%><span style="color: red;"><%=dd9 %></span><%} %></td>
-					<td><%if(!hdc10 && !hdce10 && !check10){ %><button class="calb" value="<%=y10%>"><%=dd10 %></button><% }else if(check10) {%><%=dd10 %><% }else {%><span style="color: red;"><%=dd10 %></span><%} %></td>
-					<td><%if(!hdc11 && !hdce11 && !check11){ %><button class="calb" value="<%=y11%>"><%=dd11 %></button><% }else if(check11) {%><%=dd11 %><% }else {%><span style="color: red;"><%=dd11 %></span><%} %></td>
-					<td><%if(!hdc12 && !hdce12 && !check12){ %><button class="calb" value="<%=y12%>"><%=dd12 %></button><% }else if(check12) {%><%=dd12 %><% }else {%><span style="color: red;"><%=dd12 %></span><%} %></td>
-					<td><%if(!hdc13 && !hdce13 && !check13){ %><button class="calb" value="<%=y13%>"><%=dd13 %></button><% }else if(check13) {%><%=dd13 %><% }else {%><span style="color: red;"><%=dd13 %></span><%} %></td>
-					<td><%if(!hdc14 && !hdce14 && !check14){ %><button class="calb" value="<%=y14%>"><%=dd14 %></button><% }else if(check14) {%><%=dd14 %><% }else {%><span style="color: red;"><%=dd14 %></span><%} %></td>
+					<td style="color: red;"><%if(!hdc9 && !hdce9 && !check9 && !checkDate9){ %><%=dd9 %><% }else {%><span style="color: red;"><%=dd9 %></span><%} %></td>
+					<td><%if(!hdc10 && !hdce10 && !check10 && !checkDate10){ %><button class="calb" value="<%=y10%>"><%=dd10 %></button><% }else if(check10 || checkDate10) {%><%=dd10 %><% }else {%><span style="color: red;"><%=dd10 %></span><%} %></td>
+					<td><%if(!hdc11 && !hdce11 && !check11 && !checkDate11){ %><button class="calb" value="<%=y11%>"><%=dd11 %></button><% }else if(check11 || checkDate11) {%><%=dd11 %><% }else {%><span style="color: red;"><%=dd11 %></span><%} %></td>
+					<td><%if(!hdc12 && !hdce12 && !check12 && !checkDate12){ %><button class="calb" value="<%=y12%>"><%=dd12 %></button><% }else if(check12 || checkDate12) {%><%=dd12 %><% }else {%><span style="color: red;"><%=dd12 %></span><%} %></td>
+					<td><%if(!hdc13 && !hdce13 && !check13 && !checkDate13){ %><button class="calb" value="<%=y13%>"><%=dd13 %></button><% }else if(check13 || checkDate13) {%><%=dd13 %><% }else {%><span style="color: red;"><%=dd13 %></span><%} %></td>
+					<td><%if(!hdc14 && !hdce14 && !check14 && !checkDate14){ %><button class="calb" value="<%=y14%>"><%=dd14 %></button><% }else if(check14 || checkDate14) {%><%=dd14 %><% }else {%><span style="color: red;"><%=dd14 %></span><%} %></td>
 					<td></td>
 				</tr>
 				</c:if>
 			</table>
 		</div>
 		<div id="calPhoto" style="text-align:center;">
-			<img alt="달력사진" src="${path }/resources/img/reser/reserCalendar.png" height="400px;">
+			<img alt="달력사진" src="${path }/resources/img/reser/reserCalendar.png" height="300px;">
 		</div>
 		
 	</div>
@@ -568,12 +584,26 @@
 		<div style="width:100%;height:50px;font-size:20px;text-align:center;background-color:#286090;padding-top:11px;color:white;border-radius:8px;margin-bottom:10px;">
 			시간 선택
 		</div>
+		<div id="timeImg" style="text-align:center;">
+			<img alt="달력사진" src="${path }/resources/img/reser/reserTime.png" height="300px;"></div>
+		<div id="timeChoice"></div>
 	</div>
 </div>
 <script>
 	$(function () {
+		var docNum=${doctor.doctorNum }
 		$('.calb').click(function () {
 			alert($(this).val());
+			alert(docNum);
+			$.ajax({
+				url:"${path}/medi/mediChoice",
+				data:{docNum:docNum,time:$(this).val()},
+				dataType:"html",
+				success:function(data){
+					$('#timeImg').css("display",'none');
+					$('#timeChoice').html(data);
+				}
+			});
 		});
 		$('#docInfo-div').click(function () {
 			location.href='${path}/medi/doctorS?docNum='+$(this).attr('class')+'&hosNum='+$('#docInfo').attr('class');
