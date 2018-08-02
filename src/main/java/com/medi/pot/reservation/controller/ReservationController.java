@@ -91,9 +91,6 @@ public class ReservationController {
 		List<DoctorInfo> list=service.selectDoctorList(num);
 		DoctorInfo doctor=service.selectDoctor(docNo);
 		DoctorSchedule docSche=service.selectDocSche(docNo);
-		System.out.println(list);
-		System.out.println(doctor);
-		System.out.println(docSche);
 		req.setAttribute("list", list);
 		req.setAttribute("doctor", doctor);
 		req.setAttribute("docSche", docSche);
