@@ -75,7 +75,7 @@
 		location.href="${pageContext.request.contextPath}/adminPage/admission.do?hospitalNum="+e;
 	}
 	function movePage2(){
-		location.href="${pageContext.request.contextPath}/member/adminPage.jsp";
+		location.href="${pageContext.request.contextPath}/adminPage/movePage.do";
 	}
 </script>
 

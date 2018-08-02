@@ -596,5 +596,10 @@ public class MemberController {
 		
 		return "common/msg";
 	}
+	
+	@RequestMapping("/adminPage/movePage.do")
+	public String movePage() {
+		return "member/adminPage";
+	}
 
 }

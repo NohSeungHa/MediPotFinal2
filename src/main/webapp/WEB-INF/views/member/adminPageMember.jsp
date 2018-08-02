@@ -54,7 +54,15 @@
 		</c:if>
 	</table>
 	${pageBar }
+		<button class="btn btn-default" onclick="movePage2()">돌아가기</button>
 	<div style="height:100px"></div>
 </section>
+
+
+<script>
+	function movePage2(){
+		location.href="${pageContext.request.contextPath}/adminPage/movePage.do";
+	}
+</script>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
