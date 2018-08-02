@@ -190,6 +190,7 @@ $(function(){
 		
 		<h2>병원 회원가입</h2>
 		<p><b>(*)</b>는 필수 표시사항 입니다.</p>
+		<p>병원 회원은 관리자의 승인 이후 홈페이지 이용이 가능합니다.</p>
 			<form name="" action="${pageContext.request.contextPath }/member/hospitalEnrollEnd.do" method="post" onsubmit="return fn_enroll_validate();" >
 				<table>
 					<tr>

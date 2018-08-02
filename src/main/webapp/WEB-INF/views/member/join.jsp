@@ -8,9 +8,10 @@
 	<jsp:param value="" name="pageTitle"/>
 </jsp:include>
 
-<div style="height: 200px">
+<div style="height: 100px"></div>
 
-</div>
+<div><h1 style="text-align:center;">MediPot에 오신 것을 환영합니다!</h1></div>
+<br><br>
 
 <div style="text-align: center">
 	<a href="${pageContext.request.contextPath }/member/joinMember.do">
@@ -22,8 +23,6 @@
 	</a>
 </div>
 
-<div style="height: 200px">
-
-</div>
+<div style="height: 200px"></div>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

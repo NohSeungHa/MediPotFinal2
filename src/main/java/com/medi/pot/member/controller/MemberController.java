@@ -246,7 +246,6 @@ public class MemberController {
 		System.out.println("마이페이지 들어옴");
 		String view = "";
 		if(user_id.equals("admin")) {
-			
 			//승인대기중인 병원회원 selectCount 조회
 			int waitcnt = service.HospitalSelectCount();
 			
@@ -598,7 +597,11 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/adminPage/movePage.do")
-	public String movePage() {
+	public String movePage(Model model) {
+		int waitcnt = service.HospitalSelectCount();
+		
+		model.addAttribute("waitcnt", waitcnt);
+		
 		return "member/adminPage";
 	}
 
