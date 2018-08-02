@@ -158,6 +158,15 @@
 		    <version>2.9.5</version>
 		</dependency>
 		
+		<!-- 메일API -->
+		<!-- https://mvnrepository.com/artifact/javax.mail/mail -->
+<dependency>
+    <groupId>javax.mail</groupId>
+    <artifactId>mail</artifactId>
+    <version>1.4.7</version>
+</dependency>
+		
+		
 	
 		<!-- Spring -->
 		<dependency>
