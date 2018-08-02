@@ -33,11 +33,9 @@
 		 	white-space: nowrap; 
 			width: 500px;
         }
-        /* ul{
-       		display: table; 
-       		margin-left: auto; 
-       		margin-right: auto;
-        } */
+        th{
+        	height: 19.556px;
+        }
 	</style>
 <div class="container">
 	<br> 
@@ -58,12 +56,12 @@
 	<table class="table table-hover">
 		<thead>
 			<tr>
-				<th><h4>번호</h4></th>
-				<th style="text-align: center;"><h4>제목</h4></th>
-				<th><h4>첨부파일</h4></th>
-				<th><h4>작성자</h4></th>
-				<th><h4>조회</h4></th>
-				<th style="text-align: center;width: 130px;"><h4>작성일</h4></th>
+				<th style="width: 49.778px;"><h4>번호</h4></th>
+				<th style="text-align: center;width: 667.556px;"><h4>제목</h4></th>
+				<th style="width: 90.667px;"><h4>첨부파일</h4></th>
+				<th style="width: 71.111px;"><h4>작성자</h4></th>
+				<th style="width: 50.667px;"><h4>조회</h4></th>
+				<th style="text-align: center;width: 113.778px;"><h4>작성일</h4></th>
 			</tr>
 		</thead>
 		<tbody>

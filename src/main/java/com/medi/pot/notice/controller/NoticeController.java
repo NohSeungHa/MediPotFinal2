@@ -236,9 +236,9 @@ public class NoticeController {
 	}
 	
 	@RequestMapping("/notice/noticeInsert.do")
-	public String noticeinsert(String checkPH, Model model) {
+	public String noticeInsert(String checkPH, Model model) {
 		model.addAttribute("chPH",checkPH);
-		return "notice/noticeinsert";
+		return "notice/noticeInsert";
 	}
 	
 	@RequestMapping("notice/noticeInsertEnd.do")

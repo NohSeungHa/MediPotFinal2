@@ -27,7 +27,7 @@
 <br>
 <div class="container">
 	<img class="img-thumbnail"
-		src="/pot/resources/img/notice/hnoticeinsert.jpg"
+		src="/pot/resources/img/notice/hnoticeupdate.jpg"
 		style="width: 100%;"> <br>
 	<br>
 	<a id="noticeHv" href="${path}/notice/noticeList.do?checkPH=${chPH}" style="float: right;">공지사항</a>

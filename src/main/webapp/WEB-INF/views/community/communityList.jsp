@@ -36,13 +36,14 @@
         th{
         	height: 19.556px;
         }
+        
 	</style>
 <div class="container">
 	<br> 
-	<img class="img-thumbnail" src="/pot/resources/img/notice/hnoticeMain.jpg" style="width: 100%;"> 
+	<img class="img-thumbnail" src="/pot/resources/img/community/communityMain.jpg" style="width: 100%;"> 
 	<br>
 	<br>
-	<a id="noticeHv" href="${path}/notice/noticeList.do?checkPH=${ckPH}" style="float: right;">공지사항</a>
+	<a id="noticeHv" href="${path}/community/communityList.do" style="float: right;">자유게시판</a>
 	<p style="float: right;">
 		<b style="margin-right:10px;">></b>
 	</p>
@@ -50,7 +51,7 @@
 		src="/pot/resources/img/notice/home.jpg"
 		style="width: 30%; height: 30%;"> 홈으로</a>
 	<br><br>
-	<c:if test="${memberLoggedIn.memberId=='admin' }">
+	<c:if test="${not empty memberLoggedIn.memberId}">
 	<button class="btn btn-primary btn-sm" type="submit" style="float: right;" onclick="insert()">글쓰기</button>
 	</c:if>
 	<table class="table table-hover">
@@ -65,68 +66,44 @@
 			</tr>
 		</thead>
 		<tbody>
-		<c:if test="${ckPH=='H'}">
 			<c:if test="${not empty list }">
-				<c:forEach var='hnotice' items='${list }' varStatus="vs">
+				<c:forEach var='community' items='${list }' varStatus="vs">
 					<tr>
-						<td><h4>${hnotice.hospitalNoticeNum }</h4></td>
-						<td><h4 id="txt_line" ><a href='${path}/notice/noticeView.do?no=${hnotice.hospitalNoticeNum }&checkPH=${ckPH}&id=${memberLoggedIn.memberId}&cp=${cPage}'>${hnotice.hospitalNoticeTitle }</a></h4></td>
-						<c:if test="${hnotice.hospitalNoticeFile!=null }">
+						<td><h4>${community.communityNum }</h4></td>
+						<td><h4 id="txt_line" ><a href='${path}/community/communityView.do?no=${community.communityNum }&id=${memberLoggedIn.memberId}&cp=${cPage}'>${community.communityTitle }</a></h4></td>
+						<c:if test="${community.communityFile!=null }">
 							<td>&nbsp;<img src="/pot/resources/img/notice/fileImge1.jpg" style="margin-left:10px; width: 20px;height: 20px;"></td>
 						</c:if>
-						<c:if test="${hnotice.hospitalNoticeFile==null }">
+						<c:if test="${community.communityFile==null }">
 							<td></td>
 						</c:if>
-						<td><h4>${hnotice.hospitalNoticeWriter }</h4></td>	
-						<td><h4>${hnotice.hospitalNoticeReadcount }</h4></td>
-						<td><h4>${hnotice.hospitalNoticeDate }</h4></td>
+						<td><h4>${community.communityWriter }</h4></td>	
+						<td><h4>${community.communityReadcount }</h4></td>
+						<td><h4>${community.communityDate }</h4></td>
 					</tr>	
 				</c:forEach>
 			</c:if>
 			<c:if test="${empty list}">
 				<td colspan="6" style="text-align: center;"><h4>게시글이 존재하지 않습니다.</h4></td>
 			</c:if>
-		</c:if>
-		<c:if test="${ckPH!='H'}">
-			<c:if test="${not empty list }">
-				<c:forEach var='mnotice' items='${list }' varStatus="vs">
-					<tr>
-						<td><h4>${mnotice.memberNoticeNum }</h4></td>
-						<td><h4 id="txt_line" ><a href='${path}/notice/noticeView.do?no=${mnotice.memberNoticeNum }&checkPH=${ckPH}&id=${memberLoggedIn.memberId}&cp=${cPage}'>${mnotice.memberNoticeTitle }</a></h4></td>
-						<c:if test="${mnotice.memberNoticeFile!=null }">
-							<td>&nbsp;<img src="/pot/resources/img/notice/fileImge1.jpg" style="margin-left:10px; width: 20px;height: 20px;"></td>
-						</c:if>
-						<c:if test="${mnotice.memberNoticeFile==null }">
-							<td></td>
-						</c:if>
-						<td><h4>${mnotice.memberNoticeWriter }</h4></td>	
-						<td><h4>${mnotice.memberNoticeReadcount }</h4></td>
-						<td><h4>${mnotice.memberNoticeDate }</h4></td>
-					</tr>	
-				</c:forEach>
-			</c:if>
-			<c:if test="${empty list}">
-				<td colspan="6" style="text-align: center;"><h4>게시글이 존재하지 않습니다.</h4></td>
-			</c:if>
-		</c:if>
 		</tbody>
 	</table>
 	<hr>
-	<form name="noticeSearchFrm" action="${path}/notice/noticeSearch.do" method="get">
+	<form name="noticeSearchFrm" action="${path}/community/communitySearch.do" method="get">
       	<select name="searchKind" class="form-control" style="width: 85px;height:35px;float: left;">
         	<option value="title">제목</option>
-        	<option value="content">내용</option>	
+        	<option value="content">내용</option>
+        	<option value="writer">작성자</option>
       	</select>
-      	<input type="hidden" name="checkPH" value="${ckPH}">
 		<input class="form-control mr-sm-2" type="text" placeholder="Search" name="searchContent" style="width: 15%; float: left; margin-left: 5px;">
 		<button class="btn btn-info" type="submit" style="margin-left: 5px;">검색</button>
 	</form>
-	<br>            
+	<br>
 	  ${pageBar }
 </div>
 <script>
 	function insert(){
-		location.href="${path}/notice/noticeInsert.do?checkPH=${ckPH}";
+		location.href="${path}/community/communityInsert.do";
 	}
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
