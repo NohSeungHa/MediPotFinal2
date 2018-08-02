@@ -213,15 +213,26 @@ public class MemberController {
 					PnHcheck = true;
 					if(hos_admi.equals("0")) {
 						return "member/permission";
+					}else {
+						String hospitalInfo = service.selectHospitalInfo(memberId);	//디비들어가서 있는지 확인
+						String doctorInfo = service.selectDoctorInfo(memberId);
+						
+						if(hospitalInfo==null && doctorInfo==null ) {
+							//테이블 2개다 없으면 보내주는 페이지
+						}else if(hospitalInfo==null && doctorInfo!=null) {
+							//하스피탈인포는 없고 닥터인포는 있으면 보내주는 페이지
+						}else if(hospitalInfo!=null && doctorInfo==null) {
+							//하스피탈인포는 있고, 닥터인포 없으면 보내주는 페이지
+						}
 					}
 				}
 			}
 		}
 		
 		if(PnHcheck) {
-			msg = "로그인 성공!";
+			msg = "로그인 성공 : MediPot에 오신 것을 환영합니다!";
 		} else {
-			msg = "로그인 실패!";
+			msg = "로그인에 실패하셨습니다. 아이디와 비밀번호를 다시 한번 확인해주세요!";
 		}
 		
 		model.addAttribute("msg", msg);

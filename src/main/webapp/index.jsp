@@ -155,6 +155,10 @@ to {
 	pointer-events: none;
 }
 </style>
+
+
+
+
 	<div id="jssor_1"
 		style="position: relative; margin: 0 auto; top: 0px; left: 0px; width: 980px; height: 380px; overflow: hidden; visibility: hidden;">
 		<!-- Loading Screen -->
