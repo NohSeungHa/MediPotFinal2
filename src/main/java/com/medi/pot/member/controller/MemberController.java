@@ -242,11 +242,18 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/member/mypage.do")
-	public String adminPage(String user_id, String checkPH) {
+	public String adminPage(String user_id, String checkPH, Model model) {
 		System.out.println("마이페이지 들어옴");
 		String view = "";
 		if(user_id.equals("admin")) {
+			
+			//승인대기중인 병원회원 selectCount 조회
+			int waitcnt = service.HospitalSelectCount();
+			
+			model.addAttribute("waitcnt", waitcnt);
+			
 			view = "member/adminPage";
+			
 		} else {
 			if(checkPH.equals("P")) {
 				view = "member/memberPage";

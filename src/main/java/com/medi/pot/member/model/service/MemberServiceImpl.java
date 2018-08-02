@@ -159,6 +159,13 @@ public class MemberServiceImpl implements MemberService {
 		return dao.MemberUpdate(sqlSession, m);
 		
 	}
+
+	@Override
+	public int HospitalSelectCount() {
+		
+		return dao.HospitalSelectCount(sqlSession);
+		
+	}
 	
 	
 	

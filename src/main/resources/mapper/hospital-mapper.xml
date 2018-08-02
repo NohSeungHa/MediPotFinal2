@@ -39,7 +39,9 @@
  		update hospital set hospitalAdmission=1 where hospitalNum=#{hospitalNum}
  	</update>
 
-
+	<select id="HospitalSelectCount" resultType="_int">
+		select count(*) from hospital where hospitalAdmission=0
+	</select>
 
 
 </mapper>

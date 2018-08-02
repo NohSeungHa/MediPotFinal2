@@ -45,4 +45,5 @@ public interface MemberDAO {
 	List<Hospital> selectHospitalList(SqlSessionTemplate sqlSession, int cPage, int numPerPage);
 	int selectHospitalCount(SqlSessionTemplate sqlSession);
 	int updateAdmission(SqlSessionTemplate sqlSession, int hospitalNum);
+	int HospitalSelectCount(SqlSessionTemplate sqlSession);
 }
