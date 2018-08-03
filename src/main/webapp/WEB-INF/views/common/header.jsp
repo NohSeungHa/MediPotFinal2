@@ -48,7 +48,7 @@
 					<span class="icon-bar"></span>
 				</button>
 				<!-- 네비게이션 바 메디팟 로고  -->
-				<a class="navbar-brand" href="${path }/"><img src="/pot/resources/img/common/MediPot_logo.png" width="250px" height="60px" style="margin-left:30%;margin-top: 4%;" ></a>
+				<a class="navbar-brand" href="${path }/"><img src="${path }/resources/img/common/MediPot_logo.png" width="250px" height="60px" style="margin-left:30%;margin-top: 4%;" ></a>
 			</div>
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<!-- 검색창 만들기 -->
