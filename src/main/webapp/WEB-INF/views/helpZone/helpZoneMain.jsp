@@ -56,18 +56,27 @@
 				<b style="margin-right: 10px;">></b>
 			</p>
 			<a id="home" href="${path}" style="float: right; width: 70px;">
-			<img src="/pot/resources/img/notice/home.jpg" style="width: 30%; height:30%;"> 홈으로</a>
-			
+			<img src="/pot/resources/img/notice/home.jpg" style="width: 30%; height:30%;"> 홈으로</a>		
 		</div>
+		<br>
+		<c:if test="${checkPH=='P' }">
+		<button class="btn btn-success btn-lg" type="submit" onclick="insert()">질문 하기</button>
+		</c:if>
 		<br><br>
 		
-
-		<input class="form-control mr-sm-2" type="text" placeholder="키워드로 검색하기" style="width: 280px; height: 45px; float: left;">
-		<button class="btn btn-info btn-lg" type="submit" style="margin-left: 5px;">검색</button>
-		
-		<button class="btn btn-info btn-lg pull-right" type="submit" onclick="insert()">질문 등록</button>
-
-		<br><br>
+<!-- 검색창 부분입니다. -->
+		<form name="helpZoneSearchFrm" action="${path }/helpZone/helpzoneSearch.do" method="get">
+			<select name="searchKind" class="form-control" style="width: 85px; height: 45px; float: left; font-size: 12px;">
+				<option>제목</option>
+				<option>내용</option>
+				<option>키워드</option>
+			</select>
+		<input class="form-control mr-sm-2" type="text" placeholder="원하시는 검색 내용을 적어주세요" style="width: 280px; height: 45px; float: left;">
+		<button class="btn btn-info btn-lg" type="submit" style="margin-left: 3px;">검색</button>
+<!-- 검색창 부분 끝입니다. -->
+		</form>
+<!-- 일반회원일때만 질문하기 버튼이 출력됩니다. -->	
+	<br>
 		
 	<!-- 질문글 시작 -->
 	<div class="row">
@@ -75,21 +84,24 @@
       <div class="panel panel-success">
         <div class="panel-heading">질문 제목이 들어갈 부분입니다.</div>
         <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-        <div class="panel-footer">질문자가 선택한 키워드가 들어가는 부분입니다.</div>
+        <div class="panel-footer">현재 답글수</div>
+        <div class="panel-footer">키워드</div>
       </div>
     </div>
     <div class="col-sm-4"> 
       <div class="panel panel-danger">
-        <div class="panel-heading">2.BLACK FRIDAY DEAL</div>
+        <div class="panel-heading">질문 제목이 들어갈 부분입니다.</div>
         <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
+        <div class="panel-footer">현재 답글수</div>
+        <div class="panel-footer">키워드</div>
       </div>
     </div>
     <div class="col-sm-4"> 
       <div class="panel panel-success">
-        <div class="panel-heading">3.BLACK FRIDAY DEAL</div>
+        <div class="panel-heading">질문 제목이 들어갈 부분입니다.</div>
         <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
+        <div class="panel-footer">현재 답글수</div>
+        <div class="panel-footer">키워드</div>
       </div>
     </div>
   </div>
@@ -100,23 +112,26 @@
   <div class="row">
     <div class="col-sm-4">
       <div class="panel panel-danger">
-        <div class="panel-heading">BLACK FRIDAY DEAL</div>
+        <div class="panel-heading">질문 제목이 들어갈 부분입니다.</div>
         <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
+        <div class="panel-footer">현재 답글수</div>
+        <div class="panel-footer">키워드</div>
       </div>
     </div>
     <div class="col-sm-4"> 
       <div class="panel panel-success">
-        <div class="panel-heading">BLACK FRIDAY DEAL</div>
+        <div class="panel-heading">질문 제목이 들어갈 부분입니다.</div>
         <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
+        <div class="panel-footer">현재 답글수</div>
+        <div class="panel-footer">키워드</div>
       </div>
     </div>
     <div class="col-sm-4"> 
       <div class="panel panel-danger">
-        <div class="panel-heading">BLACK FRIDAY DEAL</div>
+        <div class="panel-heading">질문 제목이 들어갈 부분입니다.</div>
         <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
+        <div class="panel-footer">현재 답글수</div>
+        <div class="panel-footer">키워드</div>
       </div>
     </div>
   </div>
@@ -128,8 +143,15 @@
 
 <script>
 	function insert() {
-		location.href="${path}/helpZone/helpZoneInsert.do";
+		location.href="${path}/helpZone/helpZoneInsert.do?";
 	}
-
 </script>
+<script>
+	$("searchKind").change(function(){
+		//180803 작업끝
+	});
+</script>
+
+
+
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

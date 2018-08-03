@@ -66,7 +66,7 @@
 		<input type="submit" value="등록" onclick="return validate();" class="btn btn-primary" style="float: right;"/>
 		</form>
 		<button type="button" class="btn btn-success" onclick="noticeList()">목록으로</button>
-	</div>
+</div>
 <br>
 <script>
 	function noticeList(){
