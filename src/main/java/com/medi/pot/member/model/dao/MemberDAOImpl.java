@@ -9,6 +9,8 @@ import org.springframework.stereotype.Repository;
 
 import com.medi.pot.member.model.vo.Hospital;
 import com.medi.pot.member.model.vo.Member;
+import com.medi.pot.reservation.model.vo.DoctorInfo;
+import com.medi.pot.reservation.model.vo.HospitalInfo;
 
 @Repository
 public class MemberDAOImpl implements MemberDAO {
@@ -162,6 +164,18 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.selectOne("hospital.HospitalSelectCount");
 		
 	}
+
+	@Override
+	public HospitalInfo selectHospitalInfo(SqlSessionTemplate sqlSession, int hospitalNum) {
+		return sqlSession.selectOne("hospital.selectHospitalInfo",hospitalNum);
+	}
+
+	@Override
+	public DoctorInfo selectDoctorInfo(SqlSessionTemplate sqlSession, int hospitalNum) {
+		return sqlSession.selectOne("hospital.selectDoctorInfo",hospitalNum);
+	}
+	
+	
 
 	
 }

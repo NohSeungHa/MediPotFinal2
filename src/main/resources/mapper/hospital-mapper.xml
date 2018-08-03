@@ -42,6 +42,14 @@
 	<select id="HospitalSelectCount" resultType="_int">
 		select count(*) from hospital where hospitalAdmission=0
 	</select>
+	
+	<select id="selectHospitalInfo" resultType="HospitalInfo">
+		select count(*) from hospitalinfo where hospitalinfonum=#{hospitalNum}
+	</select>
+	
+	<select id="selectDoctorInfo" resultType="DoctorInfo">
+		select count(*) from doctorinfo where hospitalno=#{hospitalNum}
+	</select>
 
 
 </mapper>

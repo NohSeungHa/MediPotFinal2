@@ -7,6 +7,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 
 import com.medi.pot.member.model.vo.Hospital;
 import com.medi.pot.member.model.vo.Member;
+import com.medi.pot.reservation.model.vo.DoctorInfo;
+import com.medi.pot.reservation.model.vo.HospitalInfo;
 
 
 
@@ -46,4 +48,8 @@ public interface MemberDAO {
 	int selectHospitalCount(SqlSessionTemplate sqlSession);
 	int updateAdmission(SqlSessionTemplate sqlSession, int hospitalNum);
 	int HospitalSelectCount(SqlSessionTemplate sqlSession);
+	
+	/*병원회원 승인 여부 조회*/
+	HospitalInfo selectHospitalInfo(SqlSessionTemplate sqlSession, int hospitalNum);
+	DoctorInfo selectDoctorInfo(SqlSessionTemplate sqlSession, int hospitalNum);
 }

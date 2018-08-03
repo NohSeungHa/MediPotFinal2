@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import com.medi.pot.member.model.dao.MemberDAO;
 import com.medi.pot.member.model.vo.Hospital;
 import com.medi.pot.member.model.vo.Member;
+import com.medi.pot.reservation.model.vo.DoctorInfo;
+import com.medi.pot.reservation.model.vo.HospitalInfo;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -165,6 +167,16 @@ public class MemberServiceImpl implements MemberService {
 		
 		return dao.HospitalSelectCount(sqlSession);
 		
+	}
+
+	@Override
+	public HospitalInfo selectHospitalInfo(int hospitalNum) {
+		return dao.selectHospitalInfo(sqlSession, hospitalNum);
+	}
+
+	@Override
+	public DoctorInfo selectDoctorInfo(int hospitalNum) {
+		return dao.selectDoctorInfo(sqlSession, hospitalNum);
 	}
 	
 	

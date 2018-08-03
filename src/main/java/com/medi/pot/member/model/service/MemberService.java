@@ -5,6 +5,8 @@ import java.util.Map;
 
 import com.medi.pot.member.model.vo.Hospital;
 import com.medi.pot.member.model.vo.Member;
+import com.medi.pot.reservation.model.vo.DoctorInfo;
+import com.medi.pot.reservation.model.vo.HospitalInfo;
 
 public interface MemberService {
 	
@@ -42,4 +44,8 @@ public interface MemberService {
 	int selectHospitalCount();
 	int updateAdmission(int hospitalNum);
 	int HospitalSelectCount();
+	
+	/*병원회원 승인 여부 조회*/
+	HospitalInfo selectHospitalInfo(int hospitalNum);
+	DoctorInfo selectDoctorInfo(int hospitalNum);
 }

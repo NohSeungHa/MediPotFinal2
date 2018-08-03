@@ -30,6 +30,8 @@ import com.medi.pot.common.page.PageCreate;
 import com.medi.pot.member.model.service.MemberService;
 import com.medi.pot.member.model.vo.Hospital;
 import com.medi.pot.member.model.vo.Member;
+import com.medi.pot.reservation.model.vo.DoctorInfo;
+import com.medi.pot.reservation.model.vo.HospitalInfo;
 
 @SessionAttributes(value={"memberLoggedIn", "checkPH", "emailCheck"})
 
@@ -214,15 +216,18 @@ public class MemberController {
 					if(hos_admi.equals("0")) {
 						return "member/permission";
 					}else {
-						String hospitalInfo = service.selectHospitalInfo(memberId);	//디비들어가서 있는지 확인
-						String doctorInfo = service.selectDoctorInfo(memberId);
+						HospitalInfo hospitalInfo = service.selectHospitalInfo(h.getHospitalNum());	//디비들어가서 있는지 확인
+						DoctorInfo doctorInfo = service.selectDoctorInfo(h.getHospitalNum());
 						
 						if(hospitalInfo==null && doctorInfo==null ) {
-							//테이블 2개다 없으면 보내주는 페이지
-						}else if(hospitalInfo==null && doctorInfo!=null) {
-							//하스피탈인포는 없고 닥터인포는 있으면 보내주는 페이지
+							return "member/hospitalEnroll1";
+							//테이블 2개다 없으면 보내주는 페이지1
 						}else if(hospitalInfo!=null && doctorInfo==null) {
-							//하스피탈인포는 있고, 닥터인포 없으면 보내주는 페이지
+							return "member/hospitalEnroll1";
+							//하스피탈인포는 있고, 닥터인포 없으면 보내주는 페이지2
+						}else if(hospitalInfo==null && doctorInfo!=null) {
+							return "member/hospitalEnroll1";
+							//하스피탈인포는 없고 닥터인포는 있으면 보내주는 페이지3
 						}
 					}
 				}
