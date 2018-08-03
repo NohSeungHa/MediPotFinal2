@@ -58,8 +58,6 @@ public class ReservationDaoImpl implements ReservationDao {
 
 	@Override
 	public List<MemberReservation> selectReser(Map<String, Object> map) {
-		System.out.println(map.get("num"));
-		System.out.println(map.get("chDate"));
 		return session.selectList("reser.selectReser", map);
 	}
 	
