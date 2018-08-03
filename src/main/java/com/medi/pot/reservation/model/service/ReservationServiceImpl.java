@@ -53,10 +53,6 @@ public class ReservationServiceImpl implements ReservationService {
 		return reserDAO.selectDocSche(docNo);
 	}
 
-	@Override
-	public List<DoctorSchedule> selectBlock(Map<String, Object> map) {
-		return reserDAO.selectBlock(map);
-	}
 
 	@Override
 	public List<MemberReservation> selectReser(Map<String, Object> map) {

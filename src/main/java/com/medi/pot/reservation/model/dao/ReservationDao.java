@@ -17,7 +17,6 @@ public interface ReservationDao {
 	List<DoctorInfo> selectDoctorList(int num);
 	DoctorInfo selectDoctor(int docNo);
 	DoctorSchedule selectDocSche(int docNo);
-	List<DoctorSchedule> selectBlock(Map<String, Object> map);
 	List<MemberReservation> selectReser(Map<String, Object> map);
 
 }

@@ -1,3 +1,5 @@
+<%@page import="com.medi.pot.reservation.model.vo.MemberReservation"%>
+<%@page import="java.util.List"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -13,6 +15,7 @@
 	DoctorInfo docTime=(DoctorInfo)request.getAttribute("doctor");
 	long timeI=Integer.parseInt(docTime.getTimeInterval())*60*1000;
 	String time=(String)request.getAttribute("time");
+	String week=time.substring(11,12);
 	SimpleDateFormat sd=new SimpleDateFormat("HHmm");
 	SimpleDateFormat sd2=new SimpleDateFormat("HH:mm");
 	Date ws=sd.parse(docTime.getWeekdayStime());
@@ -28,8 +31,18 @@
 	long lel=el.getTime();
 	long sycleAM=sl.getTime()-ws.getTime();
 	long syclePM=we.getTime()-el.getTime();
+	long sSycleAM=sl.getTime()-ss.getTime();
+	long sSyclePM=se.getTime()-el.getTime();
 	int sycleA=(int)(sycleAM/timeI);
 	int sycleP=(int)(syclePM/timeI);
+	int sSycleA=(int)(sSycleAM/timeI);
+	int sSycleP=(int)(sSyclePM/timeI);
+	
+	List<MemberReservation> list=(List<MemberReservation>)request.getAttribute("mr");
+	String checkTi="";
+	for(MemberReservation mr : list){
+		checkTi+="§"+mr.getBlockTime()+"§"+mr.getCheckTime()+"§";
+	}
 %>
 <style>
 	.timebut{
@@ -42,25 +55,75 @@
 	.timebut:hover{
 		background-color: #E6E6E6;
 	}
+	.ti{
+		margin:5px;
+		width:72px; height:50px;
+		font-size:20px;
+		background-color: white;
+		border-radius: 5px;
+	}
 </style>
-	<div style="border: 2px solid lightgray;padding-left:40px;box-shadow: 3px 3px 5px lightgrey;">
-		<h1 style="text-align: center;">${time }</h1>
-		<h1 style="text-align: center;">오전</h1>
-		<%for(int i=0;i<sycleA;i++ ){ 
-		%>
-		<button class="timebut" value="<%=sd.format(lws)%>"><%=sd2.format(lws) %></button>
-		<%
-		lws=lws+timeI;
-		} %>
-		<h1 style="text-align: center;">오후</h1>
-		<%for(int i=0;i<sycleP;i++ ){ 
-		%>
-		<button class="timebut" value="<%=sd.format(lel)%>"><%=sd2.format(lel) %></button>
-		<%
-		lel=lel+timeI;
-		} %>
-		<br><br>
-	</div>
+	<c:if test='<%=!week.equals("토") %>'>
+		<div style="border: 2px solid lightgray;padding-left:40px;box-shadow: 3px 3px 5px lightgrey;">
+			<h1 style="text-align: center;">${time }</h1>
+			<h1 style="text-align: center;">오전</h1>
+			<%for(int i=0;i<sycleA;i++ ){ 
+			%>
+			<c:if test="<%=!checkTi.contains(sd.format(lws)) %>">
+			<button class="timebut" value="<%=sd.format(lws)%>"><%=sd2.format(lws) %></button>
+			</c:if>
+			<c:if test="<%=checkTi.contains(sd.format(lws)) %>">
+			<button class="ti" value="<%=sd.format(lws)%>" disabled="disabled" style="background-color:#A6A6A6;color:#FCFCFC;"><%=sd2.format(lws) %></button>
+			</c:if>
+
+			<%
+			lws=lws+timeI;
+			} %>
+			<h1 style="text-align: center;">오후</h1>
+			<%for(int i=0;i<sycleP;i++ ){ 
+			%>
+			<c:if test="<%=!checkTi.contains(sd.format(lel)) %>">
+			<button class="timebut" value="<%=sd.format(lel)%>"><%=sd2.format(lel) %></button>
+			</c:if>
+			<c:if test="<%=checkTi.contains(sd.format(lel)) %>">
+			<button class="ti" value="<%=sd.format(lel)%>" disabled="disabled" style="background-color:#A6A6A6;color:#FCFCFC;"><%=sd2.format(lel) %></button>
+			</c:if>
+			<%
+			lel=lel+timeI;
+			} %>
+			<br><br>
+		</div>
+	</c:if>
+	<c:if test='<%=week.equals("토") %>'>
+		<div style="border: 2px solid lightgray;padding-left:40px;box-shadow: 3px 3px 5px lightgrey;">
+			<h1 style="text-align: center;">${time }</h1>
+			<h1 style="text-align: center;">오전</h1>
+			<%for(int i=0;i<sSycleA;i++ ){ 
+			%>
+			<c:if test="<%=!checkTi.contains(sd.format(lss)) %>">
+			<button class="timebut" value="<%=sd.format(lss)%>"><%=sd2.format(lss) %></button>
+			</c:if>
+			<c:if test="<%=checkTi.contains(sd.format(lss)) %>">
+			<button class="ti" value="<%=sd.format(lss)%>" disabled="disabled" style="background-color:#A6A6A6;color:#FCFCFC;"><%=sd2.format(lss) %></button>
+			</c:if>
+			<%
+			lss=lss+timeI;
+			} %>
+			<h1 style="text-align: center;">오후</h1>
+			<%for(int i=0;i<sSycleP;i++ ){ 
+			%>
+			<c:if test="<%=!checkTi.contains(sd.format(lel)) %>">
+			<button class="timebut" value="<%=sd.format(lel)%>"><%=sd2.format(lel) %></button>
+			</c:if>
+			<c:if test="<%=checkTi.contains(sd.format(lel)) %>">
+			<button class="ti" value="<%=sd.format(lel)%>" disabled="disabled" style="background-color:#A6A6A6;color:#FCFCFC;"><%=sd2.format(lel) %></button>
+			</c:if>
+			<%
+			lel=lel+timeI;
+			} %>
+			<br><br>
+		</div>
+	</c:if>
 	
 	<div style="text-align:center;margin-top:20px;">
 		<button id="choiceReser">예 약 하 기</button>
@@ -85,6 +148,7 @@
     	}
 	</style>
 	<script>
+		alert('<%=checkTi%>');
 		var choiceTime='';
 		$('.timebut').click(function () {
 			if($(this).css('background-color')=='rgb(40, 96, 144)'){
@@ -100,6 +164,11 @@
 			}
 		});
 		$('#choiceReser').click(function () {
-			alert(choiceTime);
+			if(choiceTime.length<1){
+				alert("시간을 선택해 주세요");
+			}else{
+				
+				alert(choiceTime);
+			}
 		});
 	</script>

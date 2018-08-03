@@ -19,6 +19,7 @@ public class HospitalInfo {
 	private String hospitalInfoIntro;
 	private String hospitalInfoNotice;
 	private String hospitalPhoto;
+	private String hospitalRePhoto;
 	private String hospitalInfoUsetime;
 	private String hospitalInfoLunchtime;
 	
@@ -29,8 +30,8 @@ public class HospitalInfo {
 	public HospitalInfo(int hospitalNum, String hospitalId, String hospitalPw, String hospitalName,
 			String hospitalLicense, String hospitalTel, String hospitalEmail, String hospitalAddr, Date hospitalDate,
 			int timeInterval, int hospitalLike, String hospitalProfessional, int hospitalInfoNum,
-			String hospitalInfoIntro, String hospitalInfoNotice, String hospitalPhoto, String hospitalInfoUsetime,
-			String hospitalInfoLunchtime) {
+			String hospitalInfoIntro, String hospitalInfoNotice, String hospitalPhoto, String hospitalRePhoto,
+			String hospitalInfoUsetime, String hospitalInfoLunchtime) {
 		super();
 		this.hospitalNum = hospitalNum;
 		this.hospitalId = hospitalId;
@@ -48,6 +49,7 @@ public class HospitalInfo {
 		this.hospitalInfoIntro = hospitalInfoIntro;
 		this.hospitalInfoNotice = hospitalInfoNotice;
 		this.hospitalPhoto = hospitalPhoto;
+		this.hospitalRePhoto = hospitalRePhoto;
 		this.hospitalInfoUsetime = hospitalInfoUsetime;
 		this.hospitalInfoLunchtime = hospitalInfoLunchtime;
 	}
@@ -60,8 +62,8 @@ public class HospitalInfo {
 				+ ", hospitalDate=" + hospitalDate + ", timeInterval=" + timeInterval + ", hospitalLike=" + hospitalLike
 				+ ", hospitalProfessional=" + hospitalProfessional + ", hospitalInfoNum=" + hospitalInfoNum
 				+ ", hospitalInfoIntro=" + hospitalInfoIntro + ", hospitalInfoNotice=" + hospitalInfoNotice
-				+ ", hospitalPhoto=" + hospitalPhoto + ", hospitalInfoUsetime=" + hospitalInfoUsetime
-				+ ", hospitalInfoLunchtime=" + hospitalInfoLunchtime + "]";
+				+ ", hospitalPhoto=" + hospitalPhoto + ", hospitalRePhoto=" + hospitalRePhoto + ", hospitalInfoUsetime="
+				+ hospitalInfoUsetime + ", hospitalInfoLunchtime=" + hospitalInfoLunchtime + "]";
 	}
 
 	public int getHospitalNum() {
@@ -192,6 +194,14 @@ public class HospitalInfo {
 		this.hospitalPhoto = hospitalPhoto;
 	}
 
+	public String getHospitalRePhoto() {
+		return hospitalRePhoto;
+	}
+
+	public void setHospitalRePhoto(String hospitalRePhoto) {
+		this.hospitalRePhoto = hospitalRePhoto;
+	}
+
 	public String getHospitalInfoUsetime() {
 		return hospitalInfoUsetime;
 	}
@@ -207,6 +217,8 @@ public class HospitalInfo {
 	public void setHospitalInfoLunchtime(String hospitalInfoLunchtime) {
 		this.hospitalInfoLunchtime = hospitalInfoLunchtime;
 	}
+
+	
 	
 	
 	

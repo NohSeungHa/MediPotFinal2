@@ -106,11 +106,9 @@ public class ReservationController {
 		map.put("num", docNum);
 		map.put("chDate", chDate);
 		DoctorInfo doctor=service.selectDoctor(num);
-		List<DoctorSchedule> ds=service.selectBlock(map);
 		List<MemberReservation> mr=service.selectReser(map);
 		
 		req.setAttribute("doctor", doctor);
-		req.setAttribute("ds", ds);
 		req.setAttribute("mr", mr);
 		req.setAttribute("time", time);
 		return "medi_reservation/choiceTime";

@@ -55,13 +55,11 @@ public class ReservationDaoImpl implements ReservationDao {
 		return session.selectOne("reser.selectDocSche", docNo);
 	}
 
-	@Override
-	public List<DoctorSchedule> selectBlock(Map<String, Object> map) {
-		return session.selectList("reser.selectBlock", map);
-	}
 
 	@Override
 	public List<MemberReservation> selectReser(Map<String, Object> map) {
+		System.out.println(map.get("num"));
+		System.out.println(map.get("chDate"));
 		return session.selectList("reser.selectReser", map);
 	}
 	

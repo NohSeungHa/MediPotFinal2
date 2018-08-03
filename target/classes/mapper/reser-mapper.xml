@@ -27,11 +27,7 @@
 		select * from RESERVATIONBLOCK where blockdoctor=#{docNo} and blockcheck='Y'
 	</select>
 	
-	<select id="selectBlock" parameterType="map" resultType="DoctorSchedule">
-		select * from RESERVATIONBLOCK where blockdoctor=#{num} and blockcheck='N' and blockdate=#{chDate}
-	</select>
-	
 	<select id="selectReser" parameterType="map" resultType="MemberReservation">
-		select * from MEMBERRESERVATION where checkdoctor=#{num} and checkdate=#{chDate}
+		select * from MEMBERRESERVATION full join reservationblock on(blockdate=checkdate) where ((checkdoctor=#{num} and checkdate=#{chDate}) or (blockdoctor=#{num} and blockdate=#{chDate})) and blockcheck='N'
 	</select>
 </mapper>

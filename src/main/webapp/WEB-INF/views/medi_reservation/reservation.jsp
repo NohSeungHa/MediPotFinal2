@@ -328,7 +328,11 @@
 		<div style="width:100%;height:50px;font-size:20px;text-align:center;background-color:#286090;padding-top:11px;color:white;border-radius:8px;margin-bottom:10px;">
 			의료진 정보
 		</div>
-		
+		<c:if test="${empty list }">
+		<div style="text-align:center;">
+			<img alt="doctorIMG" src="${path }/resources/img/reser/d1.png" height="340px">
+		</div>
+		</c:if>
 		<c:forEach var="list" items="${list }">
 		<div id="docInfo-div" style="height:auto;margin-bottom:10px;" class="${list.doctorNum }">
 			<table id="docInfo" class="${list.hospitalNo }">
