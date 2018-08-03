@@ -10,6 +10,7 @@ import com.medi.pot.reservation.model.dao.ReservationDao;
 import com.medi.pot.reservation.model.vo.DoctorInfo;
 import com.medi.pot.reservation.model.vo.DoctorSchedule;
 import com.medi.pot.reservation.model.vo.HospitalInfo;
+import com.medi.pot.reservation.model.vo.MemberReservation;
 
 @Service
 public class ReservationServiceImpl implements ReservationService {
@@ -50,6 +51,12 @@ public class ReservationServiceImpl implements ReservationService {
 	@Override
 	public DoctorSchedule selectDocSche(int docNo) {
 		return reserDAO.selectDocSche(docNo);
+	}
+
+
+	@Override
+	public List<MemberReservation> selectReser(Map<String, Object> map) {
+		return reserDAO.selectReser(map);
 	}
 	
 	

@@ -310,8 +310,7 @@
 		background-color:white;
 	}
 	#tbl-cal button:hover{
-		background-color: #286090;
-		color:white;
+		background-color: #E6E6E6;
 	}
 	#tbl-cal{
 		width:100%;
@@ -329,7 +328,11 @@
 		<div style="width:100%;height:50px;font-size:20px;text-align:center;background-color:#286090;padding-top:11px;color:white;border-radius:8px;margin-bottom:10px;">
 			의료진 정보
 		</div>
-		
+		<c:if test="${empty list }">
+		<div style="text-align:center;">
+			<img alt="doctorIMG" src="${path }/resources/img/reser/d1.png" height="340px">
+		</div>
+		</c:if>
 		<c:forEach var="list" items="${list }">
 		<div id="docInfo-div" style="height:auto;margin-bottom:10px;" class="${list.doctorNum }">
 			<table id="docInfo" class="${list.hospitalNo }">
@@ -379,7 +382,7 @@
 				</tr>
 				<c:if test='<%=e.equals("일")%>'>
 				<tr>
-					<td style="color: red;"><%if(!hdc && !hdce && !check && !checkDate){ %><%=dd %><% }else {%><span style="color: red;"><%=dd %></span><%} %></td>
+					<td style="color: red;"><%if(!hdc && !hdce){ %><%=dd %><% }else {%><span style="color: red;"><%=dd %></span><%} %></td>
 					<td><%if(!hdc2 && !hdce2 && !check2 && !checkDate2){ %><button class="calb" value="<%=y2%>"><%=dd2 %></button><% }else if(check2 || checkDate2) {%><%=dd2 %><% }else {%><span style="color: red;"><%=dd2 %></span><%} %></td>
 					<td><%if(!hdc3 && !hdce3 && !check3 && !checkDate3){ %><button class="calb" value="<%=y3%>"><%=dd3 %></button><% }else if(check3 || checkDate3) {%><%=dd3 %><% }else {%><span style="color: red;"><%=dd3 %></span><%} %></td>
 					<td><%if(!hdc4 && !hdce4 && !check4 && !checkDate4){ %><button class="calb" value="<%=y4%>"><%=dd4 %></button><% }else if(check4 || checkDate4) {%><%=dd4 %><% }else {%><span style="color: red;"><%=dd4 %></span><%} %></td>
@@ -400,7 +403,7 @@
 				<c:if test='<%=e.equals("월")%>'>
 				<tr>
 					<td></td>
-					<td><%if(!hdc && !hdce && !check && !checkDate){ %><%=dd %><% }else {%><span style="color: red;"><%=dd %></span><%} %></td>
+					<td><%if(!hdc && !hdce){ %><%=dd %><% }else {%><span style="color: red;"><%=dd %></span><%} %></td>
 					<td><%if(!hdc2 && !hdce2 && !check2 && !checkDate2){ %><button class="calb" value="<%=y2 %>"><%=dd2 %></button><% }else if(check2 || checkDate2) {%><%=dd2 %><% }else {%><span style="color: red;"><%=dd2 %></span><%} %></td>
 					<td><%if(!hdc3 && !hdce3 && !check3 && !checkDate3){ %><button class="calb" value="<%=y3%>"><%=dd3 %></button><% }else if(check3 || checkDate3) {%><%=dd3 %><% }else {%><span style="color: red;"><%=dd3 %></span><%} %></td>
 					<td><%if(!hdc4 && !hdce4 && !check4 && !checkDate4){ %><button class="calb" value="<%=y4%>"><%=dd4 %></button><% }else if(check4 || checkDate4) {%><%=dd4 %><% }else {%><span style="color: red;"><%=dd4 %></span><%} %></td>
@@ -431,7 +434,7 @@
 				<tr>
 					<td></td>
 					<td></td>
-					<td><%if(!hdc && !hdce && !check && !checkDate){ %><%=dd %><% }else {%><span style="color: red;"><%=dd %></span><%} %></td>
+					<td><%if(!hdc && !hdce){ %><%=dd %><% }else {%><span style="color: red;"><%=dd %></span><%} %></td>
 					<td><%if(!hdc2 && !hdce2 && !check2 && !checkDate2){ %><button class="calb" value="<%=y2 %>"><%=dd2 %></button><% }else if(check2 || checkDate2) {%><%=dd2 %><% }else {%><span style="color: red;"><%=dd2 %></span><%} %></td>
 					<td><%if(!hdc3 && !hdce3 && !check3 && !checkDate3){ %><button class="calb" value="<%=y3%>"><%=dd3 %></button><% }else if(check3 || checkDate3) {%><%=dd3 %><% }else {%><span style="color: red;"><%=dd3 %></span><%} %></td>
 					<td><%if(!hdc4 && !hdce4 && !check4 && !checkDate4){ %><button class="calb" value="<%=y4%>"><%=dd4 %></button><% }else if(check4 || checkDate4) {%><%=dd4 %><% }else {%><span style="color: red;"><%=dd4 %></span><%} %></td>
@@ -462,7 +465,7 @@
 					<td></td>
 					<td></td>
 					<td></td>
-					<td><%if(!hdc && !hdce && !check && !checkDate){ %><%=dd %><% }else {%><span style="color: red;"><%=dd %></span><%} %></td>
+					<td><%if(!hdc && !hdce){ %><%=dd %><% }else {%><span style="color: red;"><%=dd %></span><%} %></td>
 					<td><%if(!hdc2 && !hdce2 && !check2 && !checkDate2){ %><button class="calb" value="<%=y2 %>"><%=dd2 %></button><% }else if(check2 || checkDate2) {%><%=dd2 %><% }else {%><span style="color: red;"><%=dd2 %></span><%} %></td>
 					<td><%if(!hdc3 && !hdce3 && !check3 && !checkDate3){ %><button class="calb" value="<%=y3%>"><%=dd3 %></button><% }else if(check3 || checkDate3) {%><%=dd3 %><% }else {%><span style="color: red;"><%=dd3 %></span><%} %></td>
 					<td><%if(!hdc4 && !hdce4 && !check4 && !checkDate4){ %><button class="calb" value="<%=y4%>"><%=dd4 %></button><% }else if(check4 || checkDate4) {%><%=dd4 %><% }else {%><span style="color: red;"><%=dd4 %></span><%} %></td>
@@ -492,7 +495,7 @@
 					<td></td>
 					<td></td>
 					<td></td>
-					<td><%if(!hdc && !hdce && !check && !checkDate){ %><%=dd %><% }else {%><span style="color: red;"><%=dd %></span><%} %></td>
+					<td><%if(!hdc && !hdce){ %><%=dd %><% }else {%><span style="color: red;"><%=dd %></span><%} %></td>
 					<td><%if(!hdc2 && !hdce2 && !check2 && !checkDate2){ %><button class="calb" value="<%=y2 %>"><%=dd2 %></button><% }else if(check2 || checkDate2) {%><%=dd2 %><% }else {%><span style="color: red;"><%=dd2 %></span><%} %></td>
 					<td><%if(!hdc3 && !hdce3 && !check3 && !checkDate3){ %><button class="calb" value="<%=y3%>"><%=dd3 %></button><% }else if(check3 || checkDate3) {%><%=dd3 %><% }else {%><span style="color: red;"><%=dd3 %></span><%} %></td>
 				</tr>
@@ -522,7 +525,7 @@
 					<td></td>
 					<td></td>
 					<td></td>
-					<td><%if(!hdc && !hdce && !check && !checkDate){ %><%=dd %><% }else {%><span style="color: red;"><%=dd %></span><%} %></td>
+					<td><%if(!hdc && !hdce){ %><%=dd %><% }else {%><span style="color: red;"><%=dd %></span><%} %></td>
 					<td><%if(!hdc2 && !hdce2 && !check2 && !checkDate2){ %><button class="calb" value="<%=y2 %>"><%=dd2 %></button><% }else if(check2 || checkDate2) {%><%=dd2 %><% }else {%><span style="color: red;"><%=dd2 %></span><%} %></td>
 				</tr>
 				<tr>
@@ -552,7 +555,7 @@
 					<td></td>
 					<td></td>
 					<td></td>
-					<td><%if(!hdc && !hdce && !check && !checkDate){ %><%=dd %><% }else {%><span style="color: red;"><%=dd %></span><%} %></td>
+					<td><%if(!hdc && !hdce){ %><%=dd %><% }else {%><span style="color: red;"><%=dd %></span><%} %></td>
 				</tr>
 				<tr>
 					<td style="color: red;"><%if(!hdc2 && !hdce2 && !check2 && !checkDate2){ %><%=dd2 %><% }else {%><span style="color: red;"><%=dd2 %></span><%} %></td>
@@ -590,11 +593,16 @@
 	</div>
 </div>
 <script>
+	
 	$(function () {
 		var docNum=${doctor.doctorNum }
 		$('.calb').click(function () {
 			alert($(this).val());
 			alert(docNum);
+			$('.calb').css('background-color','white');
+			$('.calb').css('color','black');
+			$(this).css('background-color','#286090');
+			$(this).css('color','white');
 			$.ajax({
 				url:"${path}/medi/mediChoice",
 				data:{docNum:docNum,time:$(this).val()},
