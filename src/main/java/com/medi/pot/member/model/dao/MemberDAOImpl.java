@@ -16,7 +16,7 @@ public class MemberDAOImpl implements MemberDAO {
 
 	@Override
 	public Member loginMemberCheck(SqlSessionTemplate sqlSession, String memberId) {
-		System.out.println("dao에서 ID : " + memberId);
+		System.out.println("Member의 dao에서 ID : " + memberId);
 		
 		return sqlSession.selectOne("member.loginMemberCheck", memberId);
 	}
@@ -29,9 +29,10 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public Hospital loginHospitalCheck(SqlSessionTemplate sqlSession, String userId) {
+	public Hospital loginHospitalCheck(SqlSessionTemplate sqlSession, String memberId) {
 		
-		return sqlSession.selectOne("hospital.loginCheck", userId);
+		System.out.println("Hospital의 DAO ID : " + memberId);
+		return sqlSession.selectOne("hospital.loginCheck", memberId);
 		
 	}
 
@@ -153,6 +154,14 @@ public class MemberDAOImpl implements MemberDAO {
 	public int MemberUpdate(SqlSessionTemplate sqlSession, Member m) {
 		
 		return sqlSession.update("member.MemberUpdate", m);
+		
+	}
+
+	@Override
+	public int checkHospitalEmail(SqlSessionTemplate sqlSession, String HospitalEmail) {
+		
+		System.out.println("check Email : " + HospitalEmail);
+		return sqlSession.selectOne("hospital.checkhospitalEmail",HospitalEmail);
 		
 	}
 

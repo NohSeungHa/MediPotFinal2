@@ -9,6 +9,7 @@ public class Hospital {
 	private String hospitalPw;
 	private String hospitalName;
 	private String hospitalLicense;
+	private String hospitalReLicense;
 	private String hospitalTel;
 	private String hospitalEmail;
 	private String hospitalAddr;
@@ -57,6 +58,14 @@ public class Hospital {
 
 	public void setHospitalLicense(String hospitalLicense) {
 		this.hospitalLicense = hospitalLicense;
+	}
+
+	public String getHospitalReLicense() {
+		return hospitalReLicense;
+	}
+
+	public void setHospitalReLicense(String hospitalReLicense) {
+		this.hospitalReLicense = hospitalReLicense;
 	}
 
 	public String getHospitalTel() {
@@ -115,24 +124,16 @@ public class Hospital {
 		this.hospitalProfessional = hospitalProfessional;
 	}
 
-	@Override
-	public String toString() {
-		return "Hospital [hospitalNum=" + hospitalNum + ", hospitalId=" + hospitalId + ", hospitalPw=" + hospitalPw
-				+ ", hospitalName=" + hospitalName + ", hospitalLicense=" + hospitalLicense + ", hospitalTel="
-				+ hospitalTel + ", hospitalEmail=" + hospitalEmail + ", hospitalAddr=" + hospitalAddr
-				+ ", hospitalDate=" + hospitalDate + ", hospitalLike=" + hospitalLike + ", hospitalAdmission="
-				+ hospitalAdmission + ", hospitalProfessional=" + hospitalProfessional + "]";
-	}
-
 	public Hospital(int hospitalNum, String hospitalId, String hospitalPw, String hospitalName, String hospitalLicense,
-			String hospitalTel, String hospitalEmail, String hospitalAddr, Date hospitalDate, int hospitalLike,
-			String hospitalAdmission, String hospitalProfessional) {
+			String hospitalReLicense, String hospitalTel, String hospitalEmail, String hospitalAddr, Date hospitalDate,
+			int hospitalLike, String hospitalAdmission, String hospitalProfessional) {
 		super();
 		this.hospitalNum = hospitalNum;
 		this.hospitalId = hospitalId;
 		this.hospitalPw = hospitalPw;
 		this.hospitalName = hospitalName;
 		this.hospitalLicense = hospitalLicense;
+		this.hospitalReLicense = hospitalReLicense;
 		this.hospitalTel = hospitalTel;
 		this.hospitalEmail = hospitalEmail;
 		this.hospitalAddr = hospitalAddr;
@@ -141,5 +142,16 @@ public class Hospital {
 		this.hospitalAdmission = hospitalAdmission;
 		this.hospitalProfessional = hospitalProfessional;
 	}
+
+	@Override
+	public String toString() {
+		return "Hospital [hospitalNum=" + hospitalNum + ", hospitalId=" + hospitalId + ", hospitalPw=" + hospitalPw
+				+ ", hospitalName=" + hospitalName + ", hospitalLicense=" + hospitalLicense + ", hospitalReLicense="
+				+ hospitalReLicense + ", hospitalTel=" + hospitalTel + ", hospitalEmail=" + hospitalEmail
+				+ ", hospitalAddr=" + hospitalAddr + ", hospitalDate=" + hospitalDate + ", hospitalLike=" + hospitalLike
+				+ ", hospitalAdmission=" + hospitalAdmission + ", hospitalProfessional=" + hospitalProfessional + "]";
+	}
+
+	
 
 }

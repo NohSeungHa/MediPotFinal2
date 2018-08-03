@@ -15,7 +15,8 @@ public interface MemberService {
 	
 	/* 이메일 중복검사 */
 	int duplicateMemEmailCheck(String memberEmail);
-	int checkEmail(String memberEmail);
+	int checkEmail(String memberEmail); // 일반회원
+	int checkHospitalEmail(String HospitalEmail); // 병원회원
 	
 	/*일반회원*/
 	Member loginMemberCheck(String memberId);
@@ -36,7 +37,7 @@ public interface MemberService {
 	int MemberUpdate(Member m);
 	
 	/*병원회원*/
-	Hospital loginHospitalCheck(String userId);
+	Hospital loginHospitalCheck(String memberId);
 	int insertHospital(Hospital h);
 	List<Hospital> selectHospitalList(int cPage, int numPerPage);
 	int selectHospitalCount();

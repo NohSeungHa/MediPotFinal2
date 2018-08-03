@@ -35,9 +35,9 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public Hospital loginHospitalCheck(String userId) {
+	public Hospital loginHospitalCheck(String memberId) {
 		
-		return dao.loginHospitalCheck(sqlSession, userId);
+		return dao.loginHospitalCheck(sqlSession, memberId);
 		
 	}
 
@@ -157,6 +157,13 @@ public class MemberServiceImpl implements MemberService {
 	public int MemberUpdate(Member m) {
 		
 		return dao.MemberUpdate(sqlSession, m);
+		
+	}
+
+	@Override
+	public int checkHospitalEmail(String HospitalEmail) {
+		
+		return dao.checkHospitalEmail(sqlSession, HospitalEmail);
 		
 	}
 	

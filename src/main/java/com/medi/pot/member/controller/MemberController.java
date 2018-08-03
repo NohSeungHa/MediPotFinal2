@@ -1,5 +1,12 @@
 package com.medi.pot.member.controller;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +19,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeUtility;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -24,12 +32,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.medi.pot.common.page.PageCreate;
 import com.medi.pot.member.model.service.MemberService;
 import com.medi.pot.member.model.vo.Hospital;
 import com.medi.pot.member.model.vo.Member;
+
 
 @SessionAttributes(value={"memberLoggedIn", "checkPH", "emailCheck"})
 
@@ -110,20 +120,67 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/member/hospitalEnrollEnd.do")
-	public String joinHospital1(Hospital h, Model model) {
+	public String joinHospital1(Model model,
+			String hospitalId, String hospitalPw, String hospitalName,
+			String hospitalTel, String hospitalEmail, String hospitalAddr,
+			HttpServletRequest request,@RequestParam(value="hospitalLicense",required=false) MultipartFile hospitalLicense) {
+		
 		System.out.println("회원가입(병원-승인중)으로 들어옴");
 
 		String msg="";
 		String loc="";
-
+		
+		Hospital h = new Hospital(
+				0, hospitalId, hospitalPw, hospitalName,
+				null, null, hospitalTel, hospitalEmail,
+				hospitalAddr, null, 0, null, null);
+		
+		//파일 업로드
+		//저장위치지정
+		String saveDir=request.getSession().getServletContext().getRealPath("/resources/uploadfile/notice");
+		
+		File dir=new File(saveDir);
+		if(dir.exists()==false) System.out.println(dir.mkdirs());//폴더생성
+		System.out.println(hospitalLicense);
+		if(!hospitalLicense.isEmpty()) {
+		String originalFileName=hospitalLicense.getOriginalFilename();
+		
+		//확장자 구하기
+		String ext=originalFileName.substring(originalFileName.lastIndexOf(".")+1);
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
+		int rndNum=(int)(Math.random()*1000);
+		String renamedFileName=sdf.format(new Date(System.currentTimeMillis()));
+		renamedFileName+="_"+rndNum+"."+ext;
+		try 
+		{
+			hospitalLicense.transferTo(new File(saveDir+File.separator+renamedFileName));
+		}
+		catch(IOException e)
+		{
+			e.printStackTrace();
+		}
+			//DB에 저장할 첨부파일에 대한 정보를 구성!
+			h.setHospitalLicense(originalFileName);
+			h.setHospitalReLicense(renamedFileName);
+		}
+		
 		boolean checkid = service.checkHospitalId(h.getHospitalId())==0?true:false;
-
+		boolean checkemail = service.checkHospitalEmail(h.getHospitalEmail())==0?true:false;
+		
 		if(!checkid) {
 			msg = "해당 아이디는 사용이 불가능합니다.";
 
 			model.addAttribute("msg", msg);
 			model.addAttribute("loc", loc);
 
+			return "common/msg";
+		}
+		if(!checkemail) {
+			msg = "해당 이메일은 이미 존재합니다.";
+			
+			model.addAttribute("msg", msg);
+			model.addAttribute("loc", loc);
+			
 			return "common/msg";
 		}
 		String oldpw = h.getHospitalPw();
@@ -147,6 +204,53 @@ public class MemberController {
 
 		return "common/msg";
 
+	}
+	
+	@RequestMapping("/member/hospitalFileDownload.do")
+	public void fileDownload(String oName, String rName, HttpServletRequest request, HttpServletResponse response)
+	{
+		//스트림 생성
+		BufferedInputStream bis=null;
+		ServletOutputStream sos=null;
+		//저장경로
+		String savedDir=request.getSession().getServletContext().getRealPath("/resources/uploadfile/hospital_License");
+		File savedFile=new File(savedDir+"/"+rName);
+		try {
+			FileInputStream fis=new FileInputStream(savedFile);
+			bis=new BufferedInputStream(fis);
+			sos=response.getOutputStream();
+			
+			String resFilename="";
+			//브라우저 분기
+			boolean isMSIE=request.getHeader("user-agent").indexOf("MSIE")!=-1
+					||request.getHeader("user-agent").indexOf("Trident")!=-1;
+			if(isMSIE) {
+				resFilename=URLEncoder.encode(oName, "UTF-8");
+				resFilename=resFilename.replaceAll("\\", "%20");
+			}
+			else {
+				resFilename=new String(oName.getBytes("UTF-8"),"ISO-8859-1");
+			}
+			response.setContentType("application/otect-stream;charset=UTF-8");
+			response.setHeader("Content-Disposition", "attachment;filename=\""+resFilename+"\"");
+			response.setContentLength((int)savedFile.length());
+			//파일 읽어와서 전송하기
+			int read=-1;
+			while((read=bis.read())!=-1) {
+				sos.write(read);
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				sos.close();
+				bis.close();
+			}catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
 	}
 
 	@RequestMapping("/member/joinpermission.do")
@@ -174,7 +278,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/member/memberLogin.do")
-	public String login(String PnH, String memberId, String memberPw, Model model, HttpServletRequest req) {
+	public String login(String PnH, @RequestParam(value="memberId") String memberId,@RequestParam(value="memberPw") String memberPw, Model model, HttpServletRequest req) {
 		System.out.println("로그인을 실행.." + PnH + "..." + memberId + "..." + memberPw);
 		// P = 개인 (Person)
 		// H = 병원 (Hospital)
@@ -198,8 +302,8 @@ public class MemberController {
 					PnHcheck = true;
 				}
 			}
-			
-		} else{
+		}
+		if(PnH.equals("H")){
 			h = service.loginHospitalCheck(memberId);
 			if(h==null) {
 				
@@ -392,6 +496,14 @@ public class MemberController {
 	public void membercheckEmail(String memberEmail,HttpServletResponse res) throws Exception {
 		
 		boolean check = service.duplicateMemEmailCheck(memberEmail)==0?true:false;
+		res.getWriter().print(check);
+	}
+	
+	@RequestMapping("/member/HcheckEmail.do")
+	@ResponseBody
+	public void HospitalcheckEmail(String hospitalEmail,HttpServletResponse res) throws Exception {
+		
+		boolean check = service.duplicateMemEmailCheck(hospitalEmail)==0?true:false;
 		res.getWriter().print(check);
 	}
 	

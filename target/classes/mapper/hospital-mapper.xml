@@ -6,13 +6,14 @@
 		select count(*) from hospital where hospitalId=#{hospitalId}
 	</select>
 	
-	<insert id="insertHospital">
+	<insert id="insertHospital" parameterType="hospital">
 		insert into hospital values(
 			hospital_seq.nextval,
 			#{hospitalId},
 			#{hospitalPw},
 			#{hospitalName},
 			#{hospitalLicense},
+			#{hospitalReLicense},
 			#{hospitalTel},
 			#{hospitalEmail},
 			#{hospitalAddr},
@@ -24,7 +25,7 @@
 	</insert>
 	
 	<select id="loginCheck" parameterType="string" resultType="hospital">
-		select * from hospital where hospitalId=#{userId}
+		select * from hospital where hospitalId=#{memberId}
 	</select>
 	
 	<select id="selectHospitalList" resultType="hospital">
@@ -39,7 +40,9 @@
  		update hospital set hospitalAdmission=1 where hospitalNum=#{hospitalNum}
  	</update>
 
-
+	<select id="checkhospitalEmail" parameterType="string" resultType="_int">
+		select count(*) from hospital where hospitalEmail=#{HospitalEmail}
+	</select>
 
 
 </mapper>

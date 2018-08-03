@@ -19,7 +19,8 @@ public interface MemberDAO {
 	
 	/* 이메일 중복검사 */
 	int duplicateMemEmailCheck(SqlSessionTemplate sqlSession, String memberEmail);
-	int checkEmail(SqlSessionTemplate sqlSession, String memberEmail);
+	int checkEmail(SqlSessionTemplate sqlSession, String memberEmail); // 일반회원
+	int checkHospitalEmail(SqlSessionTemplate sqlSession, String HospitalEmail);// 병원회원
 	
 	/*일반회원*/
 	Member loginMemberCheck(SqlSessionTemplate sqlSession, String memberId);
@@ -40,7 +41,7 @@ public interface MemberDAO {
 	int MemberUpdate(SqlSessionTemplate sqlSession, Member m);
 	
 	/*병원회원*/
-	Hospital loginHospitalCheck(SqlSessionTemplate sqlSession, String userId);
+	Hospital loginHospitalCheck(SqlSessionTemplate sqlSession, String memberId);
 	int insertHospital(SqlSessionTemplate sqlSession, Hospital h);
 	List<Hospital> selectHospitalList(SqlSessionTemplate sqlSession, int cPage, int numPerPage);
 	int selectHospitalCount(SqlSessionTemplate sqlSession);

@@ -190,10 +190,10 @@ $(function(){
 		
 		<h2>병원 회원가입</h2>
 		<p><b>(*)</b>는 필수 표시사항 입니다.</p>
-			<form name="" action="${pageContext.request.contextPath }/member/hospitalEnrollEnd.do" method="post" onsubmit="return fn_enroll_validate();" >
+			<form action="${pageContext.request.contextPath }/member/hospitalEnrollEnd.do" method="post" onsubmit="return fn_enroll_validate();" enctype="multipart/form-data" >
 				<table>
 					<tr>
-						<th>병원 아이디<b>(*)</b></th>
+						<th style="min-width: 115px">병원 아이디<b>(*)</b></th>
 						<td>
 							<input type="text" class="form-control" placeholder="4글자이상" name="hospitalId" id="hospitalId" required>
 						</td>
@@ -230,8 +230,7 @@ $(function(){
 					<tr>
 						<th>사업자번호<b>(*)</b></th>
 						<td>	
-						<input type="text" class="form-control" name="hospitalLicense" id="hospitalLicense" 
-							maxlength="6" placeholder="6자리로 입력해주십시오." required>
+						<input type="file" name="hospitalLicense" id="hospitalLicense" accept=".jpg, .png, .bmp" style="width: 200px" required>
 						</td>
 					</tr>
 					<tr>
@@ -243,7 +242,14 @@ $(function(){
 					<tr>
 						<th>이메일</th>
 						<td>	
-							<input type="email" class="form-control" placeholder="abc@xyz.com" name="hospitalEmail" id="hospitalEmail">
+							<input type="email" class="form-control" placeholder="abc@xyz.com" name="hospitalEmail" id="PHemail">
+						</td>
+						<td style="text-align: center">
+						
+						<a id="emailAuther" style="display: none" onclick="emailRequest()">이메일 인증</a>
+							
+						<span id="successEmail" style="display: none"><b>인증 완료!</b></span>
+						
 						</td>
 					</tr>
 					<tr>
@@ -252,8 +258,7 @@ $(function(){
 							<input type="text" class="form-control" name="hospitalAddr" id="hospitalAddr" placeholder="도로명주소" readonly>
 						</td>
 						<td>
-							&nbsp;
-							<button type="button" onclick="sample4_execDaumPostcode()" class="btn btn-default" style="margin-bottom:10px;">우편번호 찾기</button> 
+							<button type="button" onclick="sample4_execDaumPostcode()" class="btn btn-default" style="margin-bottom:10px; margin-left: 20px">우편번호 찾기</button> 
 							<span style="display: none" id="guide" style="color: #999"></span>
 						</td>
 					</tr>
@@ -270,5 +275,59 @@ $(function(){
 		</div>
 	</div>
 	<div style="height: 100px"></div>
+	<script>
+	$("#PHemail").blur(function(){
+	      var email=$("#PHemail").val();
+	         if(email.length!=0){
+	            if(email.match(/([@])/)){
+					if($('#successEmail').css("display")=="none"){
+		            	$("#emailAuther").css("display","block");								
+					} else{
+						$("#emailAuther").css("display","none");
+					}
+	            } 
+	         	else if(email.match(/([!,#,$,%,^,&,*,?,~,-])/)) {
+					alert("온전하지 못한 이메일입니다. ('@'를 제외한 특수문자가 존재합니다.)");
+					$("#PHemail").val("");
+	                $("#PHemail").focus();
+	                return false;
+	            } else {
+	            	alert("온전하지 못한 이메일입니다. 다시 한 번 입력해주세요.");
+	            	$("#PHemail").val("");
+	                $("#PHemail").focus();
+	            }
+	         }
+	         return true;
+	         $.ajax({
+				url:"${pageContext.request.contextPath}/member/HcheckEmail.do",
+				data:{hospitalEmail:$('#PHemail').val()},
+				success:function(data){
+					if(data == 'true'){
+						alert("사용가능한 이메일입니다.");
+					} else{
+						alert("이메일이 중복되었습니다. 다른 이메일을 입력해주세요.");
+						$("#PHemail").val("");
+		                $("#PHemail").focus();
+					}
+				}
+	         })
+	    });
+	
+	function emailRequest(){
+		var nowemail = $('#PHemail').val();
+		var url="${pageContext.request.contextPath }/member/emailEnd.do?memberEmail="+nowemail;
+		var title="emailAuther";
+		var status="left=500px, top=100px, width=600px, height=200px";
+		var popup=window.open(url,title,status);
+	}
+	
+	function emailcheck(){
+		if($('#successEmail').css("display") == 'none'){
+			alert("이메일을 인증해주세요.");
+			return false;
+		}
+		return true;
+	}
+	</script>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

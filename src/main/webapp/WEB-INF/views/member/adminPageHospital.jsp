@@ -8,12 +8,6 @@
 	<jsp:param value="관리자 페이지" name="pageTitle"/>
 </jsp:include>
 
-
-
-
-
-
-
 <style>
 	input#btn-add {float:right; margin:0 0 15px;}
 </style>
@@ -37,7 +31,7 @@
 					<td>${h.hospitalNum }</td>
 					<td>${h.hospitalId }</td>
 					<td>${h.hospitalName }</td>
-					<td>${h.hospitalLicense }</td>
+					<td><a onclick="fileDownload('${h.hospitalLicense}','${h.hospitalReLicense }')">${h.hospitalLicense }</a></td>
 					<td>${h.hospitalTel }</td>
 					<td>${h.hospitalEmail }</td>
 					<td>${h.hospitalAddr }</td>
@@ -62,6 +56,11 @@
 		console.log(e);
 		location.href="${pageContext.request.contextPath}/adminPage/admission.do?hospitalNum="+e;
 	}
+	function fileDownload(oName, rName){
+        //한글파일명이 있을 수 있으므로, 명시적으로 encoding
+       oName = encodeURIComponent(oName);
+       location.href="${pageContext.request.contextPath}/member/hospitalFileDownload.do?oName="+oName+"&rName="+rName;
+    }
 </script>
 
 
