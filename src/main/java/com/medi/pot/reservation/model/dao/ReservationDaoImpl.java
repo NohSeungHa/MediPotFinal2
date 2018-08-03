@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.medi.pot.reservation.model.vo.DoctorInfo;
 import com.medi.pot.reservation.model.vo.DoctorSchedule;
 import com.medi.pot.reservation.model.vo.HospitalInfo;
+import com.medi.pot.reservation.model.vo.MemberReservation;
 
 @Repository
 public class ReservationDaoImpl implements ReservationDao {
@@ -53,6 +54,17 @@ public class ReservationDaoImpl implements ReservationDao {
 	public DoctorSchedule selectDocSche(int docNo) {
 		return session.selectOne("reser.selectDocSche", docNo);
 	}
+
+	@Override
+	public List<DoctorSchedule> selectBlock(Map<String, Object> map) {
+		return session.selectList("reser.selectBlock", map);
+	}
+
+	@Override
+	public List<MemberReservation> selectReser(Map<String, Object> map) {
+		return session.selectList("reser.selectReser", map);
+	}
+	
 	
 	
 	

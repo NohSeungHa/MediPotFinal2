@@ -310,8 +310,7 @@
 		background-color:white;
 	}
 	#tbl-cal button:hover{
-		background-color: #286090;
-		color:white;
+		background-color: #E6E6E6;
 	}
 	#tbl-cal{
 		width:100%;
@@ -595,6 +594,10 @@
 		$('.calb').click(function () {
 			alert($(this).val());
 			alert(docNum);
+			$('.calb').css('background-color','white');
+			$('.calb').css('color','black');
+			$(this).css('background-color','#286090');
+			$(this).css('color','white');
 			$.ajax({
 				url:"${path}/medi/mediChoice",
 				data:{docNum:docNum,time:$(this).val()},

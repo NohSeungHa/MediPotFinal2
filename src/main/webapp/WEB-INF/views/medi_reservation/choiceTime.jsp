@@ -23,6 +23,8 @@
 	Date se=sd.parse(docTime.getSatEtime());
 	long lws=ws.getTime();
 	long lwe=we.getTime();
+	long lss=ss.getTime();
+	long lse=se.getTime();
 	long lel=el.getTime();
 	long sycleAM=sl.getTime()-ws.getTime();
 	long syclePM=we.getTime()-el.getTime();
@@ -38,21 +40,66 @@
 		border-radius: 5px;
 	}
 	.timebut:hover{
-		background-color: #286090;
-		color:white;
+		background-color: #E6E6E6;
 	}
 </style>
-	<h1 style="text-align: center;">오전</h1>
-	<%for(int i=0;i<sycleA;i++ ){ 
-	%>
-	<button class="timebut" value="<%=sd.format(lws)%>"><%=sd2.format(lws) %></button>
-	<%
-	lws=lws+timeI;
-	} %>
-	<h1 style="text-align: center;">오후</h1>
-	<%for(int i=0;i<sycleP;i++ ){ 
-	%>
-	<button class="timebut" value="<%=sd.format(lel)%>"><%=sd2.format(lel) %></button>
-	<%
-	lel=lel+timeI;
-	} %>
+	<div style="border: 2px solid lightgray;padding-left:40px;box-shadow: 3px 3px 5px lightgrey;">
+		<h1 style="text-align: center;">${time }</h1>
+		<h1 style="text-align: center;">오전</h1>
+		<%for(int i=0;i<sycleA;i++ ){ 
+		%>
+		<button class="timebut" value="<%=sd.format(lws)%>"><%=sd2.format(lws) %></button>
+		<%
+		lws=lws+timeI;
+		} %>
+		<h1 style="text-align: center;">오후</h1>
+		<%for(int i=0;i<sycleP;i++ ){ 
+		%>
+		<button class="timebut" value="<%=sd.format(lel)%>"><%=sd2.format(lel) %></button>
+		<%
+		lel=lel+timeI;
+		} %>
+		<br><br>
+	</div>
+	
+	<div style="text-align:center;margin-top:20px;">
+		<button id="choiceReser">예 약 하 기</button>
+	</div>
+	
+	<style>
+		#choiceReser{
+
+			width: 100%;
+		    height: 100px;
+		    font-size: 70px;
+		    background:#286090;
+		    color:white;
+		    border-radius: 100px;
+		    box-shadow: 3px 3px 5px lightgrey;
+		    
+    	}
+    	#choiceReser:hover{
+	    	background: #2A5060;
+			color:white;
+    	
+    	}
+	</style>
+	<script>
+		var choiceTime='';
+		$('.timebut').click(function () {
+			if($(this).css('background-color')=='rgb(40, 96, 144)'){
+				$(this).css('background-color','white');
+				$(this).css('color','black');
+				choiceTime='';
+			}else{
+				$('.timebut').css('background-color','white');
+				$('.timebut').css('color','black');
+				$(this).css('background-color','#286090');
+				$(this).css('color','white');
+				choiceTime=$(this).val();
+			}
+		});
+		$('#choiceReser').click(function () {
+			alert(choiceTime);
+		});
+	</script>

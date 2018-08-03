@@ -16,6 +16,7 @@ import com.medi.pot.reservation.model.service.ReservationService;
 import com.medi.pot.reservation.model.vo.DoctorInfo;
 import com.medi.pot.reservation.model.vo.DoctorSchedule;
 import com.medi.pot.reservation.model.vo.HospitalInfo;
+import com.medi.pot.reservation.model.vo.MemberReservation;
 import com.medi.pot.common.page.PageCreate2;
 
 @Controller
@@ -99,9 +100,18 @@ public class ReservationController {
 	}
 	@RequestMapping("/medi/mediChoice")
 	public String mediChoice(String docNum,String time, HttpServletRequest req) {
+		Map<String,Object> map=new HashMap<String, Object>();
 		int num=Integer.parseInt(docNum);
+		String chDate=time.substring(0, 10);
+		map.put("num", docNum);
+		map.put("chDate", chDate);
 		DoctorInfo doctor=service.selectDoctor(num);
+		List<DoctorSchedule> ds=service.selectBlock(map);
+		List<MemberReservation> mr=service.selectReser(map);
+		
 		req.setAttribute("doctor", doctor);
+		req.setAttribute("ds", ds);
+		req.setAttribute("mr", mr);
 		req.setAttribute("time", time);
 		return "medi_reservation/choiceTime";
 	}

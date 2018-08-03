@@ -14,6 +14,7 @@
 		<typeAlias alias="HospitalInfo" type="com.medi.pot.reservation.model.vo.HospitalInfo" />
 		<typeAlias alias="DoctorInfo" type="com.medi.pot.reservation.model.vo.DoctorInfo" />
 		<typeAlias alias="DoctorSchedule" type="com.medi.pot.reservation.model.vo.DoctorSchedule" />
+		<typeAlias alias="MemberReservation" type="com.medi.pot.reservation.model.vo.MemberReservation" />
 	</typeAliases>
 	
 	
