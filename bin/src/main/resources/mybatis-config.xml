@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
+<configuration>
+	<!-- jdbcTypeForNull 자리이동 금지! -->
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL"/>
+	</settings>
+		<!-- 이전 config에서 설정했던 내용을 root-context.xml에서 이미 다 설정했기때문에 따로 설정해줄건 없음!!
+		  Aliases만 설정해주면됨-->
+	<typeAliases>
+		<!-- 병원 공지사항 -->
+		<typeAlias alias="HospitalNotice" type="com.medi.pot.notice.vo.HospitalNotice"/>
+		<!-- 일반 공지사항 -->
+		<typeAlias alias="MemberNotice" type="com.medi.pot.notice.vo.MemberNotice"/>
+		<!-- 자유게시판 -->
+		<typeAlias alias="Community" type="com.medi.pot.community.vo.Community"/>
+		<typeAlias alias="member" type="com.medi.pot.member.model.vo.Member" />
+		<typeAlias alias="hospital" type="com.medi.pot.member.model.vo.Hospital" />
+		<typeAlias alias="HospitalInfo" type="com.medi.pot.reservation.model.vo.HospitalInfo" />
+		<typeAlias alias="DoctorInfo" type="com.medi.pot.reservation.model.vo.DoctorInfo" />
+		<typeAlias alias="DoctorSchedule" type="com.medi.pot.reservation.model.vo.DoctorSchedule" />
+	</typeAliases>
+	
+	
+	
+	
+	
+</configuration>

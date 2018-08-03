@@ -70,7 +70,7 @@
 				<c:forEach var='community' items='${list }' varStatus="vs">
 					<tr>
 						<td><h4>${community.communityNum }</h4></td>
-						<td><h4 id="txt_line" ><a href='${path}/community/communityView.do?no=${community.communityNum }&id=${memberLoggedIn.memberId}&cp=${cPage}'>${community.communityTitle }</a></h4></td>
+						<td><h4 id="txt_line" ><a href='${path}/community/communityView.do?no=${community.communityNum }&cp=${cPage}'>${community.communityTitle }</a></h4></td>
 						<c:if test="${community.communityFile!=null }">
 							<td>&nbsp;<img src="/pot/resources/img/notice/fileImge1.jpg" style="margin-left:10px; width: 20px;height: 20px;"></td>
 						</c:if>

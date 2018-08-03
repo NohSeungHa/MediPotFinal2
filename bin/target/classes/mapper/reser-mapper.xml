@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="reser">
+	<select id="mediList" parameterType="map" resultType="HospitalInfo">
+		select * from hospital join hospitalinfo on(hospitalnum=hospitalinfonum) where hospital.HOSPITALPROFESSIONAL=#{sub} and hospital.hospitaladdr like '%'||#{loc}||'%'
+	</select>
+	
+	<select id="selectCount" parameterType="map" resultType="_int">
+		select count(*) from hospital join hospitalinfo on(hospitalnum=hospitalinfonum) where hospital.HOSPITALPROFESSIONAL=#{sub} and hospital.hospitaladdr like '%'||#{loc}||'%'
+	</select>
+	
+	<select id="selectName" parameterType="String" resultType="HospitalInfo">
+		select * from hospital join hospitalinfo on(hospitalnum=hospitalinfonum) where hospital.hospitalName like '%'||#{hName}||'%'
+	</select>
+	
+	<select id="selectMedi" parameterType="_int" resultType="HospitalInfo">
+		select * from hospital join hospitalinfo on(hospitalnum=hospitalinfonum) where hospital.hospitalnum=#{num}
+	</select>
+	
+	<select id="selectDoctor" parameterType="_int" resultType="DoctorInfo">
+		select * from DOCTORINFO where hospitalno=#{num}
+	</select>
+	<select id="selectDoc" parameterType="_int" resultType="DoctorInfo">
+		select * from DOCTORINFO where doctornum=#{docNo}
+	</select>
+	<select id="selectDocSche" parameterType="_int" resultType="DoctorSchedule">
+		select * from RESERVATIONBLOCK where blockdoctor=1 and blockcheck='Y'
+	</select>
+</mapper>
