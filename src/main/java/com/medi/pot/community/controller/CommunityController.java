@@ -56,7 +56,7 @@ public class CommunityController {
 		return "community/communityInsert";
 	}
 	
-	@RequestMapping("notice/noticeInsertEnd.do")
+	@RequestMapping("/community/communityInsertEnd.do")
 	public ModelAndView noticeInsertEnd(String title, String writer, String content,@RequestParam(value="fileName",required=false) MultipartFile fileName, HttpServletRequest request,String checkPH) {
 		System.out.println(title);
 		System.out.println(writer);
