@@ -65,7 +65,7 @@ public class CommunityController {
 		
 		//파일 업로드
 		//저장위치지정
-		String saveDir=request.getSession().getServletContext().getRealPath("/resources/uploadfile/notice");
+		String saveDir=request.getSession().getServletContext().getRealPath("/resources/uploadfile/community");
 		Community com=new Community();
 		File dir=new File(saveDir);
 		if(dir.exists()==false) System.out.println(dir.mkdirs());//폴더생성

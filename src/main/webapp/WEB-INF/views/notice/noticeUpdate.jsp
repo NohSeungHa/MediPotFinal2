@@ -58,7 +58,7 @@
 					</tr>
 					<tr>
 						<th>첨부파일:</th>
-						<td><input type="file" class="form-control-file border" name="newFileName" id="newFileName">
+						<td><input type="file" class="form-control-file border" name="newFileName" id="newFileName" accept=".jpg, .png, .bmp">
 							<input type="hidden" name="oldFileName" id="oldFileName" value="${notice.hospitalNoticeFile }">
 							<input type="hidden" name="oldReFileName" id="oldReFileName" value="${notice.hospitalNoticeRefile }">
 						</td>
