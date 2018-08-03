@@ -57,7 +57,12 @@
 					</tr>
 					<tr>
 						<td>병원 점심시간을 입력하세요.</td>
-						<td></td>
+						<td><input type="time" name=""/></td>
+					</tr>
+					<tr>
+						<td colspan='2'>
+							
+						</td>
 					</tr>
 				</table>
 			</form>
