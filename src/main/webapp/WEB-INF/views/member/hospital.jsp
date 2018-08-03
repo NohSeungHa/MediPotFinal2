@@ -264,7 +264,7 @@ $(function(){
 					</tr>
 				</table>
 				<br><br>
-					 <button type="submit" class="btn btn-lg btn-default">회원가입</button>
+					 <button onclick="return emailcheck()" type="submit" class="btn btn-lg btn-default">회원가입</button>
 					 <br><br>
 			</form>
 			<div style="width: 100%; height: 100px; line-height: 100px; text-align: center">

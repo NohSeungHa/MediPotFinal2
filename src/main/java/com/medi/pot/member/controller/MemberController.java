@@ -137,7 +137,7 @@ public class MemberController {
 		
 		//파일 업로드
 		//저장위치지정
-		String saveDir=request.getSession().getServletContext().getRealPath("/resources/uploadfile/notice");
+		String saveDir=request.getSession().getServletContext().getRealPath("/resources/uploadfile/H_License");
 		
 		File dir=new File(saveDir);
 		if(dir.exists()==false) System.out.println(dir.mkdirs());//폴더생성
@@ -209,12 +209,16 @@ public class MemberController {
 	@RequestMapping("/member/hospitalFileDownload.do")
 	public void fileDownload(String oName, String rName, HttpServletRequest request, HttpServletResponse response)
 	{
+		System.out.println("원본파일 : " + oName + "\n사본파일 : " + rName);
+		oName = oName.trim();
+		rName = rName.trim();
 		//스트림 생성
 		BufferedInputStream bis=null;
 		ServletOutputStream sos=null;
 		//저장경로
-		String savedDir=request.getSession().getServletContext().getRealPath("/resources/uploadfile/hospital_License");
-		File savedFile=new File(savedDir+"/"+rName);
+		String savedDir=request.getSession().getServletContext().getRealPath("/resources/uploadfile/H_License");
+		File savedFile=new File(savedDir+File.separator+rName);
+		System.out.println("경로확인 : " + savedDir);
 		try {
 			FileInputStream fis=new FileInputStream(savedFile);
 			bis=new BufferedInputStream(fis);

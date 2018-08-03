@@ -12,7 +12,14 @@
 	input#btn-add {float:right; margin:0 0 15px;}
 </style>
 <section id='board-contianer' class='container'>
-
+<c:if test="${memberLoggedIn.memberId!='admin' }">
+	<script>
+		$(function(){
+			alert("관리자만 접근이 가능합니다.");
+			location.href="${pageContext.request.contextPath}";
+		})
+	</script>
+</c:if>
 	<table id='tbl-board' class='table table-striped table-hover'>
 		<tr>
 			<th>회원번호</th>
@@ -31,7 +38,11 @@
 					<td>${h.hospitalNum }</td>
 					<td>${h.hospitalId }</td>
 					<td>${h.hospitalName }</td>
-					<td><a onclick="fileDownload('${h.hospitalLicense}','${h.hospitalReLicense }')">${h.hospitalLicense }</a></td>
+					<td>
+					<a href="${pageContext.request.contextPath}/member/hospitalFileDownload.do?oName=+${h.hospitalLicense}&rName=+${h.hospitalReLicense }" >
+						${h.hospitalLicense }
+					</a>
+					</td>
 					<td>${h.hospitalTel }</td>
 					<td>${h.hospitalEmail }</td>
 					<td>${h.hospitalAddr }</td>
