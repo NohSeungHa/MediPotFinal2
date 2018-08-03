@@ -61,7 +61,7 @@
 					</tr>
 					<tr>
 						<td colspan='2'>
-							
+							<input class="btn btn-default btn-lg" type="submit" value="다음 등록사항으로 이동"/>
 						</td>
 					</tr>
 				</table>
