@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="community">
+	
+	<!-- 자유게시판 List 불러오기 -->
+	<select id="selectList" resultType="Community">
+		select * from Community order by communityDate desc
+	</select>
+	
+	<!-- 자유게시판 전체 갯수 -->
+	<select id="selectCount" resultType="_int">
+		select count(*) from Community
+	</select>
+</mapper>
