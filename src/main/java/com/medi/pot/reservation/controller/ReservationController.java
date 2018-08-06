@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -105,5 +106,14 @@ public class ReservationController {
 		req.setAttribute("time", time);
 		return "medi_reservation/choiceTime";
 	}
-
+	
+	@RequestMapping("/medi/hospitalInfo.do")
+	public String hosinfoInsert(String hosNum, Model model) {
+		System.out.println("병원정보 입력으로 들어옴!");
+		int hosNums = Integer.parseInt(hosNum);
+		
+		model.addAttribute("hospitalNum", hosNums);
+		
+		return "medi_reservation/hospitalInfoInsert";
+	}
 }

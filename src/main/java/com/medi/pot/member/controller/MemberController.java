@@ -39,6 +39,8 @@ import com.medi.pot.common.page.PageCreate;
 import com.medi.pot.member.model.service.MemberService;
 import com.medi.pot.member.model.vo.Hospital;
 import com.medi.pot.member.model.vo.Member;
+import com.medi.pot.reservation.model.vo.DoctorInfo;
+import com.medi.pot.reservation.model.vo.HospitalInfo;
 
 
 @SessionAttributes(value={"memberLoggedIn", "checkPH", "emailCheck"})
@@ -313,11 +315,15 @@ public class MemberController {
 				
 			}else {
 				String hos_admi = h.getHospitalAdmission();
+				HospitalInfo hospitalInfo = null; //service.selectHospitalInfo(h.getHospitalNum());
+				DoctorInfo doctorInfo = null; //service.selectDoctorInfo(h.getHospitalNum());
 				
 				if(bcrypt.matches(memberPw, h.getHospitalPw())) {
 					model.addAttribute("memberLoggedIn",h);
 					model.addAttribute("checkPH","H");
 					model.addAttribute("hospitalAdmission",hos_admi);
+					model.addAttribute("hospitalInfo",hospitalInfo);
+					model.addAttribute("doctorInfo",doctorInfo);
 					PnHcheck = true;
 					if(hos_admi.equals("0")) {
 						return "member/permission";
