@@ -39,7 +39,7 @@
 	</style>
 <div class="container">
 	<br> 
-	<img class="img-thumbnail" src="/pot/resources/img/notice/hnoticeMain.jpg" style="width: 100%;"> 
+	<img class="img-thumbnail" src="${path}/resources/img/notice/hnoticeMain.jpg" style="width: 100%;"> 
 	<br>
 	<br>
 	<a id="noticeHv" href="${path}/notice/noticeList.do?checkPH=${ckPH}" style="float: right;">공지사항</a>
