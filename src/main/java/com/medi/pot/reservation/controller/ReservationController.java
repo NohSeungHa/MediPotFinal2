@@ -116,7 +116,6 @@ public class ReservationController {
 	
 	@RequestMapping("/medi/insertReser")
 	public String insertReser(MemberReservation mr,HttpServletRequest req) {
-		System.out.println("insert Reser"+mr);
 		int result=service.insertReser(mr);
 		String msg="";
 		if(result>0) {
