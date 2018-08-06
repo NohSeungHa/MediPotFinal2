@@ -58,7 +58,7 @@
 				<tr>
 					<th>첨부파일:</th>
 					<td><input type="file" class="form-control-file border"
-						name="fileName" id="fileName"></td>
+						name="fileName" id="fileName" accept=".jpg, .png, .bmp"></td>
 				</tr>
 			</tbody>
 		</table>

@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletOutputStream;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -64,7 +65,7 @@ public class CommunityController {
 		
 		//파일 업로드
 		//저장위치지정
-		String saveDir=request.getSession().getServletContext().getRealPath("/resources/uploadfile/notice");
+		String saveDir=request.getSession().getServletContext().getRealPath("/resources/uploadfile/community");
 		Community com=new Community();
 		File dir=new File(saveDir);
 		if(dir.exists()==false) System.out.println(dir.mkdirs());//폴더생성
@@ -93,16 +94,16 @@ public class CommunityController {
 			com.setCommunityWriter(writer);
 			com.setCommunityContent(content);
 				
-		/*int result=service.insertNotice(com);*/
+		int result=service.insertCommunity(com);
 		
 		ModelAndView mv=new ModelAndView();
 		String msg="";
-		/*if(result==1) {
-			msg="등록!";
+		if(result==1) {
+			msg="게시글 등록을 완료하였습니다.";
 		}
 		else {
-			msg="실패!";
-		}*/
+			msg="게시글 등록을 실패하였습니다.";
+		}
 		mv.addObject("msg",msg);
 		mv.addObject("loc", "/community/communityList.do");
 		mv.setViewName("common/msg");
@@ -116,7 +117,7 @@ public class CommunityController {
 		BufferedInputStream bis=null;
 		ServletOutputStream sos=null;
 		//저장경로
-		String savedDir=request.getSession().getServletContext().getRealPath("/resources/uploadfile/notice");
+		String savedDir=request.getSession().getServletContext().getRealPath("/resources/uploadfile/community");
 		File savedFile=new File(savedDir+"/"+rName);
 		try {
 			FileInputStream fis=new FileInputStream(savedFile);
@@ -154,5 +155,110 @@ public class CommunityController {
 			}
 		}
 		
+	}
+	
+	//자유게시판 view
+	@RequestMapping("/community/communityView.do")
+	public String communityView(int no,Model model,HttpServletResponse response, HttpServletRequest request,int cp,String searchKind,String searchContent) {
+		//조회수 증가
+		Cookie[] cookie=request.getCookies();
+		String communityCookieVal="";
+		boolean hasRead=false;
+
+		if(cookie!=null) { 
+			outter:  
+				for(Cookie c : cookie) {
+					String name=c.getName();
+					String value=c.getValue(); 
+							
+					if("communityCookie".equals(name)) { 
+						communityCookieVal=value;
+						if(value.contains("|"+no+"|")) {
+							hasRead=true;
+							break outter;
+						}
+					}
+				}
+			}
+			if(!hasRead) {
+				service.updateCount(no);
+			}
+			
+			
+			Cookie c=new Cookie("communityCookie", communityCookieVal+"|"+no+"|");
+			c.setMaxAge(-1); // 유효기간, 브라우저를 닫는 경우 삭제(-1)
+			response.addCookie(c);
+			
+			Community com=service.selectOneCommunity(no);
+			Community communityBefore=null;
+			Community communityNext=null;
+			
+			if(searchContent!=null) {
+				searchContent="%"+searchContent+"%";
+				if(searchKind.equals("title")) {
+					List communityNumber=service.searchTitleNumber(searchContent);
+					for(int i=0; i<communityNumber.size();i++) {
+						int num=(Integer) communityNumber.get(i);
+						if(num==no) {
+							if(i>=1) {
+								communityBefore=service.selectOneCommunity((Integer)communityNumber.get(i-1));
+							}
+							if(i<communityNumber.size()-1) {
+								communityNext=service.selectOneCommunity((Integer)communityNumber.get(i+1));
+							}
+						}
+					}
+				}else if(searchKind.equals("content")) {
+					List communityNumber=service.searchContentNumber(searchContent);
+					for(int i=0; i<communityNumber.size();i++) {
+						int num=(Integer) communityNumber.get(i);
+						if(num==no) {
+							if(i>=1) {
+								communityBefore=service.selectOneCommunity((Integer)communityNumber.get(i-1));
+							}
+							if(i<communityNumber.size()-1) {
+								communityNext=service.selectOneCommunity((Integer)communityNumber.get(i+1));
+							}
+						}
+					}
+				}
+				else {
+					List communityNumber=service.searchWriterNumber(searchContent);
+					for(int i=0; i<communityNumber.size();i++) {
+						int num=(Integer) communityNumber.get(i);
+						if(num==no) {
+							if(i>=1) {
+								communityBefore=service.selectOneCommunity((Integer)communityNumber.get(i-1));
+							}
+							if(i<communityNumber.size()-1) {
+								communityNext=service.selectOneCommunity((Integer)communityNumber.get(i+1));
+							}
+						}
+					}
+				}
+				searchContent=searchContent.replace("%", "");
+			}else {
+				List communityNumber=service.selectCommunityNumber();
+				for(int i=0; i<communityNumber.size();i++) {
+					int num=(Integer) communityNumber.get(i);
+					if(num==no) {
+						if(i>=1) {
+							communityBefore=service.selectOneCommunity((Integer)communityNumber.get(i-1));
+						}
+						if(i<communityNumber.size()-1) {
+							communityNext=service.selectOneCommunity((Integer)communityNumber.get(i+1));
+						}
+					}
+				}
+			}
+			System.out.println("communityBefore : "+communityBefore);
+			System.out.println("communityNext : "+communityNext);
+			model.addAttribute("cp",cp);
+			model.addAttribute("searchKind", searchKind);
+			model.addAttribute("searchContent", searchContent);
+			model.addAttribute("com",com);
+			model.addAttribute("communityBefore",communityBefore);
+			model.addAttribute("communityNext",communityNext);
+			return "community/communityView";
 	}
 }

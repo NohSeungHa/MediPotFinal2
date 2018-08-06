@@ -47,14 +47,8 @@
 				</tr>
 				<tr>
 					<th>작성자:</th>
-					<c:if test="${checkPH=='P' }">
 						<td><input type="text" name="writer"  id="writer" class="form-control"
-							value="${memberLoggedIn.memberName }" style="background-color: white;" readonly /></td>
-					</c:if>
-					<c:if test="${checkPH=='H' }">
-						<td><input type="text" name="writer"  id="writer" class="form-control"
-							value="${memberLoggedIn.hospitalName }" style="background-color: white;" readonly /></td>
-					</c:if>
+							value="${memberLoggedIn.memberId }" style="background-color: white;" readonly /></td>
 				</tr>
 				<tr>
 					<th>내용:</th>
@@ -64,11 +58,10 @@
 				<tr>
 					<th>첨부파일:</th>
 					<td><input type="file" class="form-control-file border"
-						name="fileName" id="fileName"></td>
+						name="fileName" id="fileName" accept=".jpg, .png, .bmp"></td>
 				</tr>
 			</tbody>
 		</table>
-		<input type="hidden" name="checkPH" value="${checkPH }">
 		<button type="button" onclick="noticeList()" class="btn btn-danger" style="float: right; margin-left: 10px;">취소</button> 
 		<input type="submit" value="등록" onclick="return validate();" class="btn btn-primary" style="float: right;"/>
 		</form>
