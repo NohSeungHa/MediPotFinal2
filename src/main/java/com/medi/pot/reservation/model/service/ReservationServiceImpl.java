@@ -66,9 +66,21 @@ public class ReservationServiceImpl implements ReservationService {
 	}
 
 	@Override
-	public List<ReserList> reserList(int userNum) {
-		return reserDAO.reserList(userNum);
+	public List<ReserList> reserList(int userNum,int cPage,int numPerPage) {
+		return reserDAO.reserList(userNum,cPage,numPerPage);
 	}
+
+	@Override
+	public int reserDelete(int chNum) {
+		return reserDAO.reserDelete(chNum);
+	}
+
+	@Override
+	public int reserCount(int num) {
+		return reserDAO.reserCount(num);
+	}
+	
+	
 	
 	
 	

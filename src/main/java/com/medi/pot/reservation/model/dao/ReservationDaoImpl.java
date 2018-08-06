@@ -68,9 +68,21 @@ public class ReservationDaoImpl implements ReservationDao {
 	}
 
 	@Override
-	public List<ReserList> reserList(int userNum) {
-		return session.selectList("reser.selectReser", userNum);
+	public List<ReserList> reserList(int userNum,int cPage,int numPerPage) {
+		RowBounds rowBounds=new RowBounds(((cPage-1)*numPerPage),numPerPage);
+		return session.selectList("reser.selectReserList", userNum, rowBounds);
 	}
+
+	@Override
+	public int reserDelete(int chNum) {
+		return session.delete("reser.deleteReser", chNum);
+	}
+
+	@Override
+	public int reserCount(int num) {
+		return session.selectOne("reser.selectReserCount", num);
+	}
+	
 	
 	
 	

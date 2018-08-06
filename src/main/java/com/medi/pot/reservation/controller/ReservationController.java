@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.medi.pot.common.page.PageCreate;
 import com.medi.pot.common.page.PageCreate2;
 import com.medi.pot.reservation.model.service.ReservationService;
 import com.medi.pot.reservation.model.vo.DoctorInfo;
@@ -106,6 +107,8 @@ public class ReservationController {
 		String chDate=time.substring(0, 10);
 		map.put("num", docNum);
 		map.put("chDate", chDate);
+		System.out.println("확인하기 : "+docNum);
+		System.out.println("확인하기 : "+chDate);
 		DoctorInfo doctor=service.selectDoctor(num);
 		List<MemberReservation> mr=service.selectReser(map);
 		
@@ -130,10 +133,39 @@ public class ReservationController {
 	}
 	
 	@RequestMapping("/medi/reserList")
-	public String reserList(String userNum,HttpServletRequest req) {
+	public String reserList(@RequestParam(value="cPage", required=false,defaultValue="1") int cPage, String userNum,HttpServletRequest req) {
 		int num=Integer.parseInt(userNum);
-		List<ReserList> list=service.reserList(num);
-		System.out.println(list);
+		int numPerPage=10;
+		List<ReserList> list=service.reserList(num,cPage,numPerPage);
+		int totalCount=service.reserCount(num);
+		System.out.println("확인확인"+totalCount);
+		String pageBar=new PageCreate().getPageBar(cPage, numPerPage, totalCount, req.getContextPath()+"/medi/reserList");
+		req.setAttribute("pageBar", pageBar);
+		req.setAttribute("list", list);
+		req.setAttribute("cPage", cPage);
+		return "medi_reservation/reserList";
+	}
+	
+	@RequestMapping("/medi/reserDelete")
+	public String reserDelete(@RequestParam(value="cPage", required=false,defaultValue="1") int cPage,String no,String userNum,HttpServletRequest req) {
+		int chNum=Integer.parseInt(no);
+		int numPerPage=10;
+		int result=service.reserDelete(chNum);
+		String msg=null;
+		if(result>0) {
+			msg="삭제 되었습니다.";
+		}else {
+			msg="삭제 실패";
+		}
+		
+		int num=Integer.parseInt(userNum);
+		List<ReserList> list=service.reserList(num,cPage,numPerPage);
+		int totalCount=service.reserCount(num);
+		String pageBar=new PageCreate().getPageBar(cPage, numPerPage, totalCount, req.getContextPath()+"/medi/reserList");
+		req.setAttribute("pageBar", pageBar);
+		req.setAttribute("list", list);
+		req.setAttribute("msg", msg);
+		req.setAttribute("cPage", cPage);
 		return "medi_reservation/reserList";
 	}
 	

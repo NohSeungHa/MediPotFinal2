@@ -7,13 +7,15 @@ public class ReserList {
 	private String hospitalTel;
 	private String hospitalAddr;
 	private String hospitalProfessional;
+	private int hospitalNum;
+	private int checkNum;
 	
 	public ReserList() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public ReserList(String checkDate, String checkTime, String hospitalName, String hospitalTel, String hospitalAddr,
-			String hospitalProfessional) {
+			String hospitalProfessional, int hospitalNum, int checkNum) {
 		super();
 		this.checkDate = checkDate;
 		this.checkTime = checkTime;
@@ -21,13 +23,15 @@ public class ReserList {
 		this.hospitalTel = hospitalTel;
 		this.hospitalAddr = hospitalAddr;
 		this.hospitalProfessional = hospitalProfessional;
+		this.hospitalNum = hospitalNum;
+		this.checkNum = checkNum;
 	}
 
 	@Override
 	public String toString() {
 		return "ReserList [checkDate=" + checkDate + ", checkTime=" + checkTime + ", hospitalName=" + hospitalName
 				+ ", hospitalTel=" + hospitalTel + ", hospitalAddr=" + hospitalAddr + ", hospitalProfessional="
-				+ hospitalProfessional + "]";
+				+ hospitalProfessional + ", hospitalNum=" + hospitalNum + ", checkNum=" + checkNum + "]";
 	}
 
 	public String getCheckDate() {
@@ -77,6 +81,25 @@ public class ReserList {
 	public void setHospitalProfessional(String hospitalProfessional) {
 		this.hospitalProfessional = hospitalProfessional;
 	}
+
+	public int getHospitalNum() {
+		return hospitalNum;
+	}
+
+	public void setHospitalNum(int hospitalNum) {
+		this.hospitalNum = hospitalNum;
+	}
+
+	public int getCheckNum() {
+		return checkNum;
+	}
+
+	public void setCheckNum(int checkNum) {
+		this.checkNum = checkNum;
+	}
+
+	
+
 	
 	
 

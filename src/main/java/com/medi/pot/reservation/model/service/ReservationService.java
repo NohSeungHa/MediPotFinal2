@@ -19,5 +19,7 @@ public interface ReservationService {
 	DoctorSchedule selectDocSche(int docNo);
 	List<MemberReservation> selectReser(Map<String, Object> map);
 	int insertReser(MemberReservation mr);
-	List<ReserList> reserList(int userNum);
+	List<ReserList> reserList(int userNum,int cPage,int numPerPage);
+	int reserDelete(int chNum);
+	int reserCount(int num);
 }
