@@ -255,7 +255,7 @@ public class PageCreate {
 		
 		pageBar+="<script>";
 		pageBar+="function fn_paging(cPage, numPerPage){";
-		pageBar+="location.href='"+url+"?cPage='+cPage;";
+		pageBar+="location.href='"+url+"?cPage='+cPage+'&userNum="+userNum+"';";
 		pageBar+="}";
 		pageBar+="</script>";
 			

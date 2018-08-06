@@ -73,7 +73,7 @@
 		$('.can').click(function () {
 			if(confirm('예약을 취소 하시겠습니까?')){
 				alert($(this).attr('title'));
-				location.href='${path}/medi/reserDelete?no='+$(this).attr('title')+'&userNum=${memberLoggedIn.memberNum}&cPage=${cPage}';
+				location.href='${path}/medi/reserDelete?no='+$(this).attr('title')+'&userNum=${memberLoggedIn.memberNum}';
 			}
 		});
 	});

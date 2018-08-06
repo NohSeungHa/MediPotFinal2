@@ -139,7 +139,7 @@ public class ReservationController {
 		List<ReserList> list=service.reserList(num,cPage,numPerPage);
 		int totalCount=service.reserCount(num);
 		System.out.println("확인확인"+totalCount);
-		String pageBar=new PageCreate().getPageBar(cPage, numPerPage, totalCount, req.getContextPath()+"/medi/reserList");
+		String pageBar=new PageCreate().getPageBar3(cPage, numPerPage, totalCount, req.getContextPath()+"/medi/reserList", num);
 		req.setAttribute("pageBar", pageBar);
 		req.setAttribute("list", list);
 		req.setAttribute("cPage", cPage);
