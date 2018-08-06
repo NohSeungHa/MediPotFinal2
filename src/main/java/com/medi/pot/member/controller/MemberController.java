@@ -479,7 +479,12 @@ public class MemberController {
 					break;
 				}
 			}
-			message.setText("인증번호["+ra+"]");    //메일 내용을 입력
+			//메일 내용을 입력
+			message.setContent(
+					"<img src='https://postfiles.pstatic.net/MjAxODA4MDZfMzgg/MDAxNTMzNTMzNTY5NzIz.NvFjNK3gSOcpuQgDt1_-ParNMjv5nunUq2ixh-kO6yMg.91NYgDKHmA_UkPSzzAK5lC7cYehF23PQvmj6hIP2cLwg.PNG.ahfmrqhd/MediPot_logo.png?type=w966'>"
+					+ "<br><h3>MediPot 인증번호 [<b style='color: red'>" + ra + "</b>]</h3>"
+					, "text/html; charset=UTF-8");
+			
 			
 			
 			// send the message
@@ -561,7 +566,8 @@ public class MemberController {
 					break;
 				}
 			}
-			message.setText("인증번호["+ra+"]");    //메일 내용을 입력
+			
+			message.setText("인증번호[ "+ra+" ]");    //메일 내용을 입력
 			
 			
 			// send the message
