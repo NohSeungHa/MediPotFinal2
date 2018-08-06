@@ -49,15 +49,15 @@
 
 		<interceptor>
 			<mapping path="/medi/reser"/>
-			<beans:bean id="loogerInterceptor" class="com.medi.pot.common.page.Interceptor"></beans:bean>
+			<beans:bean id="loogerInterceptor" class="com.medi.pot.common.page.Interceptor2"></beans:bean>
 		</interceptor>
 		<interceptor>
 			<mapping path="/medi/doctorS"/>
-			<beans:bean id="loogerInterceptor2" class="com.medi.pot.common.page.Interceptor"></beans:bean>
+			<beans:bean id="loogerInterceptor2" class="com.medi.pot.common.page.Interceptor2"></beans:bean>
 		</interceptor>
 		<interceptor>
-			<mapping path=""/>
-			<beans:bean id="loogerInterceptor3" class="com.medi.pot.common.page.Interceptor"></beans:bean>
+			<mapping path="/medi/insertReser"/>
+			<beans:bean id="loogerInterceptor3" class="com.medi.pot.common.page.Interceptor2"></beans:bean>
 		</interceptor>
 		
 	</interceptors>

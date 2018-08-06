@@ -245,7 +245,7 @@ to {
 			<p>우리동네 지역 선택하기</p>
 		</div>
 		<div class="col-md-1" style="padding-top:35px;padding-right:20px;">
-			<img src="/pot/resources/img/common/arrow.png" width="80px" height="60px" >
+			<img src="${path}/resources/img/common/arrow.png" width="80px" height="60px" >
 		</div>
 		<div class="col-md-2">
 			<h4>MediPot이용방법</h4>
@@ -253,7 +253,7 @@ to {
 			<p>진료과목 선택하기</p>
 		</div>
 		<div class="col-md-1" style="padding-top:35px;padding-right:20px;">
-			<img src="/pot/resources/img/common/arrow.png" width="80px" height="60px">
+			<img src="${path}/resources/img/common/arrow.png" width="80px" height="60px">
 		</div>
 		<div class="col-md-2">
 			<h4>MediPot이용방법</h4>
@@ -267,7 +267,7 @@ to {
 	<hr>
 	<!-- 중간 부분 끝 -->
 	<div class="col-md-12">
-		<img src="/pot/resources/img/common/index_1.png" style="margin-bottom: 35px;width:600px;height:600px">
+		<img src="${path}/resources/img/common/index_1.png" style="margin-bottom: 35px;width:600px;height:600px">
 	</div>
 
 

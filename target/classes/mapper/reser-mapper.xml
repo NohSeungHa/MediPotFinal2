@@ -28,10 +28,22 @@
 	</select>
 	
 	<select id="selectReser" parameterType="map" resultType="MemberReservation">
-		select * from MEMBERRESERVATION full join reservationblock on(blockdate=checkdate) where ((checkdoctor=#{num} and checkdate=#{chDate}) or (blockdoctor=#{num} and blockdate=#{chDate})) and blockcheck='N'
+		select * from MEMBERRESERVATION full join reservationblock on(blockdate=checkdate) where ((checkdoctor=#{num} and checkdate=#{chDate}) or (blockdoctor=#{num} and blockdate=#{chDate} and blockcheck='N'))
 	</select>
 	
 	<insert id="insertReser" parameterType="MemberReservation">
 		insert into MEMBERRESERVATION values(memberreservation_SEQ.nextval,#{checkDoctor},#{checkHospital},#{checkMember},#{checkDate},#{checkTime})
 	</insert>
+	
+	<select id="selectReserList" parameterType="_int" resultType="ReserList">
+		select * from MEMBERRESERVATION join hospital on(checkhospital=hospitalnum) where checkmember=#{userNum} order by checkdate desc
+	</select>
+	
+	<delete id="deleteReser" parameterType="_int">
+		delete MEMBERRESERVATION where checknum=#{chNum}
+	</delete>
+	
+	<select id="selectReserCount" parameterType="_int" resultType="_int">
+		select count(*) from MEMBERRESERVATION where checkmember=#{num}
+	</select>
 </mapper>

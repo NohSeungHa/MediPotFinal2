@@ -7,6 +7,7 @@ import com.medi.pot.reservation.model.vo.DoctorInfo;
 import com.medi.pot.reservation.model.vo.DoctorSchedule;
 import com.medi.pot.reservation.model.vo.HospitalInfo;
 import com.medi.pot.reservation.model.vo.MemberReservation;
+import com.medi.pot.reservation.model.vo.ReserList;
 
 public interface ReservationDao {
 	
@@ -19,5 +20,7 @@ public interface ReservationDao {
 	DoctorSchedule selectDocSche(int docNo);
 	List<MemberReservation> selectReser(Map<String, Object> map);
 	int insertReser(MemberReservation mr);
-
+	List<ReserList> reserList(int userNum,int cPage,int numPerPage);
+	int reserDelete(int chNum);
+	int reserCount(int num);
 }
