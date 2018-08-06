@@ -19,7 +19,7 @@ public class Interceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		HttpSession session=request.getSession();
-		if(logger.isDebugEnabled()) {
+
 			Member m=(Member)session.getAttribute("memberLoggedIn");
 			if(m==null) {
 				request.setAttribute("msg", "로그인 후 이용 가능 합니다.");
@@ -27,7 +27,7 @@ public class Interceptor extends HandlerInterceptorAdapter {
 				request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
 				return false;
 			}
-		}
+		
 		return super.preHandle(request, response, handler);
 	}
 

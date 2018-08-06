@@ -113,5 +113,19 @@ public class ReservationController {
 		req.setAttribute("time", time);
 		return "medi_reservation/choiceTime";
 	}
+	
+	@RequestMapping("/medi/insertReser")
+	public String insertReser(MemberReservation mr,HttpServletRequest req) {
+		int result=service.insertReser(mr);
+		String msg="";
+		if(result>0) {
+			msg="예약 성공";
+		}else {
+			msg="예약 실패";
+		}
+		req.setAttribute("msg", msg);
+		req.setAttribute("loc", "/");
+		return "common/msg";
+	}
 
 }

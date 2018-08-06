@@ -58,6 +58,11 @@ public class ReservationServiceImpl implements ReservationService {
 	public List<MemberReservation> selectReser(Map<String, Object> map) {
 		return reserDAO.selectReser(map);
 	}
+
+	@Override
+	public int insertReser(MemberReservation mr) {
+		return reserDAO.insertReser(mr);
+	}
 	
 	
 	
