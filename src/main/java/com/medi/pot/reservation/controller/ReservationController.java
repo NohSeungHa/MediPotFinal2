@@ -17,6 +17,7 @@ import com.medi.pot.reservation.model.vo.DoctorInfo;
 import com.medi.pot.reservation.model.vo.DoctorSchedule;
 import com.medi.pot.reservation.model.vo.HospitalInfo;
 import com.medi.pot.reservation.model.vo.MemberReservation;
+import com.medi.pot.reservation.model.vo.ReserList;
 import com.medi.pot.common.page.PageCreate2;
 
 @Controller
@@ -127,5 +128,13 @@ public class ReservationController {
 		req.setAttribute("loc", "/");
 		return "common/msg";
 	}
+	
+	@RequestMapping("/medi/reserList")
+	public String reserList(String userNum,HttpServletRequest req) {
+		int num=Integer.parseInt(userNum);
+		List<ReserList> list=service.reserList(num);
+		return "";
+	}
+	
 
 }

@@ -11,6 +11,7 @@ import com.medi.pot.reservation.model.vo.DoctorInfo;
 import com.medi.pot.reservation.model.vo.DoctorSchedule;
 import com.medi.pot.reservation.model.vo.HospitalInfo;
 import com.medi.pot.reservation.model.vo.MemberReservation;
+import com.medi.pot.reservation.model.vo.ReserList;
 
 @Service
 public class ReservationServiceImpl implements ReservationService {
@@ -62,6 +63,11 @@ public class ReservationServiceImpl implements ReservationService {
 	@Override
 	public int insertReser(MemberReservation mr) {
 		return reserDAO.insertReser(mr);
+	}
+
+	@Override
+	public List<ReserList> reserList(int userNum) {
+		return reserDAO.reserList(userNum);
 	}
 	
 	

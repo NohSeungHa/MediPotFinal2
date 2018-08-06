@@ -12,6 +12,7 @@ import com.medi.pot.reservation.model.vo.DoctorInfo;
 import com.medi.pot.reservation.model.vo.DoctorSchedule;
 import com.medi.pot.reservation.model.vo.HospitalInfo;
 import com.medi.pot.reservation.model.vo.MemberReservation;
+import com.medi.pot.reservation.model.vo.ReserList;
 
 @Repository
 public class ReservationDaoImpl implements ReservationDao {
@@ -64,6 +65,12 @@ public class ReservationDaoImpl implements ReservationDao {
 	@Override
 	public int insertReser(MemberReservation mr) {
 		return session.insert("reser.insertReser", mr);
+	}
+
+	@Override
+	public List<ReserList> reserList(int userNum) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	
