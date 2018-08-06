@@ -72,7 +72,12 @@
 				<ul class="nav navbar-nav navbar-right" style="margin-top:2.5%;margin-right:1%;">
 				
 					<c:if test="${checkPH=='P' }">
-						<li><a href="${pageContext.request.contextPath }/member/mypage.do?user_id=${memberLoggedIn.memberId}&checkPH=${checkPH}">${memberLoggedIn.memberName }&nbsp;님 환영합니다.</a></li>
+						<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${memberLoggedIn.memberName }&nbsp;님 환영합니다.<span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="${pageContext.request.contextPath }/member/mypage.do?user_id=${memberLoggedIn.memberId}&checkPH=${checkPH}">마이페이지</a></li>
+							<li><a href="${pageContext.request.contextPath }/member/MemberReservation.do?user_id=${memberLoggedIn.memberId}&checkPH=${checkPH }">진료예약확인</a></li>
+						</ul>
+						</li>
 					</c:if>
 					
 					<c:if test="${checkPH=='H' }">
@@ -80,7 +85,14 @@
 							<li><a style="text-decoration:none">승인대기 중입니다.</a></li>
 						</c:if>	
 						<c:if test="${hospitalAdmission!='0' }">
-							<li><a href="${pageContext.request.contextPath }/member/mypage.do?user_id=${memberLoggedIn.hospitalId}&checkPH=${checkPH}">${memberLoggedIn.hospitalName }&nbsp;님 환영합니다.</a></li>
+							<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${memberLoggedIn.hospitalName }&nbsp;님 환영합니다.<span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="${pageContext.request.contextPath }/member/mypage.do?user_id=${memberLoggedIn.hospitalId}&checkPH=${checkPH}">마이페이지</a></li>
+								<li><a href="${pageContext.request.contextPath }/member/hospitalInfo.do?user_id=${memberLoggedIn.hospitalId}">병원정보수정</a></li>
+								<li><a href="${pageContext.request.contextPath }/member/doctorInfo.do?user_id=${memberLoggedIn.hospitalId}">의사정보수정</a></li>
+							</ul>
+							</li>
 						</c:if>
 					</c:if>
 					
