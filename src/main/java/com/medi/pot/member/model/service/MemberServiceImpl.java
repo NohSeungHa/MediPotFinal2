@@ -166,6 +166,13 @@ public class MemberServiceImpl implements MemberService {
 		return dao.checkHospitalEmail(sqlSession, HospitalEmail);
 		
 	}
+
+	@Override
+	public int hospitalCount() {
+		
+		return dao.hospitalCount(sqlSession);
+		
+	}
 	
 	
 	

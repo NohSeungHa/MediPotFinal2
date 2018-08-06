@@ -350,11 +350,13 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/member/mypage.do")
-	public String adminPage(String user_id, String checkPH) {
+	public String adminPage(String user_id, String checkPH, Model model) {
 		System.out.println("마이페이지 들어옴");
 		String view = "";
 		if(user_id.equals("admin")) {
 			view = "member/adminPage";
+			int result = service.hospitalCount();
+			model.addAttribute("hoscnt",result);
 		} else {
 			if(checkPH.equals("P")) {
 				view = "member/memberPage";

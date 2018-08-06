@@ -44,5 +44,7 @@
 		select count(*) from hospital where hospitalEmail=#{HospitalEmail}
 	</select>
 
-
+	<select id="hoscnt" resultType="_int">
+		select count(*) from hospital where hospitalAdmission=0
+	</select>
 </mapper>
