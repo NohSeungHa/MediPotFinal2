@@ -12,9 +12,13 @@
 <div style="height:100px">
 	<h1 style="text-align: center">관리자 페이지(병원회원, 일반회원)</h1>
 	<h4 style="text-align: center">병원회원과 일반회원을 한번에 관리할 수 있습니다.</h4>
-	<h4 style="text-align: center">현재 승인 대기중인 병원 회원 : </h4>
+	<c:if test="${hoscnt!=0}">
+		<h4 style="text-align: center">현재 승인 대기중인 병원 회원 : <span id="hoscnttext">${hoscnt}명</span></h4>
+	</c:if>
+	<c:if test="${hoscnt==0}">
+		<h4 style="text-align: center">현재 승인 대기중인 병원 회원 : <span id="hoscnttext">없음</span></h4>
+	</c:if>
 </div>
-
 <br><br>
 
 <table style="margin: 0 auto;">

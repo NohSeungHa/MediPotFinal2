@@ -265,7 +265,7 @@ $(function(){
 					<tr>
 						<th>이메일</th>
 						<td>	
-							<input type="email" class="form-control" placeholder="abc@xyz.com" name="memberEmail" id="Memail">
+							<input type="email" class="form-control" placeholder="abc@xyz.com" name="memberEmail" id="PHemail">
 						</td>
 						<td style="text-align: center">
 							
@@ -289,7 +289,7 @@ $(function(){
 					</tr>
 				</table>
 				<br><br>
-					 <button type="submit" class="btn btn-lg btn-default">회원가입</button>
+					 <button onclick="return emailcheck()" type="submit" class="btn btn-lg btn-default">회원가입</button>
 					 <br><br>
 			</form>
 			<div style="width: 100%; height: 100px; line-height: 100px; text-align: center">
@@ -324,12 +324,10 @@ $(function(){
 						</div>
 					</div>
 				</div> --%>
-				<c:forEach var="member" items="${members}" varStatus="vs">
-					<input type="hidden" value="${member.memberEmail }" name="emails">
-				</c:forEach>
+				
 				<script>
-				$("#Memail").blur(function(){
-				      var email=$("#Memail").val();
+				$("#PHemail").blur(function(){
+				      var email=$("#PHemail").val();
 				         if(email.length!=0){
 				            if(email.match(/([@])/)){
 								if($('#successEmail').css("display")=="none"){
@@ -340,37 +338,45 @@ $(function(){
 				            } 
 				         	else if(email.match(/([!,#,$,%,^,&,*,?,~,-])/)) {
 								alert("온전하지 못한 이메일입니다. ('@'를 제외한 특수문자가 존재합니다.)");
-								$("#Memail").val("");
-				                $("#Memail").focus();
+								$("#PHemail").val("");
+				                $("#PHemail").focus();
 				                return false;
 				            } else {
 				            	alert("온전하지 못한 이메일입니다. 다시 한 번 입력해주세요.");
-				            	$("#Memail").val("");
-				                $("#Memail").focus();
+				            	$("#PHemail").val("");
+				                $("#PHemail").focus();
 				            }
 				         }
 				         return true;
 				         $.ajax({
 							url:"${pageContext.request.contextPath}/member/PcheckEmail.do",
-							data:{memberEmail:$('#Memail').val()},
+							data:{memberEmail:$('#PHemail').val()},
 							success:function(data){
 								if(data == 'true'){
 									alert("사용가능한 이메일입니다.");
 								} else{
 									alert("이메일이 중복되었습니다. 다른 이메일을 입력해주세요.");
-									$("#Memail").val("");
-					                $("#Memail").focus();
+									$("#PHemail").val("");
+					                $("#PHemail").focus();
 								}
 							}
 				         })
 				    });
 				
 				function emailRequest(){
-					var nowemail = $('#Memail').val();
+					var nowemail = $('#PHemail').val();
 					var url="${pageContext.request.contextPath }/member/emailEnd.do?memberEmail="+nowemail;
 					var title="emailAuther";
 					var status="left=500px, top=100px, width=600px, height=200px";
 					var popup=window.open(url,title,status);
+				}
+				
+				function emailcheck(){
+					if($('#successEmail').css("display") == 'none'){
+						alert("이메일을 인증해주세요.");
+						return false;
+					}
+					return true;
 				}
 				</script>
 	
