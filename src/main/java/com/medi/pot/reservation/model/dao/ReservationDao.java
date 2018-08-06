@@ -18,5 +18,6 @@ public interface ReservationDao {
 	DoctorInfo selectDoctor(int docNo);
 	DoctorSchedule selectDocSche(int docNo);
 	List<MemberReservation> selectReser(Map<String, Object> map);
+	int insertReser(MemberReservation mr);
 
 }

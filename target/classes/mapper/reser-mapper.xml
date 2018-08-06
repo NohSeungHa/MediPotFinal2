@@ -30,4 +30,8 @@
 	<select id="selectReser" parameterType="map" resultType="MemberReservation">
 		select * from MEMBERRESERVATION full join reservationblock on(blockdate=checkdate) where ((checkdoctor=#{num} and checkdate=#{chDate}) or (blockdoctor=#{num} and blockdate=#{chDate})) and blockcheck='N'
 	</select>
+	
+	<insert id="insertReser" parameterType="MemberReservation">
+		insert into MEMBERRESERVATION values(memberreservation_SEQ.nextval,#{checkDoctor},#{checkHospital},#{checkMember},#{checkDate},#{checkTime})
+	</insert>
 </mapper>

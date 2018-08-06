@@ -60,6 +60,11 @@ public class ReservationDaoImpl implements ReservationDao {
 	public List<MemberReservation> selectReser(Map<String, Object> map) {
 		return session.selectList("reser.selectReser", map);
 	}
+
+	@Override
+	public int insertReser(MemberReservation mr) {
+		return session.insert("reser.insertReser", mr);
+	}
 	
 	
 	

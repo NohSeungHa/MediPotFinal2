@@ -15,6 +15,7 @@
 	DoctorInfo docTime=(DoctorInfo)request.getAttribute("doctor");
 	long timeI=Integer.parseInt(docTime.getTimeInterval())*60*1000;
 	String time=(String)request.getAttribute("time");
+	String time2=time.substring(0, 10);
 	String week=time.substring(11,12);
 	SimpleDateFormat sd=new SimpleDateFormat("HHmm");
 	SimpleDateFormat sd2=new SimpleDateFormat("HH:mm");
@@ -148,7 +149,7 @@
     	}
 	</style>
 	<script>
-		alert('<%=checkTi%>');
+		
 		var choiceTime='';
 		$('.timebut').click(function () {
 			if($(this).css('background-color')=='rgb(40, 96, 144)'){
@@ -168,7 +169,7 @@
 				alert("시간을 선택해 주세요");
 			}else{
 				
-				alert(choiceTime);
+				location.href='${path}/medi/insertReser?checkDoctor=<%=docTime.getDoctorNum()%>&checkHospital=<%=docTime.getHospitalNo()%>&checkMember=${memberLoggedIn.memberNum}&checkTime='+choiceTime+'&checkDate=<%=time2%>';
 			}
 		});
 	</script>
