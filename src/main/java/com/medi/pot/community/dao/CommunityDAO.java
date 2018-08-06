@@ -34,6 +34,12 @@ public interface CommunityDAO {
 	
 	//자유게시판 전체 번호
 	List selectCommunityNumber(SqlSessionTemplate sqlsession);
+	
+	//자유게시판 글 삭제
+	int deleteCommunity(SqlSessionTemplate sqlsession,int no);
+	
+	//자유게시판 글 수정
+	int updateCommunity(SqlSessionTemplate sqlsession,Community com);
 }
 
 

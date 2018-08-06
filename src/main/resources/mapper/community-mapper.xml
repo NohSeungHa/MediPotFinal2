@@ -14,7 +14,7 @@
 	
 	<!-- 자유게시판 글작성 -->
 	<insert id="insertCommunity" parameterType="Community">
-		insert into Community VALUES(Community_SEQ.nextval, #{communityTitle}, #{communityWriter}, #{communityContent}, #{communityFile},#{communityRefile},0,sysdate)
+		insert into Community VALUES(Community_SEQ.nextval, #{communityTitle}, #{communityWriter},#{communityCheckPH} ,#{communityContent}, #{communityFile},#{communityRefile},0,sysdate)
 	</insert>
 	
 	<!-- 자유게시판 조회수 증가 -->
@@ -42,9 +42,20 @@
 		select communityNum from Community where communityTitle LIKE #{searchContent} order by communityDate desc
 	</select>
 	
+	<!-- 자유게시판 검색 안한 상태 -->
 	<select id="selectCommunityNumber" resultType="_int">
 		select communityNum from Community order by communityDate desc
 	</select>
 	
+	<!-- 자유게시판 글 삭제 -->
+	<delete id="deleteCommunity" parameterType="_int">
+		delete from Community where communityNum=#{no}
+	</delete>
+	
+	<!-- 자유게시판 글 수정 -->
+	<update id="updateCommunity" parameterType="Community">
+		update Community set communityTitle=#{communityTitle}, communityWriter=#{communityWriter}, communityContent=#{communityContent},
+		communityFile=#{communityFile}, communityRefile=#{communityRefile } where communityNum=#{communityNum}
+	</update>
 	
 </mapper>

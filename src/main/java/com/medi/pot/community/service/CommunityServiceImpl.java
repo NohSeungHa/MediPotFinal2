@@ -15,6 +15,9 @@ public class CommunityServiceImpl implements CommunityService {
 
 	
 
+	
+
+
 	@Autowired
 	private CommunityDAO communityDAO;
 	
@@ -73,6 +76,18 @@ public class CommunityServiceImpl implements CommunityService {
 	@Override
 	public List selectCommunityNumber() {
 		return communityDAO.selectCommunityNumber(sqlsession);
+	}
+	
+	//자유게시판 글 삭제
+	@Override
+	public int deleteCommunity(int no) {
+		return communityDAO.deleteCommunity(sqlsession,no);
+	}
+	
+	//자유게시판 글 수정
+	@Override
+	public int updateCommunity(Community com) {
+		return communityDAO.updateCommunity(sqlsession,com);
 	}
 }
 

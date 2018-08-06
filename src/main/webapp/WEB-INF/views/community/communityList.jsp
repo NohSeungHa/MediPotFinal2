@@ -51,8 +51,15 @@
 		src="/pot/resources/img/notice/home.jpg"
 		style="width: 30%; height: 30%;"> 홈으로</a>
 	<br><br>
-	<c:if test="${not empty memberLoggedIn.memberId}">
-	<button class="btn btn-primary btn-sm" type="submit" style="float: right;" onclick="insert()">글쓰기</button>
+	<c:if test="${checkPH=='P' }">
+		<c:if test="${not empty memberLoggedIn.memberId}">
+			<button class="btn btn-primary btn-sm" type="submit" style="float: right;" onclick="insert()">글쓰기</button>
+		</c:if>
+	</c:if>
+	<c:if test="${checkPH=='H' }">
+		<c:if test="${not empty memberLoggedIn.hospitalId}">
+			<button class="btn btn-primary btn-sm" type="submit" style="float: right;" onclick="insert()">글쓰기</button>
+		</c:if>
 	</c:if>
 	<table class="table table-hover">
 		<thead>

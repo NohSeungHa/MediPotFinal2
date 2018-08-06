@@ -77,7 +77,7 @@ public class NoticeController {
 	}
 	
 	@RequestMapping("/notice/noticeView.do")
-	public String noticeView(int no,Model model,HttpServletResponse response, HttpServletRequest request,String checkPH,String id,int cp,String searchKind,String searchContent) {
+	public String noticeView(int no,Model model,HttpServletResponse response, HttpServletRequest request,String checkPH,int cp,String searchKind,String searchContent) {
 		//조회수 증가
 		Cookie[] cookie=request.getCookies();
 		String noticeCookieVal="";
@@ -99,13 +99,11 @@ public class NoticeController {
 				}
 		}
 		if(!hasRead) {
-			if(id!="admin") {
 				if(checkPH.equals("H")) {
 					service.updateCount(no);
 				}else {
 					service.updateMemberCount(no);
 				}
-			}
 			
 			
 			Cookie c=new Cookie("noticeCookie", noticeCookieVal+"|"+no+"|");

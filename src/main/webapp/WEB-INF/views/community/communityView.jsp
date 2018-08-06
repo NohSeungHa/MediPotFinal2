@@ -76,15 +76,32 @@
 	<c:if test="${not empty searchContent }">
 		<button type="button" class="btn btn-success" onclick="searchList()">목록으로</button>
 	</c:if>
-	<c:if test="${memberLoggedIn.memberId eq com.communityWriter or memberLoggedIn.memberId=='admin' or memberLoggedIn.hospitalId eq com.communityWriter}">
-		<input type="button" value="삭제" class="btn btn-danger" style="float: right;margin-left: 10px;" data-toggle="modal" data-target="#deleteModal"/>
-  		<button type="button" class="btn btn-warning" style="float: right;margin-left: 10px;" onclick="crystal()">수정</button>
-		<script>
-			function crystal(){
-				location.href="${path}/community/communityUpdate.do?cPage=${cp}&no=${com.communityNum}";
-			}
-		</script>
+	<c:if test="${checkPH=='P'}">
+		<c:if test="${memberLoggedIn.memberId eq com.communityWriter and com.communityCheckPH eq 'P'}">
+			<input type="button" value="삭제" class="btn btn-danger" style="float: right;margin-left: 10px;" data-toggle="modal" data-target="#deleteModal"/>
+	  		<button type="button" class="btn btn-warning" style="float: right;margin-left: 10px;" onclick="crystal()">수정</button>
+			<script>
+				function crystal(){
+					location.href="${path}/community/communityUpdate.do?cPage=${cp}&no=${com.communityNum}";
+				}
+			</script>
+	  	</c:if>
+	  	<c:if test="${memberLoggedIn.memberId eq 'admin'}">
+			<input type="button" value="삭제" class="btn btn-danger" style="float: right;margin-left: 10px;" data-toggle="modal" data-target="#deleteModal"/>
+	  	</c:if>
   	</c:if>
+  	<c:if test="${checkPH=='H'}">
+		<c:if test="${memberLoggedIn.hospitalId eq com.communityWriter and com.communityCheckPH eq 'H'}">
+			<input type="button" value="삭제" class="btn btn-danger" style="float: right;margin-left: 10px;" data-toggle="modal" data-target="#deleteModal"/>
+	  		<button type="button" class="btn btn-warning" style="float: right;margin-left: 10px;" onclick="crystal()">수정</button>
+			<script>
+				function crystal(){
+					location.href="${path}/community/communityUpdate.do?cPage=${cp}&no=${com.communityNum}";
+				}
+			</script>
+	  	</c:if>
+  	</c:if>
+  	
   <br><br>
   <table class="table table-bordered table-sm" style="border: 2px solid lightgray;">
         <tbody>

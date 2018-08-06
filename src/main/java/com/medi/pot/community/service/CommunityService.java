@@ -33,5 +33,10 @@ public interface CommunityService {
 	//자유게시판 전체 번호
 	List selectCommunityNumber();
 	
+	//자유게시판 글 삭제
+	int deleteCommunity(int no);
+	
+	//자유게시판 글 수정
+	int updateCommunity(Community com);
 	
 }

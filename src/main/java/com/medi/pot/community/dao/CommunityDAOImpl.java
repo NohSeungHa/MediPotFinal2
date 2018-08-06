@@ -14,6 +14,9 @@ public class CommunityDAOImpl implements CommunityDAO {
 
 
 
+	
+
+
 	//자유게시판 List 불러오기!
 	@Override
 	public List<Community> selectList(SqlSessionTemplate sqlsession, int cPage, int numPerPage) {
@@ -68,5 +71,17 @@ public class CommunityDAOImpl implements CommunityDAO {
 	@Override
 	public List selectCommunityNumber(SqlSessionTemplate sqlsession) {
 		return sqlsession.selectList("community.selectCommunityNumber");
+	}
+	
+	//자유게시판 글 삭제
+	@Override
+	public int deleteCommunity(SqlSessionTemplate sqlsession, int no) {
+		return sqlsession.delete("community.deleteCommunity",no);
+	}
+	
+	//자유게시판 글 수정
+	@Override
+	public int updateCommunity(SqlSessionTemplate sqlsession, Community com) {
+		return sqlsession.update("community.updateCommunity",com);
 	}
 }

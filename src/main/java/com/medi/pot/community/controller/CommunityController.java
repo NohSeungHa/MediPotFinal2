@@ -92,6 +92,7 @@ public class CommunityController {
 	
 			com.setCommunityTitle(title);
 			com.setCommunityWriter(writer);
+			com.setCommunityCheckPH(checkPH);
 			com.setCommunityContent(content);
 				
 		int result=service.insertCommunity(com);
@@ -251,6 +252,7 @@ public class CommunityController {
 					}
 				}
 			}
+			
 			System.out.println("communityBefore : "+communityBefore);
 			System.out.println("communityNext : "+communityNext);
 			model.addAttribute("cp",cp);
@@ -260,5 +262,98 @@ public class CommunityController {
 			model.addAttribute("communityBefore",communityBefore);
 			model.addAttribute("communityNext",communityNext);
 			return "community/communityView";
+	}
+	
+	//자유게시판 글 삭제
+	@RequestMapping("/community/deleteCommunity.do")
+	public ModelAndView deleteCommunity(int no,String refile,HttpServletRequest request) {
+		int result=service.deleteCommunity(no);
+		
+		String savedDir=request.getSession().getServletContext().getRealPath("/resources/uploadfile/community");
+		File file=new File(savedDir+"/"+refile);
+		
+		ModelAndView mv=new ModelAndView();
+		String msg="";
+		if(result==1) {
+			msg="게시글삭제 완료!";
+			file.delete();
+		}
+		else {
+			msg="게시글삭제 실패!";
+		}
+		mv.addObject("msg",msg);
+		mv.addObject("loc", "/community/communityList.do");
+		mv.setViewName("common/msg");
+		
+		return mv;
+	}
+	
+	
+	@RequestMapping("/community/communityUpdate.do")
+	public String communityUpdate(int cPage,int no,Model model) {
+		Community com = service.selectOneCommunity(no);
+		model.addAttribute("com", com);
+		model.addAttribute("num",no);
+		model.addAttribute("cPage",cPage);
+		return "community/communityUpdate";
+	}
+	
+	@RequestMapping("/community/communityUpdateEnd.do")
+	public ModelAndView communityUpdateEnd(String title,String writer,String content,@RequestParam(value="newFileName",required=false) MultipartFile newFileName,String oldFileName,String oldReFileName,String checkPH,int cPage,int no,HttpServletRequest request){
+		
+		//파일 업로드
+		//저장위치지정
+		String saveDir=request.getSession().getServletContext().getRealPath("/resources/uploadfile/community");
+		Community com=new Community();
+		if(newFileName!=null) {
+			File dir=new File(saveDir);
+			File file=new File(saveDir+"/"+oldReFileName);
+			System.out.println("전파일 삭제 시작");
+			file.delete();
+			System.out.println("전파일 삭제 완료");
+			if(dir.exists()==false) System.out.println(dir.mkdirs());//폴더생성
+			System.out.println(newFileName);
+			if(!newFileName.isEmpty()) {
+			String originalFileName=newFileName.getOriginalFilename();
+			//확장자 구하기
+			String ext=originalFileName.substring(originalFileName.lastIndexOf(".")+1);
+			SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
+			int rndNum=(int)(Math.random()*1000);
+			String renamedFileName=sdf.format(new Date(System.currentTimeMillis()));
+			renamedFileName+="_"+rndNum+"."+ext;
+			try 
+			{
+				newFileName.transferTo(new File(saveDir+File.separator+renamedFileName));
+			}
+			catch(IOException e)
+			{e.printStackTrace();}
+					
+				//DB에 저장할 첨부파일에 대한 정보를 구성!
+				com.setCommunityFile(originalFileName);
+				com.setCommunityRefile(renamedFileName);
+			}
+		}else {
+			com.setCommunityFile(oldFileName);
+			com.setCommunityRefile(oldReFileName);
+		}
+		com.setCommunityNum(no);
+		com.setCommunityTitle(title);
+		com.setCommunityWriter(writer);
+		com.setCommunityContent(content);
+		int result=service.updateCommunity(com);
+				
+		ModelAndView mv=new ModelAndView();
+		String msg="";
+		if(result==1) {
+			msg="수정 완료!";
+		}
+		else {
+			msg="수정 실패!";
+		}
+		mv.addObject("msg",msg);
+		mv.addObject("loc", "/community/communityView.do?no="+no+"&cp="+cPage+"");
+		mv.setViewName("common/msg");
+		
+		return mv;
 	}
 }

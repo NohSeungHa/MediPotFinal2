@@ -72,7 +72,7 @@
 				<c:forEach var='hnotice' items='${list }' varStatus="vs">
 					<tr>
 						<td><h4>${hnotice.hospitalNoticeNum }</h4></td>
-						<td><h4 id="txt_line" ><a href='${path}/notice/noticeView.do?no=${hnotice.hospitalNoticeNum }&checkPH=${ckPH}&id=${memberLoggedIn.memberId}&cp=${cPage}'>${hnotice.hospitalNoticeTitle }</a></h4></td>
+						<td><h4 id="txt_line" ><a href='${path}/notice/noticeView.do?no=${hnotice.hospitalNoticeNum }&checkPH=${ckPH}&cp=${cPage}'>${hnotice.hospitalNoticeTitle }</a></h4></td>
 						<c:if test="${hnotice.hospitalNoticeFile!=null }">
 							<td>&nbsp;<img src="/pot/resources/img/notice/fileImge1.jpg" style="margin-left:10px; width: 20px;height: 20px;"></td>
 						</c:if>
@@ -94,7 +94,7 @@
 				<c:forEach var='mnotice' items='${list }' varStatus="vs">
 					<tr>
 						<td><h4>${mnotice.memberNoticeNum }</h4></td>
-						<td><h4 id="txt_line" ><a href='${path}/notice/noticeView.do?no=${mnotice.memberNoticeNum }&checkPH=${ckPH}&id=${memberLoggedIn.memberId}&cp=${cPage}'>${mnotice.memberNoticeTitle }</a></h4></td>
+						<td><h4 id="txt_line" ><a href='${path}/notice/noticeView.do?no=${mnotice.memberNoticeNum }&checkPH=${ckPH}&cp=${cPage}'>${mnotice.memberNoticeTitle }</a></h4></td>
 						<c:if test="${mnotice.memberNoticeFile!=null }">
 							<td>&nbsp;<img src="/pot/resources/img/notice/fileImge1.jpg" style="margin-left:10px; width: 20px;height: 20px;"></td>
 						</c:if>

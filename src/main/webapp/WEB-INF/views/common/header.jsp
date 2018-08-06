@@ -111,6 +111,7 @@
 						<c:if test="${checkPH=='H' }">
 							<li><a href="${path}/notice/noticeList.do?checkPH=${checkPH}">공지사항</a></li>
 						</c:if>
+							<li><a href="${path}/notice/noticeList.do?checkPH=P" id="bemember" style="display: block">공지사항</a></li>
 							<li><a href="#">자주묻는 질문</a></li>
 							<li><a href="${path}/community/communityList.do">자유게시판</a></li>
 						</ul>
@@ -125,6 +126,11 @@
 						});
 						
 					});
+					$(function(){
+		                if(${checkPH=='P'} || ${checkPH=='H'}){
+		                   $('#bemember').css("display","none");                                          
+		                }
+		            });
 				</script>	
 			</div>
 		</div>		

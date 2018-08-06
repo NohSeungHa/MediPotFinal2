@@ -7,6 +7,7 @@ public class Community {
 	private int communityNum;
 	private String communityTitle;
 	private String communityWriter;
+	private String communityCheckPH;
 	private String communityContent;
 	private String communityFile;
 	private String communityRefile;
@@ -15,12 +16,14 @@ public class Community {
 	
 	public Community() {}
 
-	public Community(int communityNum, String communityTitle, String communityWriter, String communityContent,
-			String communityFile, String communityRefile, int communityReadcount, Date communityDate) {
+	public Community(int communityNum, String communityTitle, String communityWriter, String communityCheckPH,
+			String communityContent, String communityFile, String communityRefile, int communityReadcount,
+			Date communityDate) {
 		super();
 		this.communityNum = communityNum;
 		this.communityTitle = communityTitle;
 		this.communityWriter = communityWriter;
+		this.communityCheckPH = communityCheckPH;
 		this.communityContent = communityContent;
 		this.communityFile = communityFile;
 		this.communityRefile = communityRefile;
@@ -50,6 +53,14 @@ public class Community {
 
 	public void setCommunityWriter(String communityWriter) {
 		this.communityWriter = communityWriter;
+	}
+
+	public String getCommunityCheckPH() {
+		return communityCheckPH;
+	}
+
+	public void setCommunityCheckPH(String communityCheckPH) {
+		this.communityCheckPH = communityCheckPH;
 	}
 
 	public String getCommunityContent() {
@@ -95,8 +106,10 @@ public class Community {
 	@Override
 	public String toString() {
 		return "Community [communityNum=" + communityNum + ", communityTitle=" + communityTitle + ", communityWriter="
-				+ communityWriter + ", communityContent=" + communityContent + ", communityFile=" + communityFile
-				+ ", communityRefile=" + communityRefile + ", communityReadcount=" + communityReadcount
-				+ ", communityDate=" + communityDate + "]";
+				+ communityWriter + ", communityCheckPH=" + communityCheckPH + ", communityContent=" + communityContent
+				+ ", communityFile=" + communityFile + ", communityRefile=" + communityRefile + ", communityReadcount="
+				+ communityReadcount + ", communityDate=" + communityDate + "]";
 	}
+
+	
 }
