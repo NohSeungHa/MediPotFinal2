@@ -99,6 +99,7 @@
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 						고객지원<span class="caret"></span></a>
 						<ul class="dropdown-menu">
+						<c:if test="${checkPH=='P' }">
 							<c:if test="${memberLoggedIn.memberId=='admin' }">
 								<li><a href="${path}/notice/noticeList.do?checkPH=H&id=${memberLoggedIn.memberId}">병원 공지사항</a></li>
 								<li><a href="${path}/notice/noticeList.do?checkPH=P&id=${memberLoggedIn.memberId}">일반 공지사항</a></li>
@@ -106,6 +107,10 @@
 							<c:if test="${memberLoggedIn.memberId!='admin' }">
 								<li><a href="${path}/notice/noticeList.do?checkPH=${checkPH}">공지사항</a></li>
 							</c:if>
+						</c:if>
+						<c:if test="${checkPH=='H' }">
+							<li><a href="${path}/notice/noticeList.do?checkPH=${checkPH}">공지사항</a></li>
+						</c:if>
 							<li><a href="#">자주묻는 질문</a></li>
 							<li><a href="${path}/community/communityList.do">자유게시판</a></li>
 						</ul>
@@ -133,9 +138,9 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title" id="exampleModalLabel">로그인</h5>
-						<button type="button" class="close" data-dismiss="modal"
+						<button style="margin-top: -25px" type="button" class="close" data-dismiss="modal"
 							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
+							X
 						</button>
 					</div>
 					<form

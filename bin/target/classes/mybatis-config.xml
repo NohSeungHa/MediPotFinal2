@@ -19,6 +19,12 @@
 		<typeAlias alias="HospitalInfo" type="com.medi.pot.reservation.model.vo.HospitalInfo" />
 		<typeAlias alias="DoctorInfo" type="com.medi.pot.reservation.model.vo.DoctorInfo" />
 		<typeAlias alias="DoctorSchedule" type="com.medi.pot.reservation.model.vo.DoctorSchedule" />
+<<<<<<< HEAD
+		<!-- 헬프존 -->
+		<typeAlias alias="HelpZone" type="com.medi.pot.helpZone.vo.HelpZone"/>
+=======
+		<typeAlias alias="MemberReservation" type="com.medi.pot.reservation.model.vo.MemberReservation" />
+>>>>>>> sh
 	</typeAliases>
 	
 	

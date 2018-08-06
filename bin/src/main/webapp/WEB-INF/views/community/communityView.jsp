@@ -76,11 +76,9 @@
 	<c:if test="${not empty searchContent }">
 		<button type="button" class="btn btn-success" onclick="searchList()">목록으로</button>
 	</c:if>
-	<c:if test="${memberLoggedIn.memberId eq com.communityWriter or memberLoggedIn.memberId=='admin' or memberLoggedIn.hospitalId eq com.communityWriter }">
+	<c:if test="${memberLoggedIn.memberId eq com.communityWriter or memberLoggedIn.memberId=='admin' or memberLoggedIn.hospitalId eq com.communityWriter}">
 		<input type="button" value="삭제" class="btn btn-danger" style="float: right;margin-left: 10px;" data-toggle="modal" data-target="#deleteModal"/>
-  		<c:if test="${memberLoggedIn.memberId eq com.communityWriter or memberLoggedIn.hospitalId eq com.communityWriter }">
-  			<button type="button" class="btn btn-warning" style="float: right;margin-left: 10px;" onclick="crystal()">수정</button>
-  		</c:if>
+  		<button type="button" class="btn btn-warning" style="float: right;margin-left: 10px;" onclick="crystal()">수정</button>
 		<script>
 			function crystal(){
 				location.href="${path}/community/communityUpdate.do?cPage=${cp}&no=${com.communityNum}";

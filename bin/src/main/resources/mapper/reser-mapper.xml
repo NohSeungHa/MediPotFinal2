@@ -24,6 +24,10 @@
 		select * from DOCTORINFO where doctornum=#{docNo}
 	</select>
 	<select id="selectDocSche" parameterType="_int" resultType="DoctorSchedule">
-		select * from RESERVATIONBLOCK where blockdoctor=1 and blockcheck='Y'
+		select * from RESERVATIONBLOCK where blockdoctor=#{docNo} and blockcheck='Y'
+	</select>
+	
+	<select id="selectReser" parameterType="map" resultType="MemberReservation">
+		select * from MEMBERRESERVATION full join reservationblock on(blockdate=checkdate) where ((checkdoctor=#{num} and checkdate=#{chDate}) or (blockdoctor=#{num} and blockdate=#{chDate})) and blockcheck='N'
 	</select>
 </mapper>
