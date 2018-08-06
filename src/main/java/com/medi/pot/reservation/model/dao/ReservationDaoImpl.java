@@ -69,8 +69,7 @@ public class ReservationDaoImpl implements ReservationDao {
 
 	@Override
 	public List<ReserList> reserList(int userNum) {
-		// TODO Auto-generated method stub
-		return null;
+		return session.selectList("reser.selectReser", userNum);
 	}
 	
 	

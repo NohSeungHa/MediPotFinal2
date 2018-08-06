@@ -133,7 +133,8 @@ public class ReservationController {
 	public String reserList(String userNum,HttpServletRequest req) {
 		int num=Integer.parseInt(userNum);
 		List<ReserList> list=service.reserList(num);
-		return "";
+		System.out.println(list);
+		return "medi_reservation/reserList";
 	}
 	
 

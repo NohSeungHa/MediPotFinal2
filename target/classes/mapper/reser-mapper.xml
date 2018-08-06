@@ -34,4 +34,8 @@
 	<insert id="insertReser" parameterType="MemberReservation">
 		insert into MEMBERRESERVATION values(memberreservation_SEQ.nextval,#{checkDoctor},#{checkHospital},#{checkMember},#{checkDate},#{checkTime})
 	</insert>
+	
+	<select id="selectReser" parameterType="_int" resultType="ResertList">
+		select * from MEMBERRESERVATION join hospital on(checkhospital=hospitalnum) where checkmember=#{userNum}
+	</select>
 </mapper>
