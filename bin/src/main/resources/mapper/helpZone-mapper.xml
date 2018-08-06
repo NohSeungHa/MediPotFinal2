@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="helpZone">
-	<insert id="helpZoneInsert" parameterType="HelpZone">
-		insert into HelpZone VALUES(HelpZone_SEQ.nextval, #{helpZoneTitle}, #{helpZoneQuestioner}, #{helpZoneKeyWord}, #{helpZoneContent}, #{helpZoneFile}, #{helpZoneReFile}, #{helpZoneReadCount}, sysdate, #{helpZoneLikeNum})
-	</insert>
-</mapper>
