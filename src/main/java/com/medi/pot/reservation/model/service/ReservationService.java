@@ -17,4 +17,5 @@ public interface ReservationService {
 	DoctorInfo selectDoctor(int docNo);
 	DoctorSchedule selectDocSche(int docNo);
 	List<MemberReservation> selectReser(Map<String, Object> map);
+	int insertReser(MemberReservation mr);
 }

@@ -597,8 +597,6 @@
 	$(function () {
 		var docNum=${doctor.doctorNum }
 		$('.calb').click(function () {
-			alert($(this).val());
-			alert(docNum);
 			$('.calb').css('background-color','white');
 			$('.calb').css('color','black');
 			$(this).css('background-color','#286090');
