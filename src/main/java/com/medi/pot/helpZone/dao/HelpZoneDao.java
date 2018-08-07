@@ -6,5 +6,5 @@ import com.medi.pot.helpZone.vo.HelpZone;
 
 public interface HelpZoneDao {
 
-	int insertHelpZone(SqlSessionTemplate session, HelpZone helpzone);
+	int insertHelpZone(SqlSessionTemplate session, HelpZone helpZone);
 }

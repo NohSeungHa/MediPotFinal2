@@ -9,8 +9,9 @@ import com.medi.pot.helpZone.vo.HelpZone;
 public class HelpZoneImpl implements HelpZoneDao {
 
 	@Override
-	public int insertHelpZone(SqlSessionTemplate session, HelpZone helpzone) {
-		return session.insert("helpzone.helpZoneInsert", helpzone);
+	public int insertHelpZone(SqlSessionTemplate session, HelpZone helpZone) {
+		System.out.println("헬프존 테스트"+helpZone);
+		return session.insert("helpZone.helpZoneInsert", helpZone);
 	}
 
 }

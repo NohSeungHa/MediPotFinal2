@@ -18,8 +18,8 @@ public class HelpZoneServiceImpl implements HelpZoneService {
 	
 	//헬프존 입력하기
 	@Override
-	public int insertHelpZone(HelpZone helpzone) {
-		return helpZoneDao.insertHelpZone(session, helpzone);
+	public int insertHelpZone(HelpZone helpZone) {
+		return helpZoneDao.insertHelpZone(session, helpZone);
 	}
 	
 

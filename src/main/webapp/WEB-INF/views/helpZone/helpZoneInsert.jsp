@@ -52,36 +52,38 @@
 	<a id="home" href="${path}" style="float:right;width:70px;"><img
 		src="/pot/resources/img/notice/home.jpg"
 		style="width: 30%; height: 30%;"> 홈으로</a>
-	<form name="noticeFrm" action="${path}/notice/noticeInsertEnd.do?checkPH=${chPH}" method="post" onsubmit="return validate();"  enctype="multipart/form-data" >
+	<form name="helpZoneFrm" action="${path}/helpZone/helpZoneInsertEnd.do" method="post" onsubmit="return validate();"  enctype="multipart/form-data" >
 		<table class="table table-bordered">
 			<tbody>
 				<tr>
 					<th>제목:</th>
-					<td><input type="text" placeholder="제목을 입력하세요.(100자 이내)" name="title" id="title"
+					<td><input type="text" placeholder="제목을 입력하세요.(100자 이내)" name="helpZoneTitle" id="helpZoneTitle"
 						class="form-control" maxlength="40" /></td>
 				</tr>
 				<tr>
 					<th>작성자:</th>
 					<td><input type="text" name="writer"  id="writer" class="form-control"
-						value="${memberLoggedIn.memberId }" style="background-color: white;" readonly /></td>
+						value="${memberLoggedIn.memberId }" style="background-color: white;" readonly />
+						<input type="hidden" name="helpZoneQuestioner" id="helpZoneQuestioner" value="${memberLoggedIn.memberNum }">
+					</td>
 				</tr>
 				<tr>
 					<th>키워드</th>
 					<td>
-						<label class="checkbox-inline"><input type="checkbox" value="건강" name="">건강</label>
-						<label class="checkbox-inline"><input type="checkbox" value="치료" name="">치료</label>
-						<label class="checkbox-inline"><input type="checkbox" value="기타" name="">기타</label>
+						<label class="checkbox-inline"><input type="radio" value="건강" name="helpZoneKeyWord" id="helpZoneKeyWord">건강</label>
+						<label class="checkbox-inline"><input type="radio" value="치료" name="helpZoneKeyWord" id="helpZoneKeyWord">치료</label>
+						<label class="checkbox-inline"><input type="radio" value="기타" name="helpZoneKeyWord" id="helpZoneKeyWord">기타</label>
 					</td>
 				</tr>
 				<tr>
 					<th>내용:</th>
 					<td><textarea style="resize: none; height: 350px;" class="form-control" placeholder="내용을 입력하세요.(500자이내)"
-							rows="5" id="comment" name="content" onKeyUp="checkLength(this);" onKeyDown="checkLength(this);"></textarea></td>
+							rows="5" id="helpZoneContent" name="helpZoneContent" onKeyUp="checkLength(this);" onKeyDown="checkLength(this);"></textarea></td>
 				</tr>
 				<tr>
 					<th>첨부파일:</th>
 					<td><input type="file" class="form-control-file border"
-						name="fileName" id="fileName"></td>
+						name="helpZoneFile" id="helpZoneFile"></td>
 				</tr>
 			</tbody>
 		</table>
@@ -102,6 +104,18 @@ function checkLength(comment) {
         comment.focus();
         return false;
     }
+}
+function validate(){
+	var content=$("[name=helpZoneContent]").val();
+	var title=$("[name=helpZoneTitle]").val();
+	if(title.trim().length==0){
+		alert("제목을 입력하세요!");
+		return false;
+	}else if(content.trim().length==0){
+		alert("내용을 입력하세요!");
+		return false;
+	}
+	return true;
 }
 </script>
 
