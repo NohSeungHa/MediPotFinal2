@@ -52,8 +52,8 @@ public class ReservationDaoImpl implements ReservationDao {
 	}
 
 	@Override
-	public DoctorSchedule selectDocSche(int docNo) {
-		return session.selectOne("reser.selectDocSche", docNo);
+	public List<DoctorSchedule> selectDocSche(int docNo) {
+		return session.selectList("reser.selectDocSche", docNo);
 	}
 
 

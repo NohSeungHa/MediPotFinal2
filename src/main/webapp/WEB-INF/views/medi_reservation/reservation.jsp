@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@page import="com.medi.pot.reservation.model.vo.DoctorSchedule"%>
 <%@page import="com.medi.pot.reservation.model.vo.DoctorInfo"%>
 <%@page import="java.util.Locale"%>
@@ -17,14 +18,13 @@
      String close="";
      String bDate="";
      DoctorInfo docInfo=null;
-     DoctorSchedule docSche=null;
+     List<DoctorSchedule> docSche=null;
      if((DoctorInfo)request.getAttribute("doctor")!=null){
      docInfo=(DoctorInfo)request.getAttribute("doctor");
      close=docInfo.getClosed();
      }
-     if((DoctorSchedule)request.getAttribute("docSche")!=null){
-     docSche=(DoctorSchedule)request.getAttribute("docSche");
-     bDate=docSche.getBlockDate();
+     if((List<DoctorSchedule>)request.getAttribute("docSche")!=null){
+     docSche=(List<DoctorSchedule>)request.getAttribute("docSche");
      }
      
      Date day=new Date();
@@ -43,7 +43,12 @@
      String hd=tod2.format(cal.getTime());
      String y=tod.format(cal.getTime());
      String daye=tod3.format(cal.getTime());
-     boolean checkDate=bDate.equals(hd);
+     boolean checkDate=false;
+     if(docSche!=null){
+	     for(DoctorSchedule ds : docSche){
+	    	 checkDate=ds.getBlockDate().equals(hd);
+	     }
+     }
      boolean check=close.contains(daye);
      boolean hdc=eTest(hd);
      boolean hdce=yTest(hd);
@@ -53,7 +58,12 @@
      String hd2=tod2.format(cal.getTime());
      String y2=tod.format(cal.getTime());
      String daye2=tod3.format(cal.getTime());
-     boolean checkDate2=bDate.equals(hd2);
+     boolean checkDate2=false;
+     if(docSche!=null){
+	     for(DoctorSchedule ds : docSche){
+	    	 checkDate2=ds.getBlockDate().equals(hd2);
+	     }
+     }
      boolean check2=close.contains(daye2);
      boolean hdc2=eTest(hd2);
      boolean hdce2=yTest(hd2);
@@ -63,7 +73,12 @@
      String hd3=tod2.format(cal.getTime());
      String y3=tod.format(cal.getTime());
      String daye3=tod3.format(cal.getTime());
-     boolean checkDate3=bDate.equals(hd3);
+     boolean checkDate3=false;
+     if(docSche!=null){
+	     for(DoctorSchedule ds : docSche){
+	    	 checkDate3=ds.getBlockDate().equals(hd3);
+	     }
+     }
      boolean check3=close.contains(daye3);
      boolean hdc3=eTest(hd3);
      boolean hdce3=yTest(hd3);
@@ -73,7 +88,12 @@
      String hd4=tod2.format(cal.getTime());
      String y4=tod.format(cal.getTime());
      String daye4=tod3.format(cal.getTime());
-     boolean checkDate4=bDate.equals(hd4);
+     boolean checkDate4=false;
+     if(docSche!=null){
+	     for(DoctorSchedule ds : docSche){
+	    	 checkDate4=ds.getBlockDate().equals(hd4);
+	     }
+     }
      boolean check4=close.contains(daye4);
      boolean hdc4=eTest(hd4);
      boolean hdce4=yTest(hd4);
@@ -83,7 +103,12 @@
      String hd5=tod2.format(cal.getTime());
      String y5=tod.format(cal.getTime());
      String daye5=tod3.format(cal.getTime());
-     boolean checkDate5=bDate.equals(hd5);
+     boolean checkDate5=false;
+     if(docSche!=null){
+	     for(DoctorSchedule ds : docSche){
+	    	 checkDate5=ds.getBlockDate().equals(hd5);
+	     }
+     }
      boolean check5=close.contains(daye5);
      boolean hdc5=eTest(hd5);
      boolean hdce5=yTest(hd5);
@@ -93,7 +118,12 @@
      String hd6=tod2.format(cal.getTime());
      String y6=tod.format(cal.getTime());
      String daye6=tod3.format(cal.getTime());
-     boolean checkDate6=bDate.equals(hd6);
+     boolean checkDate6=false;
+     if(docSche!=null){
+	     for(DoctorSchedule ds : docSche){
+	    	 checkDate6=ds.getBlockDate().equals(hd6);
+	     }
+     }
      boolean check6=close.contains(daye6);
      boolean hdc6=eTest(hd6);
      boolean hdce6=yTest(hd6);
@@ -103,7 +133,12 @@
      String hd7=tod2.format(cal.getTime());
      String y7=tod.format(cal.getTime());
      String daye7=tod3.format(cal.getTime());
-     boolean checkDate7=bDate.equals(hd7);
+     boolean checkDate7=false;
+     if(docSche!=null){
+	     for(DoctorSchedule ds : docSche){
+	    	 checkDate7=ds.getBlockDate().equals(hd7);
+	     }
+     }
      boolean check7=close.contains(daye7);
      boolean hdc7=eTest(hd7);
      boolean hdce7=yTest(hd7);
@@ -113,7 +148,12 @@
      String hd8=tod2.format(cal.getTime());
      String y8=tod.format(cal.getTime());
      String daye8=tod3.format(cal.getTime());
-     boolean checkDate8=bDate.equals(hd8);
+     boolean checkDate8=false;
+     if(docSche!=null){
+	     for(DoctorSchedule ds : docSche){
+	    	 checkDate8=ds.getBlockDate().equals(hd8);
+	     }
+     }
      boolean check8=close.contains(daye8);
      boolean hdc8=eTest(hd8);
      boolean hdce8=yTest(hd8);
@@ -123,7 +163,12 @@
      String hd9=tod2.format(cal.getTime());
      String y9=tod.format(cal.getTime());
      String daye9=tod3.format(cal.getTime());
-     boolean checkDate9=bDate.equals(hd9);
+     boolean checkDate9=false;
+     if(docSche!=null){
+	     for(DoctorSchedule ds : docSche){
+	    	 checkDate9=ds.getBlockDate().equals(hd9);
+	     }
+     }
      boolean check9=close.contains(daye9);
      boolean hdc9=eTest(hd9);
      boolean hdce9=yTest(hd9);
@@ -133,7 +178,12 @@
      String hd10=tod2.format(cal.getTime());
      String y10=tod.format(cal.getTime());
      String daye10=tod3.format(cal.getTime());
-     boolean checkDate10=bDate.equals(hd10);
+     boolean checkDate10=false;
+     if(docSche!=null){
+	     for(DoctorSchedule ds : docSche){
+	    	 checkDate10=ds.getBlockDate().equals(hd10);
+	     }
+     }
      boolean check10=close.contains(daye10);
      boolean hdc10=eTest(hd10);
      boolean hdce10=yTest(hd10);
@@ -143,7 +193,12 @@
      String hd11=tod2.format(cal.getTime());
      String y11=tod.format(cal.getTime());
      String daye11=tod3.format(cal.getTime());
-     boolean checkDate11=bDate.equals(hd11);
+     boolean checkDate11=false;
+     if(docSche!=null){
+	     for(DoctorSchedule ds : docSche){
+	    	 checkDate11=ds.getBlockDate().equals(hd11);
+	     }
+     }
      boolean check11=close.contains(daye11);
      boolean hdc11=eTest(hd11);
      boolean hdce11=yTest(hd11);
@@ -153,7 +208,12 @@
      String hd12=tod2.format(cal.getTime());
      String y12=tod.format(cal.getTime());
      String daye12=tod3.format(cal.getTime());
-     boolean checkDate12=bDate.equals(hd12);
+     boolean checkDate12=false;
+     if(docSche!=null){
+	     for(DoctorSchedule ds : docSche){
+	    	 checkDate12=ds.getBlockDate().equals(hd12);
+	     }
+     }
      boolean check12=close.contains(daye12);
      boolean hdc12=eTest(hd12);
      boolean hdce12=yTest(hd12);
@@ -163,7 +223,12 @@
      String hd13=tod2.format(cal.getTime());
      String y13=tod.format(cal.getTime());
      String daye13=tod3.format(cal.getTime());
-     boolean checkDate13=bDate.equals(hd13);
+     boolean checkDate13=false;
+     if(docSche!=null){
+	     for(DoctorSchedule ds : docSche){
+	    	 checkDate13=ds.getBlockDate().equals(hd13);
+	     }
+     }
      boolean check13=close.contains(daye13);
      boolean hdc13=eTest(hd13);
      boolean hdce13=yTest(hd13);
@@ -173,7 +238,12 @@
      String hd14=tod2.format(cal.getTime());
      String y14=tod.format(cal.getTime());
      String daye14=tod3.format(cal.getTime());
-     boolean checkDate14=bDate.equals(hd14);
+     boolean checkDate14=false;
+     if(docSche!=null){
+	     for(DoctorSchedule ds : docSche){
+	    	 checkDate14=ds.getBlockDate().equals(hd14);
+	     }
+     }
      boolean check14=close.contains(daye14);
      boolean hdc14=eTest(hd14);
      boolean hdce14=yTest(hd14);
@@ -612,8 +682,11 @@
 			});
 		});
 		$('#docInfo-div').click(function () {
+			alert('들어가기전');
 			location.href='${path}/medi/doctorS?docNum='+$(this).attr('class')+'&hosNum='+$('#docInfo').attr('class');
 		});
+		
+		
 	});
 	if(<%=docInfo!=null%>||<%=docSche!=null%>){
 		$('#calList').css('display','block');
