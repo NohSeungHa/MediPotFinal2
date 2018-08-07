@@ -107,13 +107,4 @@ public class ReservationController {
 		return "medi_reservation/choiceTime";
 	}
 	
-	@RequestMapping("/medi/hospitalInfo.do")
-	public String hosinfoInsert(String hosNum, Model model) {
-		System.out.println("병원정보 입력으로 들어옴!");
-		int hosNums = Integer.parseInt(hosNum);
-		
-		model.addAttribute("hospitalNum", hosNums);
-		
-		return "medi_reservation/hospitalInfoInsert";
-	}
 }

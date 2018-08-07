@@ -47,4 +47,24 @@
 	<select id="hoscnt" resultType="_int">
 		select count(*) from hospital where hospitalAdmission=0
 	</select>
+	
+	<select id="hospitalNameinput" parameterType="_int" resultType="string">
+		select hospitalName from hospital where hospitalNum=#{hospitalNum}
+	</select>
+	
+	<insert id="hospitalInfoinsert" parameterType="hospitalInfos">
+		INSERT INTO HOSPITALINFO values(
+			#{hospitalInfoNum},
+			#{hospitalInfoIntro},
+			#{hospitalInfoNotice},
+			#{hospitalPhoto},
+			#{hospitalRePhoto},
+			#{hospitalInfoUsetime},
+			#{hospitalInfoLunchtime}
+		)
+	</insert>
+	
+	<select id="selectHospitalInfo" parameterType="_int" resultType="hospitalInfos">
+		select * from hospitalInfo where hospitalInfoNum=#{hospitalNum}
+	</select>
 </mapper>

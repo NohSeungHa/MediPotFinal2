@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.medi.pot.member.model.vo.Hospital;
+import com.medi.pot.member.model.vo.HospitalInfos;
 import com.medi.pot.member.model.vo.Member;
 
 @Repository
@@ -169,6 +170,27 @@ public class MemberDAOImpl implements MemberDAO {
 	public int hospitalCount(SqlSessionTemplate sqlSession) {
 		
 		return sqlSession.selectOne("hospital.hoscnt");
+		
+	}
+
+	@Override
+	public String selecthospitalName(SqlSessionTemplate sqlSession, int hospitalNum) {
+		
+		return sqlSession.selectOne("hospital.hospitalNameinput", hospitalNum);
+		
+	}
+
+	@Override
+	public int hospitalInfoinsert(SqlSessionTemplate sqlSession, HospitalInfos hospitalInfo) {
+		
+		return sqlSession.insert("hospital.hospitalInfoinsert", hospitalInfo);
+		
+	}
+
+	@Override
+	public HospitalInfos selectHospitalInfo(SqlSessionTemplate sqlSession, int hospitalNum) {
+		
+		return sqlSession.selectOne("hospital.selectHospitalInfo", hospitalNum);
 		
 	}
 

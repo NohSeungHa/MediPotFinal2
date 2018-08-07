@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.medi.pot.member.model.vo.Hospital;
+import com.medi.pot.member.model.vo.HospitalInfos;
 import com.medi.pot.member.model.vo.Member;
 
 public interface MemberService {
@@ -43,4 +44,7 @@ public interface MemberService {
 	int selectHospitalCount();
 	int updateAdmission(int hospitalNum);
 	int hospitalCount();
+	String selecthospitalName(int hospitalNum);
+	int hospitalInfoinsert(HospitalInfos hospitalInfo);
+	HospitalInfos selectHospitalInfo(int hospitalNum);
 }

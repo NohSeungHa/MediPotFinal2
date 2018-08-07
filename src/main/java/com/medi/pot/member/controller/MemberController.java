@@ -38,15 +38,18 @@ import org.springframework.web.servlet.ModelAndView;
 import com.medi.pot.common.page.PageCreate;
 import com.medi.pot.member.model.service.MemberService;
 import com.medi.pot.member.model.vo.Hospital;
+import com.medi.pot.member.model.vo.HospitalInfos;
 import com.medi.pot.member.model.vo.Member;
 import com.medi.pot.reservation.model.vo.DoctorInfo;
 import com.medi.pot.reservation.model.vo.HospitalInfo;
 
 
-@SessionAttributes(value={"memberLoggedIn", "checkPH", "emailCheck"})
+@SessionAttributes(value={"memberLoggedIn", "checkPH", "emailCheck", "H_Info_Count"})
 
 @Controller
 public class MemberController {
+	
+	int H_Info_Count = 1;
 	
 	@Autowired
 	private MemberService service;
@@ -291,10 +294,10 @@ public class MemberController {
 		String msg = "";
 		String loc = "/";
 		boolean PnHcheck = false;
+		H_Info_Count=1;
 		
 		Member m = new Member();
 		Hospital h = new Hospital();
-		System.out.println(service.loginMemberCheck(memberId));
 		
 		if(PnH.equals("P")) {
 			m = service.loginMemberCheck(memberId);
@@ -315,18 +318,20 @@ public class MemberController {
 				
 			}else {
 				String hos_admi = h.getHospitalAdmission();
-				HospitalInfo hospitalInfo = null; //service.selectHospitalInfo(h.getHospitalNum());
-				DoctorInfo doctorInfo = null; //service.selectDoctorInfo(h.getHospitalNum());
-				
+				HospitalInfos hospitalInfo = service.selectHospitalInfo(h.getHospitalNum());
+				System.out.println(hospitalInfo);
 				if(bcrypt.matches(memberPw, h.getHospitalPw())) {
 					model.addAttribute("memberLoggedIn",h);
 					model.addAttribute("checkPH","H");
 					model.addAttribute("hospitalAdmission",hos_admi);
 					model.addAttribute("hospitalInfo",hospitalInfo);
-					model.addAttribute("doctorInfo",doctorInfo);
+					
 					PnHcheck = true;
 					if(hos_admi.equals("0")) {
 						return "member/permission";
+					}
+					if(hospitalInfo == null) {
+						model.addAttribute("H_Info_Count", H_Info_Count);
 					}
 				}
 			}
@@ -351,6 +356,15 @@ public class MemberController {
 			sessionStatus.setComplete();
 			// 세션을 완료시킨다 (끝낸다)
 		}
+		H_Info_Count--;
+		
+		return "redirect:/";
+	}
+	
+	@RequestMapping("/member/infoCount")
+	public String infoCount(Model model) {
+		H_Info_Count++;
+		model.addAttribute("H_Info_Count", H_Info_Count);
 		
 		return "redirect:/";
 	}
@@ -491,8 +505,6 @@ public class MemberController {
 					+ "<br><h3>MediPot 인증번호 [<b style='color: red'>" + ra + "</b>]</h3>"
 					, "text/html; charset=UTF-8");
 			
-			
-			
 			// send the message
 			Transport.send(message); ////전송
 			
@@ -536,7 +548,7 @@ public class MemberController {
 		res.getWriter().print(check);
 	}
 	
-	@RequestMapping("/member/FindemailEnd.do")
+	/*@RequestMapping("/member/FindemailEnd.do")
 	public String FindemailResponse(String memberEmail, Model model) {
 
 		Properties prop = new Properties();
@@ -589,7 +601,7 @@ public class MemberController {
 		model.addAttribute("ra", ra);
 		
 		return "member/emailEnd";
-	}
+	}*/
 	
 	@RequestMapping("/member/memberFindId.do")
 	public String FindIdprint(String findname, String findemail, Model model) {
@@ -716,6 +728,73 @@ public class MemberController {
 		
 		model.addAttribute("msg", msg);
 		model.addAttribute("loc", loc);
+		
+		return "common/msg";
+	}
+	
+	@RequestMapping("/member/hospitalInfo.do")
+	public String hospitalInfo(int hospitalNum, Model model) {
+		System.out.println("병원정보 입력으로 들어옴!");
+		String hospitalName = service.selecthospitalName(hospitalNum);
+		model.addAttribute("hospitalName",hospitalName);
+		model.addAttribute("hospitalNum", hospitalNum);
+		
+		return "member/hospitalInfoInsert";
+	}
+	
+	@RequestMapping("/member/hospitalInsert.do")
+	public String hosinfoInsert(
+			int hospitalNum, String hospitalInfoIntro, String hospitalInfoNotice,
+			String hospitalInfoUsetime, String hospitalInfoLunchtime,
+			Model model, HttpServletRequest request,
+			@RequestParam(value="hospitalPhoto",required=false) MultipartFile hospitalPhoto) {
+		
+		System.out.println("병원정보를 등록");
+		HospitalInfos hospitalInfo = new HospitalInfos(
+				hospitalNum, hospitalInfoIntro, hospitalInfoNotice, null, null, hospitalInfoUsetime, hospitalInfoLunchtime);
+		
+		System.out.println(hospitalInfo);
+		String msg = "";
+		String loc = "";
+		//파일 업로드
+		//저장위치지정
+		String saveDir = request.getSession().getServletContext().getRealPath("/resources/uploadfile/hospitalInfo");
+
+		File dir = new File(saveDir);
+		if (dir.exists() == false)
+			System.out.println(dir.mkdirs());// 폴더생성
+		System.out.println(hospitalPhoto);
+		if (!hospitalPhoto.isEmpty()) {
+			String originalFileName = hospitalPhoto.getOriginalFilename();
+
+			// 확장자 구하기
+			String ext = originalFileName.substring(originalFileName.lastIndexOf(".") + 1);
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
+			int rndNum = (int) (Math.random() * 1000);
+			
+			String renamedFileName = sdf.format(new Date(System.currentTimeMillis()));
+			renamedFileName += "_" + rndNum + "." + ext;
+			try {
+				hospitalPhoto.transferTo(new File(saveDir + File.separator + renamedFileName));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			// DB에 저장할 첨부파일에 대한 정보를 구성!
+			hospitalInfo.setHospitalPhoto(originalFileName);
+			hospitalInfo.setHospitalRePhoto(renamedFileName);
+		}
+		
+		int result = service.hospitalInfoinsert(hospitalInfo);
+		
+		if(result > 0) {
+			msg = "병원정보 등록성공";
+		} else {
+			msg = "병원정보 등록실패";
+		}
+		
+		model.addAttribute("msg",msg);
+		model.addAttribute("loc",loc);
 		
 		return "common/msg";
 	}

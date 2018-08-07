@@ -85,25 +85,28 @@
 							<li><a style="text-decoration:none">승인대기 중입니다.</a></li>
 						</c:if>	
 						<c:if test="${hospitalAdmission!='0' }">
-							<c:if test="${hospitalInfo==null }">
-								<script>
-									alert("병원정보를 입력해주시기 바랍니다.");
-									location.href="${pageContext.request.contextPath}/medi/hospitalInfo.do?hosNum="+${memberLoggedIn.hospitalNum};
-									return true;
-								</script>
+							<c:if test="${H_Info_Count==1 }">
+							
+								<c:if test="${hospitalInfo==null }">
+									<script>
+										alert("병원정보를 입력해주시기 바랍니다.");
+										alert("병원정보는 병원이름 - 병원정보입력에서 하시면 됩니다.");
+										location.href="${pageContext.request.contextPath}/member/infoCount.do";
+									</script>
+								</c:if>
+								
 							</c:if>
-							<c:if test="${doctorInfo==null }">
-								<script>
-									alert("의사정보를 입력해주시기 바랍니다.");
-									location.href="${pageContext.request.contextPath}/member/mypage.do?user_id="+${memberLoggedIn.hospitalId}+"&checkPH="+${checkPH}";
-								</script>
-							</c:if>
+							
 							<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${memberLoggedIn.hospitalName }&nbsp;님 환영합니다.<span class="caret"></span></a>
 							<ul class="dropdown-menu">
 								<li><a href="${pageContext.request.contextPath }/member/mypage.do?user_id=${memberLoggedIn.hospitalId}&checkPH=${checkPH}">마이페이지</a></li>
-								<li><a href="${pageContext.request.contextPath }/member/hospitalInfo.do?user_id=${memberLoggedIn.hospitalId}">병원정보수정</a></li>
-								<li><a href="${pageContext.request.contextPath }/member/doctorInfo.do?user_id=${memberLoggedIn.hospitalId}">의사정보수정</a></li>
+								<c:if test="${hospitalInfo == null }">
+									<li><a href="${pageContext.request.contextPath }/member/hospitalInfo.do?hospitalNum=${memberLoggedIn.hospitalNum}">병원정보입력</a></li>
+								</c:if>
+								<c:if test="${ hospitalInfo != null }">
+									<li><a href="${pageContext.request.contextPath }/member/hospitalInfoUpdate.do?hospitalNum=${memberLoggedIn.hospitalNum}">병원정보수정</a></li>
+								</c:if>
 							</ul>
 							</li>
 						</c:if>
