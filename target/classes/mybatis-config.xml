@@ -23,12 +23,10 @@
 		<!-- 헬프존 -->
 		<typeAlias alias="HelpZone" type="com.medi.pot.helpZone.vo.HelpZone"/>
 		<typeAlias alias="MemberReservation" type="com.medi.pot.reservation.model.vo.MemberReservation" />
+		
+		<!-- 예약 List -->
 		<typeAlias alias="ReserList" type="com.medi.pot.reservation.model.vo.ReserList" />
 
 	</typeAliases>
-	
-	
-	
-	
-	
+
 </configuration>
