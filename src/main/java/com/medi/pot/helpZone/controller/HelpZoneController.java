@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.medi.pot.common.page.PageCreate;
 import com.medi.pot.helpZone.service.HelpZoneService;
 import com.medi.pot.helpZone.vo.HelpZone;
 
@@ -25,9 +27,21 @@ public class HelpZoneController {
 	
 	//헬프존 메인화면 (질문리스트 출력)
 	@RequestMapping("/helpZone/helpZoneList.do")
-	public String helpZoneList() {		
-		System.out.println("헬프존 메인으로 고고");
-		return "helpZone/helpZoneMain";
+	public ModelAndView helpZoneList(@RequestParam(value="cPage", required=false,defaultValue="1") int cPage) {
+		ModelAndView mv = new ModelAndView();
+		int numPerPage=10;		
+		List<HelpZone> list = service.selectHelpZoneList(cPage,numPerPage);
+		System.out.println("list : "+list);
+		
+		int totalCount=service.selectCount();
+		
+		String pageBar=new PageCreate().getPageBar(cPage, numPerPage,totalCount,"/helpZone/helpZoneList");
+		mv.addObject("pageBar",pageBar);
+		mv.addObject("list",list);
+		mv.addObject("cPage",cPage);
+		mv.addObject("totalCount",totalCount);
+		mv.setViewName("/helpZone/helpZoneMain");
+		return mv;
 	}
 	
 	

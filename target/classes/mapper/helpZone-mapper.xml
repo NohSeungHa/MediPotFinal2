@@ -4,4 +4,10 @@
 	<insert id="helpZoneInsert" parameterType="HelpZone">
 		insert into HelpZone VALUES(HelpZone_SEQ.nextval, #{helpZoneTitle}, #{helpZoneQuestioner}, #{helpZoneKeyWord}, #{helpZoneContent}, #{helpZoneFile}, #{helpZoneReFile}, #{helpZoneReadCount}, sysdate, #{helpZoneLikeNum})
 	</insert>
+	<select id="helpZoneSelectList" resultType="HelpZone">
+		select * from helpzone order by helpzonedate desc
+	</select>
+	<select id="count" resultType="_int">
+		select count(*) from HELPZONE
+	</select>
 </mapper>
