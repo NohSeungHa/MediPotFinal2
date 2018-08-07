@@ -24,6 +24,7 @@
 		<typeAlias alias="HelpZone" type="com.medi.pot.helpZone.vo.HelpZone"/>
 		<typeAlias alias="MemberReservation" type="com.medi.pot.reservation.model.vo.MemberReservation" />
 		<typeAlias alias="ReserList" type="com.medi.pot.reservation.model.vo.ReserList" />
+		<typeAlias alias="ReserList" type="com.medi.pot.reservation.model.vo.ReserList2" />
 
 	</typeAliases>
 	
