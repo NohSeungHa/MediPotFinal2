@@ -93,7 +93,7 @@ public class ReservationController {
 		int docNo=Integer.parseInt(docNum);
 		List<DoctorInfo> list=service.selectDoctorList(num);
 		DoctorInfo doctor=service.selectDoctor(docNo);
-		DoctorSchedule docSche=service.selectDocSche(docNo);
+		List<DoctorSchedule> docSche=service.selectDocSche(docNo);
 		req.setAttribute("list", list);
 		req.setAttribute("doctor", doctor);
 		req.setAttribute("docSche", docSche);
@@ -169,5 +169,43 @@ public class ReservationController {
 		return "medi_reservation/reserList";
 	}
 	
+	@RequestMapping("/medi/reser2")
+	public String mediReser2(String no,HttpServletRequest req) {
+		int num=Integer.parseInt(no);
+		List<DoctorInfo> list=service.selectDoctorList(num);
+		req.setAttribute("list", list);
+		return "medi_reservation/reservation2";
+	}
+	
+	@RequestMapping("/medi/doctorS2")
+	public String doctorSca2(String docNum,String hosNum,HttpServletRequest req) {
+		System.out.println("어디서 문제인가? 1");
+		int num=Integer.parseInt(hosNum);
+		int docNo=Integer.parseInt(docNum);
+		List<DoctorInfo> list=service.selectDoctorList(num);
+		DoctorInfo doctor=service.selectDoctor(docNo);
+		List<DoctorSchedule> docSche=service.selectDocSche(docNo);
+		req.setAttribute("list", list);
+		req.setAttribute("doctor", doctor);
+		req.setAttribute("docSche", docSche);
+		
+		return "medi_reservation/reservation2";
+	}
+	
+	@RequestMapping("/medi/mediChoice2")
+	public String mediChoice2(String docNum,String time, HttpServletRequest req) {
+		Map<String,Object> map=new HashMap<String, Object>();
+		int num=Integer.parseInt(docNum);
+		String chDate=time.substring(0, 10);
+		map.put("num", docNum);
+		map.put("chDate", chDate);
+		DoctorInfo doctor=service.selectDoctor(num);
+		List<MemberReservation> mr=service.selectReser(map);
+		
+		req.setAttribute("doctor", doctor);
+		req.setAttribute("mr", mr);
+		req.setAttribute("time", time);
+		return "medi_reservation/choiceTime2";
+	}
 
 }

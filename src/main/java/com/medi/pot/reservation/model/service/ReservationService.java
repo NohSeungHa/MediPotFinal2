@@ -16,7 +16,7 @@ public interface ReservationService {
 	HospitalInfo mediInfo(int num);
 	List<DoctorInfo> selectDoctorList(int num);
 	DoctorInfo selectDoctor(int docNo);
-	DoctorSchedule selectDocSche(int docNo);
+	List<DoctorSchedule> selectDocSche(int docNo);
 	List<MemberReservation> selectReser(Map<String, Object> map);
 	int insertReser(MemberReservation mr);
 	List<ReserList> reserList(int userNum,int cPage,int numPerPage);

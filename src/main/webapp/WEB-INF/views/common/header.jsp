@@ -87,7 +87,12 @@
 							<li><a style="text-decoration:none">승인대기 중입니다.</a></li>
 						</c:if>	
 						<c:if test="${hospitalAdmission!='0' }">
-							<li><a href="${pageContext.request.contextPath }/member/mypage.do?user_id=${memberLoggedIn.hospitalId}&checkPH=${checkPH}">${memberLoggedIn.hospitalName }&nbsp;님 환영합니다.</a></li>
+							<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+							${memberLoggedIn.hospitalName }&nbsp;님 환영합니다.<span class="caret"></span></a>
+							<ul class="dropdown-menu" style="text-align: center;">
+								<li><a href="${pageContext.request.contextPath }/member/mypage.do?user_id=${memberLoggedIn.hospitalId}&checkPH=${checkPH}">마이페이지</a></li>
+								<li><a href="${pageContext.request.contextPath }/medi/reser2?no=${memberLoggedIn.hospitalNum}">예약 시간 설정</a></li>
+							</ul>
 						</c:if>
 					</c:if>
 					

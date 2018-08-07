@@ -50,7 +50,7 @@ public class ReservationServiceImpl implements ReservationService {
 	}
 
 	@Override
-	public DoctorSchedule selectDocSche(int docNo) {
+	public List<DoctorSchedule> selectDocSche(int docNo) {
 		return reserDAO.selectDocSche(docNo);
 	}
 
