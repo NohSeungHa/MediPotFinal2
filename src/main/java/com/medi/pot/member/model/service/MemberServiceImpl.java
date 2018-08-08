@@ -195,6 +195,13 @@ public class MemberServiceImpl implements MemberService {
 		return dao.selectHospitalInfo(sqlSession, hospitalNum);
 		
 	}
+
+	@Override
+	public int loadHospitalInfo(int hospitalNum) {
+		
+		return dao.loadHospitalInfo(sqlSession, hospitalNum);
+		
+	}
 	
 	
 	

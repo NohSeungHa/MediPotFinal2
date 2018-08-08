@@ -67,4 +67,8 @@
 	<select id="selectHospitalInfo" parameterType="_int" resultType="hospitalInfos">
 		select * from hospitalInfo where hospitalInfoNum=#{hospitalNum}
 	</select>
+	
+	<select id="loadHospitalInfo" parameterType="_int" resultType="_int">
+		select count(*) from hospitalInfo where hospitalInfoNum=#{hospitalNum}
+	</select>
 </mapper>

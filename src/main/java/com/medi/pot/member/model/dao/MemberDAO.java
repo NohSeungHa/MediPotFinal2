@@ -51,5 +51,6 @@ public interface MemberDAO {
 	String selecthospitalName(SqlSessionTemplate sqlSession, int hospitalNum);
 	int hospitalInfoinsert(SqlSessionTemplate sqlSession, HospitalInfos hospitalInfo);
 	HospitalInfos selectHospitalInfo(SqlSessionTemplate sqlSession, int hospitalNum);
+	int loadHospitalInfo(SqlSessionTemplate sqlSession, int hospitalNum);
 
 }

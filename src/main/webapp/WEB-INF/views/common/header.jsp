@@ -85,26 +85,39 @@
 							<li><a style="text-decoration:none">승인대기 중입니다.</a></li>
 						</c:if>	
 						<c:if test="${hospitalAdmission!='0' }">
+							<c:if test="${H_Info_Count==2}">
+								<c:if test="${infoEnter=='yes' }">
+									<script>
+										
+										location.href="${path}/member/infoCount.do?hospitalNum="+${memberLoggedIn.hospitalNum};
+										
+									</script>
+								</c:if>								
+							</c:if>
 							<c:if test="${H_Info_Count==1 }">
-							
-								<c:if test="${hospitalInfo==null }">
+								<c:if test="${InfoCheck=='no' }">
 									<script>
 										alert("병원정보를 입력해주시기 바랍니다.");
 										alert("병원정보는 병원이름 - 병원정보입력에서 하시면 됩니다.");
-										location.href="${pageContext.request.contextPath}/member/infoCount.do";
+										location.href="${path}/member/infoCount.do?hospitalNum="+${memberLoggedIn.hospitalNum};
 									</script>
 								</c:if>
-								
+								<c:if test="${H_Info_Count==1 }">
+									<script>
+										
+										location.href="${path}/member/infoCount.do?hospitalNum="+${memberLoggedIn.hospitalNum};
+									</script>
+								</c:if>
 							</c:if>
 							
 							<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${memberLoggedIn.hospitalName }&nbsp;님 환영합니다.<span class="caret"></span></a>
 							<ul class="dropdown-menu">
 								<li><a href="${pageContext.request.contextPath }/member/mypage.do?user_id=${memberLoggedIn.hospitalId}&checkPH=${checkPH}">마이페이지</a></li>
-								<c:if test="${hospitalInfo == null }">
+								<c:if test="${InfoCheck=='no' }">
 									<li><a href="${pageContext.request.contextPath }/member/hospitalInfo.do?hospitalNum=${memberLoggedIn.hospitalNum}">병원정보입력</a></li>
 								</c:if>
-								<c:if test="${ hospitalInfo != null }">
+								<c:if test="${InfoCheck=='yes' or infoEnter=='yes' }">
 									<li><a href="${pageContext.request.contextPath }/member/hospitalInfoUpdate.do?hospitalNum=${memberLoggedIn.hospitalNum}">병원정보수정</a></li>
 								</c:if>
 							</ul>

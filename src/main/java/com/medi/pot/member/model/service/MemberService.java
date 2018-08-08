@@ -47,4 +47,5 @@ public interface MemberService {
 	String selecthospitalName(int hospitalNum);
 	int hospitalInfoinsert(HospitalInfos hospitalInfo);
 	HospitalInfos selectHospitalInfo(int hospitalNum);
+	int loadHospitalInfo(int hospitalNum);
 }

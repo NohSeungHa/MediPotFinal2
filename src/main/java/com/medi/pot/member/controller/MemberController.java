@@ -44,12 +44,13 @@ import com.medi.pot.reservation.model.vo.DoctorInfo;
 import com.medi.pot.reservation.model.vo.HospitalInfo;
 
 
-@SessionAttributes(value={"memberLoggedIn", "checkPH", "emailCheck", "H_Info_Count"})
+@SessionAttributes(value={"memberLoggedIn", "checkPH", "emailCheck", "H_Info_Count", "InfoCheck", "infoEnter"})
 
 @Controller
 public class MemberController {
-	
+		
 	int H_Info_Count = 1;
+	String InfoCheck = "";
 	
 	@Autowired
 	private MemberService service;
@@ -291,9 +292,8 @@ public class MemberController {
 		System.out.println("로그인을 실행.." + PnH + "..." + memberId + "..." + memberPw);
 		// P = 개인 (Person)
 		// H = 병원 (Hospital)
-		String msg = "";
+		String msg = "로그인 성공!";
 		String loc = "/";
-		boolean PnHcheck = false;
 		H_Info_Count=1;
 		
 		Member m = new Member();
@@ -303,44 +303,43 @@ public class MemberController {
 			m = service.loginMemberCheck(memberId);
 			
 			if(m==null) {
-				
+				msg = "로그인 실패!";
 			}else {
 				if(bcrypt.matches(memberPw, m.getMemberPw())) {
 					model.addAttribute("memberLoggedIn",m);
 					model.addAttribute("checkPH","P");
-					PnHcheck = true;
 				}
 			}
 		}
 		if(PnH.equals("H")){
 			h = service.loginHospitalCheck(memberId);
 			if(h==null) {
-				
+				msg = "로그인 실패!";
 			}else {
 				String hos_admi = h.getHospitalAdmission();
 				HospitalInfos hospitalInfo = service.selectHospitalInfo(h.getHospitalNum());
-				System.out.println(hospitalInfo);
+				System.out.println("hospitalInfo -> \n" + hospitalInfo);
 				if(bcrypt.matches(memberPw, h.getHospitalPw())) {
 					model.addAttribute("memberLoggedIn",h);
 					model.addAttribute("checkPH","H");
 					model.addAttribute("hospitalAdmission",hos_admi);
-					model.addAttribute("hospitalInfo",hospitalInfo);
+					if(hospitalInfo != null) {
+						InfoCheck = "yes";
+						model.addAttribute("InfoCheck",InfoCheck);
+					}
+					if(hospitalInfo == null){
+						InfoCheck = "no";
+						model.addAttribute("InfoCheck",InfoCheck);
+					}
 					
-					PnHcheck = true;
 					if(hos_admi.equals("0")) {
 						return "member/permission";
 					}
-					if(hospitalInfo == null) {
-						model.addAttribute("H_Info_Count", H_Info_Count);
-					}
+					
+					model.addAttribute("H_Info_Count", H_Info_Count);
+					
 				}
 			}
-		}
-		
-		if(PnHcheck) {
-			msg = "로그인 성공!";
-		} else {
-			msg = "로그인 실패!";
 		}
 		
 		model.addAttribute("msg", msg);
@@ -361,10 +360,31 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
-	@RequestMapping("/member/infoCount")
-	public String infoCount(Model model) {
+	@RequestMapping("/member/infoCount.do")
+	public String infoCount(int hospitalNum, Model model) {
+		
+		boolean infochk = service.loadHospitalInfo(hospitalNum)==1?true:false;
+		if(infochk) {
+			InfoCheck = "yes";
+			model.addAttribute("InfoCheck", InfoCheck);
+		}
 		H_Info_Count++;
 		model.addAttribute("H_Info_Count", H_Info_Count);
+		
+		return "redirect:/";
+	}
+	
+	@RequestMapping("/member/hospitalInfoLoad.do")
+	public String loadHosInfo(int hospitalNum, Model model) {
+		System.out.println("첫번째 들어왔니?");
+		boolean infochk = service.loadHospitalInfo(hospitalNum)==1?true:false;
+		System.out.println(infochk);
+		if(infochk) {
+			InfoCheck = "yes";
+			model.addAttribute("InfoCheck", InfoCheck);
+			model.addAttribute("infoEnter", "yes");
+			System.out.println("들어왔니?");
+		}
 		
 		return "redirect:/";
 	}
@@ -790,9 +810,9 @@ public class MemberController {
 		if(result > 0) {
 			msg = "병원정보 등록성공";
 		} else {
-			msg = "병원정보 등록실패";
+			msg = "(잘못된 경로)이미 등록된 병원정보가 있습니다.";
 		}
-		
+		model.addAttribute("infoEnter", "yes");
 		model.addAttribute("msg",msg);
 		model.addAttribute("loc",loc);
 		
