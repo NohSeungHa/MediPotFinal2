@@ -45,7 +45,7 @@
 <!-- Container (Contact Section) -->
 <div class="container">
 	<br>
-	<a id="noticeHv" href="${path}/notice/noticeList.do?checkPH=${chPH}" style="float: right;">공지사항</a>
+	<a id="helpZoneHv" href="${path}/helpZone/helpZoneList.do?" style="float: right;">공지사항</a>
 	<p style="float: right;">
 		<b style="margin-right:10px;">></b>
 	</p>
@@ -72,7 +72,7 @@
 					<td>
 						<label class="checkbox-inline"><input type="radio" value="건강" name="helpZoneKeyWord" id="helpZoneKeyWord">건강</label>
 						<label class="checkbox-inline"><input type="radio" value="치료" name="helpZoneKeyWord" id="helpZoneKeyWord">치료</label>
-						<label class="checkbox-inline"><input type="radio" value="기타" name="helpZoneKeyWord" id="helpZoneKeyWord">기타</label>
+						<label class="checkbox-inline"><input type="radio" value="기타" name="helpZoneKeyWord" id="helpZoneKeyWord" checked>기타</label>
 					</td>
 				</tr>
 				<tr>
@@ -87,7 +87,7 @@
 				</tr>
 			</tbody>
 		</table>
-		<button type="button" onclick="noticeList()" class="btn btn-danger btn-lg" style="float: right; margin-left: 10px;">취소</button> 
+		<button type="button" onclick="helpZoneList()" class="btn btn-danger btn-lg" style="float: right; margin-left: 10px;">취소</button> 
 		<input type="submit" value="등록" onclick="return validate();" class="btn btn-primary btn-lg" style="float: right;"/>
 		</form>
 		<button type="button" class="btn btn-success btn-lg" onclick="helpZoneList()">목록으로</button>

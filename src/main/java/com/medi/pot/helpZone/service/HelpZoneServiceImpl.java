@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.medi.pot.helpZone.dao.HelpZoneDao;
 import com.medi.pot.helpZone.vo.HelpZone;
+import com.medi.pot.member.model.vo.Member;
 
 @Service
 public class HelpZoneServiceImpl implements HelpZoneService {
@@ -31,6 +32,21 @@ public class HelpZoneServiceImpl implements HelpZoneService {
 	public int selectCount() {
 		return helpZoneDao.selectCount();
 	}
+
+	@Override
+	public HelpZone selectHelpZone(int helpZoneNum) {
+		return helpZoneDao.selectHelpZone(helpZoneNum);
+	}
+
+	//글불러올 때, 작성자만 불러오는 메서드
+	@Override
+	public Member selectMember(int helpZoneQuestioner) {
+		return helpZoneDao.selectMember(helpZoneQuestioner);
+	}
+	
+	
+	
+	
 	
 	
 

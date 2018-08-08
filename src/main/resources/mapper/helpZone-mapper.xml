@@ -10,4 +10,10 @@
 	<select id="count" resultType="_int">
 		select count(*) from HELPZONE
 	</select>
+	<select id="selectHelpZone" parameterType="_int" resultType="HelpZone">
+		select * from helpZone where helpZoneNum=#{helpZoneNum}
+	</select>
+	<select id="selectMember" parameterType="_int" resultType="Member">
+		select * from member where membernum=#{helpZoneQuestioner}
+	</select>
 </mapper>

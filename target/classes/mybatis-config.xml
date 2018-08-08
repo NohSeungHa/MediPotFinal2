@@ -26,10 +26,7 @@
 		
 		<!-- 예약 List -->
 		<typeAlias alias="ReserList" type="com.medi.pot.reservation.model.vo.ReserList" />
-<<<<<<< HEAD
-=======
 
->>>>>>> sh
 	</typeAliases>
 
 </configuration>

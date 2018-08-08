@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.medi.pot.common.page.PageCreate;
 import com.medi.pot.helpZone.service.HelpZoneService;
 import com.medi.pot.helpZone.vo.HelpZone;
+import com.medi.pot.member.model.vo.Member;
 
 @Controller
 public class HelpZoneController {
@@ -29,13 +30,13 @@ public class HelpZoneController {
 	@RequestMapping("/helpZone/helpZoneList.do")
 	public ModelAndView helpZoneList(@RequestParam(value="cPage", required=false,defaultValue="1") int cPage) {
 		ModelAndView mv = new ModelAndView();
-		int numPerPage=10;		
+		int numPerPage=6;		
 		List<HelpZone> list = service.selectHelpZoneList(cPage,numPerPage);
 		System.out.println("list : "+list);
 		
 		int totalCount=service.selectCount();
 		
-		String pageBar=new PageCreate().getPageBar(cPage, numPerPage,totalCount,"/helpZone/helpZoneList");
+		String pageBar=new PageCreate().getPageBar(cPage, numPerPage,totalCount,"helpZoneList.do");
 		mv.addObject("pageBar",pageBar);
 		mv.addObject("list",list);
 		mv.addObject("cPage",cPage);
@@ -59,14 +60,12 @@ public class HelpZoneController {
 		System.out.println("helpZoneQuestioner :" + helpZoneQuestioner);
 		System.out.println("helpZoneKeyword :" + helpZoneKeyWord);
 		System.out.println("helpZoneContent :" + helpZoneContent);*/
-		
 		//파일업로드
 		//저장 위치 지정
 		String saveDir=request.getSession().getServletContext().getRealPath("/resources/uploadfile/helpZone");
 		HelpZone helpZone = new HelpZone();
 	    File dir=new File(saveDir);
 	      if(dir.exists()==false) System.out.println(dir.mkdirs());//폴더생성
-	      System.out.println(helpZoneFile);
 	      if(!helpZoneFile.isEmpty()) {
 	      String originalFileName=helpZoneFile.getOriginalFilename();
 	      //확장자 구하기
@@ -108,4 +107,15 @@ public class HelpZoneController {
 	      
 	      return mv;
 	}
+	
+	@RequestMapping("/helpZone/helpZoneView.do")
+	public String helpZoneView(int helpZoneNum, HttpServletRequest req){
+		HelpZone helpZone = service.selectHelpZone(helpZoneNum);//헬프존 불러오는 메서드
+		Member m = service.selectMember(helpZone.getHelpZoneQuestioner());	//작성자 불러오는 메서드
+		req.setAttribute("helpZone", helpZone);
+		req.setAttribute("helpZoneQuestioner", m);
+		return "helpZone/helpZoneView";
+	}
+	
+	
 }

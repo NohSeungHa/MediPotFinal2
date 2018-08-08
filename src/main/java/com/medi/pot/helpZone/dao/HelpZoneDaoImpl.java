@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.medi.pot.helpZone.vo.HelpZone;
+import com.medi.pot.member.model.vo.Member;
 
 @Repository
 public class HelpZoneDaoImpl implements HelpZoneDao {
@@ -30,6 +31,18 @@ public class HelpZoneDaoImpl implements HelpZoneDao {
 	public int selectCount() {
 		return session.selectOne("helpZone.count");
 	}
+
+	@Override
+	public HelpZone selectHelpZone(int helpZoneNum) {
+		return session.selectOne("helpZone.selectHelpZone", helpZoneNum);
+	}
+
+	@Override
+	public Member selectMember(int helpZoenQuestioner) {
+		return session.selectOne("helpZone.selectMember", helpZoenQuestioner);
+	}
+	
+	
 	
 	
 
