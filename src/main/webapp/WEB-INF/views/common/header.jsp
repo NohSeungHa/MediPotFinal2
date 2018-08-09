@@ -97,8 +97,8 @@
 							<c:if test="${H_Info_Count==1 }">
 								<c:if test="${InfoCheck=='no' }">
 									<script>
-										alert("병원정보를 입력해주시기 바랍니다.");
-										alert("병원정보는 병원이름 - 병원정보입력에서 하시면 됩니다.");
+										alert("병원정보를 등록 후 이용해주시기 바랍니다.");
+										alert("병원정보는 병원이름탭 - 병원정보입력에서 등록하시면 됩니다.");
 										location.href="${path}/member/infoCount.do?hospitalNum="+${memberLoggedIn.hospitalNum};
 									</script>
 								</c:if>
@@ -119,6 +119,10 @@
 								</c:if>
 								<c:if test="${InfoCheck=='yes' or infoEnter=='yes' }">
 									<li><a href="${pageContext.request.contextPath }/member/hospitalInfoUpdate.do?hospitalNum=${memberLoggedIn.hospitalNum}">병원정보수정</a></li>
+								</c:if>
+								<li><a href="${pageContext.request.contextPath }/member/doctorInfoInsert.do?hospitalNum=${memberLoggedIn.hospitalNum}">의사 추가</a></li>
+								<c:if test="${InfoCheck=='yes' }">
+									<li><a href="${pageContext.request.contextPath }/member/doctorInfoUpdate.do?hospitalNum=${memberLoggedIn.hospitalNum}">의사 수정</a></li>
 								</c:if>
 							</ul>
 							</li>

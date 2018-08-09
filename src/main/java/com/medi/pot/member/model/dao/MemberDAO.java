@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
+import com.medi.pot.member.model.vo.DoctorInfos;
 import com.medi.pot.member.model.vo.Hospital;
 import com.medi.pot.member.model.vo.HospitalInfos;
 import com.medi.pot.member.model.vo.Member;
@@ -49,8 +50,15 @@ public interface MemberDAO {
 	int updateAdmission(SqlSessionTemplate sqlSession, int hospitalNum);
 	int hospitalCount(SqlSessionTemplate sqlSession);
 	String selecthospitalName(SqlSessionTemplate sqlSession, int hospitalNum);
+	Hospital selectHospital(SqlSessionTemplate sqlSession, int hospitalNum);
 	int hospitalInfoinsert(SqlSessionTemplate sqlSession, HospitalInfos hospitalInfo);
+	
+	/* 병원정보 */
 	HospitalInfos selectHospitalInfo(SqlSessionTemplate sqlSession, int hospitalNum);
 	int loadHospitalInfo(SqlSessionTemplate sqlSession, int hospitalNum);
-
+	
+	/* 의사정보 */
+	List<DoctorInfos> selectDoctorInfo(SqlSessionTemplate sqlSession, int hospitalNum);
+	int doctorInfoInsert(SqlSessionTemplate sqlSession, DoctorInfos doctorInfo);
+	
 }

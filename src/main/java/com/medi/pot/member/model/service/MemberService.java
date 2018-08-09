@@ -3,6 +3,7 @@ package com.medi.pot.member.model.service;
 import java.util.List;
 import java.util.Map;
 
+import com.medi.pot.member.model.vo.DoctorInfos;
 import com.medi.pot.member.model.vo.Hospital;
 import com.medi.pot.member.model.vo.HospitalInfos;
 import com.medi.pot.member.model.vo.Member;
@@ -45,7 +46,15 @@ public interface MemberService {
 	int updateAdmission(int hospitalNum);
 	int hospitalCount();
 	String selecthospitalName(int hospitalNum);
+	Hospital selectHospital(int hospitalNum);
 	int hospitalInfoinsert(HospitalInfos hospitalInfo);
+	
+	/* 병원정보 */
 	HospitalInfos selectHospitalInfo(int hospitalNum);
 	int loadHospitalInfo(int hospitalNum);
+	
+	/* 의사정보 */
+	List<DoctorInfos> selectDoctorInfo(int hospitalNum); // 전체뽑기
+	int doctorInfoInsert(DoctorInfos doctorInfo); // 등록
+	
 }

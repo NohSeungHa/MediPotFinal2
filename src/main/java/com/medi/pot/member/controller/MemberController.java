@@ -37,6 +37,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.medi.pot.common.page.PageCreate;
 import com.medi.pot.member.model.service.MemberService;
+import com.medi.pot.member.model.vo.DoctorInfos;
 import com.medi.pot.member.model.vo.Hospital;
 import com.medi.pot.member.model.vo.HospitalInfos;
 import com.medi.pot.member.model.vo.Member;
@@ -374,19 +375,83 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
-	@RequestMapping("/member/hospitalInfoLoad.do")
-	public String loadHosInfo(int hospitalNum, Model model) {
-		System.out.println("첫번째 들어왔니?");
-		boolean infochk = service.loadHospitalInfo(hospitalNum)==1?true:false;
-		System.out.println(infochk);
-		if(infochk) {
-			InfoCheck = "yes";
-			model.addAttribute("InfoCheck", InfoCheck);
-			model.addAttribute("infoEnter", "yes");
-			System.out.println("들어왔니?");
+	@RequestMapping("/member/doctorInfoInsert.do")
+	public String doctorInsert(int hospitalNum, Model model) {
+		System.out.println("의사등록으로 들어옴");
+		System.out.println(hospitalNum);
+		Hospital hospital = service.selectHospital(hospitalNum);
+		
+		model.addAttribute("hospital", hospital);
+		
+		return "member/doctorInsert";
+	}
+	
+	@RequestMapping("/member/doctorInfoInsertEnd.do")
+	public String doctorInsertEnd(Model model, String doctorName,
+			String doctorCareer, int hospitalNum, String[] professional,
+			String doctorSlunch, String doctorElunch, String WeekdayStime,
+			String WeekdayEtime, String SatStime, String SatEtime,
+			String closed, String Specialized, String timeInterval, 
+			@RequestParam(value="doctorPhoto", required=false) MultipartFile doctorPhoto,
+			HttpServletRequest request) {
+		
+		System.out.println("의사등록을 실행");
+		String msg = "";
+		String loc = "";
+		
+		DoctorInfos doctorInfo = new DoctorInfos(0, doctorName, doctorCareer, hospitalNum, professional, doctorSlunch, doctorElunch, WeekdayStime, WeekdayEtime, SatStime, SatEtime, closed, Specialized, null, null, timeInterval);
+		
+		String saveDir=request.getSession().getServletContext().getRealPath("/resources/uploadfile/dortors");
+		
+		File dir=new File(saveDir);
+		if(dir.exists()==false) System.out.println(dir.mkdirs());//폴더생성
+		System.out.println(doctorPhoto);
+		if(!doctorPhoto.isEmpty()) {
+		String originalFileName=doctorPhoto.getOriginalFilename();
+		
+		//확장자 구하기
+		String ext=originalFileName.substring(originalFileName.lastIndexOf(".")+1);
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
+		int rndNum=(int)(Math.random()*1000);
+		String renamedFileName=sdf.format(new Date(System.currentTimeMillis()));
+		renamedFileName+="_"+rndNum+"."+ext;
+		try 
+		{
+			doctorPhoto.transferTo(new File(saveDir+File.separator+renamedFileName));
+		}
+		catch(IOException e)
+		{
+			e.printStackTrace();
+		}
+			//DB에 저장할 첨부파일에 대한 정보를 구성!
+			doctorInfo.setDoctorPhoto(originalFileName);
+			doctorInfo.setDoctorRePhoto(renamedFileName);
 		}
 		
-		return "redirect:/";
+		int result = service.doctorInfoInsert(doctorInfo);
+		
+		if(result > 0) {
+			msg = "의사정보 추가 성공";
+		}
+		else {
+			msg = "의사정보 추가 실패";
+		}
+		
+		model.addAttribute("msg",msg);
+		model.addAttribute("loc",loc);
+		
+		return "common/msg";
+	}
+	
+	@RequestMapping("/member/doctorInfoUpdate.do")
+	public String doctorUpdate(int hospitalNum, Model model) {
+		System.out.println("의사수정으로 들어옴");
+		
+		List<DoctorInfos> docinfo = service.selectDoctorInfo(hospitalNum);
+		
+		model.addAttribute("docinfo", docinfo);
+		
+		return "member/doctorsPage";
 	}
 	
 	@RequestMapping("/member/mypage.do")
@@ -567,61 +632,6 @@ public class MemberController {
 		}
 		res.getWriter().print(check);
 	}
-	
-	/*@RequestMapping("/member/FindemailEnd.do")
-	public String FindemailResponse(String memberEmail, Model model) {
-
-		Properties prop = new Properties();
-		prop.put("mail.smtp.host", "smtp.gmail.com");
-		prop.put("mail.smtp.port", 465);
-		prop.put("mail.smtp.auth", "true");
-		prop.put("mail.smtp.ssl.enable", "true");
-		prop.put("mail.smtp.ssl.trust", "smtp.gmail.com");
-
-		Session session = Session.getDefaultInstance(prop, new javax.mail.Authenticator() {
-			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication("ppj1017@gmail.com", "ahfmrqhd1!a");
-			}
-		});
-		int ra=0;
-	      
-		try {
-			MimeMessage message = new MimeMessage(session);
-			message.setFrom(new InternetAddress("ppj1017@gmail.com",MimeUtility.encodeText("MediPot 관리자","UTF-8","B")));
-	            
-
-			//수신자메일주소
-			message.addRecipient(Message.RecipientType.TO, new InternetAddress(memberEmail)); 
-
-			// Subject
-			message.setSubject("MediPot 메일 인증"); //메일 제목을 입력
-
-			// Text
-	               
-			while(true) {
-				ra=(int)(Math.random()*10000);
-				if(ra>1000) {
-					break;
-				}
-			}
-			
-			message.setText("인증번호[ "+ra+" ]");    //메일 내용을 입력
-			
-			
-			// send the message
-			Transport.send(message); ////전송
-			
-			
-			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-		
-		model.addAttribute("ra", ra);
-		
-		return "member/emailEnd";
-	}*/
 	
 	@RequestMapping("/member/memberFindId.do")
 	public String FindIdprint(String findname, String findemail, Model model) {
@@ -817,6 +827,15 @@ public class MemberController {
 		model.addAttribute("loc",loc);
 		
 		return "common/msg";
+	}
+	
+	@RequestMapping("/member/hospitalInfoUpdate.do")
+	public String hospitalInfoUpdate(int hospitalNum, Model model) {
+		System.out.println("병원정보 수정으로 들어옴");
+		
+		//// 병원정보를 받고 수정 jsp로 보내주기
+		
+		return "member/hospitalUpdate";
 	}
 	
 }

@@ -7,6 +7,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.medi.pot.member.model.vo.DoctorInfos;
 import com.medi.pot.member.model.vo.Hospital;
 import com.medi.pot.member.model.vo.HospitalInfos;
 import com.medi.pot.member.model.vo.Member;
@@ -181,6 +182,13 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
+	public Hospital selectHospital(SqlSessionTemplate sqlSession, int hospitalNum) {
+		
+		return sqlSession.selectOne("hospital.selectHospital", hospitalNum);
+		
+	}
+
+	@Override
 	public int hospitalInfoinsert(SqlSessionTemplate sqlSession, HospitalInfos hospitalInfo) {
 		
 		return sqlSession.insert("hospital.hospitalInfoinsert", hospitalInfo);
@@ -198,6 +206,20 @@ public class MemberDAOImpl implements MemberDAO {
 	public int loadHospitalInfo(SqlSessionTemplate sqlSession, int hospitalNum) {
 		
 		return sqlSession.selectOne("hospital.loadHospitalInfo", hospitalNum);
+		
+	}
+
+	@Override
+	public List<DoctorInfos> selectDoctorInfo(SqlSessionTemplate sqlSession, int hospitalNum) {
+		
+		return sqlSession.selectList("hospital.selectDoctorInfo", hospitalNum);
+		
+	}
+
+	@Override
+	public int doctorInfoInsert(SqlSessionTemplate sqlSession, DoctorInfos doctorInfo) {
+		
+		return sqlSession.insert("hospital.doctorinfoinsert", doctorInfo);
 		
 	}
 

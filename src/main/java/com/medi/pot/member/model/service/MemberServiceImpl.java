@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.medi.pot.member.model.dao.MemberDAO;
+import com.medi.pot.member.model.vo.DoctorInfos;
 import com.medi.pot.member.model.vo.Hospital;
 import com.medi.pot.member.model.vo.HospitalInfos;
 import com.medi.pot.member.model.vo.Member;
@@ -183,6 +184,13 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
+	public Hospital selectHospital(int hospitalNum) {
+		
+		return dao.selectHospital(sqlSession, hospitalNum);
+		
+	}
+
+	@Override
 	public int hospitalInfoinsert(HospitalInfos hospitalInfo) {
 		
 		return dao.hospitalInfoinsert(sqlSession, hospitalInfo);
@@ -202,7 +210,20 @@ public class MemberServiceImpl implements MemberService {
 		return dao.loadHospitalInfo(sqlSession, hospitalNum);
 		
 	}
-	
+
+	@Override
+	public List<DoctorInfos> selectDoctorInfo(int hospitalNum) {
+		
+		return dao.selectDoctorInfo(sqlSession, hospitalNum);
+		
+	}
+
+	@Override
+	public int doctorInfoInsert(DoctorInfos doctorInfo) {
+		
+		return dao.doctorInfoInsert(sqlSession, doctorInfo);
+		
+	}
 	
 	
 }

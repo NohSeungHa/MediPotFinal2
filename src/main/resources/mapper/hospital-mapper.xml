@@ -2,6 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="hospital">
 
+	<resultMap type="doctorInfos" id="doctorInfosMap">
+		<result column="professional" property="professional" typeHandler="StringArray"/>
+	</resultMap>
+
 	<select id="checkId" parameterType="string" resultType="_int">
 		select count(*) from hospital where hospitalId=#{hospitalId}
 	</select>
@@ -52,6 +56,10 @@
 		select hospitalName from hospital where hospitalNum=#{hospitalNum}
 	</select>
 	
+	<select id="selectHospital" parameterType="_int" resultType="hospital">
+		select * from hospital where hospitalNum=#{hospitalNum}
+	</select>
+	
 	<insert id="hospitalInfoinsert" parameterType="hospitalInfos">
 		INSERT INTO HOSPITALINFO values(
 			#{hospitalInfoNum},
@@ -71,4 +79,29 @@
 	<select id="loadHospitalInfo" parameterType="_int" resultType="_int">
 		select count(*) from hospitalInfo where hospitalInfoNum=#{hospitalNum}
 	</select>
+	
+	<select id="selectDoctorInfo" parameterType="_int" resultType="doctorInfos">
+		select * from doctorInfo where hospitalNo=#{hospitalNum}
+	</select>
+	
+	<insert id="doctorinfoinsert" parameterType="doctorInfos">
+		insert into doctorInfo values(
+			doctorinfo_seq.nextval,
+			#{doctorName},
+			#{doctorCareer},
+			#{hospitalNo},
+			#{professional, typeHandler=StringArray},
+			#{doctorSlunch},
+			#{doctorElunch},
+			#{WeekdayStime},
+			#{WeekdayEtime},
+			#{SatStime},
+			#{SatEtime},
+			#{Closed},
+			#{Specialized},
+			#{doctorPhoto},
+			#{doctorRePhoto},
+			#{timeInterval}
+		)
+	</insert>
 </mapper>
