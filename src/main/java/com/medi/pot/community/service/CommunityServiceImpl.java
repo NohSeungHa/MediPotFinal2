@@ -8,15 +8,10 @@ import org.springframework.stereotype.Service;
 
 import com.medi.pot.community.dao.CommunityDAO;
 import com.medi.pot.community.vo.Community;
+import com.medi.pot.community.vo.CommunityComment;
 
 @Service
 public class CommunityServiceImpl implements CommunityService {
-
-
-	
-
-	
-
 
 	@Autowired
 	private CommunityDAO communityDAO;
@@ -88,6 +83,66 @@ public class CommunityServiceImpl implements CommunityService {
 	@Override
 	public int updateCommunity(Community com) {
 		return communityDAO.updateCommunity(sqlsession,com);
+	}
+	
+	//자유게시판 title 검색
+	@Override
+	public List<Community> selectTitleSearch(int cPage, int numPerPage, String searchContent) {
+		return communityDAO.selectTitleSearch(sqlsession,cPage,numPerPage,searchContent);
+	}
+
+	//자유게시판 content 검색
+	@Override
+	public List<Community> selectContentSearch(int cPage, int numPerPage, String searchContent) {
+		return communityDAO.selectContentSearch(sqlsession,cPage,numPerPage,searchContent);
+	}
+
+	//자유게시판 writer 검색
+	@Override
+	public List<Community> selectWriterSearch(int cPage, int numPerPage, String searchContent) {
+		return communityDAO.selectWriterSearch(sqlsession,cPage,numPerPage,searchContent);
+	}
+
+	//자유게시판 title 검색 count
+	@Override
+	public int selectTitleSearchCount(String searchContent) {
+		return communityDAO.selectTitleSearchCount(sqlsession, searchContent);
+	}
+
+	//자유게시판 content 검색 count
+	@Override
+	public int selectContentSearchCount(String searchContent) {
+		return communityDAO.selectContentSearchCount(sqlsession, searchContent);
+	}
+
+	//자유게시판 writer 검색 count
+	@Override
+	public int selectWriterSearchCount(String searchContent) {
+		return communityDAO.selectWriterSearchCount(sqlsession, searchContent);
+	}
+	
+	//자유게시판 댓글 insert
+	@Override
+	public int insertCommunityComment(CommunityComment cc1) {
+		return communityDAO.insertCommunityComment(sqlsession,cc1);
+	}
+
+	//자유게시판 댓글 List
+	@Override
+	public List<CommunityComment> selectListCommunityComment(int cPage,int numPerPage,int no) {
+		return communityDAO.selectListCommunityComment(sqlsession,cPage,numPerPage,no);
+	}
+
+	//자유게시판 마지막 댓글
+	@Override
+	public CommunityComment selectOneCommunityComment() {
+		return communityDAO.selectOneCommunityComment(sqlsession);
+	}
+	
+	//자유게시판 댓글 갯수
+	@Override
+	public int communityCommentCount(int no) {
+		return communityDAO.communityCommentCount(sqlsession,no);
 	}
 }
 

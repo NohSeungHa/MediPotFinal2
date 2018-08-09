@@ -52,7 +52,7 @@
 				</tr>
 				<tr>
 					<th>내용:</th>
-					<td><textarea style="resize: none;" class="form-control" placeholder="내용을 입력하세요.(500자이내)"
+					<td><textarea style="resize: none;" class="form-control" placeholder="내용을 입력하세요.(1000자이내)"
 							rows="5" id="comment" name="content" onKeyUp="checkLength(this);" onKeyDown="checkLength(this);"></textarea></td>
 				</tr>
 				<tr>

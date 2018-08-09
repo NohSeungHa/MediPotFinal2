@@ -41,10 +41,10 @@
 	</select>
 	<!-- 게시글 검색 count -->
 	<select id="selectTitleSearchCount" resultType="_int" parameterType="string">
-		select count(*) from HospitalNotice where hospitalNoticeTitle LIKE #{searchContent}
+		select count(*) from HospitalNotice where hospitalNoticeTitle LIKE #{searchContent} order by hospitalNoticeDate desc
 	</select>
 	<select id="selectContentSearchCount" resultType="_int" parameterType="string">
-		select count(*) from HospitalNotice WHERE hospitalNoticeContent LIKE #{searchContent}
+		select count(*) from HospitalNotice WHERE hospitalNoticeContent LIKE #{searchContent} order by hospitalNoticeDate desc
 	</select>
 	<!-- 게시글 수정 -->
 	<update id="updateNotice" parameterType="HospitalNotice">

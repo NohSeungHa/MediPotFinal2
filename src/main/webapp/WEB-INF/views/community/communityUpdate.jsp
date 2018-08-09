@@ -27,7 +27,7 @@
 <br>
 <div class="container">
 	<img class="img-thumbnail"
-		src="/pot/resources/img/notice/communityUpdate.jpg"
+		src="/pot/resources/img/community/communityUpdate.jpg"
 		style="width: 100%;"> <br>
 	<br>
 	<a id="communityHv" href="${path}/community/communityList.do" style="float: right;">자유게시판</a>

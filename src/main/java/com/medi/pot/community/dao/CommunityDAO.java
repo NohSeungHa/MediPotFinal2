@@ -5,6 +5,7 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 
 import com.medi.pot.community.vo.Community;
+import com.medi.pot.community.vo.CommunityComment;
 
 public interface CommunityDAO {
 	
@@ -40,6 +41,36 @@ public interface CommunityDAO {
 	
 	//자유게시판 글 수정
 	int updateCommunity(SqlSessionTemplate sqlsession,Community com);
+	
+	//자유게시판 검색 title
+	List<Community> selectTitleSearch(SqlSessionTemplate sqlsession, int cPage,int numPerPage,String searchContent);
+		
+	//자유게시판 검색 content
+	List<Community> selectContentSearch(SqlSessionTemplate sqlsession, int cPage,int numPerPage,String searchContent);
+		
+	//자유게시판 검색 writer
+	List<Community> selectWriterSearch(SqlSessionTemplate sqlsession, int cPage,int numPerPage,String searchContent);
+		
+	//자유게시판 검색 title count
+	int selectTitleSearchCount(SqlSessionTemplate sqlsession, String searchContent);
+		
+	//자유게시판 검색 content count
+	int selectContentSearchCount(SqlSessionTemplate sqlsession, String searchContent);
+		
+	//자유게시판 검색 writer count
+	int selectWriterSearchCount(SqlSessionTemplate sqlsession, String searchContent);
+	
+	//자유게시판 댓글 insert
+	int insertCommunityComment(SqlSessionTemplate sqlsession,CommunityComment cc1);
+	
+	//자유게시판 댓글 List
+	List<CommunityComment> selectListCommunityComment(SqlSessionTemplate sqlsession,int cPage,int numPerPage,int no);
+	
+	//자유게시판 마지막 댓글
+	CommunityComment selectOneCommunityComment(SqlSessionTemplate sqlsession);
+	
+	//자유게시판 댓글 갯수
+	int communityCommentCount(SqlSessionTemplate sqlsession,int no);
 }
 
 
