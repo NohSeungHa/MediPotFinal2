@@ -41,6 +41,13 @@ public class HelpZoneDaoImpl implements HelpZoneDao {
 	public Member selectMember(int helpZoenQuestioner) {
 		return session.selectOne("helpZone.selectMember", helpZoenQuestioner);
 	}
+
+	@Override
+	public int deleteHelpZone(int num) {
+		return session.delete("helpZone.deleteHelpZone", num);
+	}
+	
+	
 	
 	
 	

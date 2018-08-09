@@ -43,6 +43,11 @@ public class HelpZoneServiceImpl implements HelpZoneService {
 	public Member selectMember(int helpZoneQuestioner) {
 		return helpZoneDao.selectMember(helpZoneQuestioner);
 	}
+
+	@Override
+	public int deleteHelpZone(int num) {
+		return helpZoneDao.deleteHelpZone(num);
+	}
 	
 	
 	
