@@ -10,7 +10,7 @@
 </jsp:include>
 <div class="container">
 	<div style="height:auto;">
-		<div><img src="${path }/resources/img/reser/listImg4.png" width="100%" height="280px;"></div>
+		<div><img src="${path }/resources/img/reser/listImg5.png" width="100%" height="280px;"></div>
 		<br><br>
 		<table id="reserLi" class="table table-hover" style="text-align: center;border-top:2px solid lightgray;">
 			<thead>

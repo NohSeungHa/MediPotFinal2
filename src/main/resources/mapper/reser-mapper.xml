@@ -28,7 +28,7 @@
 	</select>
 	
 	<select id="selectReser" parameterType="map" resultType="MemberReservation">
-		select * from MEMBERRESERVATION full join reservationblock on(blockdate=checkdate) where ((checkdoctor=#{num} and checkdate=#{chDate}) or (blockdoctor=#{num} and blockdate=#{chDate} and blockcheck='N'))
+		select a.*,b.*,c.membername,c.membernum from MEMBERRESERVATION a full join reservationblock b on(blockdate=checkdate) full join member c on(checkmember=membernum) where ((checkdoctor=#{num} and checkdate=#{chDate}) or (blockdoctor=#{num} and blockdate=#{chDate} and blockcheck='N'))
 	</select>
 	
 	<insert id="insertReser" parameterType="MemberReservation">
@@ -46,4 +46,8 @@
 	<select id="selectReserCount" parameterType="_int" resultType="_int">
 		select count(*) from MEMBERRESERVATION where checkmember=#{num}
 	</select>
+	
+	<insert id="insertBlock" parameterType="map">
+		insert into RESERVATIONBLOCK values(#{docNum},#{hosNum},#{time},#{choiceTime},'N')
+	</insert>
 </mapper>

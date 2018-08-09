@@ -24,7 +24,7 @@
 			
 	}
 	#tblInfo{
-		font-size:25px;
+		font-size:22px;
 		max-width:900px;
 	}
 	#notice{
@@ -37,6 +37,7 @@
 		
 	}
 	#tblInfo th{
+		font-size:32px;
 		color: #286090;
 		text-align:center;
 	}

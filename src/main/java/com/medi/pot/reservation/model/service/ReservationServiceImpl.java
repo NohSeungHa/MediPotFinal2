@@ -79,6 +79,11 @@ public class ReservationServiceImpl implements ReservationService {
 	public int reserCount(int num) {
 		return reserDAO.reserCount(num);
 	}
+
+	@Override
+	public int insertBlock(Map<String, Object> map) {
+		return reserDAO.insertBlock(map);
+	}
 	
 	
 	

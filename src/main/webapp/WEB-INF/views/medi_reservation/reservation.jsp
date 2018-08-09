@@ -384,19 +384,30 @@
 	}
 	#tbl-cal{
 		width:100%;
+		
+		
+	}
+	#calList{
+		display:none;
 		border:2px solid lightgray;
 		border-radius:5px;
 		box-shadow:2px 2px 5px lightgray;
 	}
-	#calList{
+	#calList2{
+		display:none;
+	}
+	#calList3{
 		display:none;
 	}
 </style>
 
 <div style="height:1000px;">
 	<div class="col-sm-4">
-		<div style="width:100%;height:50px;font-size:20px;text-align:center;background-color:#286090;padding-top:11px;color:white;border-radius:8px;margin-bottom:10px;">
+		<div style="width:100%;height:50px;font-size:25px;text-align:center;background-color:#286090;padding-top:11px;color:white;border-radius:8px;margin-bottom:10px;">
 			의료진 정보
+		</div>
+		<div id="docInfoEx" style="text-align:center;font-size:20px;">
+			** 의사를 먼저 선택해 주세요 **
 		</div>
 		<c:if test="${empty list }">
 		<div style="text-align:center;">
@@ -435,6 +446,9 @@
 	<div class="col-sm-4">
 		<div style="width:100%;height:50px;font-size:20px;text-align:center;background-color:#286090;padding-top:11px;color:white;border-radius:8px;margin-bottom:10px;">
 			날짜 선택
+		</div>
+		<div id="calList2" style="text-align:center;font-size:20px;">
+			** 원하는 날짜를 선택해 주세요 **
 		</div>
 		<div id="calList">
 			<table id="tbl-cal" align="center">
@@ -657,6 +671,9 @@
 		<div style="width:100%;height:50px;font-size:20px;text-align:center;background-color:#286090;padding-top:11px;color:white;border-radius:8px;margin-bottom:10px;">
 			시간 선택
 		</div>
+		<div id="calList3" style="text-align:center;font-size:20px;">
+			** 원하는 시간을 선택 후 예약하기 버튼을 눌러주세요  **
+		</div>
 		<div id="timeImg" style="text-align:center;">
 			<img alt="달력사진" src="${path }/resources/img/reser/reserTime.png" height="300px;"></div>
 		<div id="timeChoice"></div>
@@ -677,6 +694,8 @@
 				dataType:"html",
 				success:function(data){
 					$('#timeImg').css("display",'none');
+					$('#calList2').css("display",'none');
+					$('#calList3').css("display",'block');
 					$('#timeChoice').html(data);
 				}
 			});
@@ -690,6 +709,8 @@
 	});
 	if(<%=docInfo!=null%>||<%=docSche!=null%>){
 		$('#calList').css('display','block');
+		$('#calList2').css('display','block');
+		$('#docInfoEx').css('display','none');
 		$('#calPhoto').css('display','none');
 		
 	}

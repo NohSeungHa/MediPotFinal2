@@ -41,14 +41,16 @@
 	
 	List<MemberReservation> list=(List<MemberReservation>)request.getAttribute("mr");
 	String checkTi="";
+	String checkTi2="";
 	for(MemberReservation mr : list){
 		checkTi+="§"+mr.getBlockTime()+"§"+mr.getCheckTime()+"§";
+		checkTi2+="§"+mr.getBlockTime()+"§";
 	}
 %>
 <style>
 	.timebut{
 		margin:5px;
-		width:72px; height:50px;
+		width:72px; height:60px;
 		font-size:20px;
 		background-color: white;
 		border-radius: 5px;
@@ -58,14 +60,14 @@
 	}
 	.ti{
 		margin:5px;
-		width:72px; height:50px;
+		width:72px; height:60px;
 		font-size:20px;
 		background-color: white;
 		border-radius: 5px;
 	}
 </style>
 	<c:if test='<%=!week.equals("토") %>'>
-		<div style="border: 2px solid lightgray;padding-left:40px;box-shadow: 3px 3px 5px lightgrey;">
+		<div style="border: 2px solid lightgray;padding-left:40px;box-shadow: 3px 3px 5px lightgrey;border-radius:5px;">
 			<h1 style="text-align: center;">${time }</h1>
 			<h1 style="text-align: center;">오전</h1>
 			<%for(int i=0;i<sycleA;i++ ){ 
@@ -73,8 +75,15 @@
 			<c:if test="<%=!checkTi.contains(sd.format(lws)) %>">
 			<button class="timebut" value="<%=sd.format(lws)%>"><%=sd2.format(lws) %></button>
 			</c:if>
-			<c:if test="<%=checkTi.contains(sd.format(lws)) %>">
-			<button class="ti" value="<%=sd.format(lws)%>" disabled="disabled" style="background-color:#A6A6A6;color:#FCFCFC;"><%=sd2.format(lws) %></button>
+			<%for(int j=0;j<list.size();j++){ %>
+			<%if(list.get(j).getCheckTime()!=null){ %>
+			<c:if test="<%=list.get(j).getCheckTime().contains(sd.format(lws)) %>">
+			<button class="ti" value="<%=sd.format(lws)%>" style="background-color:#A6A6A6;color:#FCFCFC;"><%=sd2.format(lws) %><%=list.get(j).getMemberName() %></button>
+			</c:if>
+			<%} %>
+			<%} %>
+			<c:if test="<%=checkTi2.contains(sd.format(lws)) %>">
+			<button class="ti" value="<%=sd.format(lws)%>" style="background-color:#A6A6A6;color:#FCFCFC;"><%=sd2.format(lws) %></button>
 			</c:if>
 
 			<%
@@ -86,8 +95,15 @@
 			<c:if test="<%=!checkTi.contains(sd.format(lel)) %>">
 			<button class="timebut" value="<%=sd.format(lel)%>"><%=sd2.format(lel) %></button>
 			</c:if>
-			<c:if test="<%=checkTi.contains(sd.format(lel)) %>">
-			<button class="ti" value="<%=sd.format(lel)%>" disabled="disabled" style="background-color:#A6A6A6;color:#FCFCFC;"><%=sd2.format(lel) %></button>
+			<%for(int j=0;j<list.size();j++){ %>
+			<%if(list.get(j).getCheckTime()!=null){ %>
+			<c:if test="<%=list.get(j).getCheckTime().contains(sd.format(lel)) %>">
+			<button class="ti" value="<%=sd.format(lel)%>" style="background-color:#A6A6A6;color:#FCFCFC;"><%=sd2.format(lel) %><%=list.get(j).getMemberName() %></button>
+			</c:if>
+			<%} %>
+			<%} %>
+			<c:if test="<%=checkTi2.contains(sd.format(lel)) %>">
+			<button class="ti" value="<%=sd.format(lel)%>" style="background-color:#A6A6A6;color:#FCFCFC;"><%=sd2.format(lel) %></button>
 			</c:if>
 			<%
 			lel=lel+timeI;
@@ -104,8 +120,15 @@
 			<c:if test="<%=!checkTi.contains(sd.format(lss)) %>">
 			<button class="timebut" value="<%=sd.format(lss)%>"><%=sd2.format(lss) %></button>
 			</c:if>
-			<c:if test="<%=checkTi.contains(sd.format(lss)) %>">
-			<button class="ti" value="<%=sd.format(lss)%>" disabled="disabled" style="background-color:#A6A6A6;color:#FCFCFC;"><%=sd2.format(lss) %></button>
+			<%for(int j=0;j<list.size();j++){ %>
+			<%if(list.get(j).getCheckTime()!=null){ %>
+			<c:if test="<%=list.get(j).getCheckTime().contains(sd.format(lss)) %>">
+			<button class="ti" value="<%=sd.format(lss)%>" style="background-color:#A6A6A6;color:#FCFCFC;"><%=sd2.format(lss) %><br><%=list.get(j).getMemberName() %></button>
+			</c:if>
+			<%} %>
+			<%} %>
+			<c:if test="<%=checkTi2.contains(sd.format(lss)) %>">
+			<button class="ti" value="<%=sd.format(lss)%>" style="background-color:#A6A6A6;color:#FCFCFC;"><%=sd2.format(lss) %></button>
 			</c:if>
 			<%
 			lss=lss+timeI;
@@ -116,8 +139,15 @@
 			<c:if test="<%=!checkTi.contains(sd.format(lel)) %>">
 			<button class="timebut" value="<%=sd.format(lel)%>"><%=sd2.format(lel) %></button>
 			</c:if>
-			<c:if test="<%=checkTi.contains(sd.format(lel)) %>">
-			<button class="ti" value="<%=sd.format(lel)%>" disabled="disabled" style="background-color:#A6A6A6;color:#FCFCFC;"><%=sd2.format(lel) %></button>
+			<%for(int j=0;j<list.size();j++){ %>
+			<%if(list.get(j).getCheckTime()!=null){ %>
+			<c:if test="<%=list.get(j).getCheckTime().contains(sd.format(lel)) %>">
+			<button class="ti" value="<%=sd.format(lel)%>" style="background-color:#A6A6A6;color:#FCFCFC;"><%=sd2.format(lel) %><%=list.get(j).getMemberName() %></button>
+			</c:if>
+			<%} %>
+			<%} %>
+			<c:if test="<%=checkTi2.contains(sd.format(lel)) %>">
+			<button class="ti" value="<%=sd.format(lel)%>" style="background-color:#A6A6A6;color:#FCFCFC;"><%=sd2.format(lel) %></button>
 			</c:if>
 			<%
 			lel=lel+timeI;
@@ -127,20 +157,30 @@
 	</c:if>
 	
 	<div style="text-align:center;margin-top:20px;">
-		<button id="choiceReser">예 약 하 기</button>
+		<button id="choiceReser">선택 시간 제외하기</button>
+		<button id="blockDate">현재 날짜 제외하기</button>
 	</div>
 	
 	<style>
 		#choiceReser{
 
-			width: 100%;
+			width: 49%;
 		    height: 100px;
-		    font-size: 70px;
+		    font-size: 30px;
 		    background:#286090;
 		    color:white;
-		    border-radius: 100px;
+		    border-radius: 10px;
 		    box-shadow: 3px 3px 5px lightgrey;
 		    
+    	}
+    	#blockDate{
+    		width: 49%;
+		    height: 100px;
+		    font-size: 30px;
+		    background:#286090;
+		    color:white;
+		    border-radius: 10px;
+		    box-shadow: 3px 3px 5px lightgrey;
     	}
     	#choiceReser:hover{
 	    	background: #2A5060;
@@ -155,18 +195,22 @@
 			if($(this).css('background-color')=='rgb(40, 96, 144)'){
 				$(this).css('background-color','white');
 				$(this).css('color','black');
-				choiceTime='';
+				choiceTime="";
 			}else{
 				$('.timebut').css('background-color','white');
 				$('.timebut').css('color','black');
 				$(this).css('background-color','#286090');
 				$(this).css('color','white');
 				choiceTime=$(this).val();
+				alert(choiceTime);
 			}
 		});
 		$('#choiceReser').click(function () {
 			if(choiceTime.length<1){
 				alert("시간을 선택해 주세요");
+			}else{
+				alert('<%=time2%>');
+				location.href='${path}/medi/insertBlock?docNum=<%=docTime.getDoctorNum()%>&hosNum=<%=docTime.getHospitalNo()%>&time=<%=time2%>&choiceTime='+choiceTime;
 			}
 		});
 	</script>

@@ -12,6 +12,8 @@ public class MemberReservation {
 	private String blockDate;
 	private String blockTime;
 	private String blockCheck;
+	private String memberName;
+	private int memberNum;
 	
 	public MemberReservation() {
 		// TODO Auto-generated constructor stub
@@ -19,7 +21,7 @@ public class MemberReservation {
 
 	public MemberReservation(int checkNum, int checkDoctor, int checkHospital, int checkMember, String checkDate,
 			String checkTime, int blockDoctor, int blockHosplital, String blockDate, String blockTime,
-			String blockCheck) {
+			String blockCheck, String memberName, int memberNum) {
 		super();
 		this.checkNum = checkNum;
 		this.checkDoctor = checkDoctor;
@@ -32,6 +34,8 @@ public class MemberReservation {
 		this.blockDate = blockDate;
 		this.blockTime = blockTime;
 		this.blockCheck = blockCheck;
+		this.memberName = memberName;
+		this.memberNum = memberNum;
 	}
 
 	@Override
@@ -39,7 +43,8 @@ public class MemberReservation {
 		return "MemberReservation [checkNum=" + checkNum + ", checkDoctor=" + checkDoctor + ", checkHospital="
 				+ checkHospital + ", checkMember=" + checkMember + ", checkDate=" + checkDate + ", checkTime="
 				+ checkTime + ", blockDoctor=" + blockDoctor + ", blockHosplital=" + blockHosplital + ", blockDate="
-				+ blockDate + ", blockTime=" + blockTime + ", blockCheck=" + blockCheck + "]";
+				+ blockDate + ", blockTime=" + blockTime + ", blockCheck=" + blockCheck + ", memberName=" + memberName
+				+ ", memberNum=" + memberNum + "]";
 	}
 
 	public int getCheckNum() {
@@ -130,8 +135,23 @@ public class MemberReservation {
 		this.blockCheck = blockCheck;
 	}
 
-	
+	public String getMemberName() {
+		return memberName;
+	}
 
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
+
+	public int getMemberNum() {
+		return memberNum;
+	}
+
+	public void setMemberNum(int memberNum) {
+		this.memberNum = memberNum;
+	}
+
+	
 	
 	
 	

@@ -82,6 +82,11 @@ public class ReservationDaoImpl implements ReservationDao {
 	public int reserCount(int num) {
 		return session.selectOne("reser.selectReserCount", num);
 	}
+
+	@Override
+	public int insertBlock(Map<String, Object> map) {
+		return session.insert("reser.insertBlock", map);
+	}
 	
 	
 	

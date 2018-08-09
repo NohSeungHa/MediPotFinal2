@@ -179,7 +179,6 @@ public class ReservationController {
 	
 	@RequestMapping("/medi/doctorS2")
 	public String doctorSca2(String docNum,String hosNum,HttpServletRequest req) {
-		System.out.println("어디서 문제인가? 1");
 		int num=Integer.parseInt(hosNum);
 		int docNo=Integer.parseInt(docNum);
 		List<DoctorInfo> list=service.selectDoctorList(num);
@@ -206,6 +205,34 @@ public class ReservationController {
 		req.setAttribute("mr", mr);
 		req.setAttribute("time", time);
 		return "medi_reservation/choiceTime2";
+	}
+	
+	@RequestMapping("/medi/insertBlock")
+	public String insertBlock(String docNum,String hosNum,String choiceTime,String time,HttpServletRequest req) {
+		int num=Integer.parseInt(hosNum);
+		int docNo=Integer.parseInt(docNum);
+		Map<String, Object> map=new HashMap<String, Object>();
+		map.put("docNum", docNo);
+		map.put("hosNum", num);
+		map.put("time", time);
+		map.put("choiceTime",choiceTime);
+		int result=service.insertBlock(map);
+		String msg="";
+		if(result>0) {
+			msg="제외 처리가 되었습니다.";
+		}else {
+			msg="제외 처리가 실패 하였습니다.";
+		}
+		
+		List<DoctorInfo> list=service.selectDoctorList(num);
+		DoctorInfo doctor=service.selectDoctor(docNo);
+		List<DoctorSchedule> docSche=service.selectDocSche(docNo);
+		req.setAttribute("list", list);
+		req.setAttribute("doctor", doctor);
+		req.setAttribute("docSche", docSche);
+		req.setAttribute("msg", msg);
+		
+		return "medi_reservation/reservation2";
 	}
 
 }

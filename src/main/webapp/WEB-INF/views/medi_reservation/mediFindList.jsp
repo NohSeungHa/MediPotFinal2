@@ -88,9 +88,12 @@
 	<br>
 	<c:if test="${empty nameList }">
 	<div style="margin-bottom:10px;position:relative;height:auto;">
-	<div style="width:100%;height:50px;font-size:20px;text-align:center;background-color:#286090;padding-top:11px;color:white;border-radius:8px;">
-		지역 선택 및 진료과목 선택
+	<div style="width:100%;height:50px;font-size:25px;text-align:center;background-color:#286090;padding-top:11px;color:white;border-radius:8px;">
+			지역 선택 및 진료과목 선택
 	</div>
+		<div style="text-align:center;padding-top:5px;font-size:20px;">
+			** 지역을 선택 후 진료과목을 선택해 주세요 **
+		</div>
 		<div id="locList" style="text-align: center;">
 			<button class="btn btn-default loc" value="서울">서울</button><br>
 			<button class="btn btn-default loc" value="인천">인천</button><br>

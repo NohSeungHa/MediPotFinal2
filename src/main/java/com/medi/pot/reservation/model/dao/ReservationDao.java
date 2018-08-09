@@ -23,4 +23,5 @@ public interface ReservationDao {
 	List<ReserList> reserList(int userNum,int cPage,int numPerPage);
 	int reserDelete(int chNum);
 	int reserCount(int num);
+	int insertBlock(Map<String, Object> map);
 }
