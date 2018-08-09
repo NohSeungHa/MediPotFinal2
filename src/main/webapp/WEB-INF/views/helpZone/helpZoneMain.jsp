@@ -212,7 +212,6 @@
 </script>
 <script>
 	$("searchKind").change(function(){
-		//180803 작업끝
 	});
 </script>
 

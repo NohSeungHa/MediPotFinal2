@@ -6,7 +6,7 @@
 	<c:set var="path" value="<%=request.getContextPath() %>"/>
      
 <jsp:include page="/WEB-INF/views/common/header.jsp">
-	<jsp:param value="헬프존 질문등록" name="pageTitle"/>
+	<jsp:param value="헬프존 조회" name="pageTitle"/>
 </jsp:include>
 	<style>
 	.jumbotron {
@@ -52,7 +52,8 @@
 	<a id="home" href="${path}" style="float:right;width:70px;"><img
 		src="/pot/resources/img/notice/home.jpg"
 		style="width: 30%; height: 30%;"> 홈으로</a>
-	<form name="helpZoneFrm" action="${path}/helpZone/helpZoneInsertEnd.do" method="post" onsubmit="return validate();"  enctype="multipart/form-data" >
+		
+		
 		<table class="table table-bordered">
 			<tbody>
 				<tr>
@@ -80,32 +81,41 @@
 				</tr>
 				<tr><!-- 첨부사진 올려주기 -->
 					<th>첨부사진:</th>
-					<td></td>
+					<td><img src="${path}/resources/uploadfile/helpZone/${helpZone.helpZoneReFile}" style="width: 300px; height: 200px"></td>
 				</tr>
 			</tbody>
 		</table>
 			
-		</form>
 		<button type="button" class="btn btn-success btn-lg" onclick="helpZoneList()">목록으로</button>
 	<c:if test="${checkPH=='P'}" >
 			<c:if test="${memberLoggedIn.memberId == helpZoneQuestioner.memberId }">
 				<button type="button" onclick="helpZoneUpdate()" class="btn btn-success btn-lg" style="float: right; margin-left: 10px;">수정</button> 
-				<!-- <button type="button" onclick="helpZoneDelete()" class="btn btn-danger btn-lg" style="float: right; margin-left: 10px;">삭제</button>  -->
-				<input type="button" value="삭제" class="btn btn-danger btn-lg" style="float: right; margin-left: 10px;" data-toggle="modal" data-target="#deleteModal"/>
+				<button type="button" onclick="helpZoneDelete()" class="btn btn-danger btn-lg" style="float: right; margin-left: 10px;">삭제</button>
 			</c:if>
 	</c:if>
 	
-	<c:if test="${checkPH=='H'}">
-	</c:if>
+
 </div>
 <br><br>
 <script>
+/* 게시글 리스트 출력 함수 */
 function helpZoneList() {
 	location.href="${path}/helpZone/helpZoneList.do";
 }
-function helpZoneDelete() {
-	location.href="${path}/helpZone/helpZoneDelete.do";
+/* 게시글 수정 함수 */
+function helpZoneUpdate(){
+	location.href="${path}/helpZone/updateHelpZone.do?num=${helpZone.helpZoneNum}";
 }
+
+/* 게시글 삭제 함수 */
+function helpZoneDelete(){
+	if(confirm("정말 게시글을 정말 삭제하시겠습니까?")){
+	location.href="${path}/helpZone/deleteHelpZone.do?num=${helpZone.helpZoneNum}";
+	}else{
+		return false;
+	}
+}
+
 function checkLength(comment) {
     if (comment.value.length > 1000 ) {
         comment.blur();
@@ -114,6 +124,7 @@ function checkLength(comment) {
         return false;
     }
 }
+/* 게시글 작성 메서드 */
 function validate(){
 	var content=$("[name=helpZoneContent]").val();
 	var title=$("[name=helpZoneTitle]").val();
@@ -127,40 +138,5 @@ function validate(){
 	return true;
 }
 </script>
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog"
-			aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">게시물 삭제 확인</h5>
-					</div>
-					<form
-						action="${path}/helpZone/deleteHelpZone.do"
-						method="post">
-						<div class="modal-body">
-							<h1>게시물을 삭제 하시겠습니까?</h1>
-							<h3 style="color: red;">주의) 삭제한 게시물은 복구 할 수 없습니다.</h3>
-							<h3 style="color: red;">&nbsp;&nbsp;&nbsp;&nbsp;게시물의 업로드 파일도 같이 삭제 됩니다.</h3>
-							<c:if test="${ckPH=='H' }">
-							<input type="hidden" name="no" value="${helpZone.helpZoneNum}"/>
-							<input type="hidden" name="refile" value="${helpZone.helpZoneRefile}"/>
-							</c:if>
-							<c:if test="${ckPH=='P' }">
-							<input type="hidden" name="no" value="${helpZone.helpZoneNum}"/>
-							<input type="hidden" name="refile" value="${helpZone.helpZoneRefile}"/>
-							</c:if>
-						</div>
-						<div class="modal-footer">
-							<button type="submit" class="btn btn-danger">삭제</button>
-							<button type="button" class="btn"
-								data-dismiss="modal">취소</button>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-
-
-
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

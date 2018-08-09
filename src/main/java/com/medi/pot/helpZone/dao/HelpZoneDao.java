@@ -12,4 +12,5 @@ public interface HelpZoneDao {
 	int selectCount();
 	HelpZone selectHelpZone(int helpZoneNum);
 	Member selectMember(int helpZoenQuestioner);
+	int deleteHelpZone(int num);
 }
