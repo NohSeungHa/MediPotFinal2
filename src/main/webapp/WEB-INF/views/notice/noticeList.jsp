@@ -50,8 +50,10 @@
 		src="/pot/resources/img/notice/home.jpg"
 		style="width: 30%; height: 30%;"> 홈으로</a>
 	<br><br>
-	<c:if test="${memberLoggedIn.memberId=='admin' }">
-	<button class="btn btn-primary btn-sm" type="submit" style="float: right;" onclick="insert()">글쓰기</button>
+	<c:if test="${checkPH=='P' }">
+		<c:if test="${memberLoggedIn.memberId=='admin' }">
+			<button class="btn btn-primary btn-sm" type="submit" style="float: right;" onclick="insert()">글쓰기</button>
+		</c:if>
 	</c:if>
 	<table class="table table-hover">
 		<thead>
@@ -70,7 +72,7 @@
 				<c:forEach var='hnotice' items='${list }' varStatus="vs">
 					<tr>
 						<td><h4>${hnotice.hospitalNoticeNum }</h4></td>
-						<td><h4 id="txt_line" ><a href='${path}/notice/noticeView.do?no=${hnotice.hospitalNoticeNum }&checkPH=${ckPH}&id=${memberLoggedIn.memberId}&cp=${cPage}'>${hnotice.hospitalNoticeTitle }</a></h4></td>
+						<td><h4 id="txt_line" ><a href='${path}/notice/noticeView.do?no=${hnotice.hospitalNoticeNum }&checkPH=${ckPH}&cp=${cPage}'>${hnotice.hospitalNoticeTitle }</a></h4></td>
 						<c:if test="${hnotice.hospitalNoticeFile!=null }">
 							<td>&nbsp;<img src="/pot/resources/img/notice/fileImge1.jpg" style="margin-left:10px; width: 20px;height: 20px;"></td>
 						</c:if>
@@ -92,7 +94,7 @@
 				<c:forEach var='mnotice' items='${list }' varStatus="vs">
 					<tr>
 						<td><h4>${mnotice.memberNoticeNum }</h4></td>
-						<td><h4 id="txt_line" ><a href='${path}/notice/noticeView.do?no=${mnotice.memberNoticeNum }&checkPH=${ckPH}&id=${memberLoggedIn.memberId}&cp=${cPage}'>${mnotice.memberNoticeTitle }</a></h4></td>
+						<td><h4 id="txt_line" ><a href='${path}/notice/noticeView.do?no=${mnotice.memberNoticeNum }&checkPH=${ckPH}&cp=${cPage}'>${mnotice.memberNoticeTitle }</a></h4></td>
 						<c:if test="${mnotice.memberNoticeFile!=null }">
 							<td>&nbsp;<img src="/pot/resources/img/notice/fileImge1.jpg" style="margin-left:10px; width: 20px;height: 20px;"></td>
 						</c:if>

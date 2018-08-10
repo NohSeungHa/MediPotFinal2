@@ -14,6 +14,8 @@
 		<typeAlias alias="MemberNotice" type="com.medi.pot.notice.vo.MemberNotice"/>
 		<!-- 자유게시판 -->
 		<typeAlias alias="Community" type="com.medi.pot.community.vo.Community"/>
+		<!-- 자유게시판 댓글 -->
+		<typeAlias alias="CommunityComment" type="com.medi.pot.community.vo.CommunityComment"/>
 		<typeAlias alias="member" type="com.medi.pot.member.model.vo.Member" />
 		<typeAlias alias="hospital" type="com.medi.pot.member.model.vo.Hospital" />
 		<typeAlias alias="HospitalInfo" type="com.medi.pot.reservation.model.vo.HospitalInfo" />
