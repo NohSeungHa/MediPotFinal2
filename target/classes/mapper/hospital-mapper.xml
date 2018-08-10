@@ -80,6 +80,17 @@
 		select count(*) from hospitalInfo where hospitalInfoNum=#{hospitalNum}
 	</select>
 	
+	<update id="updateHospitalInfo" parameterType="hospitalInfos">
+		update hospitalInfo set 
+			hospitalInfoIntro=#{hospitalInfoIntro},
+			hospitalInfoNotice=#{hospitalInfoNotice},
+			hospitalPhoto=#{hospitalPhoto},
+			hospitalRePhoto=#{hospitalRePhoto},
+			hospitalInfoUsetime=#{hospitalInfoUsetime},
+			hospitalInfoLunchtime=#{hospitalInfoLunchtime}
+		where hospitalInfoNum=#{hospitalInfoNum}
+	</update>
+	
 	<select id="selectDoctorInfo" parameterType="_int" resultType="doctorInfos">
 		select * from doctorInfo where hospitalNo=#{hospitalNum}
 	</select>
@@ -93,15 +104,41 @@
 			#{professional, typeHandler=StringArray},
 			#{doctorSlunch},
 			#{doctorElunch},
-			#{WeekdayStime},
-			#{WeekdayEtime},
-			#{SatStime},
-			#{SatEtime},
-			#{Closed},
-			#{Specialized},
+			#{weekdayStime},
+			#{weekdayEtime},
+			#{satStime},
+			#{satEtime},
+			#{closed},
+			#{specialized},
 			#{doctorPhoto},
 			#{doctorRePhoto},
 			#{timeInterval}
 		)
 	</insert>
+	
+	<select id="selectDoctorPhoto" parameterType="_int" resultType="doctorInfos">
+		select * from doctorInfo where doctorNum=#{doctorNum}
+	</select>
+	
+	<select id="DoctorsProfessional" parameterType="_int" resultType="string">
+		select professional from doctorInfo where doctorNum=#{doctorNum}
+	</select>
+	
+	<update id="updateDoctorInfo" parameterType="doctorInfos">
+		update doctorInfo set
+			doctorCareer=#{doctorCareer},
+			professional=#{professional, typeHandler=StringArray},
+			doctorSlunch=#{doctorSlunch},
+			doctorElunch=#{doctorElunch},
+			weekdayStime=#{weekdayStime},
+			weekdayEtime=#{weekdayEtime},
+			satStime=#{satStime},
+			satEtime=#{satEtime},
+			closed=#{closed},
+			specialized=#{specialized},
+			doctorPhoto=#{doctorPhoto},
+			doctorRePhoto=#{doctorRePhoto},
+			timeInterval=#{timeInterval}
+		where doctorNum=#{doctorNum}
+	</update>
 </mapper>

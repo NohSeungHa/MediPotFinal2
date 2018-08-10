@@ -142,33 +142,35 @@ public class MemberController {
 				null, null, hospitalTel, hospitalEmail,
 				hospitalAddr, null, 0, null, null);
 		
-		//파일 업로드
-		//저장위치지정
-		String saveDir=request.getSession().getServletContext().getRealPath("/resources/uploadfile/H_License");
-		
-		File dir=new File(saveDir);
-		if(dir.exists()==false) System.out.println(dir.mkdirs());//폴더생성
-		System.out.println(hospitalLicense);
-		if(!hospitalLicense.isEmpty()) {
-		String originalFileName=hospitalLicense.getOriginalFilename();
-		
-		//확장자 구하기
-		String ext=originalFileName.substring(originalFileName.lastIndexOf(".")+1);
-		SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
-		int rndNum=(int)(Math.random()*1000);
-		String renamedFileName=sdf.format(new Date(System.currentTimeMillis()));
-		renamedFileName+="_"+rndNum+"."+ext;
-		try 
-		{
-			hospitalLicense.transferTo(new File(saveDir+File.separator+renamedFileName));
-		}
-		catch(IOException e)
-		{
-			e.printStackTrace();
-		}
-			//DB에 저장할 첨부파일에 대한 정보를 구성!
-			h.setHospitalLicense(originalFileName);
-			h.setHospitalReLicense(renamedFileName);
+		if(hospitalLicense !=null) {
+			//파일 업로드
+			//저장위치지정
+			String saveDir=request.getSession().getServletContext().getRealPath("/resources/uploadfile/H_License");
+			
+			File dir=new File(saveDir);
+			if(dir.exists()==false) System.out.println(dir.mkdirs());//폴더생성
+			System.out.println(hospitalLicense);
+			if(!hospitalLicense.isEmpty()) {
+			String originalFileName=hospitalLicense.getOriginalFilename();
+			
+			//확장자 구하기
+			String ext=originalFileName.substring(originalFileName.lastIndexOf(".")+1);
+			SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
+			int rndNum=(int)(Math.random()*1000);
+			String renamedFileName=sdf.format(new Date(System.currentTimeMillis()));
+			renamedFileName+="_"+rndNum+"."+ext;
+			try 
+			{
+				hospitalLicense.transferTo(new File(saveDir+File.separator+renamedFileName));
+			}
+			catch(IOException e)
+			{
+				e.printStackTrace();
+			}
+				//DB에 저장할 첨부파일에 대한 정보를 구성!
+				h.setHospitalLicense(originalFileName);
+				h.setHospitalReLicense(renamedFileName);
+			}
 		}
 		
 		boolean checkid = service.checkHospitalId(h.getHospitalId())==0?true:false;
@@ -401,31 +403,34 @@ public class MemberController {
 		
 		DoctorInfos doctorInfo = new DoctorInfos(0, doctorName, doctorCareer, hospitalNum, professional, doctorSlunch, doctorElunch, WeekdayStime, WeekdayEtime, SatStime, SatEtime, closed, Specialized, null, null, timeInterval);
 		
-		String saveDir=request.getSession().getServletContext().getRealPath("/resources/uploadfile/dortors");
+		if(doctorPhoto != null) {
 		
-		File dir=new File(saveDir);
-		if(dir.exists()==false) System.out.println(dir.mkdirs());//폴더생성
-		System.out.println(doctorPhoto);
-		if(!doctorPhoto.isEmpty()) {
-		String originalFileName=doctorPhoto.getOriginalFilename();
-		
-		//확장자 구하기
-		String ext=originalFileName.substring(originalFileName.lastIndexOf(".")+1);
-		SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
-		int rndNum=(int)(Math.random()*1000);
-		String renamedFileName=sdf.format(new Date(System.currentTimeMillis()));
-		renamedFileName+="_"+rndNum+"."+ext;
-		try 
-		{
-			doctorPhoto.transferTo(new File(saveDir+File.separator+renamedFileName));
-		}
-		catch(IOException e)
-		{
-			e.printStackTrace();
-		}
-			//DB에 저장할 첨부파일에 대한 정보를 구성!
-			doctorInfo.setDoctorPhoto(originalFileName);
-			doctorInfo.setDoctorRePhoto(renamedFileName);
+			String saveDir=request.getSession().getServletContext().getRealPath("/resources/uploadfile/dortors");
+			
+			File dir=new File(saveDir);
+			if(dir.exists()==false) System.out.println(dir.mkdirs());//폴더생성
+			System.out.println(doctorPhoto);
+			if(!doctorPhoto.isEmpty()) {
+			String originalFileName=doctorPhoto.getOriginalFilename();
+			
+			//확장자 구하기
+			String ext=originalFileName.substring(originalFileName.lastIndexOf(".")+1);
+			SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
+			int rndNum=(int)(Math.random()*1000);
+			String renamedFileName=sdf.format(new Date(System.currentTimeMillis()));
+			renamedFileName+="_"+rndNum+"."+ext;
+			try 
+			{
+				doctorPhoto.transferTo(new File(saveDir+File.separator+renamedFileName));
+			}
+			catch(IOException e)
+			{
+				e.printStackTrace();
+			}
+				//DB에 저장할 첨부파일에 대한 정보를 구성!
+				doctorInfo.setDoctorPhoto(originalFileName);
+				doctorInfo.setDoctorRePhoto(renamedFileName);
+			}
 		}
 		
 		int result = service.doctorInfoInsert(doctorInfo);
@@ -441,17 +446,6 @@ public class MemberController {
 		model.addAttribute("loc",loc);
 		
 		return "common/msg";
-	}
-	
-	@RequestMapping("/member/doctorInfoUpdate.do")
-	public String doctorUpdate(int hospitalNum, Model model) {
-		System.out.println("의사수정으로 들어옴");
-		
-		List<DoctorInfos> docinfo = service.selectDoctorInfo(hospitalNum);
-		
-		model.addAttribute("docinfo", docinfo);
-		
-		return "member/doctorsPage";
 	}
 	
 	@RequestMapping("/member/mypage.do")
@@ -786,33 +780,36 @@ public class MemberController {
 		System.out.println(hospitalInfo);
 		String msg = "";
 		String loc = "";
-		//파일 업로드
-		//저장위치지정
-		String saveDir = request.getSession().getServletContext().getRealPath("/resources/uploadfile/hospitalInfo");
-
-		File dir = new File(saveDir);
-		if (dir.exists() == false)
-			System.out.println(dir.mkdirs());// 폴더생성
-		System.out.println(hospitalPhoto);
-		if (!hospitalPhoto.isEmpty()) {
-			String originalFileName = hospitalPhoto.getOriginalFilename();
-
-			// 확장자 구하기
-			String ext = originalFileName.substring(originalFileName.lastIndexOf(".") + 1);
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
-			int rndNum = (int) (Math.random() * 1000);
-			
-			String renamedFileName = sdf.format(new Date(System.currentTimeMillis()));
-			renamedFileName += "_" + rndNum + "." + ext;
-			try {
-				hospitalPhoto.transferTo(new File(saveDir + File.separator + renamedFileName));
-			} catch (IOException e) {
-				e.printStackTrace();
+		
+		if(hospitalPhoto != null) {
+			//파일 업로드
+			//저장위치지정
+			String saveDir = request.getSession().getServletContext().getRealPath("/resources/uploadfile/hospitalInfo");
+	
+			File dir = new File(saveDir);
+			if (dir.exists() == false)
+				System.out.println(dir.mkdirs());// 폴더생성
+			System.out.println(hospitalPhoto);
+			if (!hospitalPhoto.isEmpty()) {
+				String originalFileName = hospitalPhoto.getOriginalFilename();
+	
+				// 확장자 구하기
+				String ext = originalFileName.substring(originalFileName.lastIndexOf(".") + 1);
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
+				int rndNum = (int) (Math.random() * 1000);
+				
+				String renamedFileName = sdf.format(new Date(System.currentTimeMillis()));
+				renamedFileName += "_" + rndNum + "." + ext;
+				try {
+					hospitalPhoto.transferTo(new File(saveDir + File.separator + renamedFileName));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
+				// DB에 저장할 첨부파일에 대한 정보를 구성!
+				hospitalInfo.setHospitalPhoto(originalFileName);
+				hospitalInfo.setHospitalRePhoto(renamedFileName);
 			}
-			
-			// DB에 저장할 첨부파일에 대한 정보를 구성!
-			hospitalInfo.setHospitalPhoto(originalFileName);
-			hospitalInfo.setHospitalRePhoto(renamedFileName);
 		}
 		
 		int result = service.hospitalInfoinsert(hospitalInfo);
@@ -833,9 +830,164 @@ public class MemberController {
 	public String hospitalInfoUpdate(int hospitalNum, Model model) {
 		System.out.println("병원정보 수정으로 들어옴");
 		
-		//// 병원정보를 받고 수정 jsp로 보내주기
+		HospitalInfos hospitalinfo = service.selectHospitalInfo(hospitalNum);
+		
+		model.addAttribute("hospitalInfo", hospitalinfo);
 		
 		return "member/hospitalUpdate";
+	}
+	
+	@RequestMapping("/member/hospitalInfoUpdateEnd.do")
+	public String hospitalInfoUpdateEnd(int hospitalNum, String hospitalInfoIntro,
+			String hospitalInfoNotice, String hospitalInfoUsetime, String hospitalInfoLunchtime,
+			Model model, HttpServletRequest request,
+			@RequestParam(value="hospitalPhoto",required=false, defaultValue="null") MultipartFile hospitalPhoto) {
+		System.out.println("병원정보 수정을 실행함");
+		String msg = "";
+		String loc = "";
+		
+		HospitalInfos hospitalInfo = new HospitalInfos(
+				hospitalNum, hospitalInfoIntro, hospitalInfoNotice, null, null, hospitalInfoUsetime, hospitalInfoLunchtime);
+		
+		if(hospitalPhoto != null) {
+			//파일 업로드
+			//저장위치지정
+			String saveDir = request.getSession().getServletContext().getRealPath("/resources/uploadfile/hospitalInfo");
+	
+			File dir = new File(saveDir);
+			if (dir.exists() == false)
+				System.out.println(dir.mkdirs());// 폴더생성
+			System.out.println(hospitalPhoto);
+			if (!hospitalPhoto.isEmpty()) {
+				String originalFileName = hospitalPhoto.getOriginalFilename();
+	
+				// 확장자 구하기
+				String ext = originalFileName.substring(originalFileName.lastIndexOf(".") + 1);
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
+				int rndNum = (int) (Math.random() * 1000);
+				
+				String renamedFileName = sdf.format(new Date(System.currentTimeMillis()));
+				renamedFileName += "_" + rndNum + "." + ext;
+				try {
+					hospitalPhoto.transferTo(new File(saveDir + File.separator + renamedFileName));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
+				// DB에 저장할 첨부파일에 대한 정보를 구성!
+				hospitalInfo.setHospitalPhoto(originalFileName);
+				hospitalInfo.setHospitalRePhoto(renamedFileName);
+			}
+		}
+		
+		int result = service.updateHospitalInfo(hospitalInfo);
+		
+		if(result > 0) {
+			msg = "병원정보 수정 성공!";
+		} else {
+			msg = "병원정보 수정 실패";
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("loc", loc);
+		
+		return "common/msg";
+	}
+	
+	@RequestMapping("/member/doctorInfoUpdate.do")
+	public String doctorUpdate(int hospitalNum, Model model) {
+		System.out.println("의사수정으로 들어옴");
+		
+		List<DoctorInfos> docinfo = service.selectDoctorInfo(hospitalNum);
+		
+		model.addAttribute("docinfo", docinfo);
+		
+		return "member/doctorsPage";
+	}
+	
+	@RequestMapping("/member/selectdoctor.do")
+	public String selectDoctor(int doctorNum, Model model) {
+		System.out.println(doctorNum);
+		DoctorInfos doctorInfo = service.selectDoctorPhoto(doctorNum);
+		String pro = service.DoctorsProfessional(doctorNum);
+		
+		String[] professional = pro.split(",");
+		
+		model.addAttribute("doctorInfo", doctorInfo);
+		model.addAttribute("professional", professional);
+		
+		return "member/doctorUpdatePage";
+	}
+	
+	@RequestMapping("/member/doctorInfoUpdateEnd.do")
+	public String doctorUpdateEnd(Model model, String doctorName,
+			String doctorCareer, int hospitalNum, String[] professional,
+			String doctorSlunch, String doctorElunch, String WeekdayStime,
+			String WeekdayEtime, String SatStime, String SatEtime,
+			String closed, String Specialized, String timeInterval, 
+			@RequestParam(value="doctorPhoto", required=false) MultipartFile doctorPhoto,
+			HttpServletRequest request, String olddoctorPhoto, int doctorNum) {
+		
+		System.out.println("의사 수정을 실행함");
+		String msg = "";
+		String loc = "";
+		
+		DoctorInfos doctorInfo = service.selectDoctorPhoto(doctorNum);
+		
+		if(doctorPhoto != null) {
+			
+			String saveDir=request.getSession().getServletContext().getRealPath("/resources/uploadfile/dortors");
+			
+			File dir=new File(saveDir);
+			if(dir.exists()==false) System.out.println(dir.mkdirs());//폴더생성
+			System.out.println(doctorPhoto);
+			if(!doctorPhoto.isEmpty()) {
+			String originalFileName=doctorPhoto.getOriginalFilename();
+			
+			//확장자 구하기
+			String ext=originalFileName.substring(originalFileName.lastIndexOf(".")+1);
+			SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
+			int rndNum=(int)(Math.random()*1000);
+			String renamedFileName=sdf.format(new Date(System.currentTimeMillis()));
+			renamedFileName+="_"+rndNum+"."+ext;
+			try 
+			{
+				doctorPhoto.transferTo(new File(saveDir+File.separator+renamedFileName));
+			}
+			catch(IOException e)
+			{
+				e.printStackTrace();
+			}
+				//DB에 저장할 첨부파일에 대한 정보를 구성!
+				doctorInfo.setDoctorPhoto(originalFileName);
+				doctorInfo.setDoctorRePhoto(renamedFileName);
+			}
+		}
+		
+		doctorInfo.setDoctorCareer(doctorCareer);
+		doctorInfo.setProfessional(professional);
+		doctorInfo.setDoctorSlunch(doctorSlunch);
+		doctorInfo.setDoctorElunch(doctorElunch);
+		doctorInfo.setWeekdayStime(WeekdayStime);
+		doctorInfo.setWeekdayEtime(WeekdayEtime);
+		doctorInfo.setSatStime(SatStime);
+		doctorInfo.setSatEtime(SatEtime);
+		doctorInfo.setClosed(closed);
+		doctorInfo.setSpecialized(Specialized);
+		doctorInfo.setTimeInterval(timeInterval);
+		
+		int result = service.updateDoctorInfo(doctorInfo);
+		
+		if(result > 0) {
+			msg = "의사 정보 수정성공!";
+		} else {
+			msg = "의사 정보 수정실패!";
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("loc", loc);
+		
+		return "common/msg";
 	}
 	
 }

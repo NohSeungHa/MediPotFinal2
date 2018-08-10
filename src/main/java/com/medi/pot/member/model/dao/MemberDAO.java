@@ -56,9 +56,13 @@ public interface MemberDAO {
 	/* 병원정보 */
 	HospitalInfos selectHospitalInfo(SqlSessionTemplate sqlSession, int hospitalNum);
 	int loadHospitalInfo(SqlSessionTemplate sqlSession, int hospitalNum);
+	int updateHospitalInfo(SqlSessionTemplate sqlSession, HospitalInfos hospitalInfo);
 	
 	/* 의사정보 */
 	List<DoctorInfos> selectDoctorInfo(SqlSessionTemplate sqlSession, int hospitalNum);
 	int doctorInfoInsert(SqlSessionTemplate sqlSession, DoctorInfos doctorInfo);
+	DoctorInfos selectDoctorPhoto(SqlSessionTemplate sqlSession, int doctorNum);
+	int updateDoctorInfo(SqlSessionTemplate sqlSession, DoctorInfos doctorInfo);
+	String DoctorsProfessional(SqlSessionTemplate sqlSession, int doctorNum);
 	
 }

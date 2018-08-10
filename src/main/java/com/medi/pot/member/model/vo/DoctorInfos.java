@@ -1,5 +1,7 @@
 package com.medi.pot.member.model.vo;
 
+import java.util.Arrays;
+
 public class DoctorInfos {
 	    //  의사번호
 	    private int doctorNum;
@@ -23,22 +25,22 @@ public class DoctorInfos {
 	    private String doctorElunch;
 
 	    //  평일시작시간
-	    private String WeekdayStime;
+	    private String weekdayStime;
 
 	    //  평일끝시간
-	    private String WeekdayEtime;
+	    private String weekdayEtime;
 
 	    //  토요일시작시간
-	    private String SatStime;
+	    private String satStime;
 
 	    //  토요일끝시간
-	    private String SatEtime;
+	    private String satEtime;
 
 	    //  휴무일
-	    private String Closed;
+	    private String closed;
 
 	    //  전문분야
-	    private String Specialized;
+	    private String specialized;
 
 	    //  의사사진
 	    private String doctorPhoto;
@@ -49,11 +51,15 @@ public class DoctorInfos {
 	    //  시간 간격
 	    private String timeInterval;
 
-		public Integer getDoctorNum() {
+		public DoctorInfos() {
+			// TODO Auto-generated constructor stub
+		}
+
+		public int getDoctorNum() {
 			return doctorNum;
 		}
 
-		public void setDoctorNum(Integer doctorNum) {
+		public void setDoctorNum(int doctorNum) {
 			this.doctorNum = doctorNum;
 		}
 
@@ -73,11 +79,11 @@ public class DoctorInfos {
 			this.doctorCareer = doctorCareer;
 		}
 
-		public Integer getHospitalNo() {
+		public int getHospitalNo() {
 			return hospitalNo;
 		}
 
-		public void setHospitalNo(Integer hospitalNo) {
+		public void setHospitalNo(int hospitalNo) {
 			this.hospitalNo = hospitalNo;
 		}
 
@@ -106,51 +112,51 @@ public class DoctorInfos {
 		}
 
 		public String getWeekdayStime() {
-			return WeekdayStime;
+			return weekdayStime;
 		}
 
 		public void setWeekdayStime(String weekdayStime) {
-			WeekdayStime = weekdayStime;
+			this.weekdayStime = weekdayStime;
 		}
 
 		public String getWeekdayEtime() {
-			return WeekdayEtime;
+			return weekdayEtime;
 		}
 
 		public void setWeekdayEtime(String weekdayEtime) {
-			WeekdayEtime = weekdayEtime;
+			this.weekdayEtime = weekdayEtime;
 		}
 
 		public String getSatStime() {
-			return SatStime;
+			return satStime;
 		}
 
 		public void setSatStime(String satStime) {
-			SatStime = satStime;
+			this.satStime = satStime;
 		}
 
 		public String getSatEtime() {
-			return SatEtime;
+			return satEtime;
 		}
 
 		public void setSatEtime(String satEtime) {
-			SatEtime = satEtime;
+			this.satEtime = satEtime;
 		}
 
 		public String getClosed() {
-			return Closed;
+			return closed;
 		}
 
 		public void setClosed(String closed) {
-			Closed = closed;
+			this.closed = closed;
 		}
 
 		public String getSpecialized() {
-			return Specialized;
+			return specialized;
 		}
 
 		public void setSpecialized(String specialized) {
-			Specialized = specialized;
+			this.specialized = specialized;
 		}
 
 		public String getDoctorPhoto() {
@@ -176,13 +182,11 @@ public class DoctorInfos {
 		public void setTimeInterval(String timeInterval) {
 			this.timeInterval = timeInterval;
 		}
-		
-		public DoctorInfos() {}
 
-		public DoctorInfos(Integer doctorNum, String doctorName, String doctorCareer, Integer hospitalNo,
-				String[] professional, String doctorSlunch, String doctorElunch, String weekdayStime, String weekdayEtime,
-				String satStime, String satEtime, String closed, String specialized, String doctorPhoto,
-				String doctorRePhoto, String timeInterval) {
+		public DoctorInfos(int doctorNum, String doctorName, String doctorCareer, int hospitalNo, String[] professional,
+				String doctorSlunch, String doctorElunch, String weekdayStime, String weekdayEtime, String satStime,
+				String satEtime, String closed, String specialized, String doctorPhoto, String doctorRePhoto,
+				String timeInterval) {
 			super();
 			this.doctorNum = doctorNum;
 			this.doctorName = doctorName;
@@ -191,12 +195,12 @@ public class DoctorInfos {
 			this.professional = professional;
 			this.doctorSlunch = doctorSlunch;
 			this.doctorElunch = doctorElunch;
-			WeekdayStime = weekdayStime;
-			WeekdayEtime = weekdayEtime;
-			SatStime = satStime;
-			SatEtime = satEtime;
-			Closed = closed;
-			Specialized = specialized;
+			this.weekdayStime = weekdayStime;
+			this.weekdayEtime = weekdayEtime;
+			this.satStime = satStime;
+			this.satEtime = satEtime;
+			this.closed = closed;
+			this.specialized = specialized;
 			this.doctorPhoto = doctorPhoto;
 			this.doctorRePhoto = doctorRePhoto;
 			this.timeInterval = timeInterval;
@@ -205,13 +209,14 @@ public class DoctorInfos {
 		@Override
 		public String toString() {
 			return "DoctorInfos [doctorNum=" + doctorNum + ", doctorName=" + doctorName + ", doctorCareer="
-					+ doctorCareer + ", hospitalNo=" + hospitalNo + ", professional=" + professional + ", doctorSlunch="
-					+ doctorSlunch + ", doctorElunch=" + doctorElunch + ", WeekdayStime=" + WeekdayStime
-					+ ", WeekdayEtime=" + WeekdayEtime + ", SatStime=" + SatStime + ", SatEtime=" + SatEtime
-					+ ", Closed=" + Closed + ", Specialized=" + Specialized + ", doctorPhoto=" + doctorPhoto
+					+ doctorCareer + ", hospitalNo=" + hospitalNo + ", professional=" + Arrays.toString(professional)
+					+ ", doctorSlunch=" + doctorSlunch + ", doctorElunch=" + doctorElunch + ", weekdayStime="
+					+ weekdayStime + ", weekdayEtime=" + weekdayEtime + ", satStime=" + satStime + ", satEtime="
+					+ satEtime + ", closed=" + closed + ", specialized=" + specialized + ", doctorPhoto=" + doctorPhoto
 					+ ", doctorRePhoto=" + doctorRePhoto + ", timeInterval=" + timeInterval + "]";
 		}
 
-	    
+		
+		
 	    
 }

@@ -52,9 +52,13 @@ public interface MemberService {
 	/* 병원정보 */
 	HospitalInfos selectHospitalInfo(int hospitalNum);
 	int loadHospitalInfo(int hospitalNum);
+	int updateHospitalInfo(HospitalInfos hospitalInfo);
 	
 	/* 의사정보 */
 	List<DoctorInfos> selectDoctorInfo(int hospitalNum); // 전체뽑기
 	int doctorInfoInsert(DoctorInfos doctorInfo); // 등록
+	DoctorInfos selectDoctorPhoto(int doctorNum);
+	int updateDoctorInfo(DoctorInfos doctorInfo);
+	String DoctorsProfessional(int doctorNum);
 	
 }

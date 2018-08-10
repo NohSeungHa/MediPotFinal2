@@ -224,6 +224,34 @@ public class MemberServiceImpl implements MemberService {
 		return dao.doctorInfoInsert(sqlSession, doctorInfo);
 		
 	}
+
+	@Override
+	public int updateHospitalInfo(HospitalInfos hospitalInfo) {
+		
+		return dao.updateHospitalInfo(sqlSession, hospitalInfo);
+		
+	}
+
+	@Override
+	public DoctorInfos selectDoctorPhoto(int doctorNum) {
+		
+		return dao.selectDoctorPhoto(sqlSession, doctorNum);
+		
+	}
+
+	@Override
+	public int updateDoctorInfo(DoctorInfos doctorInfo) {
+		
+		return dao.updateDoctorInfo(sqlSession, doctorInfo);
+		
+	}
+
+	@Override
+	public String DoctorsProfessional(int doctorNum) {
+		
+		return dao.DoctorsProfessional(sqlSession, doctorNum);
+		
+	}
 	
 	
 }
