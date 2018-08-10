@@ -69,4 +69,10 @@ public interface CommunityService {
 	
 	//자유게시판 댓글 갯수
 	int communityCommentCount(int no);
+	
+	//자유게시판 삭제시 댓글 List 삭제
+	void deleteCommunityCommentList(int no);
+	
+	//자유게시판 댓글 삭제
+	int deleteComment(int num);
 }

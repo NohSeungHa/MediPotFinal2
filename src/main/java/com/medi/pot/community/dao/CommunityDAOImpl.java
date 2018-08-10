@@ -12,6 +12,8 @@ import com.medi.pot.community.vo.CommunityComment;
 @Repository
 public class CommunityDAOImpl implements CommunityDAO {
 
+
+
 	//자유게시판 List 불러오기!
 	@Override
 	public List<Community> selectList(SqlSessionTemplate sqlsession, int cPage, int numPerPage) {
@@ -145,5 +147,18 @@ public class CommunityDAOImpl implements CommunityDAO {
 	@Override
 	public int communityCommentCount(SqlSessionTemplate sqlsession,int no) {
 		return sqlsession.selectOne("community.communityCommentCount", no);
+	}
+
+	//자유게시판 게시판 삭제시 댓글 List 삭제
+	@Override
+	public void deleteCommunityCommentList(SqlSessionTemplate sqlsession, int no) {
+		sqlsession.delete("community.deleteCommunityCommentList", no);
+		
+	}
+
+	//자유게시판 댓글 삭제
+	@Override
+	public int deleteComment(SqlSessionTemplate sqlsession, int num) {
+		return sqlsession.delete("community.deleteComment",num);
 	}
 }

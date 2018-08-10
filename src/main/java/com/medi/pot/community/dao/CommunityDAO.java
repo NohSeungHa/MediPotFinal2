@@ -71,6 +71,12 @@ public interface CommunityDAO {
 	
 	//자유게시판 댓글 갯수
 	int communityCommentCount(SqlSessionTemplate sqlsession,int no);
+	
+	//자유게시판 삭제시 댓글 List 삭제
+	void deleteCommunityCommentList(SqlSessionTemplate sqlsession,int no);
+	
+	//자유게시판 댓글 삭제
+	int deleteComment(SqlSessionTemplate sqlsession,int num);
 }
 
 

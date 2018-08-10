@@ -13,6 +13,8 @@ import com.medi.pot.community.vo.CommunityComment;
 @Service
 public class CommunityServiceImpl implements CommunityService {
 
+
+
 	@Autowired
 	private CommunityDAO communityDAO;
 	
@@ -144,6 +146,16 @@ public class CommunityServiceImpl implements CommunityService {
 	public int communityCommentCount(int no) {
 		return communityDAO.communityCommentCount(sqlsession,no);
 	}
+	
+	//자유게시판 게시글 삭제시 댓글 List삭제
+	@Override
+	public void deleteCommunityCommentList(int no) {
+		communityDAO.deleteCommunityCommentList(sqlsession,no);
+	}
+
+	//자유게시판 댓글 삭제
+	@Override
+	public int deleteComment(int num) {
+		return communityDAO.deleteComment(sqlsession,num);
+	}
 }
-
-

@@ -292,6 +292,9 @@ public class CommunityController {
 	//자유게시판 글 삭제
 	@RequestMapping("/community/deleteCommunity.do")
 	public ModelAndView deleteCommunity(int no,String refile,HttpServletRequest request) {
+		//게시판의 댓글 List 삭제
+		service.deleteCommunityCommentList(no);
+		//게시판 삭제
 		int result=service.deleteCommunity(no);
 		
 		String savedDir=request.getSession().getServletContext().getRealPath("/resources/uploadfile/community");
@@ -450,8 +453,33 @@ public class CommunityController {
 		mv.addObject("pageBar", pageBar);
 		mv.addObject("cPage", cPage);
 		mv.addObject("totalCount", totalCount);
+		mv.addObject("no2", communityNum);
+		mv.addObject("cp2",cp);
 		mv.setViewName("community/CommunityCommentLoad");
 	
+		return mv;
+	}
+	
+	@RequestMapping("/community/deleteComment.do")
+	public ModelAndView deleteComment(int no2,String cp2,int commentNum) {
+		
+		System.out.println("no2"+no2);
+		System.out.println("cp2"+cp2);
+		System.out.println("num"+commentNum);
+		int result = service.deleteComment(commentNum);
+		
+		ModelAndView mv=new ModelAndView();
+		String msg="";
+		if(result==1) {
+			msg="댓글을 삭제하였습니다.";
+		}
+		else {
+			msg="댓글을 삭제를 실패하였습니다.";
+		}
+		mv.addObject("msg",msg);
+		mv.addObject("loc", "/community/communityView.do?no="+no2+"&cp="+cp2);
+		mv.setViewName("common/msg");
+		
 		return mv;
 	}
 }

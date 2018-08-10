@@ -324,10 +324,6 @@ public class PageCreate {
 		pageBar+="<script>";
 		pageBar+="function fn_paging(cPage, numPerPage){";
 		pageBar+="location.href='"+url+"?no="+no+"&cp="+cp+"&cPage='+cPage;";
-		pageBar+="window.onload = pageLoad;";
-		pageBar+="}";
-		pageBar+="function pageLoad(){";
-		pageBar+="location.href='#cc2s';";
 		pageBar+="}";
 		pageBar+="</script>";
 			
