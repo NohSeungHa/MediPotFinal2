@@ -281,7 +281,7 @@
 								function deleteCommentNum(num){
 									var no=num;
 									$('#commentNum').val(no);
-								}
+								};
 							</script>
 							<input type="hidden" id="no2" name="no2" value="${com.communityNum}"/>
 							<input type="hidden" id="cp2" name="cp2" value="${cp}"/>
