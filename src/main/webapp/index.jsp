@@ -252,6 +252,7 @@ to {
 			<h1>2단계</h1>
 			<p>진료과목 선택하기</p>
 		</div>
+		
 		<div class="col-md-1" style="padding-top:35px;padding-right:20px;">
 			<img src="${path}/resources/img/common/arrow.png" width="80px" height="60px">
 		</div>

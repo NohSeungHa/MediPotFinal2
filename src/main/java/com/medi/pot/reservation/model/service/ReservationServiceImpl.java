@@ -84,6 +84,26 @@ public class ReservationServiceImpl implements ReservationService {
 	public int insertBlock(Map<String, Object> map) {
 		return reserDAO.insertBlock(map);
 	}
+
+	@Override
+	public int hDeleteReser(Map<String, Object> map) {
+		return reserDAO.hDeleteReser(map);
+	}
+
+	@Override
+	public int bDeleteReser(Map<String, Object> map) {
+		return reserDAO.bDeleteReser(map);
+	}
+
+	@Override
+	public int hBlockDate(Map<String, Object> map) {
+		return reserDAO.hBlockDate(map);
+	}
+
+	@Override
+	public int deleteDateCan(Map<String, Object> map) {
+		return reserDAO.deleteDateCan(map);
+	}
 	
 	
 	

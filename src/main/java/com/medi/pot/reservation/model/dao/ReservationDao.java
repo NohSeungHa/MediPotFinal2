@@ -24,4 +24,8 @@ public interface ReservationDao {
 	int reserDelete(int chNum);
 	int reserCount(int num);
 	int insertBlock(Map<String, Object> map);
+	int hDeleteReser(Map<String, Object> map);
+	int bDeleteReser(Map<String, Object> map);
+	int hBlockDate(Map<String, Object> map);
+	int deleteDateCan(Map<String, Object> map);
 }
