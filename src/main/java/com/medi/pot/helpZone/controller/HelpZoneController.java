@@ -154,6 +154,7 @@ public class HelpZoneController {
 		return "helpZone/helpZoneUpdate";
 	}
 	
+<<<<<<< HEAD
 	@RequestMapping("/helpZone/helpZoneUpdateEnd.do")
 	public ModelAndView helpZoneUpdateEnd(String helpZoneTitle,
 											int helpZoneQuestioner,
@@ -219,5 +220,7 @@ public class HelpZoneController {
 		
 		return mv;
 	} 
+=======
+>>>>>>> sh
 	
 }

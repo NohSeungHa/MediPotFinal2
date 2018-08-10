@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="com.medi.pot.reservation.model.vo.MemberReservation"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Calendar"%>
@@ -40,11 +41,19 @@
 	int sSycleP=(int)(sSyclePM/timeI);
 	
 	List<MemberReservation> list=(List<MemberReservation>)request.getAttribute("mr");
+	List<MemberReservation> list2=new ArrayList();
+	for(int i=0;i<list.size();i++){
+		if(!list2.contains(list.get(i).getCheckTime())){
+			list2.add(list.get(i));
+		}
+	}
 	String checkTi="";
 	String checkTi2="";
+	String checkTi3="";
 	for(MemberReservation mr : list){
 		checkTi+="§"+mr.getBlockTime()+"§"+mr.getCheckTime()+"§";
 		checkTi2+="§"+mr.getBlockTime()+"§";
+		checkTi3+="§"+mr.getCheckTime()+"§";
 	}
 %>
 <style>
@@ -65,9 +74,16 @@
 		background-color: white;
 		border-radius: 5px;
 	}
+	.ti2{
+		margin:5px;
+		width:72px; height:60px;
+		font-size:20px;
+		background-color: white;
+		border-radius: 5px;
+	}
 </style>
 	<c:if test='<%=!week.equals("토") %>'>
-		<div style="border: 2px solid lightgray;padding-left:40px;box-shadow: 3px 3px 5px lightgrey;border-radius:5px;">
+		<div style="border: 2px solid lightgray;padding-left:40px;box-shadow: 3px 3px 5px lightgrey;border-radius:5px;border-radius:5px;">
 			<h1 style="text-align: center;">${time }</h1>
 			<h1 style="text-align: center;">오전</h1>
 			<%for(int i=0;i<sycleA;i++ ){ 
@@ -76,14 +92,14 @@
 			<button class="timebut" value="<%=sd.format(lws)%>"><%=sd2.format(lws) %></button>
 			</c:if>
 			<%for(int j=0;j<list.size();j++){ %>
-			<%if(list.get(j).getCheckTime()!=null){ %>
-			<c:if test="<%=list.get(j).getCheckTime().contains(sd.format(lws)) %>">
-			<button class="ti" value="<%=sd.format(lws)%>" style="background-color:#A6A6A6;color:#FCFCFC;"><%=sd2.format(lws) %><%=list.get(j).getMemberName() %></button>
+			<%if(list2.get(j).getCheckTime()!=null){ %>
+			<c:if test="<%=list2.get(j).getCheckTime().contains(sd.format(lws)) %>">
+			<button class="ti" value="<%=sd.format(lws)%>" name="<%=list2.get(j).getMemberNum() %>" title="<%=list2.get(j).getMemberName() %>" style="background-color:#A6A6A6;color:#FCFCFC;"><%=sd2.format(lws) %><%=list2.get(j).getMemberName() %></button>
 			</c:if>
 			<%} %>
 			<%} %>
 			<c:if test="<%=checkTi2.contains(sd.format(lws)) %>">
-			<button class="ti" value="<%=sd.format(lws)%>" style="background-color:#A6A6A6;color:#FCFCFC;"><%=sd2.format(lws) %></button>
+			<button class="ti2" value="<%=sd.format(lws)%>" style="background-color:#A6A6A6;color:#FCFCFC;"><%=sd2.format(lws) %></button>
 			</c:if>
 
 			<%
@@ -96,14 +112,14 @@
 			<button class="timebut" value="<%=sd.format(lel)%>"><%=sd2.format(lel) %></button>
 			</c:if>
 			<%for(int j=0;j<list.size();j++){ %>
-			<%if(list.get(j).getCheckTime()!=null){ %>
-			<c:if test="<%=list.get(j).getCheckTime().contains(sd.format(lel)) %>">
-			<button class="ti" value="<%=sd.format(lel)%>" style="background-color:#A6A6A6;color:#FCFCFC;"><%=sd2.format(lel) %><%=list.get(j).getMemberName() %></button>
+			<%if(list2.get(j).getCheckTime()!=null){ %>
+			<c:if test="<%=list2.get(j).getCheckTime().contains(sd.format(lel)) %>">
+			<button class="ti" value="<%=sd.format(lel)%>" name="<%=list2.get(j).getMemberNum() %>" title="<%=list2.get(j).getMemberName() %>" style="background-color:#A6A6A6;color:#FCFCFC;"><%=sd2.format(lel) %><%=list2.get(j).getMemberName() %></button>
 			</c:if>
 			<%} %>
 			<%} %>
 			<c:if test="<%=checkTi2.contains(sd.format(lel)) %>">
-			<button class="ti" value="<%=sd.format(lel)%>" style="background-color:#A6A6A6;color:#FCFCFC;"><%=sd2.format(lel) %></button>
+			<button class="ti2" value="<%=sd.format(lel)%>" style="background-color:#A6A6A6;color:#FCFCFC;"><%=sd2.format(lel) %></button>
 			</c:if>
 			<%
 			lel=lel+timeI;
@@ -112,7 +128,7 @@
 		</div>
 	</c:if>
 	<c:if test='<%=week.equals("토") %>'>
-		<div style="border: 2px solid lightgray;padding-left:40px;box-shadow: 3px 3px 5px lightgrey;">
+		<div style="border: 2px solid lightgray;padding-left:40px;box-shadow: 3px 3px 5px lightgrey;border-radius:5px;">
 			<h1 style="text-align: center;">${time }</h1>
 			<h1 style="text-align: center;">오전</h1>
 			<%for(int i=0;i<sSycleA;i++ ){ 
@@ -121,14 +137,14 @@
 			<button class="timebut" value="<%=sd.format(lss)%>"><%=sd2.format(lss) %></button>
 			</c:if>
 			<%for(int j=0;j<list.size();j++){ %>
-			<%if(list.get(j).getCheckTime()!=null){ %>
-			<c:if test="<%=list.get(j).getCheckTime().contains(sd.format(lss)) %>">
-			<button class="ti" value="<%=sd.format(lss)%>" style="background-color:#A6A6A6;color:#FCFCFC;"><%=sd2.format(lss) %><br><%=list.get(j).getMemberName() %></button>
+			<%if(list2.get(j).getCheckTime()!=null){ %>
+			<c:if test="<%=list2.get(j).getCheckTime().contains(sd.format(lss)) %>">
+			<button class="ti" value="<%=sd.format(lss)%>" name="<%=list2.get(j).getMemberNum() %>" title="<%=list2.get(j).getMemberName() %>" style="background-color:#A6A6A6;color:#FCFCFC;"><%=sd2.format(lss) %><br><%=list2.get(j).getMemberName() %></button>
 			</c:if>
 			<%} %>
 			<%} %>
 			<c:if test="<%=checkTi2.contains(sd.format(lss)) %>">
-			<button class="ti" value="<%=sd.format(lss)%>" style="background-color:#A6A6A6;color:#FCFCFC;"><%=sd2.format(lss) %></button>
+			<button class="ti2" value="<%=sd.format(lss)%>" style="background-color:#A6A6A6;color:#FCFCFC;"><%=sd2.format(lss) %></button>
 			</c:if>
 			<%
 			lss=lss+timeI;
@@ -140,14 +156,14 @@
 			<button class="timebut" value="<%=sd.format(lel)%>"><%=sd2.format(lel) %></button>
 			</c:if>
 			<%for(int j=0;j<list.size();j++){ %>
-			<%if(list.get(j).getCheckTime()!=null){ %>
-			<c:if test="<%=list.get(j).getCheckTime().contains(sd.format(lel)) %>">
-			<button class="ti" value="<%=sd.format(lel)%>" style="background-color:#A6A6A6;color:#FCFCFC;"><%=sd2.format(lel) %><%=list.get(j).getMemberName() %></button>
+			<%if(list2.get(j).getCheckTime()!=null){ %>
+			<c:if test="<%=list2.get(j).getCheckTime().contains(sd.format(lel)) %>">
+			<button class="ti" value="<%=sd.format(lel)%>" name="<%=list2.get(j).getMemberNum() %>" title="<%=list2.get(j).getMemberName() %>" style="background-color:#A6A6A6;color:#FCFCFC;"><%=sd2.format(lel) %><%=list2.get(j).getMemberName() %></button>
 			</c:if>
 			<%} %>
 			<%} %>
 			<c:if test="<%=checkTi2.contains(sd.format(lel)) %>">
-			<button class="ti" value="<%=sd.format(lel)%>" style="background-color:#A6A6A6;color:#FCFCFC;"><%=sd2.format(lel) %></button>
+			<button class="ti2" value="<%=sd.format(lel)%>" style="background-color:#A6A6A6;color:#FCFCFC;"><%=sd2.format(lel) %></button>
 			</c:if>
 			<%
 			lel=lel+timeI;
@@ -195,13 +211,11 @@
 			if($(this).css('background-color')=='rgb(40, 96, 144)'){
 				$(this).css('background-color','white');
 				$(this).css('color','black');
-				choiceTime="";
+				choiceTime=choiceTime.replace($(this).val()+',','');
 			}else{
-				$('.timebut').css('background-color','white');
-				$('.timebut').css('color','black');
 				$(this).css('background-color','#286090');
 				$(this).css('color','white');
-				choiceTime=$(this).val();
+				choiceTime+=$(this).val()+',';
 				alert(choiceTime);
 			}
 		});
@@ -211,6 +225,23 @@
 			}else{
 				alert('<%=time2%>');
 				location.href='${path}/medi/insertBlock?docNum=<%=docTime.getDoctorNum()%>&hosNum=<%=docTime.getHospitalNo()%>&time=<%=time2%>&choiceTime='+choiceTime;
+			}
+		});
+		$('.ti').click(function () {
+			if(confirm($(this).attr('title')+'님의 예약을 취소하시겠습니까?')){
+				location.href='${path}/medi/hDeleteReser?docNum=<%=docTime.getDoctorNum()%>&hosNum=<%=docTime.getHospitalNo()%>&memberNum='+$(this).attr('name')+'&reserDate=<%=time2%>&reserTime='+$(this).val();
+			}
+		});
+		$('.ti2').click(function () {
+			if(confirm('제외처리를 취소하시겠습니까?')){
+				location.href='${path}/medi/bDeleteReser?docNum=<%=docTime.getDoctorNum()%>&hosNum=<%=docTime.getHospitalNo()%>&reserDate=<%=time2%>&reserTime='+$(this).val();
+			}
+		});
+		$('#blockDate').click(function () {
+			if($('.ti').attr('name')!=null){
+				alert('예약된 회원이 있어 제외가 불가능합니다.');
+			}else{
+				location.href=location.href='${path}/medi/hBlockDate?docNum=<%=docTime.getDoctorNum()%>&hosNum=<%=docTime.getHospitalNo()%>&date=<%=time2%>';
 			}
 		});
 	</script>

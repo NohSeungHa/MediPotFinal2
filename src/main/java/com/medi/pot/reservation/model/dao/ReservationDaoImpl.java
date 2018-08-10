@@ -87,6 +87,27 @@ public class ReservationDaoImpl implements ReservationDao {
 	public int insertBlock(Map<String, Object> map) {
 		return session.insert("reser.insertBlock", map);
 	}
+
+	@Override
+	public int hDeleteReser(Map<String, Object> map) {
+		return session.delete("reser.deletehReser", map);
+	}
+
+	@Override
+	public int bDeleteReser(Map<String, Object> map) {
+		return session.delete("reser.deletebReser",map);
+	}
+
+	@Override
+	public int hBlockDate(Map<String, Object> map) {
+		return session.insert("reser.insertBlockH",map);
+	}
+
+	@Override
+	public int deleteDateCan(Map<String, Object> map) {
+		return session.delete("reser.deleteDateCan",map);
+	}
+	
 	
 	
 	

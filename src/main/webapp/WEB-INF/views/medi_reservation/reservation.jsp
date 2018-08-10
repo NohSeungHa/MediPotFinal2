@@ -47,6 +47,9 @@
      if(docSche!=null){
 	     for(DoctorSchedule ds : docSche){
 	    	 checkDate=ds.getBlockDate().equals(hd);
+	    	 if(checkDate){
+	    		 break;
+	    	 }
 	     }
      }
      boolean check=close.contains(daye);
@@ -62,6 +65,9 @@
      if(docSche!=null){
 	     for(DoctorSchedule ds : docSche){
 	    	 checkDate2=ds.getBlockDate().equals(hd2);
+	    	 if(checkDate2){
+	    		 break;
+	    	 }
 	     }
      }
      boolean check2=close.contains(daye2);
@@ -77,6 +83,9 @@
      if(docSche!=null){
 	     for(DoctorSchedule ds : docSche){
 	    	 checkDate3=ds.getBlockDate().equals(hd3);
+	    	 if(checkDate3){
+	    		 break;
+	    	 }
 	     }
      }
      boolean check3=close.contains(daye3);
@@ -92,6 +101,9 @@
      if(docSche!=null){
 	     for(DoctorSchedule ds : docSche){
 	    	 checkDate4=ds.getBlockDate().equals(hd4);
+	    	 if(checkDate4){
+	    		 break;
+	    	 }
 	     }
      }
      boolean check4=close.contains(daye4);
@@ -107,6 +119,9 @@
      if(docSche!=null){
 	     for(DoctorSchedule ds : docSche){
 	    	 checkDate5=ds.getBlockDate().equals(hd5);
+	    	 if(checkDate5){
+	    		 break;
+	    	 }
 	     }
      }
      boolean check5=close.contains(daye5);
@@ -122,6 +137,9 @@
      if(docSche!=null){
 	     for(DoctorSchedule ds : docSche){
 	    	 checkDate6=ds.getBlockDate().equals(hd6);
+	    	 if(checkDate6){
+	    		 break;
+	    	 }
 	     }
      }
      boolean check6=close.contains(daye6);
@@ -137,6 +155,9 @@
      if(docSche!=null){
 	     for(DoctorSchedule ds : docSche){
 	    	 checkDate7=ds.getBlockDate().equals(hd7);
+	    	 if(checkDate7){
+	    		 break;
+	    	 }
 	     }
      }
      boolean check7=close.contains(daye7);
@@ -152,6 +173,9 @@
      if(docSche!=null){
 	     for(DoctorSchedule ds : docSche){
 	    	 checkDate8=ds.getBlockDate().equals(hd8);
+	    	 if(checkDate8){
+	    		 break;
+	    	 }
 	     }
      }
      boolean check8=close.contains(daye8);
@@ -167,6 +191,9 @@
      if(docSche!=null){
 	     for(DoctorSchedule ds : docSche){
 	    	 checkDate9=ds.getBlockDate().equals(hd9);
+	    	 if(checkDate9){
+	    		 break;
+	    	 }
 	     }
      }
      boolean check9=close.contains(daye9);
@@ -182,6 +209,9 @@
      if(docSche!=null){
 	     for(DoctorSchedule ds : docSche){
 	    	 checkDate10=ds.getBlockDate().equals(hd10);
+	    	 if(checkDate10){
+	    		 break;
+	    	 }
 	     }
      }
      boolean check10=close.contains(daye10);
@@ -197,6 +227,9 @@
      if(docSche!=null){
 	     for(DoctorSchedule ds : docSche){
 	    	 checkDate11=ds.getBlockDate().equals(hd11);
+	    	 if(checkDate11){
+	    		 break;
+	    	 }
 	     }
      }
      boolean check11=close.contains(daye11);
@@ -212,6 +245,9 @@
      if(docSche!=null){
 	     for(DoctorSchedule ds : docSche){
 	    	 checkDate12=ds.getBlockDate().equals(hd12);
+	    	 if(checkDate12){
+	    		 break;
+	    	 }
 	     }
      }
      boolean check12=close.contains(daye12);
@@ -227,6 +263,9 @@
      if(docSche!=null){
 	     for(DoctorSchedule ds : docSche){
 	    	 checkDate13=ds.getBlockDate().equals(hd13);
+	    	 if(checkDate13){
+	    		 break;
+	    	 }
 	     }
      }
      boolean check13=close.contains(daye13);
@@ -242,6 +281,9 @@
      if(docSche!=null){
 	     for(DoctorSchedule ds : docSche){
 	    	 checkDate14=ds.getBlockDate().equals(hd14);
+	    	 if(checkDate14){
+	    		 break;
+	    	 }
 	     }
      }
      boolean check14=close.contains(daye14);
@@ -356,12 +398,12 @@
 		text-align:center;
 		width:90px;
 	}
-	#docInfo-div{
+	.docInfo-div{
 		border:2px solid lightgray;
 		border-radius:5px;
 		box-shadow:2px 2px 5px lightgray;
 	}
-	#docInfo-div:hover{
+	.docInfo-div:hover{
 		cursor: pointer;
 		border: 2px solid #286090;
 	}	
@@ -415,8 +457,8 @@
 		</div>
 		</c:if>
 		<c:forEach var="list" items="${list }">
-		<div id="docInfo-div" style="height:auto;margin-bottom:10px;" class="${list.doctorNum }">
-			<table id="docInfo" class="${list.hospitalNo }">
+		<div class="docInfo-div" style="height:auto;margin-bottom:10px;" title="${list.doctorNum }" lang="${list.hospitalNo }">
+			<table id="docInfo">
 				<tr>
 					<td rowspan="4"><img src="${path }/resources/img/reser/${list.doctorPhoto }" width="200px;" height="250px;"></td>
 					<th>이름</th>
@@ -700,9 +742,9 @@
 				}
 			});
 		});
-		$('#docInfo-div').click(function () {
+		$('.docInfo-div').click(function () {
 			alert('들어가기전');
-			location.href='${path}/medi/doctorS?docNum='+$(this).attr('class')+'&hosNum='+$('#docInfo').attr('class');
+			location.href='${path}/medi/doctorS?docNum='+$(this).attr('title')+'&hosNum='+$(this).attr('lang');
 		});
 		
 		
