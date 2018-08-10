@@ -3,7 +3,6 @@
 <%@ taglib prefix='c' uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix='fmt' uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix='fn' uri="http://java.sun.com/jsp/jstl/functions"%>
-<c:set var="path" value="<%=request.getContextPath() %>" />
 
 
 <jsp:include page="/WEB-INF/views/common/header.jsp">
@@ -271,6 +270,7 @@ to {
 		<img src="${path}/resources/img/common/index_1.png" style="margin-bottom: 35px;width:600px;height:600px">
 	</div>
 	
+
 
 
 
