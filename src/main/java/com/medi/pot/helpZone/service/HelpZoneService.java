@@ -13,6 +13,6 @@ public interface HelpZoneService {
 	HelpZone selectHelpZone(int helpZoneNum);						//글 한개 가져오기
 	Member selectMember(int helpZoneQuestioner);					//작성자 불러오기
 	int deleteHelpZone(int num);									//글 삭제하기
-	
+	int updateHelpZone(HelpZone helpZone);							//글 업데이트 하기
 	
 }

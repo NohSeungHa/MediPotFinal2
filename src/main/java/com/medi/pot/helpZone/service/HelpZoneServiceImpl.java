@@ -48,6 +48,11 @@ public class HelpZoneServiceImpl implements HelpZoneService {
 	public int deleteHelpZone(int num) {
 		return helpZoneDao.deleteHelpZone(num);
 	}
+
+	@Override
+	public int updateHelpZone(HelpZone helpZone) {
+		return helpZoneDao.updateHelpZone(helpZone);
+	}
 	
 	
 	

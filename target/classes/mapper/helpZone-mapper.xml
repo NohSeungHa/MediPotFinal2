@@ -25,4 +25,13 @@
 	<delete id="deleteHelpZone" parameterType="_int">
 		delete from helpZone where helpZoneNum=#{num}
 	</delete>
+	<!-- 글 수정 -->
+	<update id="updateHelpZone" parameterType="HelpZone">
+		update HelpZone set helpZoneTitle=#{helpZoneTitle},
+							 helpZoneKeyWord=#{helpZoneKeyWord},
+							  helpZoneContent=#{helpZoneContent},
+							   helpZoneFile=#{helpZoneFile},
+							    helpZoneReFile=#{helpZoneReFile}
+							    where helpZoneNum=#{helpZoneNum}
+	</update>
 </mapper>
