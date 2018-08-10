@@ -279,7 +279,6 @@
 							<h3 style="color: red;">주의) 삭제한 댓글은 복구 할 수 없습니다.</h3>
 							<script>
 								function deleteCommentNum(num){
-									alert(num);
 									var no=num;
 									$('#commentNum').val(no);
 								}
