@@ -431,6 +431,7 @@ public class CommunityController {
 			String checkPH,
 			String communityNum,
 			int cp,
+			String check,
 			@RequestParam(value="cPage",required=false,defaultValue="1") int cPage,
 			ModelAndView mv) throws JsonProcessingException,UnsupportedEncodingException {
 		int numPerPage=10;
@@ -440,6 +441,7 @@ public class CommunityController {
 			cc1.setCommentNo(Integer.parseInt(communityNum));
 			cc1.setCommentWriter(writer);
 			cc1.setCommentContent(comment);
+			cc1.setCommentCheckPH(check);
 			service.insertCommunityComment(cc1);
 		}
 		System.out.println("!!!@");
@@ -453,15 +455,16 @@ public class CommunityController {
 		mv.addObject("pageBar", pageBar);
 		mv.addObject("cPage", cPage);
 		mv.addObject("totalCount", totalCount);
-		mv.addObject("no2", communityNum);
+		mv.addObject("no2", Integer.parseInt(communityNum));
 		mv.addObject("cp2",cp);
 		mv.setViewName("community/CommunityCommentLoad");
 	
 		return mv;
 	}
 	
+	//댓글 삭제
 	@RequestMapping("/community/deleteComment.do")
-	public ModelAndView deleteComment(int no2,String cp2,int commentNum) {
+	public ModelAndView deleteComment(int no2,int cp2,int commentNum) {
 		
 		System.out.println("no2"+no2);
 		System.out.println("cp2"+cp2);

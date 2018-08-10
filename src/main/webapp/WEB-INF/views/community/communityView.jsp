@@ -79,10 +79,12 @@
 			<c:if test="${checkPH=='P'}">
 				<p type="text" id="commentPwriter" readonly>&nbsp;${memberLoggedIn.memberId}</p>
 				<input type="hidden" id="commentPwriter2" value="${memberLoggedIn.memberId}"/>
+				<input type="hidden" id="checkPH" value="P"/>
 			</c:if>
 			<c:if test="${checkPH=='H'}">
 				<p type="text" id="commentHwriter" readonly>&nbsp;${memberLoggedIn.hospitalId}</p>
 				<input type="hidden" id="commentHwriter2" value="${memberLoggedIn.hospitalId}"/>
+				<input type="hidden" id="checkPH" value="H"/>
 			</c:if>
 			<textarea class="form-control" style="width: 88%;height: 100px;resize: none; float: left; border: 1px solid lightgray;" id="commentContent" name="commentContent" onKeyUp="checkLength(this);" onKeyDown="checkLength(this);" placeholder="댓글을 입력하세요.(500자이내) 불쾌감을 주는 욕설과 악플은 삭제될 수 있습니다."></textarea>
 			<button id="communityInsert" type="submit" class="btn btn-success" style="height:100px; width:100px; margin-left: 10px;">댓글 등록</button>
@@ -96,45 +98,22 @@
   <c:if test="${not empty cc2}">
   	<c:forEach var='cc' items='${cc2 }' varStatus="vs">
 		<p id="commentWriter" readonly>작성자 : ${cc.commentWriter} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;작성일 : ${cc.commentDate }
-		<c:if test="${checkPH=='P'}">
+		<c:if test="${cc.commentCheckPH eq checkPH and checkPH eq 'P'}">
 			<c:if test="${cc.commentWriter eq memberLoggedIn.memberId and memberLoggedIn.memberId != 'admin' }">
-				<a data-toggle="modal" data-target="#deleteComment" style="color: red;float: right;">&nbsp;&nbsp;&nbsp;댓글 삭제</a>
+				<a data-toggle="modal" data-target="#deleteComment" style="color: red;float: right;" onclick="deleteCommentNum(${cc.commentNum})">&nbsp;&nbsp;&nbsp;댓글 삭제</a>
 			</c:if>
 			<c:if test="${memberLoggedIn.memberId eq 'admin'}">
-				<a data-toggle="modal" data-target="#deleteComment" style="color: red;float: right;">&nbsp;&nbsp;&nbsp;댓글 삭제</a>
+				<a data-toggle="modal" data-target="#deleteComment" style="color: red;float: right;" onclick="deleteCommentNum(${cc.commentNum})">&nbsp;&nbsp;&nbsp;댓글 삭제</a>
 			</c:if>
 		</c:if>
-		<c:if test="${checkPH=='H'} ">
+		<c:if test="${cc.commentCheckPH eq checkPH and checkPH eq 'H'}">
 			<c:if test="${cc.commentWriter eq memberLoggedIn.hospitalId}">
-				<a data-toggle="modal" data-target="#deleteComment" style="color: red;float: right;">&nbsp;&nbsp;&nbsp;댓글 삭제</a>
+				<a data-toggle="modal" data-target="#deleteComment" style="color: red;float: right;" onclick="deleteCommentNum(${cc.commentNum})">&nbsp;&nbsp;&nbsp;댓글 삭제</a>
 			</c:if>
 		</c:if>
 		</p>
 		<p id="commentContent2" name="commentContent2">&nbsp;${cc.commentContent }</p>
   		<hr>
-  		<!-- 댓글 삭제 modal -->
-		<div class="modal fade" id="deleteComment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">댓글 삭제 확인</h5>
-					</div>
-					<form action="${path}/community/deleteComment.do" method="post">
-						<div class="modal-body">
-							<h1>댓글을 삭제 하시겠습니까?</h1>
-							<h3 style="color: red;">주의) 삭제한 댓글은 복구 할 수 없습니다.</h3>
-							<input type="hidden" id="no2" name="no2" value="${com.communityNum}"/>
-							<input type="hidden" id="cp2" name="cp2" value="${cp}"/>
-							<input type="hidden" id="commentNum" name="commentNum" value="${cc.commentNum}"/>
-						</div>
-						<div class="modal-footer">
-							<button type="submit" class="btn btn-danger">삭제</button>
-							<button type="button" class="btn" data-dismiss="modal">취소</button>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
   	</c:forEach>
   	${pageBar }
   	</c:if>
@@ -147,9 +126,18 @@
 		<button type="button" class="btn btn-success" onclick="searchList()">목록으로</button>
 	</c:if>
 	<c:if test="${checkPH=='P'}">
-		<c:if test="${memberLoggedIn.memberId eq com.communityWriter and com.communityCheckPH eq 'P' or memberLoggedIn.memberId eq 'admin'}">
+		<c:if test="${memberLoggedIn.memberId eq com.communityWriter and com.communityCheckPH eq 'P'}">
+	  		<c:if test="${memberLoggedIn.memberId eq com.communityWriter and memberLoggedIn.memberId != 'admin'}">
 			<input type="button" value="삭제" class="btn btn-danger" style="float: right;margin-left: 10px;" data-toggle="modal" data-target="#deleteModal"/>
-	  		<c:if test="${memberLoggedIn.memberId eq com.communityWriter}">
+		  		<button type="button" class="btn btn-warning" style="float: right;margin-left: 10px;" onclick="crystal()">수정</button>
+				<script>
+					function crystal(){
+						location.href="${path}/community/communityUpdate.do?cPage=${cp}&no=${com.communityNum}";
+					}
+				</script>
+			</c:if>
+			<c:if test="${memberLoggedIn.memberId eq 'admin'}">
+			<input type="button" value="삭제" class="btn btn-danger" style="float: right;margin-left: 10px;" data-toggle="modal" data-target="#deleteModal"/>
 		  		<button type="button" class="btn btn-warning" style="float: right;margin-left: 10px;" onclick="crystal()">수정</button>
 				<script>
 					function crystal(){
@@ -160,9 +148,9 @@
 	  	</c:if>
   	</c:if>
   	<c:if test="${checkPH=='H'}">
-		<c:if test="${memberLoggedIn.hospitalId eq com.communityWriter and com.communityCheckPH eq 'H' or memberLoggedIn.memberId eq 'admin'}">
-			<input type="button" value="삭제" class="btn btn-danger" style="float: right;margin-left: 10px;" data-toggle="modal" data-target="#deleteModal"/>
+		<c:if test="${memberLoggedIn.hospitalId eq com.communityWriter and com.communityCheckPH eq 'H'}">
 	  		<c:if test="${memberLoggedIn.hospitalId eq com.communityWriter}">
+			<input type="button" value="삭제" class="btn btn-danger" style="float: right;margin-left: 10px;" data-toggle="modal" data-target="#deleteModal"/>
 	  			<button type="button" class="btn btn-warning" style="float: right;margin-left: 10px;" onclick="crystal()">수정</button>
 				<script>
 					function crystal(){
@@ -232,6 +220,7 @@
 		var comment = $('#commentContent').val();
 		var communityNum = $('#communityNum').val();
 		var cp = $('#cp').val();
+		var check=$('#checkPH').val();
 		if(${checkPH=='P'}){
 			writer = $('#commentPwriter2').val();
 		}
@@ -239,7 +228,7 @@
 			writer = $('#commentHwriter2').val();
 		}
 		  
-		var allData = { "writer": writer, "comment": comment, "communityNum":communityNum, "cp":cp };
+		var allData = { "writer": writer, "comment": comment, "communityNum":communityNum, "cp":cp, "check":check };
 		  $.ajax({
 				url:"${path}/community/insertCommunityComment.do",
 				type:'post',
@@ -277,6 +266,35 @@
 		</div>
 	</div>
 </div>
-
+<!-- 댓글 삭제 modal -->
+		<div class="modal fade" id="deleteComment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">댓글 삭제 확인</h5>
+					</div>
+					<form action="${path}/community/deleteComment.do" method="post">
+						<div class="modal-body">
+							<h1>댓글을 삭제 하시겠습니까?</h1>
+							<h3 style="color: red;">주의) 삭제한 댓글은 복구 할 수 없습니다.</h3>
+							<script>
+								function deleteCommentNum(num){
+									alert(num);
+									var no=num;
+									$('#commentNum').val(no);
+								}
+							</script>
+							<input type="hidden" id="no2" name="no2" value="${com.communityNum}"/>
+							<input type="hidden" id="cp2" name="cp2" value="${cp}"/>
+							<input type="hidden" id="commentNum" name="commentNum"/>
+						</div>
+						<div class="modal-footer">
+							<button type="submit" class="btn btn-danger">삭제</button>
+							<button type="button" class="btn" data-dismiss="modal">취소</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

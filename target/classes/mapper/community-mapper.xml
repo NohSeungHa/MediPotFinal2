@@ -90,7 +90,7 @@
 	
 	<!-- 자유게시판 댓글 insert -->
 	<insert id="insertCommunityComment" parameterType="CommunityComment">
-		insert into CommunityComment VALUES(CommunityComment_SEQ.nextval, #{commentNo}, #{commentWriter},#{commentContent} ,sysdate)
+		insert into CommunityComment VALUES(CommunityComment_SEQ.nextval, #{commentNo}, #{commentWriter}, #{commentCheckPH},#{commentContent} ,sysdate)
 	</insert>
 	
 	<!-- 자유게시판 댓글 List -->

@@ -7,17 +7,19 @@ public class CommunityComment {
 	private int commentNum; //댓글 번호
 	private int commentNo;  //댓글의 게시판 번호
 	private String commentWriter; //댓글의 작성자
+	private String commentCheckPH; //댓글의 P,H 확인
 	private String commentContent; //댓글 내용
 	private Date commentDate; //댓글의 날짜
 	
 	public CommunityComment() {}
 
-	public CommunityComment(int commentNum, int commentNo, String commentWriter, String commentContent,
-			Date commentDate) {
+	public CommunityComment(int commentNum, int commentNo, String commentWriter, String commentCheckPH,
+			String commentContent, Date commentDate) {
 		super();
 		this.commentNum = commentNum;
 		this.commentNo = commentNo;
 		this.commentWriter = commentWriter;
+		this.commentCheckPH = commentCheckPH;
 		this.commentContent = commentContent;
 		this.commentDate = commentDate;
 	}
@@ -46,6 +48,14 @@ public class CommunityComment {
 		this.commentWriter = commentWriter;
 	}
 
+	public String getCommentCheckPH() {
+		return commentCheckPH;
+	}
+
+	public void setCommentCheckPH(String commentCheckPH) {
+		this.commentCheckPH = commentCheckPH;
+	}
+
 	public String getCommentContent() {
 		return commentContent;
 	}
@@ -65,9 +75,8 @@ public class CommunityComment {
 	@Override
 	public String toString() {
 		return "CommunityComment [commentNum=" + commentNum + ", commentNo=" + commentNo + ", commentWriter="
-				+ commentWriter + ", commentContent=" + commentContent + ", commentDate=" + commentDate + "]";
+				+ commentWriter + ", commentCheckPH=" + commentCheckPH + ", commentContent=" + commentContent
+				+ ", commentDate=" + commentDate + "]";
 	}
-
-	
 	
 }
