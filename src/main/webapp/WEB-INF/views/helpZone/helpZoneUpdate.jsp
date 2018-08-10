@@ -53,8 +53,8 @@
 		src="/pot/resources/img/notice/home.jpg"
 		style="width: 30%; height: 30%;"> 홈으로</a>
 		
-	<form name="helpZoneUpdateFrm" action="${path}/helpZone/helpZoneUpdateEnd.do" method="post" onsubmit="return validate();"  enctype="multipart/form-data" >	
-		<table class="table table-bordered">
+	<form name="helpZoneUpdateFrm" action="${path}/helpZone/helpZoneUpdateEnd.do" method="post" enctype="multipart/form-data" >	
+	<table class="table table-bordered">
 			<tbody>
 				<tr>
 					<th>제목:</th>
@@ -68,33 +68,34 @@
 				</tr>
 				<tr>
 					<th>키워드</th>
-					<td>
+					<td> 
 						<c:if test="${helpZone.helpZoneKeyWord eq '건강' }">
-							<label class="checkbox-inline"><input type="radio" value="건강" name="helpZoneKeyWord" id="helpZoneKeyWord" checked>건강</label>
-							<label class="checkbox-inline"><input type="radio" value="치료" name="helpZoneKeyWord" id="helpZoneKeyWord">치료</label>
-							<label class="checkbox-inline"><input type="radio" value="기타" name="helpZoneKeyWord" id="helpZoneKeyWord">기타</label>
+							<label class="checkbox-inline"><input type="radio" value="건강"  id="helpZoneKeyWord" checked>건강</label>
+							<label class="checkbox-inline"><input type="radio" value="치료" id="helpZoneKeyWord">치료</label>
+							<label class="checkbox-inline"><input type="radio" value="기타"  id="helpZoneKeyWord">기타</label>
 						</c:if>
 						<c:if test="${helpZone.helpZoneKeyWord eq '치료' }">
-							<label class="checkbox-inline"><input type="radio" value="건강" name="helpZoneKeyWord" id="helpZoneKeyWord">건강</label>
-							<label class="checkbox-inline"><input type="radio" value="치료" name="helpZoneKeyWord" id="helpZoneKeyWord" checked>치료</label>
-							<label class="checkbox-inline"><input type="radio" value="기타" name="helpZoneKeyWord" id="helpZoneKeyWord">기타</label>
+							<label class="checkbox-inline"><input type="radio" value="건강"  id="helpZoneKeyWord">건강</label>
+							<label class="checkbox-inline"><input type="radio" value="치료"  id="helpZoneKeyWord" checked>치료</label>
+							<label class="checkbox-inline"><input type="radio" value="기타"  id="helpZoneKeyWord">기타</label>
 						</c:if>	
 						<c:if test="${helpZone.helpZoneKeyWord eq '기타' }">
-							<label class="checkbox-inline"><input type="radio" value="건강" name="helpZoneKeyWord" id="helpZoneKeyWord">건강</label>
-							<label class="checkbox-inline"><input type="radio" value="치료" name="helpZoneKeyWord" id="helpZoneKeyWord">치료</label>
-							<label class="checkbox-inline"><input type="radio" value="기타" name="helpZoneKeyWord" id="helpZoneKeyWord" checked>기타</label>
-						</c:if>				
+							<label class="checkbox-inline"><input type="radio" value="건강"  id="helpZoneKeyWord">건강</label>
+							<label class="checkbox-inline"><input type="radio" value="치료"  id="helpZoneKeyWord">치료</label>
+							<label class="checkbox-inline"><input type="radio" value="기타"  id="helpZoneKeyWord" checked>기타</label>
+						</c:if>
+						<input type="hidden" value="${helpZone.helpZoneKeyWord }" name="helpZoneKeyWord"/>
 					</td>
 				</tr>
 				<tr>
 					<th>내용:</th>
-					<td><textarea style="resize: none; height: 200px;" class="form-control"
-							rows="5" id="helpZoneContent" name="helpZoneContent" onKeyUp="checkLength(this);" onKeyDown="checkLength(this);">${helpZone.helpZoneContent }</textarea>							
+					<td><textarea style="resize: none; height: 200px;" class="form-control" rows="5" id="helpZoneContent" name="helpZoneContent" onKeyUp="checkLength(this);" onKeyDown="checkLength(this);">${helpZone.helpZoneContent }</textarea>							
 					</td>
 				</tr>
 				<tr><!-- 첨부사진 -->
 					<th>첨부사진:</th>
 					<td>
+						<img src="${path}/resources/uploadfile/helpZone/${helpZone.helpZoneReFile}" style="width: 300px; height: 200px">
 						<input type="file" class="form-control-file border" name="newFileName" id="newFileName">
 						<input type="hidden" name="oldFileName" id="oldFileName" value="${helpZone.helpZoneFile }">
 						<input type="hidden" name="oldReFileName" id="oldReFileName" value="${helpZone.helpZoneReFile }">
@@ -102,8 +103,10 @@
 				</tr>
 			</tbody>
 		</table>
+
+		<input type="hidden" id="helpZoneQuestioner" name="helpZoneQuestioner" value="${helpZone.helpZoneQuestioner}">
 		<input type="hidden" id="num" name="num" value="${helpZone.helpZoneNum}">
-			
+
 	<c:if test="${checkPH=='P'}" >
 			<c:if test="${memberLoggedIn.memberId == helpZoneQuestioner.memberId }">
 				<input type="submit" value="완료" onclick="return validate();" class="btn btn-info btn-lg" style="float: right; margin-left: 10px;"/>
@@ -113,8 +116,8 @@
 	</form>
 		<button type="button" class="btn btn-success btn-lg" onclick="helpZoneList()">목록으로</button>
 	
-
 </div>
+</body>
 <br><br>
 <script>
 function checkLength(comment) {
@@ -126,8 +129,8 @@ function checkLength(comment) {
     }
 }
 function validate() {
-	var content=$("[name=content]").val();
-	var title=$("[name=title]").val();
+	var content=$("[name=helpZoneContent]").val();
+	var title=$("[name=helpZoneTitle]").val();
 	if(title.trim().length==0) {
 		alert("제목을 입력하세요!");
 		return false;

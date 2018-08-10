@@ -46,6 +46,12 @@ public class HelpZoneDaoImpl implements HelpZoneDao {
 	public int deleteHelpZone(int num) {
 		return session.delete("helpZone.deleteHelpZone", num);
 	}
+
+	@Override
+	public int updateHelpZone(HelpZone helpZone) {
+		
+		return session.update("helpZone.updateHelpZone",helpZone);
+	}
 	
 	
 	

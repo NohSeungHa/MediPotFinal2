@@ -155,11 +155,17 @@ public class HelpZoneController {
 	}
 	
 	@RequestMapping("/helpZone/helpZoneUpdateEnd.do")
-	public ModelAndView helpZoneUpdateEnd(String helpZoneTitle,int helpZoneQuestioner, String helpZoneKeyWord,String helpZoneContent, @RequestParam(value="newFileName",required=false) MultipartFile newFileName,String oldFileName,String oldReFileName,int num,HttpServletRequest request) {
+	public ModelAndView helpZoneUpdateEnd(String helpZoneTitle,
+											int helpZoneQuestioner,
+											String helpZoneKeyWord,
+											String helpZoneContent, 
+											@RequestParam(value="newFileName",required=false) MultipartFile newFileName,
+											String oldFileName,String oldReFileName,
+											int num,
+											HttpServletRequest request) {
 		//파일 업로드
 		//저장 위치 지정
-		System.out.println("헬프존으로 들어왔다리");
-		String saveDir = request.getSession().getServletContext().getRealPath("/resource/uploadfile/notice");
+		String saveDir = request.getSession().getServletContext().getRealPath("/resources/uploadfile/helpZone");
 		HelpZone helpZone = new HelpZone();
 		if(newFileName !=null) 
 		{
@@ -194,11 +200,24 @@ public class HelpZoneController {
 		helpZone.setHelpZoneTitle(helpZoneTitle);
 		helpZone.setHelpZoneQuestioner(helpZoneQuestioner);
 		helpZone.setHelpZoneContent(helpZoneContent);
+		helpZone.setHelpZoneKeyWord(helpZoneKeyWord);
 		
 		System.out.println("헬프존 업데이트에서 헬프존 확인 : "+helpZone);
 		
-		int result = 0;
-		result = service.updateHelpZone(helpZone);
+		int result = service.updateHelpZone(helpZone);
+		ModelAndView mv = new ModelAndView();
+		String msg = "";
+		if(result ==1) {
+			msg = "수정 완료";
+		}
+		else {
+			msg = "수정 실패";
+		}
+		mv.addObject("msg", msg);
+		mv.addObject("loc", "helpZone/helpZoneView.do?helpZoneNum="+num);
+		mv.setViewName("common/msg");
+		
+		return mv;
 	} 
 	
 }

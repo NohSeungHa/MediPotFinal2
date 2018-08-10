@@ -269,6 +269,7 @@ to {
 	<div class="col-md-12">
 		<img src="${path}/resources/img/common/index_1.png" style="margin-bottom: 35px;width:600px;height:600px">
 	</div>
+	
 
 
 
