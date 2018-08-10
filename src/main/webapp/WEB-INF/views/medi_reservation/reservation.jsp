@@ -398,12 +398,12 @@
 		text-align:center;
 		width:90px;
 	}
-	#docInfo-div{
+	.docInfo-div{
 		border:2px solid lightgray;
 		border-radius:5px;
 		box-shadow:2px 2px 5px lightgray;
 	}
-	#docInfo-div:hover{
+	.docInfo-div:hover{
 		cursor: pointer;
 		border: 2px solid #286090;
 	}	
@@ -457,8 +457,8 @@
 		</div>
 		</c:if>
 		<c:forEach var="list" items="${list }">
-		<div id="docInfo-div" style="height:auto;margin-bottom:10px;" class="${list.doctorNum }">
-			<table id="docInfo" class="${list.hospitalNo }">
+		<div class="docInfo-div" style="height:auto;margin-bottom:10px;" title="${list.doctorNum }" lang="${list.hospitalNo }">
+			<table id="docInfo">
 				<tr>
 					<td rowspan="4"><img src="${path }/resources/img/reser/${list.doctorPhoto }" width="200px;" height="250px;"></td>
 					<th>이름</th>
@@ -742,9 +742,9 @@
 				}
 			});
 		});
-		$('#docInfo-div').click(function () {
+		$('.docInfo-div').click(function () {
 			alert('들어가기전');
-			location.href='${path}/medi/doctorS?docNum='+$(this).attr('class')+'&hosNum='+$('#docInfo').attr('class');
+			location.href='${path}/medi/doctorS?docNum='+$(this).attr('title')+'&hosNum='+$(this).attr('lang');
 		});
 		
 		
