@@ -171,7 +171,7 @@
 				<th><br>의사사진<br>
 				<span style="color: red">(수정 내용이 없다면 원본 사진으로)</span></th>
 				<td><br>
-					<input type="file" name="doctorPhoto" id="doctorPhoto" accept=".jpg, .png, .bmp" style="width: 200px" required>
+					<input type="file" name="doctorPhoto" id="doctorPhoto" accept=".jpg, .png, .bmp" style="width: 200px">
 					<input type="hidden" name="olddoctorPhoto" id="olddoctorPhoto" style="width: 200px" value="${doctorInfo.doctorPhoto }" required>
 				</td>
 			</tr>

@@ -404,81 +404,6 @@ public class MemberController {
 	}
 	
 	
-	/* 의사정보를 입력하는 화면으로 들어옴 */
-	@RequestMapping("/member/doctorInfoInsert.do")
-	public String doctorInsert(int hospitalNum, Model model) {
-		System.out.println("의사등록으로 들어옴");
-		System.out.println(hospitalNum);
-		Hospital hospital = service.selectHospital(hospitalNum);
-		
-		model.addAttribute("hospital", hospital);
-		
-		return "member/doctorInsert";
-	}
-	
-	
-	/* 의사정보 입력 */
-	@RequestMapping("/member/doctorInfoInsertEnd.do")
-	public String doctorInsertEnd(Model model, String doctorName,
-			String doctorCareer, int hospitalNum, String[] professional,
-			String doctorSlunch, String doctorElunch, String WeekdayStime,
-			String WeekdayEtime, String SatStime, String SatEtime,
-			String closed, String Specialized, String timeInterval, 
-			@RequestParam(value="doctorPhoto", required=false) MultipartFile doctorPhoto,
-			HttpServletRequest request) {
-		
-		System.out.println("의사등록을 실행");
-		String msg = "";
-		String loc = "";
-		
-		DoctorInfos doctorInfo = new DoctorInfos(0, doctorName, doctorCareer, hospitalNum, professional, doctorSlunch, doctorElunch, WeekdayStime, WeekdayEtime, SatStime, SatEtime, closed, Specialized, null, null, timeInterval);
-		
-		if(doctorPhoto != null) {
-		
-			String saveDir=request.getSession().getServletContext().getRealPath("/resources/uploadfile/dortors");
-			
-			File dir=new File(saveDir);
-			if(dir.exists()==false) System.out.println(dir.mkdirs());//폴더생성
-			System.out.println(doctorPhoto);
-			if(!doctorPhoto.isEmpty()) {
-			String originalFileName=doctorPhoto.getOriginalFilename();
-			
-			//확장자 구하기
-			String ext=originalFileName.substring(originalFileName.lastIndexOf(".")+1);
-			SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
-			int rndNum=(int)(Math.random()*1000);
-			String renamedFileName=sdf.format(new Date(System.currentTimeMillis()));
-			renamedFileName+="_"+rndNum+"."+ext;
-			try 
-			{
-				doctorPhoto.transferTo(new File(saveDir+File.separator+renamedFileName));
-			}
-			catch(IOException e)
-			{
-				e.printStackTrace();
-			}
-				//DB에 저장할 첨부파일에 대한 정보를 구성!
-				doctorInfo.setDoctorPhoto(originalFileName);
-				doctorInfo.setDoctorRePhoto(renamedFileName);
-			}
-		}
-		
-		int result = service.doctorInfoInsert(doctorInfo);
-		
-		if(result > 0) {
-			msg = "의사정보 추가 성공";
-		}
-		else {
-			msg = "의사정보 추가 실패";
-		}
-		
-		model.addAttribute("msg",msg);
-		model.addAttribute("loc",loc);
-		
-		return "common/msg";
-	}
-	
-	
 	/* 마이페이지 구별 */
 	@RequestMapping("/member/mypage.do")
 	public String adminPage(String user_id, String checkPH, Model model) {
@@ -1024,6 +949,80 @@ public class MemberController {
 		return "common/msg";
 	}
 	
+	/* 의사정보를 입력하는 화면으로 들어옴 */
+	@RequestMapping("/member/doctorInfoInsert.do")
+	public String doctorInsert(int hospitalNum, Model model) {
+		System.out.println("의사등록으로 들어옴");
+		System.out.println(hospitalNum);
+		Hospital hospital = service.selectHospital(hospitalNum);
+		
+		model.addAttribute("hospital", hospital);
+		
+		return "member/doctorInsert";
+	}
+	
+	
+	/* 의사정보 입력 */
+	@RequestMapping("/member/doctorInfoInsertEnd.do")
+	public String doctorInsertEnd(Model model, String doctorName,
+			String doctorCareer, int hospitalNum, String[] professional,
+			String doctorSlunch, String doctorElunch, String WeekdayStime,
+			String WeekdayEtime, String SatStime, String SatEtime,
+			String closed, String Specialized, String timeInterval, 
+			@RequestParam(value="doctorPhoto", required=false) MultipartFile doctorPhoto,
+			HttpServletRequest request) {
+		
+		System.out.println("의사등록을 실행");
+		String msg = "";
+		String loc = "";
+		
+		DoctorInfos doctorInfo = new DoctorInfos(0, doctorName, doctorCareer, hospitalNum, professional, doctorSlunch, doctorElunch, WeekdayStime, WeekdayEtime, SatStime, SatEtime, closed, Specialized, null, null, timeInterval);
+		
+		if(doctorPhoto != null) {
+		
+			String saveDir=request.getSession().getServletContext().getRealPath("/resources/uploadfile/dortors");
+			
+			File dir=new File(saveDir);
+			if(dir.exists()==false) System.out.println(dir.mkdirs());//폴더생성
+			System.out.println(doctorPhoto);
+			if(!doctorPhoto.isEmpty()) {
+			String originalFileName=doctorPhoto.getOriginalFilename();
+			
+			//확장자 구하기
+			String ext=originalFileName.substring(originalFileName.lastIndexOf(".")+1);
+			SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
+			int rndNum=(int)(Math.random()*1000);
+			String renamedFileName=sdf.format(new Date(System.currentTimeMillis()));
+			renamedFileName+="_"+rndNum+"."+ext;
+			try 
+			{
+				doctorPhoto.transferTo(new File(saveDir+File.separator+renamedFileName));
+			}
+			catch(IOException e)
+			{
+				e.printStackTrace();
+			}
+				//DB에 저장할 첨부파일에 대한 정보를 구성!
+				doctorInfo.setDoctorPhoto(originalFileName);
+				doctorInfo.setDoctorRePhoto(renamedFileName);
+			}
+		}
+		
+		int result = service.doctorInfoInsert(doctorInfo);
+		
+		if(result > 0) {
+			msg = "의사정보 추가 성공";
+		}
+		else {
+			msg = "의사정보 추가 실패";
+		}
+		
+		model.addAttribute("msg",msg);
+		model.addAttribute("loc",loc);
+		
+		return "common/msg";
+	}
+	
 	
 	/* 의사정보 수정으로 들어옴 */
 	@RequestMapping("/member/doctorInfoUpdate.do")
@@ -1067,7 +1066,7 @@ public class MemberController {
 			String WeekdayEtime, String SatStime, String SatEtime,
 			String closed, String Specialized, String timeInterval, 
 			@RequestParam(value="doctorPhoto", required=false) MultipartFile doctorPhoto,
-			HttpServletRequest request, String olddoctorPhoto, int doctorNum) {
+			HttpServletRequest request, int doctorNum) {
 		
 		System.out.println("의사 수정을 실행함");
 		String msg = "";
