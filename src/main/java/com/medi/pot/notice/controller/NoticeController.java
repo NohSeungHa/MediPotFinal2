@@ -277,19 +277,17 @@ public class NoticeController {
 				mNotice.setMemberNoticeRefile(renamedFileName);
 			}
 		}
-		if(writer.equals("관리자")) {
-			if(checkPH.equals("H")) {
-				notice.setHospitalNoticeTitle(title);
-				notice.setHospitalNoticeWriter(writer);
-				notice.setHospitalNoticeContent(content);
-			}else {
-				System.out.println("여기 들어온다?2");
-				mNotice.setMemberNoticeTitle(title);
-				mNotice.setMemberNoticeWriter(writer);
-				mNotice.setMemberNoticeContent(content);
-			}
-			System.out.println("mNotice : "+mNotice);
+		if(checkPH.equals("H")) {
+			notice.setHospitalNoticeTitle(title);
+			notice.setHospitalNoticeWriter(writer);
+			notice.setHospitalNoticeContent(content);
+		}else {
+			System.out.println("여기 들어온다?2");
+			mNotice.setMemberNoticeTitle(title);
+			mNotice.setMemberNoticeWriter(writer);
+			mNotice.setMemberNoticeContent(content);
 		}
+		System.out.println("mNotice : "+mNotice);
 		int result=0;
 		if(checkPH.equals("H")) {
 			result=service.insertNotice(notice);
@@ -498,21 +496,19 @@ public class NoticeController {
 				mNotice.setMemberNoticeRefile(oldReFileName);
 			}
 		}
-		if(writer.equals("관리자")) {
-			if(checkPH.equals("H")) {
-				notice.setHospitalNoticeNum(no);
-				notice.setHospitalNoticeTitle(title);
-				notice.setHospitalNoticeWriter(writer);
-				notice.setHospitalNoticeContent(content);
-			}else {
-				System.out.println("여기 들어온다?2");
-				mNotice.setMemberNoticeNum(no);
-				mNotice.setMemberNoticeTitle(title);
-				mNotice.setMemberNoticeWriter(writer);
-				mNotice.setMemberNoticeContent(content);
-			}
-			System.out.println("mNotice : "+mNotice);
+		if(checkPH.equals("H")) {
+			notice.setHospitalNoticeNum(no);
+			notice.setHospitalNoticeTitle(title);
+			notice.setHospitalNoticeWriter(writer);
+			notice.setHospitalNoticeContent(content);
+		}else {
+			System.out.println("여기 들어온다?2");
+			mNotice.setMemberNoticeNum(no);
+			mNotice.setMemberNoticeTitle(title);
+			mNotice.setMemberNoticeWriter(writer);
+			mNotice.setMemberNoticeContent(content);
 		}
+		System.out.println("mNotice : "+mNotice);
 		int result=0;
 		if(checkPH.equals("H")) {
 			result=service.updateNotice(notice);
