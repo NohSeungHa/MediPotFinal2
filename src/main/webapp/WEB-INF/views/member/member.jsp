@@ -282,8 +282,7 @@ $(function(){
 							<input type="text" class="form-control" name="memberAddr" id="memberAddr" placeholder="도로명주소" readonly>
 						</td>
 						<td>
-							&nbsp;
-							<button type="button" onclick="sample4_execDaumPostcode()" class="btn btn-default" style="margin-bottom:10px;">우편번호 찾기</button> 
+							<button type="button" onclick="sample4_execDaumPostcode()" class="btn btn-default" style="margin: 0px 0px 10px 10px;">우편번호 찾기</button> 
 							<span style="display: none" id="guide" style="color: #999"></span>
 						</td>
 					</tr>

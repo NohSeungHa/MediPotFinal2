@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.Map;
 import java.util.Properties;
 
 import javax.mail.Message;
+import javax.mail.Multipart;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
@@ -37,27 +39,36 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.medi.pot.common.page.PageCreate;
 import com.medi.pot.member.model.service.MemberService;
+import com.medi.pot.member.model.vo.DoctorInfos;
 import com.medi.pot.member.model.vo.Hospital;
+import com.medi.pot.member.model.vo.HospitalInfos;
 import com.medi.pot.member.model.vo.Member;
+import com.medi.pot.reservation.model.vo.DoctorInfo;
+import com.medi.pot.reservation.model.vo.HospitalInfo;
 
 
-@SessionAttributes(value={"memberLoggedIn", "checkPH", "emailCheck"})
+@SessionAttributes(value={"memberLoggedIn", "checkPH", "emailCheck", "H_Info_Count", "InfoCheck", "infoEnter"})
 
 @Controller
 public class MemberController {
+		
+	int H_Info_Count = 1;
+	String InfoCheck = "";
 	
 	@Autowired
 	private MemberService service;
 	
 	@Autowired
 	private BCryptPasswordEncoder bcrypt;
-	
+	/* 회원가입을 클릭 */
 	@RequestMapping("/member/join.do")
 	public String join() {
 		System.out.println("회원가입으로 들어옴");
 		return "member/join";
 	}
-
+	
+	
+	/* 회원가입(개인)을 클릭 */
 	@RequestMapping("/member/joinMember.do")
 	public String joinMemeber(Model model) {
 		System.out.println("회원가입(개인)으로 들어옴");
@@ -65,6 +76,8 @@ public class MemberController {
 		return "member/member";
 	}
 	
+	
+	/* 회원가입(개인)을 실행 */
 	@RequestMapping("/member/memberEnrollEnd.do")
 	public String joinMemberEnd(Member m, Model model) {
 		System.out.println("회원가입(개인)을 실행함");
@@ -112,13 +125,17 @@ public class MemberController {
 		
 		return "common/msg";
 	}
-
+	
+	
+	/* 회원가입(병원)을 클릭 */
 	@RequestMapping("/member/joinHospitalStart.do")
 	public String joinHospital1() {
 		System.out.println("회원가입(병원-승인전)으로 들어옴");
 		return "member/hospital";
 	}
 	
+	
+	/* 회원가입(병원)을 실행 */
 	@RequestMapping("/member/hospitalEnrollEnd.do")
 	public String joinHospital1(Model model,
 			String hospitalId, String hospitalPw, String hospitalName,
@@ -135,33 +152,35 @@ public class MemberController {
 				null, null, hospitalTel, hospitalEmail,
 				hospitalAddr, null, 0, null, null);
 		
-		//파일 업로드
-		//저장위치지정
-		String saveDir=request.getSession().getServletContext().getRealPath("/resources/uploadfile/H_License");
-		
-		File dir=new File(saveDir);
-		if(dir.exists()==false) System.out.println(dir.mkdirs());//폴더생성
-		System.out.println(hospitalLicense);
-		if(!hospitalLicense.isEmpty()) {
-		String originalFileName=hospitalLicense.getOriginalFilename();
-		
-		//확장자 구하기
-		String ext=originalFileName.substring(originalFileName.lastIndexOf(".")+1);
-		SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
-		int rndNum=(int)(Math.random()*1000);
-		String renamedFileName=sdf.format(new Date(System.currentTimeMillis()));
-		renamedFileName+="_"+rndNum+"."+ext;
-		try 
-		{
-			hospitalLicense.transferTo(new File(saveDir+File.separator+renamedFileName));
-		}
-		catch(IOException e)
-		{
-			e.printStackTrace();
-		}
-			//DB에 저장할 첨부파일에 대한 정보를 구성!
-			h.setHospitalLicense(originalFileName);
-			h.setHospitalReLicense(renamedFileName);
+		if(hospitalLicense !=null) {
+			//파일 업로드
+			//저장위치지정
+			String saveDir=request.getSession().getServletContext().getRealPath("/resources/uploadfile/H_License");
+			
+			File dir=new File(saveDir);
+			if(dir.exists()==false) System.out.println(dir.mkdirs());//폴더생성
+			System.out.println(hospitalLicense);
+			if(!hospitalLicense.isEmpty()) {
+			String originalFileName=hospitalLicense.getOriginalFilename();
+			
+			//확장자 구하기
+			String ext=originalFileName.substring(originalFileName.lastIndexOf(".")+1);
+			SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
+			int rndNum=(int)(Math.random()*1000);
+			String renamedFileName=sdf.format(new Date(System.currentTimeMillis()));
+			renamedFileName+="_"+rndNum+"."+ext;
+			try 
+			{
+				hospitalLicense.transferTo(new File(saveDir+File.separator+renamedFileName));
+			}
+			catch(IOException e)
+			{
+				e.printStackTrace();
+			}
+				//DB에 저장할 첨부파일에 대한 정보를 구성!
+				h.setHospitalLicense(originalFileName);
+				h.setHospitalReLicense(renamedFileName);
+			}
 		}
 		
 		boolean checkid = service.checkHospitalId(h.getHospitalId())==0?true:false;
@@ -206,6 +225,8 @@ public class MemberController {
 
 	}
 	
+	
+	/* 병원회원의 사업자번호를 클릭(다운로드) */
 	@RequestMapping("/member/hospitalFileDownload.do")
 	public void fileDownload(String oName, String rName, HttpServletRequest request, HttpServletResponse response)
 	{
@@ -256,80 +277,94 @@ public class MemberController {
 		}
 		
 	}
-
+	
+	
+	/* 병원회원의 승인 전 화면 */
 	@RequestMapping("/member/joinpermission.do")
 	public String joinPermission() {
 		System.out.println("회원가입(병원-승인중)으로 들어옴");
 		return "member/permission";
 	}
-
+	
+	
+	/* 병원회원 화면 확인중... */
 	@RequestMapping("/member/joinHospitalEnd.do")
 	public String joinHospital2() {
 		System.out.println("회원가입(병원-승인중)으로 들어옴");
 		return "redirect:/";
 	}
 	
+	
+	/* 아이디 찾기로 들어옴 */
 	@RequestMapping("/member/findId.do")
 	public String findid() {
 		System.out.println("아이디찾기로 들어옴");
 		return "member/findid";
 	}
 	
+	
+	/* 비밀번호 찾기로 들어옴 */
 	@RequestMapping("/member/findPassword.do")
 	public String findpassword() {
 		System.out.println("비밀번호찾기로 들어옴");
 		return "member/findPassword";
 	}
 	
+	
+	/* 로그인을 실행 */
 	@RequestMapping("/member/memberLogin.do")
 	public String login(String PnH, @RequestParam(value="memberId") String memberId,@RequestParam(value="memberPw") String memberPw, Model model, HttpServletRequest req) {
 		System.out.println("로그인을 실행.." + PnH + "..." + memberId + "..." + memberPw);
 		// P = 개인 (Person)
 		// H = 병원 (Hospital)
-		String msg = "";
+		String msg = "로그인 성공!";
 		String loc = "/";
-		boolean PnHcheck = false;
+		H_Info_Count=1;
 		
 		Member m = new Member();
 		Hospital h = new Hospital();
-		System.out.println(service.loginMemberCheck(memberId));
 		
 		if(PnH.equals("P")) {
 			m = service.loginMemberCheck(memberId);
 			
 			if(m==null) {
-				
+				msg = "로그인 실패!";
 			}else {
 				if(bcrypt.matches(memberPw, m.getMemberPw())) {
 					model.addAttribute("memberLoggedIn",m);
 					model.addAttribute("checkPH","P");
-					PnHcheck = true;
 				}
 			}
 		}
 		if(PnH.equals("H")){
 			h = service.loginHospitalCheck(memberId);
 			if(h==null) {
-				
+				msg = "로그인 실패!";
 			}else {
 				String hos_admi = h.getHospitalAdmission();
-				
+				HospitalInfos hospitalInfo = service.selectHospitalInfo(h.getHospitalNum());
+				System.out.println("hospitalInfo -> \n" + hospitalInfo);
 				if(bcrypt.matches(memberPw, h.getHospitalPw())) {
 					model.addAttribute("memberLoggedIn",h);
 					model.addAttribute("checkPH","H");
 					model.addAttribute("hospitalAdmission",hos_admi);
-					PnHcheck = true;
+					if(hospitalInfo != null) {
+						InfoCheck = "yes";
+						model.addAttribute("InfoCheck",InfoCheck);
+					}
+					if(hospitalInfo == null){
+						InfoCheck = "no";
+						model.addAttribute("InfoCheck",InfoCheck);
+					}
+					
 					if(hos_admi.equals("0")) {
 						return "member/permission";
 					}
+					
+					model.addAttribute("H_Info_Count", H_Info_Count);
+					
 				}
 			}
-		}
-		
-		if(PnHcheck) {
-			msg = "로그인 성공!";
-		} else {
-			msg = "로그인 실패!";
 		}
 		
 		model.addAttribute("msg", msg);
@@ -337,6 +372,8 @@ public class MemberController {
 		return "common/msg";
 	}
 	
+	
+	/* 로그아웃을 실행 */
 	@RequestMapping("/member/memberLogout.do")
 	public String logout(SessionStatus sessionStatus) {
 		System.out.println("로그아웃을 진행");
@@ -345,10 +382,104 @@ public class MemberController {
 			sessionStatus.setComplete();
 			// 세션을 완료시킨다 (끝낸다)
 		}
+		H_Info_Count--;
 		
 		return "redirect:/";
 	}
 	
+	
+	/* 병원정보체크를 위한 카운트 */
+	@RequestMapping("/member/infoCount.do")
+	public String infoCount(int hospitalNum, Model model) {
+		
+		boolean infochk = service.loadHospitalInfo(hospitalNum)==1?true:false;
+		if(infochk) {
+			InfoCheck = "yes";
+			model.addAttribute("InfoCheck", InfoCheck);
+		}
+		H_Info_Count++;
+		model.addAttribute("H_Info_Count", H_Info_Count);
+		
+		return "redirect:/";
+	}
+	
+	
+	/* 의사정보를 입력하는 화면으로 들어옴 */
+	@RequestMapping("/member/doctorInfoInsert.do")
+	public String doctorInsert(int hospitalNum, Model model) {
+		System.out.println("의사등록으로 들어옴");
+		System.out.println(hospitalNum);
+		Hospital hospital = service.selectHospital(hospitalNum);
+		
+		model.addAttribute("hospital", hospital);
+		
+		return "member/doctorInsert";
+	}
+	
+	
+	/* 의사정보 입력 */
+	@RequestMapping("/member/doctorInfoInsertEnd.do")
+	public String doctorInsertEnd(Model model, String doctorName,
+			String doctorCareer, int hospitalNum, String[] professional,
+			String doctorSlunch, String doctorElunch, String WeekdayStime,
+			String WeekdayEtime, String SatStime, String SatEtime,
+			String closed, String Specialized, String timeInterval, 
+			@RequestParam(value="doctorPhoto", required=false) MultipartFile doctorPhoto,
+			HttpServletRequest request) {
+		
+		System.out.println("의사등록을 실행");
+		String msg = "";
+		String loc = "";
+		
+		DoctorInfos doctorInfo = new DoctorInfos(0, doctorName, doctorCareer, hospitalNum, professional, doctorSlunch, doctorElunch, WeekdayStime, WeekdayEtime, SatStime, SatEtime, closed, Specialized, null, null, timeInterval);
+		
+		if(doctorPhoto != null) {
+		
+			String saveDir=request.getSession().getServletContext().getRealPath("/resources/uploadfile/dortors");
+			
+			File dir=new File(saveDir);
+			if(dir.exists()==false) System.out.println(dir.mkdirs());//폴더생성
+			System.out.println(doctorPhoto);
+			if(!doctorPhoto.isEmpty()) {
+			String originalFileName=doctorPhoto.getOriginalFilename();
+			
+			//확장자 구하기
+			String ext=originalFileName.substring(originalFileName.lastIndexOf(".")+1);
+			SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
+			int rndNum=(int)(Math.random()*1000);
+			String renamedFileName=sdf.format(new Date(System.currentTimeMillis()));
+			renamedFileName+="_"+rndNum+"."+ext;
+			try 
+			{
+				doctorPhoto.transferTo(new File(saveDir+File.separator+renamedFileName));
+			}
+			catch(IOException e)
+			{
+				e.printStackTrace();
+			}
+				//DB에 저장할 첨부파일에 대한 정보를 구성!
+				doctorInfo.setDoctorPhoto(originalFileName);
+				doctorInfo.setDoctorRePhoto(renamedFileName);
+			}
+		}
+		
+		int result = service.doctorInfoInsert(doctorInfo);
+		
+		if(result > 0) {
+			msg = "의사정보 추가 성공";
+		}
+		else {
+			msg = "의사정보 추가 실패";
+		}
+		
+		model.addAttribute("msg",msg);
+		model.addAttribute("loc",loc);
+		
+		return "common/msg";
+	}
+	
+	
+	/* 마이페이지 구별 */
 	@RequestMapping("/member/mypage.do")
 	public String adminPage(String user_id, String checkPH, Model model) {
 		System.out.println("마이페이지 들어옴");
@@ -368,6 +499,50 @@ public class MemberController {
 		return view;
 	}
 	
+	
+	/* 관리자페이지에 일반회원 목록 */
+	@RequestMapping("/adminPage/memberList.do")
+	public ModelAndView memberList(@RequestParam(value="cPage",required=false,defaultValue="1") int cPage) {
+		ModelAndView mv=new ModelAndView();
+		int numPerPage=10;
+		List<Member> list=service.selectMemberList(cPage,numPerPage);
+		
+		int totalCount=service.selectCount();
+		
+		String pageBar=new PageCreate().getPageBar(cPage, numPerPage,totalCount,"memberList.do");
+		
+		mv.addObject("pageBar", pageBar);
+		mv.addObject("list",list);
+		mv.addObject("cPage", cPage);
+		mv.addObject("totalCount", totalCount);
+		mv.setViewName("/member/adminPageMember");		
+		
+		return mv;
+	}
+	
+	
+	/* 관리자페이지에 병원회원 목록 */
+	@RequestMapping("/adminPage/hospitalList.do")
+	public ModelAndView hospitalList(@RequestParam(value="cPage",required=false,defaultValue="1") int cPage) {
+		ModelAndView mv=new ModelAndView();
+		int numPerPage=10;
+		List<Hospital> list=service.selectHospitalList(cPage,numPerPage);
+		
+		int totalCount=service.selectHospitalCount();
+		
+		String pageBar=new PageCreate().getPageBar(cPage, numPerPage,totalCount,"hospitalList.do");
+		
+		mv.addObject("pageBar", pageBar);
+		mv.addObject("list",list);
+		mv.addObject("cPage", cPage);
+		mv.addObject("totalCount", totalCount);
+		mv.setViewName("/member/adminPageHospital");		
+		
+		return mv;
+	}
+	
+	
+	/* 일반회원의 아이디 중복체크 */
 	@RequestMapping("/member/PcheckId.do")
 	@ResponseBody
 	public void membercheckId(String memberId,HttpServletResponse res) throws Exception {
@@ -377,6 +552,8 @@ public class MemberController {
 		res.getWriter().print(check);
 	}
 	
+	
+	/* 병원회원의 아이디 중복체크 */
 	@RequestMapping("/member/HcheckId.do")
 	@ResponseBody
 	public void hospitalcheckId(String hospitalId,HttpServletResponse res) throws Exception{
@@ -384,6 +561,8 @@ public class MemberController {
 		res.getWriter().print(check);
 	}
 	
+	
+	/* 일반회원의 마이페이지 수정 */
 	@RequestMapping("/member/memberPageUpdate.do")
 	public String memberPageUpdate(Member m, Model model) {
 		String msg = "수정 실패";
@@ -401,6 +580,8 @@ public class MemberController {
 		return "common/msg";
 	}
 	
+	
+	/* 일반회원의 비밀번호 수정 */
 	@RequestMapping("/member/memberPwUpdate.do")
 	public String memberPwUpate(String originPw, String newPw, String memberId, Model model) {
 		String msg = "";
@@ -428,6 +609,8 @@ public class MemberController {
 		return "common/msg";
 	}
 	
+	
+	/* 비밀번호 수정 시 해당 회원의 화면으로 이동(병원, 일반) */
 	@RequestMapping("/member/pwEdit.do")
 	public String pwEdit(String check) {
 		String view = "";
@@ -443,6 +626,8 @@ public class MemberController {
 		return view;
 	}
 	
+	
+	/* 각 회원의 이메일 인증 */
 	@RequestMapping("/member/emailEnd.do")
 	public String emailResponse(String memberEmail, Model model) {
 
@@ -479,8 +664,11 @@ public class MemberController {
 					break;
 				}
 			}
-			message.setText("인증번호["+ra+"]");    //메일 내용을 입력
-			
+			//메일 내용을 입력
+			message.setContent(
+					"<img src='https://postfiles.pstatic.net/MjAxODA4MDZfMzgg/MDAxNTMzNTMzNTY5NzIz.NvFjNK3gSOcpuQgDt1_-ParNMjv5nunUq2ixh-kO6yMg.91NYgDKHmA_UkPSzzAK5lC7cYehF23PQvmj6hIP2cLwg.PNG.ahfmrqhd/MediPot_logo.png?type=w966'>"
+					+ "<br><h3>MediPot 인증번호 [<b style='color: red'>" + ra + "</b>]</h3>"
+					, "text/html; charset=UTF-8");
 			
 			// send the message
 			Transport.send(message); ////전송
@@ -497,6 +685,8 @@ public class MemberController {
 		return "member/emailEnd";
 	}
 	
+	
+	/* 일반회원의 이메일이 중복인지 체크 */
 	@RequestMapping("/member/PcheckEmail.do")
 	@ResponseBody
 	public void membercheckEmail(String memberEmail,HttpServletResponse res) throws Exception {
@@ -505,6 +695,8 @@ public class MemberController {
 		res.getWriter().print(check);
 	}
 	
+	
+	/* 병원회원의 이메일이 중복인지 체크 */
 	@RequestMapping("/member/HcheckEmail.do")
 	@ResponseBody
 	public void HospitalcheckEmail(String hospitalEmail,HttpServletResponse res) throws Exception {
@@ -513,6 +705,8 @@ public class MemberController {
 		res.getWriter().print(check);
 	}
 	
+	
+	/* 찾기 중 입력한 이메일과 정보가 일치한지 */
 	@RequestMapping("/member/findCheckEmail.do")
 	@ResponseBody
 	public void memberFindCheckEmail(String PnH, String memberEmail,HttpServletResponse res) throws Exception {
@@ -520,65 +714,13 @@ public class MemberController {
 		if(PnH.equals("P")) {
 			check = service.FindMemEmailCheck(memberEmail)==1?true:false;			
 		} else {
-			//check = service.FindHosmEmailCheck(memberEmail)==1?true:false;
+			check = service.FindHosEmailCheck(memberEmail)==1?true:false;
 		}
 		res.getWriter().print(check);
 	}
 	
-	@RequestMapping("/member/FindemailEnd.do")
-	public String FindemailResponse(String memberEmail, Model model) {
-
-		Properties prop = new Properties();
-		prop.put("mail.smtp.host", "smtp.gmail.com");
-		prop.put("mail.smtp.port", 465);
-		prop.put("mail.smtp.auth", "true");
-		prop.put("mail.smtp.ssl.enable", "true");
-		prop.put("mail.smtp.ssl.trust", "smtp.gmail.com");
-
-		Session session = Session.getDefaultInstance(prop, new javax.mail.Authenticator() {
-			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication("ppj1017@gmail.com", "ahfmrqhd1!a");
-			}
-		});
-		int ra=0;
-	      
-		try {
-			MimeMessage message = new MimeMessage(session);
-			message.setFrom(new InternetAddress("ppj1017@gmail.com",MimeUtility.encodeText("MediPot 관리자","UTF-8","B")));
-	            
-
-			//수신자메일주소
-			message.addRecipient(Message.RecipientType.TO, new InternetAddress(memberEmail)); 
-
-			// Subject
-			message.setSubject("MediPot 메일 인증"); //메일 제목을 입력
-
-			// Text
-	               
-			while(true) {
-				ra=(int)(Math.random()*10000);
-				if(ra>1000) {
-					break;
-				}
-			}
-			message.setText("인증번호["+ra+"]");    //메일 내용을 입력
-			
-			
-			// send the message
-			Transport.send(message); ////전송
-			
-			
-			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-		
-		model.addAttribute("ra", ra);
-		
-		return "member/emailEnd";
-	}
 	
+	/* 아이디를 찾은 후 */
 	@RequestMapping("/member/memberFindId.do")
 	public String FindIdprint(String findname, String findemail, Model model) {
 		System.out.println("아이디를 찾음");
@@ -603,6 +745,8 @@ public class MemberController {
 		return view;
 	}
 	
+	
+	/* 비밀번호를 찾음 */
 	@RequestMapping("/member/memberFindPw.do")
 	public String memberFindPw(String findid, String findemail, Model model) {
 		System.out.println("비밀번호를 찾음");
@@ -627,6 +771,8 @@ public class MemberController {
 		return view;
 	}
 	
+	
+	/* 비밀번호 찾기 후 수정 */
 	@RequestMapping("/member/FindPwUpdate.do")
 	public String FindPwUpdate(String newPw, String memberId, Model model) {
 		System.out.println("비밀번호 찾을 때 가져온 아이디 : " + memberId);
@@ -651,45 +797,9 @@ public class MemberController {
 		
 		return "common/msg";
 	}
-
-	@RequestMapping("/adminPage/memberList.do")
-	public ModelAndView memberList(@RequestParam(value="cPage",required=false,defaultValue="1") int cPage) {
-		ModelAndView mv=new ModelAndView();
-		int numPerPage=10;
-		List<Member> list=service.selectMemberList(cPage,numPerPage);
-		
-		int totalCount=service.selectCount();
-		
-		String pageBar=new PageCreate().getPageBar(cPage, numPerPage,totalCount,"memberList.do");
-		
-		mv.addObject("pageBar", pageBar);
-		mv.addObject("list",list);
-		mv.addObject("cPage", cPage);
-		mv.addObject("totalCount", totalCount);
-		mv.setViewName("/member/adminPageMember");		
-		
-		return mv;
-	}
 	
-	@RequestMapping("/adminPage/hospitalList.do")
-	public ModelAndView hospitalList(@RequestParam(value="cPage",required=false,defaultValue="1") int cPage) {
-		ModelAndView mv=new ModelAndView();
-		int numPerPage=10;
-		List<Hospital> list=service.selectHospitalList(cPage,numPerPage);
-		
-		int totalCount=service.selectHospitalCount();
-		
-		String pageBar=new PageCreate().getPageBar(cPage, numPerPage,totalCount,"hospitalList.do");
-		
-		mv.addObject("pageBar", pageBar);
-		mv.addObject("list",list);
-		mv.addObject("cPage", cPage);
-		mv.addObject("totalCount", totalCount);
-		mv.setViewName("/member/adminPageHospital");		
-		
-		return mv;
-	}
 	
+	/* 해당 병원 승인 시 */
 	@RequestMapping("/adminPage/admission.do")
 	public String admission(int hospitalNum, Model model) {
 		int result = service.updateAdmission(hospitalNum);
@@ -707,5 +817,318 @@ public class MemberController {
 		
 		return "common/msg";
 	}
-
+	
+	
+	/* 병원회원이 마이페이지 수정을 실행 */
+	@RequestMapping("/member/hospitalUpdate.do")
+	public String hospitalUpdate(int hospitalNum, String hospitalName, String hospitalTel, String hospitalAddr, Model model,
+			HttpServletRequest request,@RequestParam(value="hospitalLicense",required=false) MultipartFile hospitalLicense) {
+		System.out.println("병원회원이 수정을 실행함");
+		String msg = "수정 실패!";
+		String loc = "";
+		
+		Hospital hospital = service.selectHospital(hospitalNum); 
+		
+		if(hospitalLicense !=null) {
+			//파일 업로드
+			//저장위치지정
+			String saveDir=request.getSession().getServletContext().getRealPath("/resources/uploadfile/H_License");
+			
+			File dir=new File(saveDir);
+			if(dir.exists()==false) System.out.println(dir.mkdirs());//폴더생성
+			System.out.println(hospitalLicense);
+			if(!hospitalLicense.isEmpty()) {
+			String originalFileName=hospitalLicense.getOriginalFilename();
+			
+			//확장자 구하기
+			String ext=originalFileName.substring(originalFileName.lastIndexOf(".")+1);
+			SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
+			int rndNum=(int)(Math.random()*1000);
+			String renamedFileName=sdf.format(new Date(System.currentTimeMillis()));
+			renamedFileName+="_"+rndNum+"."+ext;
+			try 
+			{
+				hospitalLicense.transferTo(new File(saveDir+File.separator+renamedFileName));
+			}
+			catch(IOException e)
+			{
+				e.printStackTrace();
+			}
+				//DB에 저장할 첨부파일에 대한 정보를 구성!
+				hospital.setHospitalLicense(originalFileName);
+				hospital.setHospitalReLicense(renamedFileName);
+			}
+		}
+		
+		hospital.setHospitalName(hospitalName);
+		hospital.setHospitalTel(hospitalTel);
+		hospital.setHospitalAddr(hospitalAddr);
+		
+		int result = service.hospitalUpdate(hospital);
+		
+		if(result > 0) {
+			msg = "회원 수정 성공!";
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("loc", loc);
+		
+		return "common/msg";
+	}
+	
+	
+	/* 병원정보 입력으로 들어옴 */
+	@RequestMapping("/member/hospitalInfo.do")
+	public String hospitalInfo(int hospitalNum, Model model) {
+		System.out.println("병원정보 입력으로 들어옴!");
+		String hospitalName = service.selecthospitalName(hospitalNum);
+		model.addAttribute("hospitalName",hospitalName);
+		model.addAttribute("hospitalNum", hospitalNum);
+		
+		return "member/hospitalInfoInsert";
+	}
+	
+	
+	/* 병원정보를 등록 */
+	@RequestMapping("/member/hospitalInfoInsert.do")
+	public String hosinfoInsert(
+			int hospitalNum, String hospitalInfoIntro, String hospitalInfoNotice,
+			String hospitalInfoUsetime, String hospitalInfoLunchtime,
+			Model model, HttpServletRequest request,
+			@RequestParam(value="hospitalPhoto",required=false) MultipartFile hospitalPhoto) {
+		
+		System.out.println("병원정보를 등록");
+		HospitalInfos hospitalInfo = new HospitalInfos(
+				hospitalNum, hospitalInfoIntro, hospitalInfoNotice, null, null, hospitalInfoUsetime, hospitalInfoLunchtime);
+		
+		System.out.println(hospitalInfo);
+		String msg = "";
+		String loc = "";
+		
+		if(hospitalPhoto != null) {
+			//파일 업로드
+			//저장위치지정
+			String saveDir = request.getSession().getServletContext().getRealPath("/resources/uploadfile/hospitalInfo");
+	
+			File dir = new File(saveDir);
+			if (dir.exists() == false)
+				System.out.println(dir.mkdirs());// 폴더생성
+			System.out.println(hospitalPhoto);
+			if (!hospitalPhoto.isEmpty()) {
+				String originalFileName = hospitalPhoto.getOriginalFilename();
+	
+				// 확장자 구하기
+				String ext = originalFileName.substring(originalFileName.lastIndexOf(".") + 1);
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
+				int rndNum = (int) (Math.random() * 1000);
+				
+				String renamedFileName = sdf.format(new Date(System.currentTimeMillis()));
+				renamedFileName += "_" + rndNum + "." + ext;
+				try {
+					hospitalPhoto.transferTo(new File(saveDir + File.separator + renamedFileName));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
+				// DB에 저장할 첨부파일에 대한 정보를 구성!
+				hospitalInfo.setHospitalPhoto(originalFileName);
+				hospitalInfo.setHospitalRePhoto(renamedFileName);
+			}
+		}
+		
+		int result = service.hospitalInfoinsert(hospitalInfo);
+		
+		if(result > 0) {
+			msg = "병원정보 등록성공";
+		} else {
+			msg = "(잘못된 경로)이미 등록된 병원정보가 있습니다.";
+		}
+		model.addAttribute("infoEnter", "yes");
+		model.addAttribute("msg",msg);
+		model.addAttribute("loc",loc);
+		
+		return "common/msg";
+	}
+	
+	
+	/* 병원정보 수정으로 들어옴 */
+	@RequestMapping("/member/hospitalInfoUpdate.do")
+	public String hospitalInfoUpdate(int hospitalNum, Model model) {
+		System.out.println("병원정보 수정으로 들어옴");
+		
+		HospitalInfos hospitalinfo = service.selectHospitalInfo(hospitalNum);
+		String hospitalName = service.selecthospitalName(hospitalNum);
+		
+		model.addAttribute("hospitalName", hospitalName);
+		model.addAttribute("hospitalInfo", hospitalinfo);
+		
+		return "member/hospitalInfoUpdatePage";
+	}
+	
+	
+	/* 병원정보 수정을 실행함 */
+	@RequestMapping("/member/hospitalInfoUpdateEnd.do")
+	public String hospitalInfoUpdateEnd(int hospitalNum, String hospitalInfoIntro,
+			String hospitalInfoNotice, String hospitalInfoUsetime, String hospitalInfoLunchtime,
+			Model model, HttpServletRequest request,
+			@RequestParam(value="hospitalPhoto",required=false, defaultValue="null") MultipartFile hospitalPhoto) {
+		System.out.println("병원정보 수정을 실행함");
+		String msg = "";
+		String loc = "";
+		
+		HospitalInfos hospitalInfo = new HospitalInfos(
+				hospitalNum, hospitalInfoIntro, hospitalInfoNotice, null, null, hospitalInfoUsetime, hospitalInfoLunchtime);
+		
+		if(hospitalPhoto != null) {
+			//파일 업로드
+			//저장위치지정
+			String saveDir = request.getSession().getServletContext().getRealPath("/resources/uploadfile/hospitalInfo");
+	
+			File dir = new File(saveDir);
+			if (dir.exists() == false)
+				System.out.println(dir.mkdirs());// 폴더생성
+			System.out.println(hospitalPhoto);
+			if (!hospitalPhoto.isEmpty()) {
+				String originalFileName = hospitalPhoto.getOriginalFilename();
+	
+				// 확장자 구하기
+				String ext = originalFileName.substring(originalFileName.lastIndexOf(".") + 1);
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
+				int rndNum = (int) (Math.random() * 1000);
+				
+				String renamedFileName = sdf.format(new Date(System.currentTimeMillis()));
+				renamedFileName += "_" + rndNum + "." + ext;
+				try {
+					hospitalPhoto.transferTo(new File(saveDir + File.separator + renamedFileName));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
+				// DB에 저장할 첨부파일에 대한 정보를 구성!
+				hospitalInfo.setHospitalPhoto(originalFileName);
+				hospitalInfo.setHospitalRePhoto(renamedFileName);
+			}
+		}
+		
+		int result = service.updateHospitalInfo(hospitalInfo);
+		
+		if(result > 0) {
+			msg = "병원정보 수정 성공!";
+		} else {
+			msg = "병원정보 수정 실패";
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("loc", loc);
+		
+		return "common/msg";
+	}
+	
+	
+	/* 의사정보 수정으로 들어옴 */
+	@RequestMapping("/member/doctorInfoUpdate.do")
+	public String doctorUpdate(int hospitalNum, Model model) {
+		System.out.println("의사수정으로 들어옴");
+		
+		List<DoctorInfos> docinfo = service.selectDoctorInfo(hospitalNum);
+		
+		model.addAttribute("docinfo", docinfo);
+		
+		return "member/doctorsPage";
+	}
+	
+	
+	/* 의사 사진을 선택해서 의사 수정을 들어감 */
+	@RequestMapping("/member/selectdoctor.do")
+	public String selectDoctor(int doctorNum, Model model) {
+		System.out.println(doctorNum);
+		DoctorInfos doctorInfo = service.selectDoctorPhoto(doctorNum);
+		String pro = service.DoctorsProfessional(doctorNum);
+		
+		String[] professionalArray = pro.split(",");
+		ArrayList<String> professional = new ArrayList();
+		for(int i = 0; i < professionalArray.length; i++) {
+			professional.add(professionalArray[i]);
+		}
+		
+		
+		model.addAttribute("doctorInfo", doctorInfo);
+		model.addAttribute("professional", professional);
+		
+		return "member/doctorUpdatePage";
+	}
+	
+	
+	/* 의사 수정을 실행함 */
+	@RequestMapping("/member/doctorInfoUpdateEnd.do")
+	public String doctorUpdateEnd(Model model, String doctorName,
+			String doctorCareer, int hospitalNum, String[] professional,
+			String doctorSlunch, String doctorElunch, String WeekdayStime,
+			String WeekdayEtime, String SatStime, String SatEtime,
+			String closed, String Specialized, String timeInterval, 
+			@RequestParam(value="doctorPhoto", required=false) MultipartFile doctorPhoto,
+			HttpServletRequest request, String olddoctorPhoto, int doctorNum) {
+		
+		System.out.println("의사 수정을 실행함");
+		String msg = "";
+		String loc = "";
+		
+		DoctorInfos doctorInfo = service.selectDoctorPhoto(doctorNum);
+		
+		if(doctorPhoto != null) {
+			
+			String saveDir=request.getSession().getServletContext().getRealPath("/resources/uploadfile/dortors");
+			
+			File dir=new File(saveDir);
+			if(dir.exists()==false) System.out.println(dir.mkdirs());//폴더생성
+			System.out.println(doctorPhoto);
+			if(!doctorPhoto.isEmpty()) {
+			String originalFileName=doctorPhoto.getOriginalFilename();
+			
+			//확장자 구하기
+			String ext=originalFileName.substring(originalFileName.lastIndexOf(".")+1);
+			SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
+			int rndNum=(int)(Math.random()*1000);
+			String renamedFileName=sdf.format(new Date(System.currentTimeMillis()));
+			renamedFileName+="_"+rndNum+"."+ext;
+			try 
+			{
+				doctorPhoto.transferTo(new File(saveDir+File.separator+renamedFileName));
+			}
+			catch(IOException e)
+			{
+				e.printStackTrace();
+			}
+				//DB에 저장할 첨부파일에 대한 정보를 구성!
+				doctorInfo.setDoctorPhoto(originalFileName);
+				doctorInfo.setDoctorRePhoto(renamedFileName);
+			}
+		}
+		
+		doctorInfo.setDoctorCareer(doctorCareer);
+		doctorInfo.setProfessional(professional);
+		doctorInfo.setDoctorSlunch(doctorSlunch);
+		doctorInfo.setDoctorElunch(doctorElunch);
+		doctorInfo.setWeekdayStime(WeekdayStime);
+		doctorInfo.setWeekdayEtime(WeekdayEtime);
+		doctorInfo.setSatStime(SatStime);
+		doctorInfo.setSatEtime(SatEtime);
+		doctorInfo.setClosed(closed);
+		doctorInfo.setSpecialized(Specialized);
+		doctorInfo.setTimeInterval(timeInterval);
+		
+		int result = service.updateDoctorInfo(doctorInfo);
+		
+		if(result > 0) {
+			msg = "의사 정보 수정성공!";
+		} else {
+			msg = "의사 정보 수정실패!";
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("loc", loc);
+		
+		return "common/msg";
+	}
+	
 }

@@ -73,6 +73,7 @@
 				<ul class="nav navbar-nav navbar-right" style="margin-top:2.5%;margin-right:1%;">
 				
 					<c:if test="${checkPH=='P' }">
+<<<<<<< HEAD
 						<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 						${memberLoggedIn.memberName }&nbsp;님 환영합니다.<span class="caret"></span></a>
 						<ul class="dropdown-menu" style="text-align: center;">
@@ -80,6 +81,23 @@
 							<li><a href="${pageContext.request.contextPath }/medi/reserList?userNum=${memberLoggedIn.memberNum}" >내 예약 정보</a></li>
 						</ul>
 						
+=======
+						<c:if test="${memberLoggedIn.memberId!='admin' }">
+							<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${memberLoggedIn.memberName }&nbsp;님 환영합니다.<span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="${pageContext.request.contextPath }/member/mypage.do?user_id=${memberLoggedIn.memberId}&checkPH=${checkPH}">마이페이지</a></li>
+								<li><a href="${pageContext.request.contextPath }/member/MemberReservation.do?user_id=${memberLoggedIn.memberId}&checkPH=${checkPH }">진료예약확인</a></li>
+							</ul>
+							</li>
+						</c:if>
+						<c:if test="${memberLoggedIn.memberId=='admin' }">
+							<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${memberLoggedIn.memberName }&nbsp;님 환영합니다.<span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="${pageContext.request.contextPath }/member/mypage.do?user_id=${memberLoggedIn.memberId}&checkPH=${checkPH}">관리자 페이지</a></li>
+							</ul>
+							</li>
+						</c:if>
+>>>>>>> groot
 					</c:if>
 					
 					<c:if test="${checkPH=='H' }">
@@ -87,12 +105,56 @@
 							<li><a style="text-decoration:none">승인대기 중입니다.</a></li>
 						</c:if>	
 						<c:if test="${hospitalAdmission!='0' }">
+<<<<<<< HEAD
 							<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 							${memberLoggedIn.hospitalName }&nbsp;님 환영합니다.<span class="caret"></span></a>
 							<ul class="dropdown-menu" style="text-align: center;">
 								<li><a href="${pageContext.request.contextPath }/member/mypage.do?user_id=${memberLoggedIn.hospitalId}&checkPH=${checkPH}">마이페이지</a></li>
 								<li><a href="${pageContext.request.contextPath }/medi/reser2?no=${memberLoggedIn.hospitalNum}">예약 시간 설정</a></li>
 							</ul>
+=======
+							<c:if test="${H_Info_Count==2}">
+								<c:if test="${infoEnter=='yes' }">
+									<script>
+										
+										location.href="${path}/member/infoCount.do?hospitalNum="+${memberLoggedIn.hospitalNum};
+										
+									</script>
+								</c:if>								
+							</c:if>
+							<c:if test="${H_Info_Count==1 }">
+								<c:if test="${InfoCheck=='no' }">
+									<script>
+										alert("병원정보를 등록 후 이용해주시기 바랍니다.");
+										alert("병원정보는 병원이름탭 - 병원정보입력에서 등록하시면 됩니다.");
+										location.href="${path}/member/infoCount.do?hospitalNum="+${memberLoggedIn.hospitalNum};
+									</script>
+								</c:if>
+								<c:if test="${H_Info_Count==1 }">
+									<script>
+										
+										location.href="${path}/member/infoCount.do?hospitalNum="+${memberLoggedIn.hospitalNum};
+									</script>
+								</c:if>
+							</c:if>
+							
+							<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${memberLoggedIn.hospitalName }&nbsp;님 환영합니다.<span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="${pageContext.request.contextPath }/member/mypage.do?user_id=${memberLoggedIn.hospitalId}&checkPH=${checkPH}">마이페이지</a></li>
+								<c:if test="${InfoCheck=='no' }">
+									<li><a href="${pageContext.request.contextPath }/member/hospitalInfo.do?hospitalNum=${memberLoggedIn.hospitalNum}">병원정보입력</a></li>
+								</c:if>
+								<c:if test="${InfoCheck=='yes' or infoEnter=='yes' }">
+									<li><a href="${pageContext.request.contextPath }/member/hospitalInfoUpdate.do?hospitalNum=${memberLoggedIn.hospitalNum}">병원정보수정</a></li>
+								</c:if>
+								<c:if test="${InfoCheck=='yes' }">
+									<li><a href="${pageContext.request.contextPath }/member/doctorInfoInsert.do?hospitalNum=${memberLoggedIn.hospitalNum}">의사 추가</a></li>
+									<li><a href="${pageContext.request.contextPath }/member/doctorInfoUpdate.do?hospitalNum=${memberLoggedIn.hospitalNum}">의사 수정</a></li>
+								</c:if>
+							</ul>
+							</li>
+>>>>>>> groot
 						</c:if>
 					</c:if>
 					
@@ -123,7 +185,13 @@
 						<c:if test="${checkPH=='H' }">
 							<li><a href="${path}/notice/noticeList.do?checkPH=${checkPH}">공지사항</a></li>
 						</c:if>
+<<<<<<< HEAD
 							<li><a href="${path}/notice/noticeList.do?checkPH=P" id="bemember" style="display: block">공지사항</a></li>
+=======
+						
+						<li><a href="${path}/notice/noticeList.do?checkPH=P" id="bemember" style="display: block">공지사항</a></li>
+						
+>>>>>>> groot
 							<li><a href="#">자주묻는 질문</a></li>
 							<li><a href="${path}/community/communityList.do">자유게시판</a></li>
 						</ul>
@@ -138,11 +206,20 @@
 						});
 						
 					});
+<<<<<<< HEAD
 					$(function(){
 		                if(${checkPH=='P'} || ${checkPH=='H'}){
 		                   $('#bemember').css("display","none");                                          
 		                }
 		            });
+=======
+					
+					$(function(){
+						if(${checkPH=='P'} || ${checkPH=='H'}){
+							$('#bemember').css("display","none");														
+						}
+					});
+>>>>>>> groot
 				</script>	
 			</div>
 		</div>		

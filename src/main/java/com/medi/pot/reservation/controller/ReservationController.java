@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -118,6 +119,7 @@ public class ReservationController {
 		return "medi_reservation/choiceTime";
 	}
 	
+<<<<<<< HEAD
 	@RequestMapping("/medi/insertReser")
 	public String insertReser(MemberReservation mr,HttpServletRequest req) {
 		int result=service.insertReser(mr);
@@ -348,4 +350,6 @@ public class ReservationController {
 		return "medi_reservation/reservation2";
 	}
 
+=======
+>>>>>>> groot
 }
