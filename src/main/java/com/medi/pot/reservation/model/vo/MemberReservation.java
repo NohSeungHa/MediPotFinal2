@@ -1,5 +1,7 @@
 package com.medi.pot.reservation.model.vo;
 
+import java.util.Objects;
+
 public class MemberReservation {
 	private int checkNum;
 	private int checkDoctor;
@@ -149,6 +151,24 @@ public class MemberReservation {
 
 	public void setMemberNum(int memberNum) {
 		this.memberNum = memberNum;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(checkTime);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		MemberReservation r=(MemberReservation)obj;
+		if(this.checkTime.equals(r.getCheckTime()))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 	
