@@ -1,9 +1,13 @@
+<%@page import="com.medi.pot.member.model.vo.Member"%>
+<%@page import="com.medi.pot.helpZone.vo.HelpZoneComment"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix='c' uri="http://java.sun.com/jsp/jstl/core"%>
     <%@ taglib prefix='fmt' uri="http://java.sun.com/jsp/jstl/fmt"%>
     <%@ taglib prefix='fn' uri="http://java.sun.com/jsp/jstl/functions"%>
 	<c:set var="path" value="<%=request.getContextPath() %>"/>
+	<%List<HelpZoneComment> helpZoneCommentList = (List)request.getAttribute("helpZoneCommentList"); %>
      
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="헬프존 조회" name="pageTitle"/>
@@ -45,12 +49,12 @@
 <!-- Container (Contact Section) -->
 <div class="container">
 	<br>
-	<a id="noticeHv" href="${path}/helpZone/helpZoneList.do" style="float: right;">헬프존</a>
+	<a id="helpZoneHv" href="${path}/helpZone/helpZoneList.do" style="float: right;">헬프존</a>
 	<p style="float: right;">
 		<b style="margin-right:10px;">></b>
 	</p>
 	<a id="home" href="${path}" style="float:right;width:70px;"><img
-		src="/pot/resources/img/notice/home.jpg"
+		src="${path }/resources/img/notice/home.jpg"
 		style="width: 30%; height: 30%;"> 홈으로</a>
 		<br><br>
 		
@@ -92,7 +96,41 @@
 				<button type="button" onclick="helpZoneDelete()" class="btn btn-danger btn-lg" style="float: right; margin-left: 10px;">삭제</button>
 			</c:if>
 	</c:if>
-	<%@ include file="../helpZone/helpZoneComment.jsp" %>
+	
+<hr><!-- 댓글등록창 -->
+<div id="comment-container">
+	<div id="comment-content-container">
+		<table id="tbl-comment">
+			<%if(helpZoneCommentList!=null){ 
+			for(HelpZoneComment hzComment : helpZoneCommentList) {
+				if(hzComment.getHzCommentLevel()==1){%>
+				<tr class="level1">
+					<td>
+						<sub class="comment-writer"><%=hzComment.getHzCommentWriterNum() %></sub>
+						<sub class="comment-date"><%=hzComment.getHzCommentDate() %></sub>
+						<br><%=hzComment.getHzCommentContent() %>
+					</td>
+					
+					<td>
+						<button class='btn-reply' value="<%=hzComment.getHzCommentNum() %>">답글</button>
+						<c:if test="${memberLoggedIn.memberId == hzCommentWriterNum.memberId }">
+							<button class='btn-delete' value="<%=hzComment.getHzCommentNum()%>">삭제</button>
+						</c:if>
+					<%} %>
+					</td>
+				</tr>
+				<%} %>
+				<%else{ %>
+				<tr class="level2">
+					<td>
+						<sub style="font-size: 15px;font-weight: bold">ㄴ</sub><sub class="comment-writer"><%=hzComment.getHzCommentWriterNum() %></sub>
+					</td>
+				</tr>
+				
+		</table>
+	</div><!-- comment-content-container -->
+</div><!-- comment-container -->
+
 
 </div>
 <br><br>

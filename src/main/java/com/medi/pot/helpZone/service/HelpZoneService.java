@@ -3,6 +3,7 @@ package com.medi.pot.helpZone.service;
 import java.util.List;
 
 import com.medi.pot.helpZone.vo.HelpZone;
+import com.medi.pot.helpZone.vo.HelpZoneComment;
 import com.medi.pot.member.model.vo.Member;
 
 public interface HelpZoneService {
@@ -14,5 +15,4 @@ public interface HelpZoneService {
 	Member selectMember(int helpZoneQuestioner);					//작성자 불러오기
 	int deleteHelpZone(int num);									//글 삭제하기
 	int updateHelpZone(HelpZone helpZone);							//글 업데이트 하기
-	
 }

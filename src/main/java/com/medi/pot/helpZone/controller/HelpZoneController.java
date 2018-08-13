@@ -2,23 +2,30 @@ package com.medi.pot.helpZone.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.medi.pot.common.page.PageCreate;
 import com.medi.pot.helpZone.service.HelpZoneService;
 import com.medi.pot.helpZone.vo.HelpZone;
+import com.medi.pot.helpZone.vo.HelpZoneComment;
+import com.medi.pot.member.model.vo.Hospital;
 import com.medi.pot.member.model.vo.Member;
 
 @Controller
@@ -154,7 +161,6 @@ public class HelpZoneController {
 		return "helpZone/helpZoneUpdate";
 	}
 	
-<<<<<<< HEAD
 	@RequestMapping("/helpZone/helpZoneUpdateEnd.do")
 	public ModelAndView helpZoneUpdateEnd(String helpZoneTitle,
 											int helpZoneQuestioner,
@@ -220,7 +226,14 @@ public class HelpZoneController {
 		
 		return mv;
 	} 
-=======
->>>>>>> sh
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }
