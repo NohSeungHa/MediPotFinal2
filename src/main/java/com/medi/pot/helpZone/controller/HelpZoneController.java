@@ -154,5 +154,73 @@ public class HelpZoneController {
 		return "helpZone/helpZoneUpdate";
 	}
 	
+<<<<<<< HEAD
+	@RequestMapping("/helpZone/helpZoneUpdateEnd.do")
+	public ModelAndView helpZoneUpdateEnd(String helpZoneTitle,
+											int helpZoneQuestioner,
+											String helpZoneKeyWord,
+											String helpZoneContent, 
+											@RequestParam(value="newFileName",required=false) MultipartFile newFileName,
+											String oldFileName,String oldReFileName,
+											int num,
+											HttpServletRequest request) {
+		//파일 업로드
+		//저장 위치 지정
+		String saveDir = request.getSession().getServletContext().getRealPath("/resources/uploadfile/helpZone");
+		HelpZone helpZone = new HelpZone();
+		if(newFileName !=null) 
+		{
+			File dir = new File(saveDir);
+			File file = new File(saveDir+"/"+oldReFileName);
+			System.out.println("전에 파일을 삭제합니다.");
+			file.delete();
+			System.out.println("전에 파일을 삭제 완료하였습니다.");
+			if(dir.exists()==false) System.out.println(dir.mkdirs());//폴더생성
+			System.out.println(newFileName);
+			if(!newFileName.isEmpty()) {
+				String originalFileName = newFileName.getOriginalFilename();
+				//확장자 구하기
+				String ext=originalFileName.substring(originalFileName.lastIndexOf(".")+1);
+				SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
+				int rndNum=(int)(Math.random()*1000);
+				String renamedFileName=sdf.format(new Date(System.currentTimeMillis()));
+				renamedFileName+="_"+rndNum+"."+ext;
+				try 
+				{
+					newFileName.transferTo(new File(saveDir+File.separator+renamedFileName));
+				}
+				catch(IOException e)
+				{e.printStackTrace();}
+					//DB에 저장할 첨부파일에 대한 정보를 구성!
+					helpZone.setHelpZoneFile(originalFileName);
+					helpZone.setHelpZoneReFile(renamedFileName);
+			}
+		}
+		
+		helpZone.setHelpZoneNum(num);
+		helpZone.setHelpZoneTitle(helpZoneTitle);
+		helpZone.setHelpZoneQuestioner(helpZoneQuestioner);
+		helpZone.setHelpZoneContent(helpZoneContent);
+		helpZone.setHelpZoneKeyWord(helpZoneKeyWord);
+		
+		System.out.println("헬프존 업데이트에서 헬프존 확인 : "+helpZone);
+		
+		int result = service.updateHelpZone(helpZone);
+		ModelAndView mv = new ModelAndView();
+		String msg = "";
+		if(result ==1) {
+			msg = "수정 완료";
+		}
+		else {
+			msg = "수정 실패";
+		}
+		mv.addObject("msg", msg);
+		mv.addObject("loc", "helpZone/helpZoneView.do?helpZoneNum="+num);
+		mv.setViewName("common/msg");
+		
+		return mv;
+	} 
+=======
+>>>>>>> sh
 	
 }

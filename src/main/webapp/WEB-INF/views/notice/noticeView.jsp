@@ -103,6 +103,7 @@
 	<c:if test="${not empty searchContent }">
 		<button type="button" class="btn btn-success" onclick="searchList()">목록으로</button>
 	</c:if>
+	<c:if test="${checkPH=='P' }">
 	<c:if test="${memberLoggedIn.memberId=='admin' }">
 		<input type="button" value="삭제" class="btn btn-danger" style="float: right;margin-left: 10px;" data-toggle="modal" data-target="#deleteModal"/>
   		<c:if test="${ckPH=='H'}">
@@ -122,6 +123,7 @@
 			</script>
 		</c:if>
   	</c:if>
+  	</c:if>
   <br><br>
   <table class="table table-bordered table-sm" style="border: 2px solid lightgray;">
         <tbody>
@@ -130,13 +132,13 @@
 	            	<c:if test="${ckPH=='H'}">
 	            		<tr>
 	                		<td style="width: 10%;text-align:center;"><h4> <b>∧</b> 이전</h4></td>
-	                		<td><h4><a href='${path}/notice/noticeView.do?no=${noticeBefore.hospitalNoticeNum }&checkPH=${ckPH}&id=${memberLoggedIn.memberId}&cp=${cp}'> ${noticeBefore.hospitalNoticeTitle }</a></h4></td>
+	                		<td><h4><a href='${path}/notice/noticeView.do?no=${noticeBefore.hospitalNoticeNum }&checkPH=${ckPH}&cp=${cp}'> ${noticeBefore.hospitalNoticeTitle }</a></h4></td>
 	            		</tr>
 	            	</c:if>
 	            	<c:if test="${ckPH!='H'}">
 	            		<tr>
 	                		<td style="width: 10%;text-align:center;"><h4> <b>∧</b> 이전</h4></td>
-	                		<td><h4><a href='${path}/notice/noticeView.do?no=${noticeBefore.memberNoticeNum }&checkPH=${ckPH}&id=${memberLoggedIn.memberId}&cp=${cp}'> ${noticeBefore.memberNoticeTitle }</a></h4></td>
+	                		<td><h4><a href='${path}/notice/noticeView.do?no=${noticeBefore.memberNoticeNum }&checkPH=${ckPH}&cp=${cp}'> ${noticeBefore.memberNoticeTitle }</a></h4></td>
 	            		</tr>
 	            	</c:if>
 	            </c:if>
@@ -144,13 +146,13 @@
 		            <c:if test="${ckPH=='H'}">
 			            <tr>
 			                <td style="width: 10%;text-align:center;"><h4> <b>∨</b> 다음</h4></td>
-			                <td><h4><a href='${path}/notice/noticeView.do?no=${noticeNext.hospitalNoticeNum }&checkPH=${ckPH}&id=${memberLoggedIn.memberId}&cp=${cp}'> ${noticeNext.hospitalNoticeTitle }</a></h4></td>
+			                <td><h4><a href='${path}/notice/noticeView.do?no=${noticeNext.hospitalNoticeNum }&checkPH=${ckPH}&cp=${cp}'> ${noticeNext.hospitalNoticeTitle }</a></h4></td>
 			            </tr>
 			        </c:if>
 			        <c:if test="${ckPH!='H'}">
 			            <tr>
 			                <td style="width: 10%;text-align:center;"><h4> <b>∨</b> 다음</h4></td>
-			                <td><h4><a href='${path}/notice/noticeView.do?no=${noticeNext.memberNoticeNum }&checkPH=${ckPH}&id=${memberLoggedIn.memberId}&cp=${cp}'> ${noticeNext.memberNoticeTitle }</a></h4></td>
+			                <td><h4><a href='${path}/notice/noticeView.do?no=${noticeNext.memberNoticeNum }&checkPH=${ckPH}&cp=${cp}'> ${noticeNext.memberNoticeTitle }</a></h4></td>
 			            </tr>
 			        </c:if>
 	            </c:if>
@@ -160,13 +162,13 @@
 	            	<c:if test="${ckPH=='H'}">
 	            		<tr>
 	                		<td style="width: 10%;text-align:center;"><h4> <b>∧</b> 이전</h4></td>
-	                		<td><h4><a href='${path}/notice/noticeView.do?no=${noticeBefore.hospitalNoticeNum }&checkPH=${ckPH}&id=${memberLoggedIn.memberId}&cp=${cp}&searchKind=${searchKind}&searchContent=${searchContent}'> ${noticeBefore.hospitalNoticeTitle }</a></h4></td>
+	                		<td><h4><a href='${path}/notice/noticeView.do?no=${noticeBefore.hospitalNoticeNum }&checkPH=${ckPH}&cp=${cp}&searchKind=${searchKind}&searchContent=${searchContent}'> ${noticeBefore.hospitalNoticeTitle }</a></h4></td>
 	            		</tr>
 	            	</c:if>
 	            	<c:if test="${ckPH!='H'}">
 	            		<tr>
 	                		<td style="width: 10%;text-align:center;"><h4> <b>∧</b> 이전</h4></td>
-	                		<td><h4><a href='${path}/notice/noticeView.do?no=${noticeBefore.memberNoticeNum }&checkPH=${ckPH}&id=${memberLoggedIn.memberId}&cp=${cp}&searchKind=${searchKind}&searchContent=${searchContent}'> ${noticeBefore.memberNoticeTitle }</a></h4></td>
+	                		<td><h4><a href='${path}/notice/noticeView.do?no=${noticeBefore.memberNoticeNum }&checkPH=${ckPH}&cp=${cp}&searchKind=${searchKind}&searchContent=${searchContent}'> ${noticeBefore.memberNoticeTitle }</a></h4></td>
 	            		</tr>
 	            	</c:if>
 	            </c:if>
@@ -174,13 +176,13 @@
 		            <c:if test="${ckPH=='H'}">
 			            <tr>
 			                <td style="width: 10%;text-align:center;"><h4> <b>∨</b> 다음</h4></td>
-			                <td><h4><a href='${path}/notice/noticeView.do?no=${noticeNext.hospitalNoticeNum }&checkPH=${ckPH}&id=${memberLoggedIn.memberId}&cp=${cp}&searchKind=${searchKind}&searchContent=${searchContent}'> ${noticeNext.hospitalNoticeTitle }</a></h4></td>
+			                <td><h4><a href='${path}/notice/noticeView.do?no=${noticeNext.hospitalNoticeNum }&checkPH=${ckPH}&cp=${cp}&searchKind=${searchKind}&searchContent=${searchContent}'> ${noticeNext.hospitalNoticeTitle }</a></h4></td>
 			            </tr>
 			        </c:if>
 			        <c:if test="${ckPH!='H'}">
 			            <tr>
 			                <td style="width: 10%;text-align:center;"><h4> <b>∨</b> 다음</h4></td>
-			                <td><h4><a href='${path}/notice/noticeView.do?no=${noticeNext.memberNoticeNum }&checkPH=${ckPH}&id=${memberLoggedIn.memberId}&cp=${cp}&searchKind=${searchKind}&searchContent=${searchContent}'> ${noticeNext.memberNoticeTitle }</a></h4></td>
+			                <td><h4><a href='${path}/notice/noticeView.do?no=${noticeNext.memberNoticeNum }&checkPH=${ckPH}&cp=${cp}&searchKind=${searchKind}&searchContent=${searchContent}'> ${noticeNext.memberNoticeTitle }</a></h4></td>
 			            </tr>
 			        </c:if>
 	            </c:if>

@@ -17,10 +17,10 @@
         #home:hover{
             color: #18bc9c;
         }
-        #noticeHv{
+        #communityHv{
             float:right;
         }
-        #noticeHv:hover{
+        #communityHv:hover{
             color: #18bc9c;
         }
 </style>
@@ -30,7 +30,7 @@
 		src="/pot/resources/img/community/communityInsert.jpg"
 		style="width: 100%;"> <br>
 	<br>
-	<a id="noticeHv" href="${path}/community/communityList.do" style="float: right;">자유게시판</a>
+	<a id="communityHv" href="${path}/community/communityList.do" style="float: right;">자유게시판</a>
 	<p style="float: right;">
 		<b style="margin-right:10px;">></b>
 	</p>
@@ -40,36 +40,61 @@
 	<form name="communityFrm" action="${path}/community/communityInsertEnd.do" method="post" onsubmit="return validate();"  enctype="multipart/form-data" >
 		<table class="table table-bordered">
 			<tbody>
-				<tr>
-					<th>제목:</th>
-					<td><input type="text" placeholder="제목을 입력하세요.(100자 이내)" name="title" id="title"
-						class="form-control" maxlength="40" /></td>
-				</tr>
-				<tr>
-					<th>작성자:</th>
-						<td><input type="text" name="writer"  id="writer" class="form-control"
-							value="${memberLoggedIn.memberId }" style="background-color: white;" readonly /></td>
-				</tr>
-				<tr>
-					<th>내용:</th>
-					<td><textarea style="resize: none;" class="form-control" placeholder="내용을 입력하세요.(500자이내)"
-							rows="5" id="comment" name="content" onKeyUp="checkLength(this);" onKeyDown="checkLength(this);"></textarea></td>
-				</tr>
-				<tr>
-					<th>첨부파일:</th>
-					<td><input type="file" class="form-control-file border"
-						name="fileName" id="fileName" accept=".jpg, .png, .bmp"></td>
-				</tr>
+				<c:if test="${checkPH=='P' }">
+					<tr>
+						<th>제목:</th>
+						<td><input type="text" placeholder="제목을 입력하세요.(100자 이내)" name="title" id="title"
+							class="form-control" maxlength="40" /></td>
+					</tr>
+					<tr>
+						<th>작성자:</th>
+							<td><input type="text" name="writer"  id="writer" class="form-control"
+								value="${memberLoggedIn.memberId }" style="background-color: white;" readonly /></td>
+					</tr>
+					<tr>
+						<th>내용:</th>
+						<td><textarea style="resize: none;" class="form-control" placeholder="내용을 입력하세요.(1000자이내)"
+								rows="5" id="comment" name="content" onKeyUp="checkLength(this);" onKeyDown="checkLength(this);"></textarea></td>
+					</tr>
+					<tr>
+						<th>첨부파일:</th>
+						<td><input type="file" class="form-control-file border"
+							name="fileName" id="fileName" accept=".jpg, .png, .bmp"></td>
+					</tr>
+				</c:if>
+				<c:if test="${checkPH=='H' }">
+					<tr>
+						<th>제목:</th>
+						<td><input type="text" placeholder="제목을 입력하세요.(100자 이내)" name="title" id="title"
+							class="form-control" maxlength="40" /></td>
+					</tr>
+					<tr>
+						<th>작성자:</th>
+							<td><input type="text" name="writer"  id="writer" class="form-control"
+								value="${memberLoggedIn.hospitalId }" style="background-color: white;" readonly /></td>
+					</tr>
+					<tr>
+						<th>내용:</th>
+						<td><textarea style="resize: none;" class="form-control" placeholder="내용을 입력하세요.(500자이내)"
+								rows="5" id="comment" name="content" onKeyUp="checkLength(this);" onKeyDown="checkLength(this);"></textarea></td>
+					</tr>
+					<tr>
+						<th>첨부파일:</th>
+						<td><input type="file" class="form-control-file border"
+							name="fileName" id="fileName" accept=".jpg, .png, .bmp"></td>
+					</tr>
+				</c:if>
 			</tbody>
 		</table>
-		<button type="button" onclick="noticeList()" class="btn btn-danger" style="float: right; margin-left: 10px;">취소</button> 
+		<input type="hidden" name="checkPH" value="${checkPH}">
+		<button type="button" onclick="communityList()" class="btn btn-danger" style="float: right; margin-left: 10px;">취소</button> 
 		<input type="submit" value="등록" onclick="return validate();" class="btn btn-primary" style="float: right;"/>
 		</form>
-		<button type="button" class="btn btn-success" onclick="noticeList()">목록으로</button>
+		<button type="button" class="btn btn-success" onclick="communityList()">목록으로</button>
 	</div>
 <br>
 <script>
-	function noticeList(){
+	function communityList(){
 		location.href="${path}/community/communityList.do";
 	}
 	function checkLength(comment) {

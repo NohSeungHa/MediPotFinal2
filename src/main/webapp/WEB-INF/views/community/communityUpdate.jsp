@@ -27,50 +27,55 @@
 <br>
 <div class="container">
 	<img class="img-thumbnail"
-		src="/pot/resources/img/notice/hnoticeinsert.jpg"
+		src="/pot/resources/img/community/communityUpdate.jpg"
 		style="width: 100%;"> <br>
 	<br>
-	<a id="noticeHv" href="${path}/notice/noticeList.do?checkPH=${chPH}" style="float: right;">공지사항</a>
+	<a id="communityHv" href="${path}/community/communityList.do" style="float: right;">자유게시판</a>
 	<p style="float: right;">
 		<b style="margin-right:10px;">></b>
 	</p>
 	<a id="home" href="${path}" style="float:right;width:70px;"><img
 		src="/pot/resources/img/notice/home.jpg"
 		style="width: 30%; height: 30%;"> 홈으로</a>
-	<form name="noticeFrm" action="${path}/notice/noticeInsertEnd.do?checkPH=${chPH}" method="post" onsubmit="return validate();"  enctype="multipart/form-data" >
+	<form name="communityUpdateFrm" action="${path}/community/communityUpdateEnd.do" method="post" onsubmit="return validate();"  enctype="multipart/form-data" >
 		<table class="table table-bordered">
 			<tbody>
-				<tr>
-					<th>제목:</th>
-					<td><input type="text" placeholder="제목을 입력하세요.(100자 이내)" name="title" id="title"
-						class="form-control" maxlength="40" /></td>
-				</tr>
-				<tr>
-					<th>작성자:</th>
-					<td><input type="text" name="writer"  id="writer" class="form-control"
-						value="관리자" style="background-color: white;" readonly /></td>
-				</tr>
-				<tr>
-					<th>내용:</th>
-					<td><textarea style="resize: none;" class="form-control" placeholder="내용을 입력하세요.(1000자이내)"
-							rows="5" id="comment" name="content" onKeyUp="checkLength(this);" onKeyDown="checkLength(this);"></textarea></td>
-				</tr>
-				<tr>
-					<th>첨부파일:</th>
-					<td><input type="file" class="form-control-file border"
-						name="fileName" id="fileName" accept=".jpg, .png, .bmp"></td>
-				</tr>
+					<tr>
+						<th>제목:</th>
+						<td><input type="text" placeholder="제목을 입력하세요.(100자 이내)" name="title" id="title"
+							class="form-control" maxlength="40" value="${com.communityTitle }" /></td>
+					</tr>
+					<tr>
+						<th>작성자:</th>
+						<td><input type="text" name="writer"  id="writer" class="form-control"
+							value="${com.communityWriter }" style="background-color: white;" readonly /></td>
+					</tr>
+					<tr>
+						<th>내용:</th>
+						<td><textarea style="resize: none;" class="form-control" placeholder="내용을 입력하세요.(500자이내)"
+								rows="5" id="comment" name="content" onKeyUp="checkLength(this);" onKeyDown="checkLength(this);">${com.communityContent }</textarea></td>
+					</tr>
+					<tr>
+						<th>첨부파일:</th>
+						<td><input type="file" class="form-control-file border" name="newFileName" id="newFileName" accept=".jpg, .png, .bmp">
+							<input type="hidden" name="oldFileName" id="oldFileName" value="${com.communityFile }">
+							<input type="hidden" name="oldReFileName" id="oldReFileName" value="${com.communityRefile }">
+						</td>
+					</tr>
 			</tbody>
 		</table>
+		<input type="hidden" id="checkPH" name="checkPH" value="${com.communityCheckPH }">
+		<input type="hidden" id="no" name="no" value="${num}">
+		<input type="hidden" id="cPage" name="cPage" value="${cPage}">
 		<button type="button" onclick="noticeList()" class="btn btn-danger" style="float: right; margin-left: 10px;">취소</button> 
-		<input type="submit" value="등록" onclick="return validate();" class="btn btn-primary" style="float: right;"/>
+		<input type="submit" value="수정" onclick="return validate();" class="btn btn-primary" style="float: right;"/>
 		</form>
 		<button type="button" class="btn btn-success" onclick="noticeList()">목록으로</button>
-</div>
+	</div>
 <br>
 <script>
 	function noticeList(){
-		location.href="${path}/notice/noticeList.do?checkPH=${chPH}";
+		location.href="${path}/community/communityList.do";
 	}
 	function checkLength(comment) {
 	    if (comment.value.length > 1000 ) {

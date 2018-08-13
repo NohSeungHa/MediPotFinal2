@@ -45,14 +45,14 @@
 <!-- Container (Contact Section) -->
 <div class="container">
 	<br>
-	<a id="noticeHv" href="${path}/helpZone/helpZoneList.do" style="float: right;">공지사항</a>
+	<a id="noticeHv" href="${path}/helpZone/helpZoneList.do" style="float: right;">헬프존</a>
 	<p style="float: right;">
 		<b style="margin-right:10px;">></b>
 	</p>
 	<a id="home" href="${path}" style="float:right;width:70px;"><img
 		src="/pot/resources/img/notice/home.jpg"
 		style="width: 30%; height: 30%;"> 홈으로</a>
-		
+		<br><br>
 		
 		<table class="table table-bordered">
 			<tbody>
@@ -84,24 +84,19 @@
 					<td><img src="${path}/resources/uploadfile/helpZone/${helpZone.helpZoneReFile}" style="width: 300px; height: 200px"></td>
 				</tr>
 			</tbody>
-		</table>
-			
-		<button type="button" class="btn btn-success btn-lg" onclick="helpZoneList()">목록으로</button>
+		</table>		
+		
 	<c:if test="${checkPH=='P'}" >
 			<c:if test="${memberLoggedIn.memberId == helpZoneQuestioner.memberId }">
 				<button type="button" onclick="helpZoneUpdate()" class="btn btn-success btn-lg" style="float: right; margin-left: 10px;">수정</button> 
 				<button type="button" onclick="helpZoneDelete()" class="btn btn-danger btn-lg" style="float: right; margin-left: 10px;">삭제</button>
 			</c:if>
 	</c:if>
-	
+	<%@ include file="../helpZone/helpZoneComment.jsp" %>
 
 </div>
 <br><br>
 <script>
-/* 게시글 리스트 출력 함수 */
-function helpZoneList() {
-	location.href="${path}/helpZone/helpZoneList.do";
-}
 /* 게시글 수정 함수 */
 function helpZoneUpdate(){
 	location.href="${path}/helpZone/updateHelpZone.do?num=${helpZone.helpZoneNum}";

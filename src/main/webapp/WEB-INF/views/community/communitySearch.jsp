@@ -77,7 +77,7 @@
 				<c:forEach var='community' items='${list }' varStatus="vs">
 					<tr>
 						<td><h4>${community.communityNum }</h4></td>
-						<td><h4 id="txt_line" ><a href='${path}/community/communityView.do?no=${community.communityNum }&cp=${cPage}'>${community.communityTitle }</a></h4></td>
+						<td><h4 id="txt_line" ><a href='${path}/community/communityView.do?no=${community.communityNum }&cp=${cPage}&searchKind=${searchKind}&searchContent=${searchContent}'>${community.communityTitle }</a></h4></td>
 						<c:if test="${community.communityFile!=null }">
 							<td>&nbsp;<img src="/pot/resources/img/notice/fileImge1.jpg" style="margin-left:10px; width: 20px;height: 20px;"></td>
 						</c:if>
@@ -97,12 +97,12 @@
 	</table>
 	<hr>
 	<form name="communitySearchFrm" action="${path}/community/communitySearch.do" method="get">
-      	<select name="searchKind" class="form-control" style="width: 85px;height:35px;float: left;">
-        	<option value="title">제목</option>
-        	<option value="content">내용</option>
-        	<option value="writer">작성자</option>
+      	<select id="searchKind" name="searchKind" class="form-control" style="width: 85px;height:35px;float: left;">
+	        	<option value="title" <c:if test="${searchKind eq 'title'}">selected</c:if>>제목</option>
+	        	<option value="content" <c:if test="${searchKind eq 'content'}">selected</c:if>>내용</option>
+	        	<option value="writer" <c:if test="${searchKind eq 'writer'}">selected</c:if>>작성자</option>
       	</select>
-		<input class="form-control mr-sm-2" type="text" placeholder="Search" name="searchContent" style="width: 15%; float: left; margin-left: 5px;">
+		<input class="form-control mr-sm-2" value="${searchContent }" type="text" placeholder="Search" name="searchContent" style="width: 15%; float: left; margin-left: 5px;">
 		<button class="btn btn-info" type="submit" style="margin-left: 5px;">검색</button>
 	</form>
 	<br>
