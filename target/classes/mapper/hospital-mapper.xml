@@ -52,6 +52,10 @@
 		select count(*) from hospital where hospitalAdmission=0
 	</select>
 	
+	<select id="EmailCheck" parameterType="string" resultType="_int">
+		select count(*) from hospital where hospitalEmail=#{hospitalEmail}
+	</select>
+	
 	<select id="hospitalNameinput" parameterType="_int" resultType="string">
 		select hospitalName from hospital where hospitalNum=#{hospitalNum}
 	</select>
@@ -59,6 +63,16 @@
 	<select id="selectHospital" parameterType="_int" resultType="hospital">
 		select * from hospital where hospitalNum=#{hospitalNum}
 	</select>
+	
+	<update id="hospitalUpdate" parameterType="hospital">
+		update hospital set
+			hospitalName=#{hospitalName},
+			hospitalTel=#{hospitalTel},
+			hospitalLicense=#{hospitalLicense},
+			hospitalReLicense=#{hospitalReLicense},
+			hospitalAddr=#{hospitalAddr}
+		where hospitalNum=#{hospitalNum}
+	</update>
 	
 	<insert id="hospitalInfoinsert" parameterType="hospitalInfos">
 		INSERT INTO HOSPITALINFO values(

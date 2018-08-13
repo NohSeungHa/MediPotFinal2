@@ -72,12 +72,21 @@
 				<ul class="nav navbar-nav navbar-right" style="margin-top:2.5%;margin-right:1%;">
 				
 					<c:if test="${checkPH=='P' }">
-						<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${memberLoggedIn.memberName }&nbsp;님 환영합니다.<span class="caret"></span></a>
-						<ul class="dropdown-menu">
-							<li><a href="${pageContext.request.contextPath }/member/mypage.do?user_id=${memberLoggedIn.memberId}&checkPH=${checkPH}">마이페이지</a></li>
-							<li><a href="${pageContext.request.contextPath }/member/MemberReservation.do?user_id=${memberLoggedIn.memberId}&checkPH=${checkPH }">진료예약확인</a></li>
-						</ul>
-						</li>
+						<c:if test="${memberLoggedIn.memberId!='admin' }">
+							<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${memberLoggedIn.memberName }&nbsp;님 환영합니다.<span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="${pageContext.request.contextPath }/member/mypage.do?user_id=${memberLoggedIn.memberId}&checkPH=${checkPH}">마이페이지</a></li>
+								<li><a href="${pageContext.request.contextPath }/member/MemberReservation.do?user_id=${memberLoggedIn.memberId}&checkPH=${checkPH }">진료예약확인</a></li>
+							</ul>
+							</li>
+						</c:if>
+						<c:if test="${memberLoggedIn.memberId=='admin' }">
+							<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${memberLoggedIn.memberName }&nbsp;님 환영합니다.<span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="${pageContext.request.contextPath }/member/mypage.do?user_id=${memberLoggedIn.memberId}&checkPH=${checkPH}">관리자 페이지</a></li>
+							</ul>
+							</li>
+						</c:if>
 					</c:if>
 					
 					<c:if test="${checkPH=='H' }">
@@ -120,8 +129,8 @@
 								<c:if test="${InfoCheck=='yes' or infoEnter=='yes' }">
 									<li><a href="${pageContext.request.contextPath }/member/hospitalInfoUpdate.do?hospitalNum=${memberLoggedIn.hospitalNum}">병원정보수정</a></li>
 								</c:if>
-								<li><a href="${pageContext.request.contextPath }/member/doctorInfoInsert.do?hospitalNum=${memberLoggedIn.hospitalNum}">의사 추가</a></li>
 								<c:if test="${InfoCheck=='yes' }">
+									<li><a href="${pageContext.request.contextPath }/member/doctorInfoInsert.do?hospitalNum=${memberLoggedIn.hospitalNum}">의사 추가</a></li>
 									<li><a href="${pageContext.request.contextPath }/member/doctorInfoUpdate.do?hospitalNum=${memberLoggedIn.hospitalNum}">의사 수정</a></li>
 								</c:if>
 							</ul>

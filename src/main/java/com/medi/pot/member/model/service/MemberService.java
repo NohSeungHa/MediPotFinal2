@@ -34,6 +34,8 @@ public interface MemberService {
 	String FindId(Member m);
 	Member searchName(String findname);
 	
+	int FindHosEmailCheck(String memberEmail);
+	
 	/* 비밀번호 찾기 */
 	Member searchID(String findid);
 	int MemberUpdate(Member m);
@@ -47,9 +49,10 @@ public interface MemberService {
 	int hospitalCount();
 	String selecthospitalName(int hospitalNum);
 	Hospital selectHospital(int hospitalNum);
-	int hospitalInfoinsert(HospitalInfos hospitalInfo);
+	int hospitalUpdate(Hospital hospital);
 	
 	/* 병원정보 */
+	int hospitalInfoinsert(HospitalInfos hospitalInfo);
 	HospitalInfos selectHospitalInfo(int hospitalNum);
 	int loadHospitalInfo(int hospitalNum);
 	int updateHospitalInfo(HospitalInfos hospitalInfo);

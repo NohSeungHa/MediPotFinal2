@@ -252,6 +252,20 @@ public class MemberServiceImpl implements MemberService {
 		return dao.DoctorsProfessional(sqlSession, doctorNum);
 		
 	}
+
+	@Override
+	public int hospitalUpdate(Hospital hospital) {
+		
+		return dao.hospitalUpdate(sqlSession, hospital);
+		
+	}
+
+	@Override
+	public int FindHosEmailCheck(String memberEmail) {
+		
+		return dao.FindHosEmailCheck(sqlSession, memberEmail);
+		
+	}
 	
 	
 }

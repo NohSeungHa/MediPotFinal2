@@ -24,7 +24,14 @@
 		padding: 10px;
 	}
 </style>
-
+<c:if test="${memberLoggedIn == null }">
+	<script>
+		$(function(){
+			alert("잘못된 접근입니다.");
+			location.href="${pageContext.request.contextPath}";
+		})	
+	</script>
+</c:if>
 <div style="height: 200px">
 	
 </div>
@@ -45,7 +52,7 @@
 			<tr>
 				<th><br>의사이력</th>
 				<td><br>
-					<textarea name="doctorCareer" cols="100" rows="10" maxlength="1000" style="width: 800px" placeholder="의사의 이력을 입력해주세요."></textarea>
+					<textarea name="doctorCareer" class="form-control" cols="100" rows="10" maxlength="1000" style="width: 800px" placeholder="의사의 이력을 입력해주세요."></textarea>
 				</td>
 			</tr>
 			<tr>
@@ -96,7 +103,7 @@
 			<tr>
 				<th><br>점심시간 (예 : 1200 ~ 1300)</th>
 				<td><br>
-					<input type="text" name="doctorSlunch" id="doctorSlunch"> ~ <input type="text" name="doctorElunch" id="doctorElunch"> 
+					<input type="text" class="form-control" style="width: 150px; display: inline-block" name="doctorSlunch" id="doctorSlunch"> ~ <input type="text" class="form-control" style="width: 150px; display: inline-block" name="doctorElunch" id="doctorElunch"> 
 				</td>
 			</tr>
 			<tr>
@@ -105,7 +112,7 @@
 			<tr>
 				<th><br>평일시간 (예 : 0900 ~ 1700)</th>
 				<td><br>
-					<input type="text" name="WeekdayStime" id="WeekdayStime"> ~ <input type="text" name="WeekdayEtime" id="WeekdayEtime">
+					<input type="text" class="form-control" style="width: 150px; display: inline-block" name="WeekdayStime" id="WeekdayStime"> ~ <input type="text" class="form-control" style="width: 150px; display: inline-block" name="WeekdayEtime" id="WeekdayEtime">
 				</td>
 			</tr>
 			<tr>
@@ -114,7 +121,7 @@
 			<tr>
 				<th><br>토요일시간 (예 : 0900 ~ 1200)</th>
 				<td><br>
-					<input type="text" name="SatStime" id="SatStime"> ~ <input type="text" name="SatEtime" id="SatEtime">
+					<input type="text" class="form-control" style="width: 150px; display: inline-block" name="SatStime" id="SatStime"> ~ <input type="text" class="form-control" style="width: 150px; display: inline-block" name="SatEtime" id="SatEtime">
 				</td>
 			</tr>
 			<tr>

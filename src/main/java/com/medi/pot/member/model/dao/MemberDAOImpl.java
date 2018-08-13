@@ -251,5 +251,19 @@ public class MemberDAOImpl implements MemberDAO {
 		
 	}
 
+	@Override
+	public int hospitalUpdate(SqlSessionTemplate sqlSession, Hospital hospital) {
+		
+		return sqlSession.update("hospital.hospitalUpdate", hospital);
+		
+	}
+
+	@Override
+	public int FindHosEmailCheck(SqlSessionTemplate sqlSession, String memberEmail) {
+		
+		return sqlSession.selectOne("hospital.EmailCheck", memberEmail);
+		
+	}
+
 	
 }

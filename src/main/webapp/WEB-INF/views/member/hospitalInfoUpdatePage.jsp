@@ -9,18 +9,18 @@
 </jsp:include>
 
 <style>
-	.HospitalInsertFrm{
+	.HospitalUpdateFrm{
 		margin: 0 auto;
 		width: 80%;
-		height: 1000px;
+		height: 1200px;
 	}
-	.HospitalInsertFrm .tblFrm{
+	.HospitalUpdateFrm .tblUpdateFrm{
 		margin: 0 auto;
 	}
-	textarea{
+	.HospitalUpdateFrm textarea{
 		form-control;
 	}
-	.tblFrm td{
+	.tblUpdateFrm td{
 		padding: 10px;
 	}
 </style>
@@ -36,10 +36,10 @@
 	
 </div>
 
-<div class="HospitalInsertFrm">
+<div class="HospitalUpdateFrm">
 	<h1 style="text-align: center">병 원 정 보 입 력</h1>
-	<form action="${pageContext.request.contextPath }/member/hospitalInfoInsert.do" method="post" enctype="multipart/form-data">
-		<table class="tblFrm">
+	<form action="${pageContext.request.contextPath }/member/hospitalInfoUpdateEnd.do" method="post" enctype="multipart/form-data">
+		<table class="tblUpdateFrm">
 			<tr>
 				<th>병원 명</th>
 				<td>
@@ -52,7 +52,7 @@
 			<tr>
 				<th><br>병원소개</th>
 				<td><br>
-					<textarea name="hospitalInfoIntro" class="form-control" cols="100" rows="10" maxlength="1000" style="width: 800px"></textarea>
+					<textarea name="hospitalInfoIntro" class="form-control" cols="100" rows="10" maxlength="1000" style="width: 800px">${hospitalInfo.hospitalInfoIntro }</textarea>
 				</td>
 			</tr>
 			<tr>
@@ -61,7 +61,7 @@
 			<tr>
 				<th><br>공지사항</th>
 				<td><br>
-					<textarea name="hospitalInfoNotice" class="form-control" cols="100" rows="10" maxlength="1000" style="width: 800px"></textarea>
+					<textarea name="hospitalInfoNotice" class="form-control" cols="100" rows="10" maxlength="1000" style="width: 800px">${hospitalInfo.hospitalInfoNotice }</textarea>
 				</td>
 			</tr>
 			<tr>
@@ -70,7 +70,9 @@
 			<tr>
 				<th><br>병원사진</th>
 				<td><br>
-					<input type="file" name="hospitalPhoto" id="hospitalPhoto" accept=".jpg, .png, .bmp"/>
+					<input type="file" name="hospitalPhoto" id="hospitalPhoto" accept=".jpg, .png, .bmp"/><br>
+					<span style="color: red">사진을 수정하지 않을 시 원본사진으로 대체됩니다.</span>
+					<input type="hidden" name="oldhospitalPhoto" value="${hospitalInfo.hospitalPhoto }">
 				</td>
 			</tr>
 			<tr>
@@ -79,7 +81,7 @@
 			<tr>
 				<th><br>병원이용시간</th>
 				<td><br>
-					<input type="text" class="form-control" name="hospitalInfoUsetime">
+					<input type="text" class="form-control" name="hospitalInfoUsetime" value="${hospitalInfo.hospitalInfoUsetime }">
 				</td>
 			</tr>
 			<tr>
@@ -88,7 +90,7 @@
 			<tr>
 				<th><br>병원점심시간</th>
 				<td><br>
-					<input type="text" class="form-control" name="hospitalInfoLunchtime">
+					<input type="text" class="form-control" name="hospitalInfoLunchtime" value="${hospitalInfo.hospitalInfoLunchtime }">
 				</td>
 			</tr>
 			<tr>
@@ -98,15 +100,13 @@
 				<td colspan="2" style="text-align: center">
 					<input type="submit" class="btn btn-info btn-lg" value="입력" style="margin-right: 50px">
 					<input type="reset" class="btn btn-info btn-lg" value="취소">
-					<input type="hidden" value="${hospitalNum }" name="hospitalNum">
+					<input type="hidden" value="${hospitalInfo.hospitalInfoNum }" name="hospitalNum">
 				</td>
 			</tr>
 		</table>
 	</form>
 </div>
 
-<div style="height: 200px">
-	
-</div>
+
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

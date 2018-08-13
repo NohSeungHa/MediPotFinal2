@@ -17,6 +17,12 @@
 		})	
 	</script>
 </c:if>
+<c:if test="${docinfo=='[]' }">
+	<div style="text-align: center; height: 200px">
+		<h1>의사정보를 먼저 추가해주세요.</h1><br>
+		<h2>의사정보는 병원이름탭 - 의사추가 에서 할 수 있습니다.</h2>
+	</div>
+</c:if>
 <c:forEach var="docs" items="${docinfo }" varStatus="vs">
 	<div style="display: inline-block; margin: 0 0 0 30px">
 		<img class="bj" src="/pot/resources/uploadfile/dortors/${docs.doctorRePhoto }" style="width: 300px; height: 300px" onclick="selectdoctor()">
