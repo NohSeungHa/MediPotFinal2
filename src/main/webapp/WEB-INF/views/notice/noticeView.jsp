@@ -33,14 +33,14 @@
     </style>
 <div class="container">
   <br><br>
-  <img class="img-thumbnail" src="/pot/resources/img/notice/hnoticeMain.jpg" style="width:100%; height:270px;">
+  <img class="img-thumbnail" src="${path}/resources/img/notice/hnoticeMain.jpg" style="width:100%; height:270px;">
 	<br><br>
 	<a id="noticeHv" href="${path}/notice/noticeList.do?checkPH=${ckPH}" style="float: right;">공지사항</a>
 	<p style="float: right;">
 		<b style="margin-right:10px;">></b>
 	</p>
 	<a id="home" href="${path}" style="float:right;width:70px;"><img
-		src="/pot/resources/img/notice/home.jpg"
+		src="${path}/resources/img/notice/home.jpg"
 		style="width: 30%; height: 30%;"> 홈으로</a>
 	<table class="table table-bordered">
 		<tbody>
@@ -65,7 +65,7 @@
 	      <c:if test="${notice.hospitalNoticeFile!=null}">
 	      	<tr>
 	      		<th><h4>첨부파일</h4></th>
-	      		<td colspan="3"><img src="/pot/resources/img/notice/fileImge1.jpg" style="margin-left:10px;margin-top:-10px; width: 20px;height:20px;display: inline-block;">&nbsp;<h4 class="fileAction" style="display: inline-block;cursor: pointer;" onclick="fileDownload('${notice.hospitalNoticeFile}','${notice.hospitalNoticeRefile }')">${notice.hospitalNoticeFile}</h4></td>
+	      		<td colspan="3"><img src="${path}/resources/img/notice/fileImge1.jpg" style="margin-left:10px;margin-top:-10px; width: 20px;height:20px;display: inline-block;">&nbsp;<h4 class="fileAction" style="display: inline-block;cursor: pointer;" onclick="fileDownload('${notice.hospitalNoticeFile}','${notice.hospitalNoticeRefile }')">${notice.hospitalNoticeFile}</h4></td>
 	      	</tr>
 	      </c:if>
       </c:if>
@@ -90,7 +90,7 @@
 	      <c:if test="${notice.memberNoticeFile!=null}">
 	      	<tr>
 	      		<th><h4>첨부파일</h4></th>
-	      		<td colspan="3"><img src="/pot/resources/img/notice/fileImge1.jpg" style="margin-left:10px;margin-top:-10px; width: 20px;height: 20px;display: inline-block;"><h4 class="fileAction" style="display: inline-block;cursor: pointer;" onclick="fileDownload('${notice.memberNoticeFile}','${notice.memberNoticeRefile }')">${notice.memberNoticeFile}</h4></td>
+	      		<td colspan="3"><img src="${path}/resources/img/notice/fileImge1.jpg" style="margin-left:10px;margin-top:-10px; width: 20px;height: 20px;display: inline-block;"><h4 class="fileAction" style="display: inline-block;cursor: pointer;" onclick="fileDownload('${notice.memberNoticeFile}','${notice.memberNoticeRefile }')">${notice.memberNoticeFile}</h4></td>
 	      	</tr>
 	      </c:if>
       </c:if>
