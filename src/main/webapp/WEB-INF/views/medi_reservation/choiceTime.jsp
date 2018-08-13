@@ -125,6 +125,10 @@
 			<br><br>
 		</div>
 	</c:if>
+	<div style="text-align: center;margin-top: 10px;">
+		<span style="font-size:20px;">** 병원측에 남기실 말이 있다면 적어주세요  **</span>
+		<textarea rows="3" cols="83" style="resize:none"></textarea>
+	</div>
 	
 	<div style="text-align:center;margin-top:20px;">
 		<button id="choiceReser">예 약 하 기</button>
