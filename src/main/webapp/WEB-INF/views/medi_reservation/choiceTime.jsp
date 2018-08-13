@@ -65,7 +65,7 @@
 	}
 </style>
 	<c:if test='<%=!week.equals("토") %>'>
-		<div style="border: 2px solid lightgray;padding-left:40px;box-shadow: 3px 3px 5px lightgrey;">
+		<div style="border: 2px solid lightgray;padding-left:40px;box-shadow: 3px 3px 5px lightgrey;border-radius:5px;">
 			<h1 style="text-align: center;">${time }</h1>
 			<h1 style="text-align: center;">오전</h1>
 			<%for(int i=0;i<sycleA;i++ ){ 
@@ -96,7 +96,7 @@
 		</div>
 	</c:if>
 	<c:if test='<%=week.equals("토") %>'>
-		<div style="border: 2px solid lightgray;padding-left:40px;box-shadow: 3px 3px 5px lightgrey;">
+		<div style="border: 2px solid lightgray;padding-left:40px;box-shadow: 3px 3px 5px lightgrey;border-radius:5px;">
 			<h1 style="text-align: center;">${time }</h1>
 			<h1 style="text-align: center;">오전</h1>
 			<%for(int i=0;i<sSycleA;i++ ){ 
@@ -149,7 +149,7 @@
     	}
 	</style>
 	<script>
-		
+		alert('<%=checkTi%>');
 		var choiceTime='';
 		$('.timebut').click(function () {
 			if($(this).css('background-color')=='rgb(40, 96, 144)'){

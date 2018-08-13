@@ -28,10 +28,42 @@
 	</select>
 	
 	<select id="selectReser" parameterType="map" resultType="MemberReservation">
-		select * from MEMBERRESERVATION full join reservationblock on(blockdate=checkdate) where ((checkdoctor=#{num} and checkdate=#{chDate}) or (blockdoctor=#{num} and blockdate=#{chDate})) and blockcheck='N'
+		select a.*,b.*,c.membername,c.membernum from MEMBERRESERVATION a full join reservationblock b on(blockdate=checkdate) full join member c on(checkmember=membernum) where ((checkdoctor=#{num} and checkdate=#{chDate}) or (blockdoctor=#{num} and blockdate=#{chDate} and blockcheck='N'))
 	</select>
 	
 	<insert id="insertReser" parameterType="MemberReservation">
 		insert into MEMBERRESERVATION values(memberreservation_SEQ.nextval,#{checkDoctor},#{checkHospital},#{checkMember},#{checkDate},#{checkTime})
 	</insert>
+	
+	<select id="selectReserList" parameterType="_int" resultType="ReserList">
+		select * from MEMBERRESERVATION join hospital on(checkhospital=hospitalnum) where checkmember=#{userNum} order by checkdate desc
+	</select>
+	
+	<delete id="deleteReser" parameterType="_int">
+		delete MEMBERRESERVATION where checknum=#{chNum}
+	</delete>
+	
+	<select id="selectReserCount" parameterType="_int" resultType="_int">
+		select count(*) from MEMBERRESERVATION where checkmember=#{num}
+	</select>
+	
+	<insert id="insertBlock" parameterType="map">
+		insert into RESERVATIONBLOCK values(#{docNum},#{hosNum},#{time},#{choiceTime},'N')
+	</insert>
+	
+	<delete id="deletehReser" parameterType="map">
+		delete MEMBERRESERVATION where checkmember=#{num} and checkdate=#{date} and checktime=#{time} and checkdoctor=#{docNum} 
+	</delete>
+	
+	<delete id="deletebReser" parameterType="map">
+		delete RESERVATIONBLOCK where blockdoctor=#{docNum} and blockdate=#{date} and blocktime=#{time}
+	</delete>
+	
+	<insert id="insertBlockH" parameterType="map">
+		insert into RESERVATIONBLOCK values(#{docNum},#{hosNum},#{date},null,'Y')
+	</insert>
+	
+	<delete id="deleteDateCan" parameterType="map">
+		delete RESERVATIONBLOCK where blockdoctor=#{docNum} and blockhospital=#{hosNum} and blockdate=#{date} and blockcheck='Y'
+	</delete>
 </mapper>

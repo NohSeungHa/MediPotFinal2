@@ -200,8 +200,12 @@ public class PageCreate {
 		
 	}
 	
+<<<<<<< HEAD
+	public String getPageBar3(int cPage, int numPerPage, int totalCount, String url,int userNum)
+=======
 	//자유게시판 검색 페이징 처리
 	public String getPageBar(int cPage, int numPerPage, int totalCount,String searchKind,String searchContent, String url)
+>>>>>>> jung
 	{
 		String pageBar="";
 		int pageSize=5;
@@ -221,7 +225,11 @@ public class PageCreate {
 		}
 		else 
 		{
+<<<<<<< HEAD
+			pageBar+="<li class='previous active'>";
+=======
 			pageBar+="<li class='previous'>";
+>>>>>>> jung
 			pageBar+="<a href='javascript:fn_paging("+(pageNo-1)+")'>이전</a>";
 			pageBar+="</li>";
 		}
@@ -253,6 +261,22 @@ public class PageCreate {
 			pageBar += "</li>";
 		}
 		pageBar+="</ul>";
+<<<<<<< HEAD
+		
+		pageBar+="<script>";
+		pageBar+="function fn_paging(cPage, numPerPage){";
+		pageBar+="location.href='"+url+"?cPage='+cPage+'&userNum="+userNum+"';";
+		pageBar+="}";
+		pageBar+="</script>";
+			
+		
+		
+		return pageBar;
+		
+		
+	}
+=======
+>>>>>>> jung
 		
 		pageBar+="<script>";
 		pageBar+="function fn_paging(cPage, numPerPage){";

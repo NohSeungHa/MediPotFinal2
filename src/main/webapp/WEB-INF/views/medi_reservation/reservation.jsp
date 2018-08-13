@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@page import="com.medi.pot.reservation.model.vo.DoctorSchedule"%>
 <%@page import="com.medi.pot.reservation.model.vo.DoctorInfo"%>
 <%@page import="java.util.Locale"%>
@@ -17,14 +18,13 @@
      String close="";
      String bDate="";
      DoctorInfo docInfo=null;
-     DoctorSchedule docSche=null;
+     List<DoctorSchedule> docSche=null;
      if((DoctorInfo)request.getAttribute("doctor")!=null){
      docInfo=(DoctorInfo)request.getAttribute("doctor");
      close=docInfo.getClosed();
      }
-     if((DoctorSchedule)request.getAttribute("docSche")!=null){
-     docSche=(DoctorSchedule)request.getAttribute("docSche");
-     bDate=docSche.getBlockDate();
+     if((List<DoctorSchedule>)request.getAttribute("docSche")!=null){
+     docSche=(List<DoctorSchedule>)request.getAttribute("docSche");
      }
      
      Date day=new Date();
@@ -43,7 +43,15 @@
      String hd=tod2.format(cal.getTime());
      String y=tod.format(cal.getTime());
      String daye=tod3.format(cal.getTime());
-     boolean checkDate=bDate.equals(hd);
+     boolean checkDate=false;
+     if(docSche!=null){
+	     for(DoctorSchedule ds : docSche){
+	    	 checkDate=ds.getBlockDate().equals(hd);
+	    	 if(checkDate){
+	    		 break;
+	    	 }
+	     }
+     }
      boolean check=close.contains(daye);
      boolean hdc=eTest(hd);
      boolean hdce=yTest(hd);
@@ -53,7 +61,15 @@
      String hd2=tod2.format(cal.getTime());
      String y2=tod.format(cal.getTime());
      String daye2=tod3.format(cal.getTime());
-     boolean checkDate2=bDate.equals(hd2);
+     boolean checkDate2=false;
+     if(docSche!=null){
+	     for(DoctorSchedule ds : docSche){
+	    	 checkDate2=ds.getBlockDate().equals(hd2);
+	    	 if(checkDate2){
+	    		 break;
+	    	 }
+	     }
+     }
      boolean check2=close.contains(daye2);
      boolean hdc2=eTest(hd2);
      boolean hdce2=yTest(hd2);
@@ -63,7 +79,15 @@
      String hd3=tod2.format(cal.getTime());
      String y3=tod.format(cal.getTime());
      String daye3=tod3.format(cal.getTime());
-     boolean checkDate3=bDate.equals(hd3);
+     boolean checkDate3=false;
+     if(docSche!=null){
+	     for(DoctorSchedule ds : docSche){
+	    	 checkDate3=ds.getBlockDate().equals(hd3);
+	    	 if(checkDate3){
+	    		 break;
+	    	 }
+	     }
+     }
      boolean check3=close.contains(daye3);
      boolean hdc3=eTest(hd3);
      boolean hdce3=yTest(hd3);
@@ -73,7 +97,15 @@
      String hd4=tod2.format(cal.getTime());
      String y4=tod.format(cal.getTime());
      String daye4=tod3.format(cal.getTime());
-     boolean checkDate4=bDate.equals(hd4);
+     boolean checkDate4=false;
+     if(docSche!=null){
+	     for(DoctorSchedule ds : docSche){
+	    	 checkDate4=ds.getBlockDate().equals(hd4);
+	    	 if(checkDate4){
+	    		 break;
+	    	 }
+	     }
+     }
      boolean check4=close.contains(daye4);
      boolean hdc4=eTest(hd4);
      boolean hdce4=yTest(hd4);
@@ -83,7 +115,15 @@
      String hd5=tod2.format(cal.getTime());
      String y5=tod.format(cal.getTime());
      String daye5=tod3.format(cal.getTime());
-     boolean checkDate5=bDate.equals(hd5);
+     boolean checkDate5=false;
+     if(docSche!=null){
+	     for(DoctorSchedule ds : docSche){
+	    	 checkDate5=ds.getBlockDate().equals(hd5);
+	    	 if(checkDate5){
+	    		 break;
+	    	 }
+	     }
+     }
      boolean check5=close.contains(daye5);
      boolean hdc5=eTest(hd5);
      boolean hdce5=yTest(hd5);
@@ -93,7 +133,15 @@
      String hd6=tod2.format(cal.getTime());
      String y6=tod.format(cal.getTime());
      String daye6=tod3.format(cal.getTime());
-     boolean checkDate6=bDate.equals(hd6);
+     boolean checkDate6=false;
+     if(docSche!=null){
+	     for(DoctorSchedule ds : docSche){
+	    	 checkDate6=ds.getBlockDate().equals(hd6);
+	    	 if(checkDate6){
+	    		 break;
+	    	 }
+	     }
+     }
      boolean check6=close.contains(daye6);
      boolean hdc6=eTest(hd6);
      boolean hdce6=yTest(hd6);
@@ -103,7 +151,15 @@
      String hd7=tod2.format(cal.getTime());
      String y7=tod.format(cal.getTime());
      String daye7=tod3.format(cal.getTime());
-     boolean checkDate7=bDate.equals(hd7);
+     boolean checkDate7=false;
+     if(docSche!=null){
+	     for(DoctorSchedule ds : docSche){
+	    	 checkDate7=ds.getBlockDate().equals(hd7);
+	    	 if(checkDate7){
+	    		 break;
+	    	 }
+	     }
+     }
      boolean check7=close.contains(daye7);
      boolean hdc7=eTest(hd7);
      boolean hdce7=yTest(hd7);
@@ -113,7 +169,15 @@
      String hd8=tod2.format(cal.getTime());
      String y8=tod.format(cal.getTime());
      String daye8=tod3.format(cal.getTime());
-     boolean checkDate8=bDate.equals(hd8);
+     boolean checkDate8=false;
+     if(docSche!=null){
+	     for(DoctorSchedule ds : docSche){
+	    	 checkDate8=ds.getBlockDate().equals(hd8);
+	    	 if(checkDate8){
+	    		 break;
+	    	 }
+	     }
+     }
      boolean check8=close.contains(daye8);
      boolean hdc8=eTest(hd8);
      boolean hdce8=yTest(hd8);
@@ -123,7 +187,15 @@
      String hd9=tod2.format(cal.getTime());
      String y9=tod.format(cal.getTime());
      String daye9=tod3.format(cal.getTime());
-     boolean checkDate9=bDate.equals(hd9);
+     boolean checkDate9=false;
+     if(docSche!=null){
+	     for(DoctorSchedule ds : docSche){
+	    	 checkDate9=ds.getBlockDate().equals(hd9);
+	    	 if(checkDate9){
+	    		 break;
+	    	 }
+	     }
+     }
      boolean check9=close.contains(daye9);
      boolean hdc9=eTest(hd9);
      boolean hdce9=yTest(hd9);
@@ -133,7 +205,15 @@
      String hd10=tod2.format(cal.getTime());
      String y10=tod.format(cal.getTime());
      String daye10=tod3.format(cal.getTime());
-     boolean checkDate10=bDate.equals(hd10);
+     boolean checkDate10=false;
+     if(docSche!=null){
+	     for(DoctorSchedule ds : docSche){
+	    	 checkDate10=ds.getBlockDate().equals(hd10);
+	    	 if(checkDate10){
+	    		 break;
+	    	 }
+	     }
+     }
      boolean check10=close.contains(daye10);
      boolean hdc10=eTest(hd10);
      boolean hdce10=yTest(hd10);
@@ -143,7 +223,15 @@
      String hd11=tod2.format(cal.getTime());
      String y11=tod.format(cal.getTime());
      String daye11=tod3.format(cal.getTime());
-     boolean checkDate11=bDate.equals(hd11);
+     boolean checkDate11=false;
+     if(docSche!=null){
+	     for(DoctorSchedule ds : docSche){
+	    	 checkDate11=ds.getBlockDate().equals(hd11);
+	    	 if(checkDate11){
+	    		 break;
+	    	 }
+	     }
+     }
      boolean check11=close.contains(daye11);
      boolean hdc11=eTest(hd11);
      boolean hdce11=yTest(hd11);
@@ -153,7 +241,15 @@
      String hd12=tod2.format(cal.getTime());
      String y12=tod.format(cal.getTime());
      String daye12=tod3.format(cal.getTime());
-     boolean checkDate12=bDate.equals(hd12);
+     boolean checkDate12=false;
+     if(docSche!=null){
+	     for(DoctorSchedule ds : docSche){
+	    	 checkDate12=ds.getBlockDate().equals(hd12);
+	    	 if(checkDate12){
+	    		 break;
+	    	 }
+	     }
+     }
      boolean check12=close.contains(daye12);
      boolean hdc12=eTest(hd12);
      boolean hdce12=yTest(hd12);
@@ -163,7 +259,15 @@
      String hd13=tod2.format(cal.getTime());
      String y13=tod.format(cal.getTime());
      String daye13=tod3.format(cal.getTime());
-     boolean checkDate13=bDate.equals(hd13);
+     boolean checkDate13=false;
+     if(docSche!=null){
+	     for(DoctorSchedule ds : docSche){
+	    	 checkDate13=ds.getBlockDate().equals(hd13);
+	    	 if(checkDate13){
+	    		 break;
+	    	 }
+	     }
+     }
      boolean check13=close.contains(daye13);
      boolean hdc13=eTest(hd13);
      boolean hdce13=yTest(hd13);
@@ -173,7 +277,15 @@
      String hd14=tod2.format(cal.getTime());
      String y14=tod.format(cal.getTime());
      String daye14=tod3.format(cal.getTime());
-     boolean checkDate14=bDate.equals(hd14);
+     boolean checkDate14=false;
+     if(docSche!=null){
+	     for(DoctorSchedule ds : docSche){
+	    	 checkDate14=ds.getBlockDate().equals(hd14);
+	    	 if(checkDate14){
+	    		 break;
+	    	 }
+	     }
+     }
      boolean check14=close.contains(daye14);
      boolean hdc14=eTest(hd14);
      boolean hdce14=yTest(hd14);
@@ -286,12 +398,12 @@
 		text-align:center;
 		width:90px;
 	}
-	#docInfo-div{
+	.docInfo-div{
 		border:2px solid lightgray;
 		border-radius:5px;
 		box-shadow:2px 2px 5px lightgray;
 	}
-	#docInfo-div:hover{
+	.docInfo-div:hover{
 		cursor: pointer;
 		border: 2px solid #286090;
 	}	
@@ -314,19 +426,30 @@
 	}
 	#tbl-cal{
 		width:100%;
+		
+		
+	}
+	#calList{
+		display:none;
 		border:2px solid lightgray;
 		border-radius:5px;
 		box-shadow:2px 2px 5px lightgray;
 	}
-	#calList{
+	#calList2{
+		display:none;
+	}
+	#calList3{
 		display:none;
 	}
 </style>
 
 <div style="height:1000px;">
 	<div class="col-sm-4">
-		<div style="width:100%;height:50px;font-size:20px;text-align:center;background-color:#286090;padding-top:11px;color:white;border-radius:8px;margin-bottom:10px;">
+		<div style="width:100%;height:50px;font-size:25px;text-align:center;background-color:#286090;padding-top:11px;color:white;border-radius:8px;margin-bottom:10px;">
 			의료진 정보
+		</div>
+		<div id="docInfoEx" style="text-align:center;font-size:20px;">
+			** 의사를 먼저 선택해 주세요 **
 		</div>
 		<c:if test="${empty list }">
 		<div style="text-align:center;">
@@ -334,8 +457,8 @@
 		</div>
 		</c:if>
 		<c:forEach var="list" items="${list }">
-		<div id="docInfo-div" style="height:auto;margin-bottom:10px;" class="${list.doctorNum }">
-			<table id="docInfo" class="${list.hospitalNo }">
+		<div class="docInfo-div" style="height:auto;margin-bottom:10px;" title="${list.doctorNum }" lang="${list.hospitalNo }">
+			<table id="docInfo">
 				<tr>
 					<td rowspan="4"><img src="${path }/resources/img/reser/${list.doctorPhoto }" width="200px;" height="250px;"></td>
 					<th>이름</th>
@@ -365,6 +488,9 @@
 	<div class="col-sm-4">
 		<div style="width:100%;height:50px;font-size:20px;text-align:center;background-color:#286090;padding-top:11px;color:white;border-radius:8px;margin-bottom:10px;">
 			날짜 선택
+		</div>
+		<div id="calList2" style="text-align:center;font-size:20px;">
+			** 원하는 날짜를 선택해 주세요 **
 		</div>
 		<div id="calList">
 			<table id="tbl-cal" align="center">
@@ -587,6 +713,9 @@
 		<div style="width:100%;height:50px;font-size:20px;text-align:center;background-color:#286090;padding-top:11px;color:white;border-radius:8px;margin-bottom:10px;">
 			시간 선택
 		</div>
+		<div id="calList3" style="text-align:center;font-size:20px;">
+			** 원하는 시간을 선택 후 예약하기 버튼을 눌러주세요  **
+		</div>
 		<div id="timeImg" style="text-align:center;">
 			<img alt="달력사진" src="${path }/resources/img/reser/reserTime.png" height="300px;"></div>
 		<div id="timeChoice"></div>
@@ -607,16 +736,23 @@
 				dataType:"html",
 				success:function(data){
 					$('#timeImg').css("display",'none');
+					$('#calList2').css("display",'none');
+					$('#calList3').css("display",'block');
 					$('#timeChoice').html(data);
 				}
 			});
 		});
-		$('#docInfo-div').click(function () {
-			location.href='${path}/medi/doctorS?docNum='+$(this).attr('class')+'&hosNum='+$('#docInfo').attr('class');
+		$('.docInfo-div').click(function () {
+			alert('들어가기전');
+			location.href='${path}/medi/doctorS?docNum='+$(this).attr('title')+'&hosNum='+$(this).attr('lang');
 		});
+		
+		
 	});
 	if(<%=docInfo!=null%>||<%=docSche!=null%>){
 		$('#calList').css('display','block');
+		$('#calList2').css('display','block');
+		$('#docInfoEx').css('display','none');
 		$('#calPhoto').css('display','none');
 		
 	}

@@ -51,57 +51,89 @@
 <div class="container">	
 
 		<div>
-			<a id="noticeHv" href="${path}/helpZone/helpZoneList.do" style="float: right;">헬프존</a>
+			<a id="helpZoneHv" href="${path}/helpZone/helpZoneList.do" style="float: right;">헬프존</a>
 			<p style="float: right;">
 				<b style="margin-right: 10px;">></b>
 			</p>
 			<a id="home" href="${path}" style="float: right; width: 70px;">
 			<img src="/pot/resources/img/notice/home.jpg" style="width: 30%; height:30%;"> 홈으로</a>		
 		</div>
-		<br>
-		<c:if test="${checkPH=='P' }">
-		<button class="btn btn-success btn-lg" type="submit" onclick="insert()">질문 하기</button>
-		</c:if>
-		<br><br>
+		<br><br><br>
+
 		
 <!-- 검색창 부분입니다. -->
-		<form name="helpZoneSearchFrm" action="${path }/helpZone/helpzoneSearch.do" method="get">
 			<select name="searchKind" class="form-control" style="width: 85px; height: 45px; float: left; font-size: 12px;">
-				<option>제목</option>
-				<option>내용</option>
-				<option>키워드</option>
+				<option value="title">제목</option>
+				<option value="content">내용</option>
 			</select>
 		<input class="form-control mr-sm-2" type="text" placeholder="원하시는 검색 내용을 적어주세요" style="width: 280px; height: 45px; float: left;">
 		<button class="btn btn-info btn-lg" type="submit" style="margin-left: 3px;">검색</button>
-<!-- 검색창 부분 끝입니다. -->
-		</form>
+		
 <!-- 일반회원일때만 질문하기 버튼이 출력됩니다. -->	
-	<br>
+		<c:if test="${checkPH=='P' }">
+		<button class="btn btn-success btn-lg" style="float: right;" type="submit" onclick="insert()">질문 하기</button>
+		</c:if>
+	
+	<br><br>
 		
 	<!-- 질문글 시작 -->
+	
 	<div class="row">
     <div class="col-sm-4">
       <div class="panel panel-success">
-        <div class="panel-heading">질문 제목이 들어갈 부분입니다.</div>
-        <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
+        <div class="panel-heading"><c:out value="${list[0].helpZoneTitle}"/> </div>
+        <c:if test="${list[0].helpZoneKeyWord eq '건강'}">
+        <div class="panel-body"><a href="${path }/helpZone/helpZoneView.do?helpZoneNum=${list[0].helpZoneNum}"><img src="${path }/resources/img/helpZone/fitness.jpg" class="img-responsive" style="width:100%;height:140px" alt="Image"></a></div>        
+        </c:if>
+        
+        <c:if test="${list[0].helpZoneKeyWord eq '치료'}">
+        <div class="panel-body"><a href="${path }/helpZone/helpZoneView.do?helpZoneNum=${list[0].helpZoneNum}"><img src="${path }/resources/img/helpZone/treatment.jpg" class="img-responsive" style="width:100%;height:140px" alt="Image"></a></div>
+        </c:if>
+        
+        <c:if test="${list[0].helpZoneKeyWord eq '기타'}">
+        <div class="panel-body"><a href="${path }/helpZone/helpZoneView.do?helpZoneNum=${list[0].helpZoneNum}"><img src="${path }/resources/img/helpZone/other.jpg" class="img-responsive" style="width:100%;height:140px" alt="Image"></a></div>        
+        </c:if>
+        
         <div class="panel-footer">현재 답글수</div>
-        <div class="panel-footer">키워드</div>
+        <div class="panel-footer">좋아요</div>
       </div>
     </div>
     <div class="col-sm-4"> 
       <div class="panel panel-danger">
-        <div class="panel-heading">질문 제목이 들어갈 부분입니다.</div>
-        <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
+        <div class="panel-heading"><c:out value="${list[1].helpZoneTitle}"/> </div>
+         <c:if test="${list[1].helpZoneKeyWord eq '건강'}">
+        <div class="panel-body"><a href="${path }/helpZone/helpZoneView.do?helpZoneNum=${list[1].helpZoneNum}"><img src="${path }/resources/img/helpZone/fitness.jpg" class="img-responsive" style="width:100%;height:140px" alt="Image"></a></div>        
+        </c:if>
+        
+        <c:if test="${list[1].helpZoneKeyWord eq '치료'}">
+        <div class="panel-body"><a href="${path }/helpZone/helpZoneView.do?helpZoneNum=${list[1].helpZoneNum}"><img src="${path }/resources/img/helpZone/treatment.jpg" class="img-responsive" style="width:100%;height:140px" alt="Image"></a></div>
+        </c:if>
+        
+        <c:if test="${list[1].helpZoneKeyWord eq '기타'}">
+        <div class="panel-body"><a href="${path }/helpZone/helpZoneView.do?helpZoneNum=${list[1].helpZoneNum}"><img src="${path }/resources/img/helpZone/other.jpg" class="img-responsive" style="width:100%;height:140px" alt="Image"></a></div>        
+        </c:if>
+        
         <div class="panel-footer">현재 답글수</div>
-        <div class="panel-footer">키워드</div>
+        <div class="panel-footer">좋아요</div>
       </div>
     </div>
     <div class="col-sm-4"> 
       <div class="panel panel-success">
-        <div class="panel-heading">질문 제목이 들어갈 부분입니다.</div>
-        <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
+        <div class="panel-heading"><c:out value="${list[2].helpZoneTitle}"/> </div>
+        <c:if test="${list[2].helpZoneKeyWord eq '건강'}">
+        <div class="panel-body"><a href="${path }/helpZone/helpZoneView.do?helpZoneNum=${list[2].helpZoneNum}"><img src="${path }/resources/img/helpZone/fitness.jpg" class="img-responsive" style="width:100%;height:140px" alt="Image"></a></div>        
+        </c:if>
+        
+        <c:if test="${list[2].helpZoneKeyWord eq '치료'}">
+        <div class="panel-body"><a href="${path }/helpZone/helpZoneView.do?helpZoneNum=${list[2].helpZoneNum}"><img src="${path }/resources/img/helpZone/treatment.jpg" class="img-responsive" style="width:100%;height:140px" alt="Image"></a></div>
+        </c:if>
+        
+        <c:if test="${list[2].helpZoneKeyWord eq '기타'}">
+        <div class="panel-body"><a href="${path }/helpZone/helpZoneView.do?helpZoneNum=${list[2].helpZoneNum}"><img src="${path }/resources/img/helpZone/other.jpg" class="img-responsive" style="width:100%;height:140px" alt="Image"></a></div>        
+        </c:if>
+        
         <div class="panel-footer">현재 답글수</div>
-        <div class="panel-footer">키워드</div>
+        <div class="panel-footer">좋아요</div>
       </div>
     </div>
   </div>
@@ -112,26 +144,58 @@
   <div class="row">
     <div class="col-sm-4">
       <div class="panel panel-danger">
-        <div class="panel-heading">질문 제목이 들어갈 부분입니다.</div>
-        <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
+        <div class="panel-heading"><c:out value="${list[3].helpZoneTitle}"/> </div>
+        <c:if test="${list[3].helpZoneKeyWord eq '건강'}">
+        <div class="panel-body"><a href="${path }/helpZone/helpZoneView.do?helpZoneNum=${list[3].helpZoneNum}"><img src="${path }/resources/img/helpZone/fitness.jpg" class="img-responsive" style="width:100%;height:140px" alt="Image"></a></div>        
+        </c:if>        
+        <c:if test="${list[3].helpZoneKeyWord eq '치료'}">
+        <div class="panel-body"><a href="${path }/helpZone/helpZoneView.do?helpZoneNum=${list[3].helpZoneNum}"><img src="${path }/resources/img/helpZone/treatment.jpg" class="img-responsive" style="width:100%;height:140px" alt="Image"></a></div>
+        </c:if>        
+        <c:if test="${list[3].helpZoneKeyWord eq '기타'}">
+        <div class="panel-body"><a href="${path }/helpZone/helpZoneView.do?helpZoneNum=${list[3].helpZoneNum}"><img src="${path }/resources/img/helpZone/other.jpg" class="img-responsive" style="width:100%;height:140px" alt="Image"></a></div>        
+        </c:if>
+        
+        
         <div class="panel-footer">현재 답글수</div>
-        <div class="panel-footer">키워드</div>
+        <div class="panel-footer">좋아요</div>
       </div>
     </div>
     <div class="col-sm-4"> 
       <div class="panel panel-success">
-        <div class="panel-heading">질문 제목이 들어갈 부분입니다.</div>
-        <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
+        <div class="panel-heading"><c:out value="${list[4].helpZoneTitle}"/> </div>
+         <c:if test="${list[4].helpZoneKeyWord eq '건강'}">
+        <div class="panel-body"><a href="${path }/helpZone/helpZoneView.do?helpZoneNum=${list[4].helpZoneNum}"><img src="${path }/resources/img/helpZone/fitness.jpg" class="img-responsive" style="width:100%;height:140px" alt="Image"></a></div>        
+        </c:if>
+        
+        <c:if test="${list[4].helpZoneKeyWord eq '치료'}">
+        <div class="panel-body"><a href="${path }/helpZone/helpZoneView.do?helpZoneNum=${list[4].helpZoneNum}"><img src="${path }/resources/img/helpZone/treatment.jpg" class="img-responsive" style="width:100%;height:140px" alt="Image"></a></div>
+        </c:if>
+        
+        <c:if test="${list[4].helpZoneKeyWord eq '기타'}">
+        <div class="panel-body"><a href="${path }/helpZone/helpZoneView.do?helpZoneNum=${list[4].helpZoneNum}"><img src="${path }/resources/img/helpZone/other.jpg" class="img-responsive" style="width:100%;height:140px" alt="Image"></a></div>        
+        </c:if>
+        
         <div class="panel-footer">현재 답글수</div>
-        <div class="panel-footer">키워드</div>
+        <div class="panel-footer">좋아요</div>
       </div>
     </div>
     <div class="col-sm-4"> 
       <div class="panel panel-danger">
-        <div class="panel-heading">질문 제목이 들어갈 부분입니다.</div>
-        <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
+        <div class="panel-heading"><c:out value="${list[5].helpZoneTitle}"/> </div>
+         <c:if test="${list[5].helpZoneKeyWord eq '건강'}">
+        <div class="panel-body"><a href="${path }/helpZone/helpZoneView.do?helpZoneNum=${list[5].helpZoneNum}"><img src="${path }/resources/img/helpZone/fitness.jpg" class="img-responsive" style="width:100%;height:140px" alt="Image"></a></div>        
+        </c:if>
+        
+        <c:if test="${list[5].helpZoneKeyWord eq '치료'}">
+        <div class="panel-body"><a href="${path }/helpZone/helpZoneView.do?helpZoneNum=${list[5].helpZoneNum}"><img src="${path }/resources/img/helpZone/treatment.jpg" class="img-responsive" style="width:100%;height:140px" alt="Image"></a></div>
+        </c:if>
+        
+        <c:if test="${list[5].helpZoneKeyWord eq '기타'}">
+        <div class="panel-body"><a href="${path }/helpZone/helpZoneView.do?helpZoneNum=${list[5].helpZoneNum}"><img src="${path }/resources/img/helpZone/other.jpg" class="img-responsive" style="width:100%;height:140px" alt="Image"></a></div>        
+        </c:if>
+        
         <div class="panel-footer">현재 답글수</div>
-        <div class="panel-footer">키워드</div>
+        <div class="panel-footer">좋아요</div>
       </div>
     </div>
   </div>
@@ -148,7 +212,6 @@
 </script>
 <script>
 	$("searchKind").change(function(){
-		//180803 작업끝
 	});
 </script>
 
