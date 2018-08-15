@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="helpZone">
+	<!-- 글 등록 -->
+	<insert id="helpZoneInsert" parameterType="HelpZone">
+		insert into HelpZone VALUES(HelpZone_SEQ.nextval, #{helpZoneTitle}, #{helpZoneQuestioner}, #{helpZoneKeyWord}, #{helpZoneContent}, #{helpZoneFile}, #{helpZoneReFile}, #{helpZoneReadCount}, sysdate, #{helpZoneLikeNum})
+	</insert>
+	<!-- 글 모두 불러오기 -->
+	<select id="helpZoneSelectList" resultType="HelpZone">
+		select * from helpzone order by helpzonedate desc
+	</select>
+	<!-- 글 개수 -->
+	<select id="count" resultType="_int">
+		select count(*) from HELPZONE
+	</select>
+	<!-- 해당글 하나 불러오기 -->
+	<select id="selectHelpZone" parameterType="_int" resultType="HelpZone">
+		select * from helpZone where helpZoneNum=#{helpZoneNum}
+	</select>
+	<!-- 작성자 불러오기 -->
+	<select id="selectMember" parameterType="_int" resultType="Member">
+		select * from member where membernum=#{helpZoneQuestioner}
+	</select>
+	<!-- 글 삭제 -->
+	<delete id="deleteHelpZone" parameterType="_int">
+		delete from helpZone where helpZoneNum=#{num}
+	</delete>
+	<!-- 글 수정 -->
+	<update id="updateHelpZone" parameterType="HelpZone">
+		update HelpZone set helpZoneTitle=#{helpZoneTitle},
+							 helpZoneKeyWord=#{helpZoneKeyWord},
+							  helpZoneContent=#{helpZoneContent},
+							   helpZoneFile=#{helpZoneFile},
+							    helpZoneReFile=#{helpZoneReFile}
+							    where helpZoneNum=#{helpZoneNum}
+	</update>
+</mapper>

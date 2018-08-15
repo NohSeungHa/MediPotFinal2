@@ -44,74 +44,59 @@
 
 <!-- Container (Contact Section) -->
 <div class="container">
-
-		<div>
-			<a id="noticeHv" href="${path}/helpZone/helpZoneList.do" style="float: right;">목록으로</a>
-			<p style="float: right;">
-				<b style="margin-right: 10px;">></b>
-			</p>
-			<a id="home" href="${path}" style="float: right; width: 70px;">
-			<img src="/pot/resources/img/notice/home.jpg" style="width: 30%; height:30%;"> 홈으로</a>
-			
-		</div>
-
-
-  <div class="row">    
-    <div class="col-md-12">
-      <div class="row">
-        <div class="col-sm-3 form-group">
-          <input class="form-control" id="memberId" name="memberId" placeholder="ID" type="text" readonly>
-        </div>
-        <div class="col-sm-9 form-group">
-          <input class="form-control" id="helpZoneTitle" name="helpZoneTitle" placeholder="질문 제목" type="email" required>
-        </div>
-      </div>
-
-      <textarea class="form-control" id="helpZoneContent" name="helpZoneContent" placeholder="질문 내용을 작성해주세요. (500자 이내)" 
-      rows="15" id="content" style="resize: none;" name="content" onKeyUp="checkLength(this);" onKeyDown="checkLength(this);"></textarea>
-
-      <br>
-      <div class="row">
-        <div class="col-md-12 form-group">
-          <button class="btn btn1 btn-danger pull-right" type="submit">취소</button>
-          <button class="btn btn1 btn-info pull-right" style="margin-right:3px"type="submit">등록</button>
-          <button class="btn btn1 btn-info pull-left" data-toggle="modal" data-target="#fileModal">첨부파일</button>
-     
-     
-     
-          
-  <!-- file Modal시작 -->
-  <div class="modal fade" id="fileModal" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Help Zone</h4>
-        </div>
-        <!-- 첨부파일 등록 버튼-->
-        <div class="modal-body">
-        <p>질문에 참고될 파일을 등록해주세요.</p>
-          <p><input type="file" class="form-control-file border" name="fileName" id="fileName"></p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-      
-    </div>
-  </div>
-       
-          
-          
-          
-        </div>
-      </div>
-    </div>
-  </div>
+	<br>
+	<a id="helpZoneHv" href="${path}/helpZone/helpZoneList.do?" style="float: right;">공지사항</a>
+	<p style="float: right;">
+		<b style="margin-right:10px;">></b>
+	</p>
+	<a id="home" href="${path}" style="float:right;width:70px;"><img
+		src="/pot/resources/img/notice/home.jpg"
+		style="width: 30%; height: 30%;"> 홈으로</a>
+	<form name="helpZoneFrm" action="${path}/helpZone/helpZoneInsertEnd.do" method="post" onsubmit="return validate();"  enctype="multipart/form-data" >
+		<table class="table table-bordered">
+			<tbody>
+				<tr>
+					<th>제목:</th>
+					<td><input type="text" placeholder="제목을 입력하세요.(100자 이내)" name="helpZoneTitle" id="helpZoneTitle"
+						class="form-control" maxlength="40" /></td>
+				</tr>
+				<tr>
+					<th>작성자:</th>
+					<td><input type="text" name="writer"  id="writer" class="form-control"
+						value="${memberLoggedIn.memberId }" style="background-color: white;" readonly />
+						<input type="hidden" name="helpZoneQuestioner" id="helpZoneQuestioner" value="${memberLoggedIn.memberNum }">
+					</td>
+				</tr>
+				<tr>
+					<th>키워드</th>
+					<td>
+						<label class="checkbox-inline"><input type="radio" value="건강" name="helpZoneKeyWord" id="helpZoneKeyWord">건강</label>
+						<label class="checkbox-inline"><input type="radio" value="치료" name="helpZoneKeyWord" id="helpZoneKeyWord">치료</label>
+						<label class="checkbox-inline"><input type="radio" value="기타" name="helpZoneKeyWord" id="helpZoneKeyWord" checked>기타</label>
+					</td>
+				</tr>
+				<tr>
+					<th>내용:</th>
+					<td><textarea style="resize: none; height: 350px;" class="form-control" placeholder="내용을 입력하세요.(500자이내)"
+							rows="5" id="helpZoneContent" name="helpZoneContent" onKeyUp="checkLength(this);" onKeyDown="checkLength(this);"></textarea></td>
+				</tr>
+				<tr>
+					<th>첨부파일:</th>
+					<td><input type="file" class="form-control-file border"
+						name="helpZoneFile" id="helpZoneFile"></td>
+				</tr>
+			</tbody>
+		</table>
+		<button type="button" onclick="helpZoneList()" class="btn btn-danger btn-lg" style="float: right; margin-left: 10px;">취소</button> 
+		<input type="submit" value="등록" onclick="return validate();" class="btn btn-primary btn-lg" style="float: right;"/>
+		</form>
+		<button type="button" class="btn btn-success btn-lg" onclick="helpZoneList()">목록으로</button>
 </div>
+<br><br>
 <script>
+function helpZoneList() {
+	location.href="${path}/helpZone/helpZoneList.do";
+}
 function checkLength(comment) {
     if (comment.value.length > 1000 ) {
         comment.blur();
@@ -119,6 +104,18 @@ function checkLength(comment) {
         comment.focus();
         return false;
     }
+}
+function validate(){
+	var content=$("[name=helpZoneContent]").val();
+	var title=$("[name=helpZoneTitle]").val();
+	if(title.trim().length==0){
+		alert("제목을 입력하세요!");
+		return false;
+	}else if(content.trim().length==0){
+		alert("내용을 입력하세요!");
+		return false;
+	}
+	return true;
 }
 </script>
 

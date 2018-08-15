@@ -8,14 +8,18 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.medi.pot.common.page.PageCreate;
 import com.medi.pot.common.page.PageCreate2;
 import com.medi.pot.reservation.model.service.ReservationService;
 import com.medi.pot.reservation.model.vo.DoctorInfo;
 import com.medi.pot.reservation.model.vo.DoctorSchedule;
 import com.medi.pot.reservation.model.vo.HospitalInfo;
+import com.medi.pot.reservation.model.vo.MemberReservation;
+import com.medi.pot.reservation.model.vo.ReserList;
 import com.medi.pot.common.page.PageCreate2;
 
 @Controller
@@ -90,15 +94,262 @@ public class ReservationController {
 		int docNo=Integer.parseInt(docNum);
 		List<DoctorInfo> list=service.selectDoctorList(num);
 		DoctorInfo doctor=service.selectDoctor(docNo);
-		DoctorSchedule docSche=service.selectDocSche(docNo);
-		System.out.println(list);
-		System.out.println(doctor);
-		System.out.println(docSche);
+		List<DoctorSchedule> docSche=service.selectDocSche(docNo);
 		req.setAttribute("list", list);
 		req.setAttribute("doctor", doctor);
 		req.setAttribute("docSche", docSche);
 		
 		return "medi_reservation/reservation";
 	}
+	@RequestMapping("/medi/mediChoice")
+	public String mediChoice(String docNum,String time, HttpServletRequest req) {
+		Map<String,Object> map=new HashMap<String, Object>();
+		int num=Integer.parseInt(docNum);
+		String chDate=time.substring(0, 10);
+		map.put("num", docNum);
+		map.put("chDate", chDate);
+		System.out.println("확인하기 : "+docNum);
+		System.out.println("확인하기 : "+chDate);
+		DoctorInfo doctor=service.selectDoctor(num);
+		List<MemberReservation> mr=service.selectReser(map);
+		
+		req.setAttribute("doctor", doctor);
+		req.setAttribute("mr", mr);
+		req.setAttribute("time", time);
+		return "medi_reservation/choiceTime";
+	}
+	
+<<<<<<< HEAD
+	@RequestMapping("/medi/insertReser")
+	public String insertReser(MemberReservation mr,HttpServletRequest req) {
+		int result=service.insertReser(mr);
+		String msg="";
+		if(result>0) {
+			msg="예약 성공";
+		}else {
+			msg="예약 실패";
+		}
+		req.setAttribute("msg", msg);
+		req.setAttribute("loc", "/");
+		return "common/msg";
+	}
+	
+	@RequestMapping("/medi/reserList")
+	public String reserList(@RequestParam(value="cPage", required=false,defaultValue="1") int cPage, String userNum,HttpServletRequest req) {
+		int num=Integer.parseInt(userNum);
+		int numPerPage=10;
+		List<ReserList> list=service.reserList(num,cPage,numPerPage);
+		int totalCount=service.reserCount(num);
+		System.out.println("확인확인"+totalCount);
+		String pageBar=new PageCreate().getPageBar3(cPage, numPerPage, totalCount, req.getContextPath()+"/medi/reserList", num);
+		req.setAttribute("pageBar", pageBar);
+		req.setAttribute("list", list);
+		req.setAttribute("cPage", cPage);
+		return "medi_reservation/reserList";
+	}
+	
+	@RequestMapping("/medi/reserDelete")
+	public String reserDelete(@RequestParam(value="cPage", required=false,defaultValue="1") int cPage,String no,String userNum,HttpServletRequest req) {
+		int chNum=Integer.parseInt(no);
+		int numPerPage=10;
+		int result=service.reserDelete(chNum);
+		String msg=null;
+		if(result>0) {
+			msg="삭제 되었습니다.";
+		}else {
+			msg="삭제 실패";
+		}
+		
+		int num=Integer.parseInt(userNum);
+		List<ReserList> list=service.reserList(num,cPage,numPerPage);
+		int totalCount=service.reserCount(num);
+		String pageBar=new PageCreate().getPageBar(cPage, numPerPage, totalCount, req.getContextPath()+"/medi/reserList");
+		req.setAttribute("pageBar", pageBar);
+		req.setAttribute("list", list);
+		req.setAttribute("msg", msg);
+		req.setAttribute("cPage", cPage);
+		return "medi_reservation/reserList";
+	}
+	
+	@RequestMapping("/medi/reser2")
+	public String mediReser2(String no,HttpServletRequest req) {
+		int num=Integer.parseInt(no);
+		List<DoctorInfo> list=service.selectDoctorList(num);
+		req.setAttribute("list", list);
+		return "medi_reservation/reservation2";
+	}
+	
+	@RequestMapping("/medi/doctorS2")
+	public String doctorSca2(String docNum,String hosNum,HttpServletRequest req) {
+		int num=Integer.parseInt(hosNum);
+		int docNo=Integer.parseInt(docNum);
+		List<DoctorInfo> list=service.selectDoctorList(num);
+		DoctorInfo doctor=service.selectDoctor(docNo);
+		List<DoctorSchedule> docSche=service.selectDocSche(docNo);
+		req.setAttribute("list", list);
+		req.setAttribute("doctor", doctor);
+		req.setAttribute("docSche", docSche);
+		
+		return "medi_reservation/reservation2";
+	}
+	
+	@RequestMapping("/medi/mediChoice2")
+	public String mediChoice2(String docNum,String time, HttpServletRequest req) {
+		Map<String,Object> map=new HashMap<String, Object>();
+		int num=Integer.parseInt(docNum);
+		String chDate=time.substring(0, 10);
+		map.put("num", docNum);
+		map.put("chDate", chDate);
+		DoctorInfo doctor=service.selectDoctor(num);
+		List<MemberReservation> mr=service.selectReser(map);
+		
+		req.setAttribute("doctor", doctor);
+		req.setAttribute("mr", mr);
+		req.setAttribute("time", time);
+		return "medi_reservation/choiceTime2";
+	}
+	
+	@RequestMapping("/medi/insertBlock")
+	public String insertBlock(@RequestParam(value = "docNum")String docNum,@RequestParam(value = "hosNum")String hosNum,@RequestParam(value = "choiceTime")String choiceTime,@RequestParam(value = "time")String time,HttpServletRequest req) {
+		int num=Integer.parseInt(hosNum);
+		int docNo=Integer.parseInt(docNum);
+		int result=0;
+		String [] cho=choiceTime.split(",");
+		for(int i=0;i<cho.length;i++) {
+		Map<String, Object> map=new HashMap<String, Object>();
+		map.put("docNum", docNo);
+		map.put("hosNum", num);
+		map.put("time", time);
+		map.put("choiceTime",cho[i]);
+		result=service.insertBlock(map);
+		}
+		String msg="";
+		if(result>0) {
+			msg="제외 처리가 되었습니다.";
+		}else {
+			msg="제외 처리가 실패 하였습니다.";
+		}
+		
+		List<DoctorInfo> list=service.selectDoctorList(num);
+		DoctorInfo doctor=service.selectDoctor(docNo);
+		List<DoctorSchedule> docSche=service.selectDocSche(docNo);
+		req.setAttribute("list", list);
+		req.setAttribute("doctor", doctor);
+		req.setAttribute("docSche", docSche);
+		req.setAttribute("msg", msg);
+		
+		return "medi_reservation/reservation2";
+	}
+	
+	@RequestMapping("/medi/hDeleteReser")
+	public String hDeleteReser(@RequestParam(value = "docNum")String docNum,@RequestParam(value = "hosNum")String hosNum,@RequestParam(value = "memberNum")int memberNum,@RequestParam(value = "reserDate")String reserDate,String reserTime,HttpServletRequest req) {
+		int num=Integer.parseInt(hosNum);
+		int docNo=Integer.parseInt(docNum);
+		Map<String, Object> map=new HashMap<String, Object>();
+		map.put("num", memberNum);
+		map.put("date", reserDate);
+		map.put("time", reserTime);
+		map.put("docNum", docNo);
+		int result=service.hDeleteReser(map);
+		String msg="";
+		if(result>0) {
+			msg="예약이 삭제 되었습니다.";
+		}else {
+			msg="예약 삭제 실패 하였습니다.";
+		}
+		
+		List<DoctorInfo> list=service.selectDoctorList(num);
+		DoctorInfo doctor=service.selectDoctor(docNo);
+		List<DoctorSchedule> docSche=service.selectDocSche(docNo);
+		req.setAttribute("list", list);
+		req.setAttribute("doctor", doctor);
+		req.setAttribute("docSche", docSche);
+		req.setAttribute("msg", msg);
+		
+		return "medi_reservation/reservation2";
+	}
+	
+	@RequestMapping("/medi/bDeleteReser")
+	public String bDeleteReser(@RequestParam(value = "docNum")String docNum,@RequestParam(value = "hosNum")String hosNum,@RequestParam(value = "reserDate")String reserDate,@RequestParam(value = "reserTime")String reserTime,HttpServletRequest req) {
+		int num=Integer.parseInt(hosNum);
+		int docNo=Integer.parseInt(docNum);
+		Map<String, Object> map=new HashMap<String, Object>();
+		map.put("date", reserDate);
+		map.put("time", reserTime);
+		map.put("docNum", docNo);
+		int result=service.bDeleteReser(map);
+		String msg="";
+		if(result>0) {
+			msg="제외처리가 취소 되었습니다.";
+		}else {
+			msg="제외처리 취소에 실패 하였습니다.";
+		}
+		
+		List<DoctorInfo> list=service.selectDoctorList(num);
+		DoctorInfo doctor=service.selectDoctor(docNo);
+		List<DoctorSchedule> docSche=service.selectDocSche(docNo);
+		req.setAttribute("list", list);
+		req.setAttribute("doctor", doctor);
+		req.setAttribute("docSche", docSche);
+		req.setAttribute("msg", msg);
+		
+		return "medi_reservation/reservation2";
+	}
+	
+	@RequestMapping("/medi/hBlockDate")
+	public String hBlockDate (@RequestParam(value = "docNum")String docNum,@RequestParam(value = "hosNum")String hosNum,@RequestParam(value = "date")String date,HttpServletRequest req) {
+		int num=Integer.parseInt(hosNum);
+		int docNo=Integer.parseInt(docNum);
+		Map<String, Object> map=new HashMap<String, Object>();
+		map.put("docNum", docNo);
+		map.put("hosNum", num);
+		map.put("date", date);
+		int result=service.hBlockDate(map);
+		String msg="";
+		if(result>0) {
+			msg="날짜가 제외 처리 되었습니다.";
+		}else {
+			msg="날짜 제외 처리에 실패 하였습니다.";
+		}
+		
+		List<DoctorInfo> list=service.selectDoctorList(num);
+		DoctorInfo doctor=service.selectDoctor(docNo);
+		List<DoctorSchedule> docSche=service.selectDocSche(docNo);
+		req.setAttribute("list", list);
+		req.setAttribute("doctor", doctor);
+		req.setAttribute("docSche", docSche);
+		req.setAttribute("msg", msg);
+		
+		return "medi_reservation/reservation2";
+	}
+	
+	@RequestMapping("/medi/deleteDateCan")
+	public String deleteDateCan(@RequestParam(value = "docNum")String docNum,@RequestParam(value = "hosNum")String hosNum,@RequestParam(value = "blockD")String blockD,HttpServletRequest req) {
+		int num=Integer.parseInt(hosNum);
+		int docNo=Integer.parseInt(docNum);
+		Map<String, Object> map=new HashMap<String, Object>();
+		map.put("docNum", docNo);
+		map.put("hosNum", num);
+		map.put("date", blockD);
+		int result=service.deleteDateCan(map);
+		String msg="";
+		if(result>0) {
+			msg="날짜 제외처리가 취소 되었습니다.";
+		}else {
+			msg="날짜 제외처리 취소에 실패하였습니다.";
+		}
+		
+		List<DoctorInfo> list=service.selectDoctorList(num);
+		DoctorInfo doctor=service.selectDoctor(docNo);
+		List<DoctorSchedule> docSche=service.selectDocSche(docNo);
+		req.setAttribute("list", list);
+		req.setAttribute("doctor", doctor);
+		req.setAttribute("docSche", docSche);
+		req.setAttribute("msg", msg);
+		
+		return "medi_reservation/reservation2";
+	}
 
+=======
+>>>>>>> groot
 }

@@ -8,11 +8,20 @@
 	<jsp:param value="" name="pageTitle"/>
 </jsp:include>
 
+<<<<<<< HEAD
 <div style="height: 100px"></div>
 
 <div><h1 style="text-align:center;">MediPot에 오신 것을 환영합니다!</h1></div>
 <br><br>
 
+=======
+<div style="height: 100px">
+
+</div>
+<div style="text-align: center; margin-bottom: 50px">
+	<h1>MediPot에 오신 것을 환영합니다.</h1>
+</div>
+>>>>>>> origin/mediSuper2
 <div style="text-align: center">
 	<a href="${pageContext.request.contextPath }/member/joinMember.do">
 		<img alt="개인" src="${pageContext.request.contextPath }/resources/img/member/person.PNG">

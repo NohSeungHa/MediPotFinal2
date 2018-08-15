@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.medi.pot.member.model.dao.MemberDAO;
+import com.medi.pot.member.model.vo.DoctorInfos;
 import com.medi.pot.member.model.vo.Hospital;
+import com.medi.pot.member.model.vo.HospitalInfos;
 import com.medi.pot.member.model.vo.Member;
 import com.medi.pot.reservation.model.vo.DoctorInfo;
 import com.medi.pot.reservation.model.vo.HospitalInfo;
@@ -37,9 +39,9 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public Hospital loginHospitalCheck(String userId) {
+	public Hospital loginHospitalCheck(String memberId) {
 		
-		return dao.loginHospitalCheck(sqlSession, userId);
+		return dao.loginHospitalCheck(sqlSession, memberId);
 		
 	}
 
@@ -163,13 +165,20 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
+<<<<<<< HEAD
 	public int HospitalSelectCount() {
 		
 		return dao.HospitalSelectCount(sqlSession);
+=======
+	public int checkHospitalEmail(String HospitalEmail) {
+		
+		return dao.checkHospitalEmail(sqlSession, HospitalEmail);
+>>>>>>> origin/mediSuper2
 		
 	}
 
 	@Override
+<<<<<<< HEAD
 	public HospitalInfo selectHospitalInfo(int hospitalNum) {
 		return dao.selectHospitalInfo(sqlSession, hospitalNum);
 	}
@@ -179,6 +188,104 @@ public class MemberServiceImpl implements MemberService {
 		return dao.selectDoctorInfo(sqlSession, hospitalNum);
 	}
 	
+=======
+	public int hospitalCount() {
+		
+		return dao.hospitalCount(sqlSession);
+		
+	}
+
+	@Override
+	public String selecthospitalName(int hospitalNum) {
+		
+		return dao.selecthospitalName(sqlSession, hospitalNum);
+		
+	}
+
+	@Override
+	public Hospital selectHospital(int hospitalNum) {
+		
+		return dao.selectHospital(sqlSession, hospitalNum);
+		
+	}
+
+	@Override
+	public int hospitalInfoinsert(HospitalInfos hospitalInfo) {
+		
+		return dao.hospitalInfoinsert(sqlSession, hospitalInfo);
+		
+	}
+
+	@Override
+	public HospitalInfos selectHospitalInfo(int hospitalNum) {
+		
+		return dao.selectHospitalInfo(sqlSession, hospitalNum);
+		
+	}
+
+	@Override
+	public int loadHospitalInfo(int hospitalNum) {
+		
+		return dao.loadHospitalInfo(sqlSession, hospitalNum);
+		
+	}
+
+	@Override
+	public List<DoctorInfos> selectDoctorInfo(int hospitalNum) {
+		
+		return dao.selectDoctorInfo(sqlSession, hospitalNum);
+		
+	}
+
+	@Override
+	public int doctorInfoInsert(DoctorInfos doctorInfo) {
+		
+		return dao.doctorInfoInsert(sqlSession, doctorInfo);
+		
+	}
+
+	@Override
+	public int updateHospitalInfo(HospitalInfos hospitalInfo) {
+		
+		return dao.updateHospitalInfo(sqlSession, hospitalInfo);
+		
+	}
+
+	@Override
+	public DoctorInfos selectDoctorPhoto(int doctorNum) {
+		
+		return dao.selectDoctorPhoto(sqlSession, doctorNum);
+		
+	}
+
+	@Override
+	public int updateDoctorInfo(DoctorInfos doctorInfo) {
+		
+		return dao.updateDoctorInfo(sqlSession, doctorInfo);
+		
+	}
+
+	@Override
+	public String DoctorsProfessional(int doctorNum) {
+		
+		return dao.DoctorsProfessional(sqlSession, doctorNum);
+		
+	}
+
+	@Override
+	public int hospitalUpdate(Hospital hospital) {
+		
+		return dao.hospitalUpdate(sqlSession, hospital);
+		
+	}
+
+	@Override
+	public int FindHosEmailCheck(String memberEmail) {
+		
+		return dao.FindHosEmailCheck(sqlSession, memberEmail);
+		
+	}
+>>>>>>> origin/mediSuper2
 	
 	
 }

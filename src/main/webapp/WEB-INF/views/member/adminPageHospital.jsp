@@ -8,16 +8,11 @@
 	<jsp:param value="관리자 페이지" name="pageTitle"/>
 </jsp:include>
 
-
-
-
-
-
-
 <style>
 	input#btn-add {float:right; margin:0 0 15px;}
 </style>
 <section id='board-contianer' class='container'>
+<<<<<<< HEAD
 
 
 	<div style="height:100px">
@@ -28,6 +23,16 @@
 
 
 
+=======
+<c:if test="${memberLoggedIn.memberId!='admin' }">
+	<script>
+		$(function(){
+			alert("관리자만 접근이 가능합니다.");
+			location.href="${pageContext.request.contextPath}";
+		})
+	</script>
+</c:if>
+>>>>>>> origin/mediSuper2
 	<table id='tbl-board' class='table table-striped table-hover'>
 		<tr>
 			<th>회원번호</th>
@@ -46,7 +51,11 @@
 					<td>${h.hospitalNum }</td>
 					<td>${h.hospitalId }</td>
 					<td>${h.hospitalName }</td>
-					<td>${h.hospitalLicense }</td>
+					<td>
+					<a href="${pageContext.request.contextPath}/member/hospitalFileDownload.do?oName=+${h.hospitalLicense}&rName=+${h.hospitalReLicense }" >
+						${h.hospitalLicense }
+					</a>
+					</td>
 					<td>${h.hospitalTel }</td>
 					<td>${h.hospitalEmail }</td>
 					<td>${h.hospitalAddr }</td>
@@ -74,9 +83,17 @@
 		console.log(e);
 		location.href="${pageContext.request.contextPath}/adminPage/admission.do?hospitalNum="+e;
 	}
+<<<<<<< HEAD
 	function movePage2(){
 		location.href="${pageContext.request.contextPath}/adminPage/movePage.do";
 	}
+=======
+	function fileDownload(oName, rName){
+        //한글파일명이 있을 수 있으므로, 명시적으로 encoding
+       oName = encodeURIComponent(oName);
+       location.href="${pageContext.request.contextPath}/member/hospitalFileDownload.do?oName="+oName+"&rName="+rName;
+    }
+>>>>>>> origin/mediSuper2
 </script>
 
 

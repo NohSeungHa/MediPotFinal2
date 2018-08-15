@@ -30,14 +30,14 @@
 		src="/pot/resources/img/notice/hnoticeinsert.jpg"
 		style="width: 100%;"> <br>
 	<br>
-	<a id="noticeHv" href="${path}/notice/noticeList.do" style="float: right;">공지사항</a>
+	<a id="noticeHv" href="${path}/notice/noticeList.do?checkPH=${chPH}" style="float: right;">공지사항</a>
 	<p style="float: right;">
 		<b style="margin-right:10px;">></b>
 	</p>
 	<a id="home" href="${path}" style="float:right;width:70px;"><img
 		src="/pot/resources/img/notice/home.jpg"
 		style="width: 30%; height: 30%;"> 홈으로</a>
-	<form name="noticeFrm" action="${path}/notice/noticeInsertEnd.do" method="post" onsubmit="return validate();"  enctype="multipart/form-data" >
+	<form name="noticeFrm" action="${path}/notice/noticeInsertEnd.do?checkPH=${chPH}" method="post" onsubmit="return validate();"  enctype="multipart/form-data" >
 		<table class="table table-bordered">
 			<tbody>
 				<tr>
@@ -52,25 +52,25 @@
 				</tr>
 				<tr>
 					<th>내용:</th>
-					<td><textarea class="form-control" placeholder="내용을 입력하세요.(500자이내)"
+					<td><textarea style="resize: none;" class="form-control" placeholder="내용을 입력하세요.(1000자이내)"
 							rows="5" id="comment" name="content" onKeyUp="checkLength(this);" onKeyDown="checkLength(this);"></textarea></td>
 				</tr>
 				<tr>
 					<th>첨부파일:</th>
 					<td><input type="file" class="form-control-file border"
-						name="fileName" id="fileName"></td>
+						name="fileName" id="fileName" accept=".jpg, .png, .bmp"></td>
 				</tr>
 			</tbody>
 		</table>
 		<button type="button" onclick="noticeList()" class="btn btn-danger" style="float: right; margin-left: 10px;">취소</button> 
-		<input type="submit" value="등록" class="btn btn-primary" style="float: right;" />
+		<input type="submit" value="등록" onclick="return validate();" class="btn btn-primary" style="float: right;"/>
 		</form>
 		<button type="button" class="btn btn-success" onclick="noticeList()">목록으로</button>
-	</div>
+</div>
 <br>
 <script>
 	function noticeList(){
-		location.href="${path}/notice/noticeList.do";
+		location.href="${path}/notice/noticeList.do?checkPH=${chPH}";
 	}
 	function checkLength(comment) {
 	    if (comment.value.length > 1000 ) {
@@ -79,6 +79,18 @@
 	        comment.focus();
 	        return false;
 	    }
+	}
+	function validate() {
+		var content=$("[name=content]").val();
+		var title=$("[name=title]").val();
+		if(title.trim().length==0) {
+			alert("제목을 입력하세요!");
+			return false;
+		}else if(content.trim().length==0) {
+			alert("내용을 입력하세요!");
+			return false;
+		}
+		return true;
 	}
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

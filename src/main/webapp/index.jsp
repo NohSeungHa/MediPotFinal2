@@ -3,7 +3,6 @@
 <%@ taglib prefix='c' uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix='fmt' uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix='fn' uri="http://java.sun.com/jsp/jstl/functions"%>
-<c:set var="path" value="<%=request.getContextPath() %>" />
 
 
 <jsp:include page="/WEB-INF/views/common/header.jsp">
@@ -249,15 +248,16 @@ to {
 			<p>우리동네 지역 선택하기</p>
 		</div>
 		<div class="col-md-1" style="padding-top:35px;padding-right:20px;">
-			<img src="/pot/resources/img/common/arrow.png" width="80px" height="60px" >
+			<img src="${path}/resources/img/common/arrow.png" width="80px" height="60px" >
 		</div>
 		<div class="col-md-2">
 			<h4>MediPot이용방법</h4>
 			<h1>2단계</h1>
 			<p>진료과목 선택하기</p>
 		</div>
+		
 		<div class="col-md-1" style="padding-top:35px;padding-right:20px;">
-			<img src="/pot/resources/img/common/arrow.png" width="80px" height="60px">
+			<img src="${path}/resources/img/common/arrow.png" width="80px" height="60px">
 		</div>
 		<div class="col-md-2">
 			<h4>MediPot이용방법</h4>
@@ -271,8 +271,10 @@ to {
 	<hr>
 	<!-- 중간 부분 끝 -->
 	<div class="col-md-12">
-		<img src="/pot/resources/img/common/index_1.png" style="margin-bottom: 35px;width:600px;height:600px">
+		<img src="${path}/resources/img/common/index_1.png" style="margin-bottom: 35px;width:600px;height:600px">
 	</div>
+	
+
 
 
 
@@ -280,3 +282,5 @@ to {
 <!-- class="container" -->
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+
+

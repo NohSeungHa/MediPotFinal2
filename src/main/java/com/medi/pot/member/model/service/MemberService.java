@@ -3,7 +3,9 @@ package com.medi.pot.member.model.service;
 import java.util.List;
 import java.util.Map;
 
+import com.medi.pot.member.model.vo.DoctorInfos;
 import com.medi.pot.member.model.vo.Hospital;
+import com.medi.pot.member.model.vo.HospitalInfos;
 import com.medi.pot.member.model.vo.Member;
 import com.medi.pot.reservation.model.vo.DoctorInfo;
 import com.medi.pot.reservation.model.vo.HospitalInfo;
@@ -17,7 +19,8 @@ public interface MemberService {
 	
 	/* 이메일 중복검사 */
 	int duplicateMemEmailCheck(String memberEmail);
-	int checkEmail(String memberEmail);
+	int checkEmail(String memberEmail); // 일반회원
+	int checkHospitalEmail(String HospitalEmail); // 병원회원
 	
 	/*일반회원*/
 	Member loginMemberCheck(String memberId);
@@ -33,19 +36,42 @@ public interface MemberService {
 	String FindId(Member m);
 	Member searchName(String findname);
 	
+	int FindHosEmailCheck(String memberEmail);
+	
 	/* 비밀번호 찾기 */
 	Member searchID(String findid);
 	int MemberUpdate(Member m);
 	
 	/*병원회원*/
-	Hospital loginHospitalCheck(String userId);
+	Hospital loginHospitalCheck(String memberId);
 	int insertHospital(Hospital h);
 	List<Hospital> selectHospitalList(int cPage, int numPerPage);
 	int selectHospitalCount();
 	int updateAdmission(int hospitalNum);
+<<<<<<< HEAD
 	int HospitalSelectCount();
 	
 	/*병원회원 승인 여부 조회*/
 	HospitalInfo selectHospitalInfo(int hospitalNum);
 	DoctorInfo selectDoctorInfo(int hospitalNum);
+=======
+	int hospitalCount();
+	String selecthospitalName(int hospitalNum);
+	Hospital selectHospital(int hospitalNum);
+	int hospitalUpdate(Hospital hospital);
+	
+	/* 병원정보 */
+	int hospitalInfoinsert(HospitalInfos hospitalInfo);
+	HospitalInfos selectHospitalInfo(int hospitalNum);
+	int loadHospitalInfo(int hospitalNum);
+	int updateHospitalInfo(HospitalInfos hospitalInfo);
+	
+	/* 의사정보 */
+	List<DoctorInfos> selectDoctorInfo(int hospitalNum); // 전체뽑기
+	int doctorInfoInsert(DoctorInfos doctorInfo); // 등록
+	DoctorInfos selectDoctorPhoto(int doctorNum);
+	int updateDoctorInfo(DoctorInfos doctorInfo);
+	String DoctorsProfessional(int doctorNum);
+	
+>>>>>>> origin/mediSuper2
 }

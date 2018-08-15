@@ -10,6 +10,8 @@ import com.medi.pot.reservation.model.dao.ReservationDao;
 import com.medi.pot.reservation.model.vo.DoctorInfo;
 import com.medi.pot.reservation.model.vo.DoctorSchedule;
 import com.medi.pot.reservation.model.vo.HospitalInfo;
+import com.medi.pot.reservation.model.vo.MemberReservation;
+import com.medi.pot.reservation.model.vo.ReserList;
 
 @Service
 public class ReservationServiceImpl implements ReservationService {
@@ -48,9 +50,62 @@ public class ReservationServiceImpl implements ReservationService {
 	}
 
 	@Override
-	public DoctorSchedule selectDocSche(int docNo) {
+	public List<DoctorSchedule> selectDocSche(int docNo) {
 		return reserDAO.selectDocSche(docNo);
 	}
+
+
+	@Override
+	public List<MemberReservation> selectReser(Map<String, Object> map) {
+		return reserDAO.selectReser(map);
+	}
+
+	@Override
+	public int insertReser(MemberReservation mr) {
+		return reserDAO.insertReser(mr);
+	}
+
+	@Override
+	public List<ReserList> reserList(int userNum,int cPage,int numPerPage) {
+		return reserDAO.reserList(userNum,cPage,numPerPage);
+	}
+
+	@Override
+	public int reserDelete(int chNum) {
+		return reserDAO.reserDelete(chNum);
+	}
+
+	@Override
+	public int reserCount(int num) {
+		return reserDAO.reserCount(num);
+	}
+
+	@Override
+	public int insertBlock(Map<String, Object> map) {
+		return reserDAO.insertBlock(map);
+	}
+
+	@Override
+	public int hDeleteReser(Map<String, Object> map) {
+		return reserDAO.hDeleteReser(map);
+	}
+
+	@Override
+	public int bDeleteReser(Map<String, Object> map) {
+		return reserDAO.bDeleteReser(map);
+	}
+
+	@Override
+	public int hBlockDate(Map<String, Object> map) {
+		return reserDAO.hBlockDate(map);
+	}
+
+	@Override
+	public int deleteDateCan(Map<String, Object> map) {
+		return reserDAO.deleteDateCan(map);
+	}
+	
+	
 	
 	
 	

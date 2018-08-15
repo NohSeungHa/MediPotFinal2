@@ -44,6 +44,24 @@
 		</beans:property>
 	</beans:bean>
 	
+	<interceptors>
+		<!-- <exclude-mapping path=""/> exclued-mapping은 interceptor를 제외할 매핑값을 적으면 제외됨 -->
+
+		<interceptor>
+			<mapping path="/medi/reser"/>
+			<beans:bean id="loogerInterceptor" class="com.medi.pot.common.page.Interceptor2"></beans:bean>
+		</interceptor>
+		<interceptor>
+			<mapping path="/medi/doctorS"/>
+			<beans:bean id="loogerInterceptor2" class="com.medi.pot.common.page.Interceptor2"></beans:bean>
+		</interceptor>
+		<interceptor>
+			<mapping path="/medi/insertReser"/>
+			<beans:bean id="loogerInterceptor3" class="com.medi.pot.common.page.Interceptor2"></beans:bean>
+		</interceptor>
+		
+	</interceptors>
+	
 	
 	
 </beans:beans>
