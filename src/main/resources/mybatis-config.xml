@@ -14,19 +14,15 @@
 		<typeAlias alias="MemberNotice" type="com.medi.pot.notice.vo.MemberNotice"/>
 		<!-- 자유게시판 -->
 		<typeAlias alias="Community" type="com.medi.pot.community.vo.Community"/>
-<<<<<<< HEAD
 		<!-- 자유게시판 댓글 -->
 		<typeAlias alias="CommunityComment" type="com.medi.pot.community.vo.CommunityComment"/>
-=======
 		
->>>>>>> groot
 		<typeAlias alias="member" type="com.medi.pot.member.model.vo.Member" />
 		<typeAlias alias="hospital" type="com.medi.pot.member.model.vo.Hospital" />
 		
 		<typeAlias alias="HospitalInfo" type="com.medi.pot.reservation.model.vo.HospitalInfo" />
 		<typeAlias alias="DoctorInfo" type="com.medi.pot.reservation.model.vo.DoctorInfo" />
 		<typeAlias alias="DoctorSchedule" type="com.medi.pot.reservation.model.vo.DoctorSchedule" />
-<<<<<<< HEAD
 
 		<!-- 헬프존 -->
 		<typeAlias alias="HelpZone" type="com.medi.pot.helpZone.vo.HelpZone"/>
@@ -35,8 +31,6 @@
 		<!-- 예약 List -->
 		<typeAlias alias="ReserList" type="com.medi.pot.reservation.model.vo.ReserList" />
 
-=======
-		
 		<!-- 병원정보, 의사정보 적용중 -->
 		<typeAlias alias="hospitalInfos" type="com.medi.pot.member.model.vo.HospitalInfos" />
 		<typeAlias alias="doctorInfos" type="com.medi.pot.member.model.vo.DoctorInfos" />
@@ -44,7 +38,6 @@
 		<!-- 체크박스 여러 개를 하나의 String으로 -->
 		<typeAlias alias="StringArray" type="com.medi.pot.member.model.vo.StringArrayTypeHandler"/>
 		
->>>>>>> groot
 	</typeAliases>
 
 </configuration>

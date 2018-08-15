@@ -6,7 +6,7 @@ public class HelpZoneCommentHospital {
 	private int hzCommentNumH;			//병원 댓글 번호
 	private int hzNumH;					//헬프존 번호
 	private int hzCommentWriterNumH;	//병원 회원 작성자
-	private String hzCommentContentH;	//내용
+	private String hzCommentContentH;	//댓글내용
 	private Date date;					//날짜
 	private int hzCommentLevelH;		//댓글 레벨
 	private char hzCommentChoice;		//채택여부

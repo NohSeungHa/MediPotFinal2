@@ -98,6 +98,31 @@
 	</c:if>
 <br><br>	
 <hr><!-- 1. 댓글등록창 시작 -->
+<table class="table table-helpZoneComment">
+	<tbody>
+		<tr>
+			<th>댓글작성</th>
+			<td><input type="text" placeholder="댓글을 작성해주세요." style="resize: none" name="hzCommentContent" id="hzCommentContent"
+			class="form-control" maxlength="40"></td>
+		</tr>
+		<tr>
+			<th>작성자</th>
+			<td>
+			<c:if test="${checkPH=='P'}">
+				<input type="hidden" name="hzCommentWriterNumH" id="hzCommentWriterNumH" value="${memberLoggedIn.memberNum }">
+				<input type="text" name="hzCommentWriter" id="hzCommentWriter" value="${memberLoggedIn.memberId}" readonly/>
+			</c:if>
+			<c:if test="${checkPH=='H'}">	
+				<input type="hidden" name="hzCommentWriterNumM" id="hzCommentWriterNumM" value="${memberLoggedIn.hospitalNum }">
+				<input type="text" name="hzCommentWriter" id="hzCommentWriter" value="${memberLoggedIn.hospitalId}" readonly/>
+			</c:if>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+
+
 <div class="box box-warning">
     <div class="box-header with-border">
         <div class="text-lg"><span class="glyphicon glyphicon-pencil"></span>댓글 작성</div>
