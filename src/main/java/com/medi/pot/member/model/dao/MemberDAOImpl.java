@@ -265,5 +265,12 @@ public class MemberDAOImpl implements MemberDAO {
 		
 	}
 
+	@Override
+	public int deleteMember(SqlSessionTemplate sqlSession, int memberNum) {
+		
+		return sqlSession.delete("member.deleteMember", memberNum);
+		
+	}
+
 	
 }

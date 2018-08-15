@@ -28,6 +28,7 @@ public interface MemberService {
 	int memberPwUpdate(Map<String, String> idpw);
 	List<Member> selectMemberList(int cPage, int numPerPage);
 	int selectCount();
+	int deleteMember(int memberNum);
 	
 	/* 아이디찾기 */
 	int FindMemEmailCheck(String memberEmail);

@@ -32,6 +32,7 @@ public interface MemberDAO {
 	int memberPwUpdate(SqlSessionTemplate sqlSession, Map<String, String> idpw);
 	List<Member> selectMemberList(SqlSessionTemplate sqlSession, int cPage, int numPerPage);
 	int selectCount(SqlSessionTemplate sqlSession);
+	int deleteMember(SqlSessionTemplate sqlSession, int memberNum);
 	
 	/* 아이디 찾기 */
 	int FindMemEmailCheck(SqlSessionTemplate sqlSession, String memberEmail);

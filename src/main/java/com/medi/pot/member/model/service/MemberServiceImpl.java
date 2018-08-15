@@ -266,6 +266,13 @@ public class MemberServiceImpl implements MemberService {
 		return dao.FindHosEmailCheck(sqlSession, memberEmail);
 		
 	}
+
+	@Override
+	public int deleteMember(int memberNum) {
+		
+		return dao.deleteMember(sqlSession, memberNum);
+		
+	}
 	
 	
 }

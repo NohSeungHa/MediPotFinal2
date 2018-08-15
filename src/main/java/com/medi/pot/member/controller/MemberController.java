@@ -506,6 +506,39 @@ public class MemberController {
 	}
 	
 	
+	/* 회원 삭제시 헬프존 게시물과 함께 삭제(해당 게시물의 병원 댓글도 함께) */
+	@RequestMapping("/member/deleteMember.do")
+	public String deleteMember() {
+		System.out.println("회원탈퇴를 들어옴");
+		
+		return "member/deleteMember";
+	}
+	
+	
+	@RequestMapping("/member/deleteMemberEnd.do")
+	public String deleteMemberEnd(String memberId, String memberPw, Model model, SessionStatus sessionStatus) {
+		System.out.println("회원탈퇴를 실행함");
+		String msg = "아이디와 비밀번호가 일치하지 않아 삭제하지 못했습니다.";
+		String loc = "";
+		
+		Member m = service.selectMember(memberId);
+		if(m != null) {
+			if(bcrypt.matches(memberPw, m.getMemberPw())) {
+				msg = "삭제 성공";
+				int result = service.deleteMember(m.getMemberNum());
+				sessionStatus.setComplete();
+			}
+		}
+		else {
+			msg = "해당 아이디는 존재하지 않습니다.";
+		}
+		model.addAttribute("msg", msg);
+		model.addAttribute("loc", loc);
+		
+		return "common/msg";
+	}
+	
+	
 	/* 일반회원의 비밀번호 수정 */
 	@RequestMapping("/member/memberPwUpdate.do")
 	public String memberPwUpate(String originPw, String newPw, String memberId, Model model) {

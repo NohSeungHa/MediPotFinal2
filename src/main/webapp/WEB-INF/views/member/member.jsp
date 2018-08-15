@@ -95,11 +95,18 @@ $(function(){
 <!-- 아이디 잘 못 입력시 ajax이용한 출력문 스크립트 시작 -->
 	$(function(){
 		$('#memberId').on("keyup",function(){
-			var memberId=$(this).val().trim().length;
-			if(memberId<4){
+			var memberId=$(this).val().trim();
+			if(memberId.length<4){
 				$(".guide").hide();
 				$("#idDuplicateCheck").val(0);
 				return;
+			} else {
+				if(memberId.match(/([ㄱ-ㅎ|가-힣]|([!,@,#,$,%,^,&,*,?,_,~,-]))/) || (memberId.match(/([0-9])/) && (memberId.match(/([a-zA-Z])/))==null)){
+					alert("아이디는 영문과 숫자로 입력해야합니다.");
+					$('#memberId').val("");
+					$('#memberId').focus();
+					return;
+				}
 			}
 			$.ajax({
 				url:"${pageContext.request.contextPath}/member/PcheckId.do",

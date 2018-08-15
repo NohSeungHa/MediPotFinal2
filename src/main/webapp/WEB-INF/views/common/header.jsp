@@ -73,18 +73,13 @@
 				<ul class="nav navbar-nav navbar-right" style="margin-top:2.5%;margin-right:1%;">
 				
 					<c:if test="${checkPH=='P' }">
-						<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-						${memberLoggedIn.memberName }&nbsp;님 환영합니다.<span class="caret"></span></a>
-						<ul class="dropdown-menu" style="text-align: center;">
-							<li><a href="${pageContext.request.contextPath }/member/mypage.do?user_id=${memberLoggedIn.memberId}&checkPH=${checkPH}">마이페이지</a></li>
-							<li><a href="${pageContext.request.contextPath }/medi/reserList?userNum=${memberLoggedIn.memberNum}" >내 예약 정보</a></li>
-						</ul>
-						
 						<c:if test="${memberLoggedIn.memberId!='admin' }">
 							<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${memberLoggedIn.memberName }&nbsp;님 환영합니다.<span class="caret"></span></a>
 							<ul class="dropdown-menu">
 								<li><a href="${pageContext.request.contextPath }/member/mypage.do?user_id=${memberLoggedIn.memberId}&checkPH=${checkPH}">마이페이지</a></li>
-								<li><a href="${pageContext.request.contextPath }/member/MemberReservation.do?user_id=${memberLoggedIn.memberId}&checkPH=${checkPH }">진료예약확인</a></li>
+								<li><a href="${pageContext.request.contextPath }/medi/reserList?userNum=${memberLoggedIn.memberNum}" >내 예약 정보</a></li>
+								<li><a href="${pageContext.request.contextPath }/member/deleteMember.do" >회원 탈퇴</a></li>
+								
 							</ul>
 							</li>
 						</c:if>

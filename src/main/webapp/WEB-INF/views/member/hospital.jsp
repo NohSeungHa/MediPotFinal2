@@ -82,15 +82,22 @@ $(function(){
 <!-- 아이디 잘 못 입력시 ajax이용한 출력문 스크립트 시작 -->
 	$(function(){
 		$('#hospitalId').on("keyup",function(){
-			var memberId=$(this).val().trim().length;
-			if(memberId<4){
+			var hospitalId=$(this).val().trim();
+			if(hospitalId.length<4){
 				$(".guide").hide();
 				$("#idDuplicateCheck").val(0);
 				return;
+			} else {
+				if(hospitalId.match(/([ㄱ-ㅎ|가-힣]|([!,@,#,$,%,^,&,*,?,_,~,-]))/) || (hospitalId.match(/([0-9])/) && (hospitalId.match(/([a-zA-Z])/))==null)){
+					alert("아이디는 영문과 숫자로 입력해야합니다.");
+					$('#hospitalId').val("");
+					$('#hospitalId').focus();
+					return;
+				}
 			}
 			$.ajax({
 				url:"${pageContext.request.contextPath}/member/HcheckId.do",
-				data:{memberId:$(this).val()},
+				data:{hospitalId:$(this).val()},
 				success:function(data){
 					if(data.trim()=='true'){
 						$(".guide.error").hide();

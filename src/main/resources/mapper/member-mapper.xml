@@ -81,4 +81,8 @@
 	<select id="selectCount" resultType="_int">
  		select count(*) from member
  	</select>
+ 	
+ 	<delete id="deleteMember" parameterType="_int">
+ 		delete from member where memberNum=#{memberNum}
+ 	</delete>
 </mapper>
