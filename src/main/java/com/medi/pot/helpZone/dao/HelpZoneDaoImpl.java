@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.medi.pot.helpZone.vo.HelpZone;
-import com.medi.pot.helpZone.vo.HelpZoneComment;
 import com.medi.pot.member.model.vo.Member;
 
 @Repository

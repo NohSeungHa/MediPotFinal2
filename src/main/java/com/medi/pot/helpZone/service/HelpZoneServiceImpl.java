@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.medi.pot.helpZone.dao.HelpZoneDao;
 import com.medi.pot.helpZone.vo.HelpZone;
-import com.medi.pot.helpZone.vo.HelpZoneComment;
 import com.medi.pot.member.model.vo.Member;
 
 @Service

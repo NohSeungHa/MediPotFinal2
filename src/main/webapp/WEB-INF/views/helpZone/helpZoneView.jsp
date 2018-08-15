@@ -1,5 +1,5 @@
 <%@page import="com.medi.pot.member.model.vo.Member"%>
-<%@page import="com.medi.pot.helpZone.vo.HelpZoneComment"%>
+<%@page import="com.medi.pot.helpZone.vo.HelpZoneCommentHospital"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -7,11 +7,11 @@
     <%@ taglib prefix='fmt' uri="http://java.sun.com/jsp/jstl/fmt"%>
     <%@ taglib prefix='fn' uri="http://java.sun.com/jsp/jstl/functions"%>
 	<c:set var="path" value="<%=request.getContextPath() %>"/>
-	<%List<HelpZoneComment> helpZoneCommentList = (List)request.getAttribute("helpZoneCommentList"); %>
      
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="헬프존 조회" name="pageTitle"/>
 </jsp:include>
+
 	<style>
 	.jumbotron {
       margin-bottom: 0;
@@ -96,40 +96,48 @@
 				<button type="button" onclick="helpZoneDelete()" class="btn btn-danger btn-lg" style="float: right; margin-left: 10px;">삭제</button>
 			</c:if>
 	</c:if>
-	
-<hr><!-- 댓글등록창 -->
-<div id="comment-container">
-	<div id="comment-content-container">
-		<table id="tbl-comment">
-			<%if(helpZoneCommentList!=null){ 
-			for(HelpZoneComment hzComment : helpZoneCommentList) {
-				if(hzComment.getHzCommentLevel()==1){%>
-				<tr class="level1">
-					<td>
-						<sub class="comment-writer"><%=hzComment.getHzCommentWriterNum() %></sub>
-						<sub class="comment-date"><%=hzComment.getHzCommentDate() %></sub>
-						<br><%=hzComment.getHzCommentContent() %>
-					</td>
-					
-					<td>
-						<button class='btn-reply' value="<%=hzComment.getHzCommentNum() %>">답글</button>
-						<c:if test="${memberLoggedIn.memberId == hzCommentWriterNum.memberId }">
-							<button class='btn-delete' value="<%=hzComment.getHzCommentNum()%>">삭제</button>
-						</c:if>
-					<%} %>
-					</td>
-				</tr>
-				<%} %>
-				<%else{ %>
-				<tr class="level2">
-					<td>
-						<sub style="font-size: 15px;font-weight: bold">ㄴ</sub><sub class="comment-writer"><%=hzComment.getHzCommentWriterNum() %></sub>
-					</td>
-				</tr>
-				
-		</table>
-	</div><!-- comment-content-container -->
-</div><!-- comment-container -->
+<br><br>	
+<hr><!-- 1. 댓글등록창 시작 -->
+<div class="box box-warning">
+    <div class="box-header with-border">
+        <div class="text-lg"><span class="glyphicon glyphicon-pencil"></span>댓글 작성</div>
+    </div>
+    <div class="box-body">
+        <form class="form-horizontal">
+            <div class="form-group margin">
+                <div class="col-md-10">
+                    <textarea class="form-control" id="CommentText" rows="3" placeholder="댓글을 작성해주세요." style="resize: none"></textarea>
+                </div>
+                <div class="col-md-2">
+                    <input type="text" class="form-control" id="newReplyWriter" value="${memberLoggedIn.memberId }" readonly>
+                </div>
+                <hr/>
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-primary btn-block replyAddBtn"><i class="fa fa-save"></i> 저장</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<hr>
+<!-- 댓글 등록창 끝 -->
+<!-- 2. 댓글 목록 리스트 출력 시작 -->
+<div class="box box-success collapsed-box">
+    <%--댓글 유무 / 댓글 갯수--%>
+    <%--댓글 목록--%>
+    <div class="box-body repliesDiv">
+
+    </div>
+    <%--댓글 페이징--%>
+    <div class="box-footer">
+        <div class="text-center">
+            <ul class="pagination pagination-sm no-margin">
+
+            </ul>
+        </div>
+    </div>
+</div>
+
 
 
 </div>
