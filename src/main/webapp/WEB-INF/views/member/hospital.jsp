@@ -240,7 +240,7 @@ $(function(){
 						</td>
 					</tr>
 					<tr>
-						<th>이메일</th>
+						<th>이메일<b>(*)</b></th>
 						<td>	
 							<input type="email" class="form-control" placeholder="abc@xyz.com" name="hospitalEmail" id="PHemail">
 						</td>
@@ -258,7 +258,8 @@ $(function(){
 							<input type="text" class="form-control" name="hospitalAddr" id="hospitalAddr" placeholder="도로명주소" readonly>
 						</td>
 						<td>
-							<button type="button" onclick="sample4_execDaumPostcode()" class="btn btn-default" style="margin-bottom:10px; margin-left: 20px">우편번호 찾기</button> 
+							&nbsp;
+							<button type="button" onclick="sample4_execDaumPostcode()" class="btn btn-default" style="margin: 0 0 30px 30px">우편번호 찾기</button>
 							<span style="display: none" id="guide" style="color: #999"></span>
 						</td>
 					</tr>

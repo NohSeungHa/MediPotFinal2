@@ -99,7 +99,14 @@
 </script>
 <!-- 다음 주소 API끝 -->
 
-
+<c:if test="${memberLoggedIn == null }">
+	<script>
+		$(function(){
+			alert("잘못된 접근입니다.");
+			location.href="${pageContext.request.contextPath}";
+		})	
+	</script>
+</c:if>
 <div style="height: 100px"></div>
 <div class="jointab">
 
@@ -110,16 +117,15 @@
 			<img src="${pageContext.request.contextPath }/resources/img/enroll/hospitalEnrollTop.png"
 				style="width: 100%; max-width: 760px; vertical-align: middle" />
 		</div>
-
-
-
 		
 		<h2>병원 회원정보 수정</h2>
-		<p><b>(*)</b>는 필수 표시사항 입니다.</p>
-			<form name="" action="" method="post" onsubmit="return fn_enroll_validate();" >
+		<p>** <b>(*)</b>는 필수 표시사항 입니다. **<br>
+		** 이메일 수정을 원할 시 관리자에게 문의해주세요. **<br>
+		** 사업자번호를 수정하지 않는다면 원본으로 출력됩니다. **</p>
+			<form action="${pageContext.request.contextPath }/member/hospitalUpdate.do" method="post" onsubmit="return fn_enroll_validate();" enctype="multipart/form-data">
 				<table>
 					<tr>
-						<th>병원 아이디<b>(*)</b></th>
+						<th style="min-width: 130px">병원 아이디<b>(*)</b></th>
 						<td>
 							<div id="hospitalId-container">
 								<input type="text" class="form-control" placeholder="4글자이상" name="hospitalId" id="hospitalId_" value="${memberLoggedIn.hospitalId }" readonly>
@@ -134,9 +140,9 @@
 					</tr>
 					<tr>
 						<th>사업자번호<b>(*)</b></th>
-						<td>	
-						<input type="text" class="form-control" name="hospitalLicense" id="hospitalLicense" 
-							maxlength="6" placeholder="6자리로 입력해주십시오." value="${memberLoggedIn.hospitalLicense }" readonly>
+						<td>
+						<input type="file" name="hospitalLicense" id="hospitalLicense" accept=".jpg, .png, .bmp" style="width: 200px" required>
+						<input type="hidden" class="form-control" name="oldhospitalLicense" id="oldhospitalLicense" value="${memberLoggedIn.hospitalLicense }" readonly>
 						</td>
 					</tr>
 					<tr>
@@ -148,7 +154,7 @@
 					<tr>
 						<th>이메일</th>
 						<td>	
-							<input type="email" class="form-control" placeholder="abc@xyz.com" name="hospitalEmail" value="${memberLoggedIn.hospitalEmail }" id="hospitalEmail">
+							<input type="email" class="form-control" placeholder="abc@xyz.com" name="hospitalEmail" value="${memberLoggedIn.hospitalEmail }" id="hospitalEmail" readonly>
 						</td>
 					</tr>
 					<tr>
@@ -157,8 +163,7 @@
 							<input type="text" class="form-control" name="hospitalAddr" id="hospitalAddr" placeholder="도로명주소" value="${memberLoggedIn.hospitalAddr }" readonly>
 						</td>
 						<td>
-							&nbsp;
-							<button type="button" onclick="sample4_execDaumPostcode()" class="btn btn-default" style="margin-bottom:10px;">우편번호 찾기</button> 
+							<button type="button" onclick="sample4_execDaumPostcode()" class="btn btn-default" style="margin:0 0 10px 10px;">우편번호 찾기</button> 
 							<span id="guide" style="color: #999"></span>
 						</td>
 					</tr>
@@ -170,6 +175,7 @@
 					<tr>
 						<td colspan="3" style="text-align:center;">
 							<input type="button" onclick="location.href='${path}/'" class="btn btn-lg btn-default" value="비밀번호수정"/>
+							<input type="hidden" name="hospitalNum" value="${memberLoggedIn.hospitalNum }">
 						</td>
 					</tr>
 				</table>

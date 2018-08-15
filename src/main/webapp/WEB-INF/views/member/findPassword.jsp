@@ -175,7 +175,7 @@
 	
 	function emailAuther(){
 		var nowemail = $('#findemail').val();
-		var url="${pageContext.request.contextPath }/member/FindemailEnd.do?memberEmail="+nowemail;
+		var url="${pageContext.request.contextPath }/member/emailEnd.do?memberEmail="+nowemail;
 		var title="emailAuther";
 		var status="left=500px, top=100px, width=600px, height=200px";
 		var popup=window.open(url,title,status);
