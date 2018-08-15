@@ -53,6 +53,10 @@ public interface MemberService {
 	String selecthospitalName(int hospitalNum);
 	Hospital selectHospital(int hospitalNum);
 	int hospitalUpdate(Hospital hospital);
+	Hospital selectFindHospital(String hospitalId);
+	int deleteDoctors(int hospitalNo);
+	int deleteHospitalInfo(int hospitalInfoNum);
+	int updateHospital(int hospitalNum);
 	
 	/* 병원정보 */
 	int hospitalInfoinsert(HospitalInfos hospitalInfo);

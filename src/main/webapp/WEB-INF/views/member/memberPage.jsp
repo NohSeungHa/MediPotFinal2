@@ -183,7 +183,7 @@
 					</tr>
 					<tr>
 						<td colspan="3" style="text-align: center;">
-							<input type="button" onclick="deleteMember()" class="btn btn-lg btn-default" value="회원 탈퇴">
+							<input type="button" onclick="deleteMember()" class="btn btn-lg btn-default" value="회 원 탈 퇴">
 						</td>
 					</tr>
 				</table>

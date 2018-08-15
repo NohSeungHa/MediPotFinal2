@@ -301,7 +301,7 @@ public class MemberController {
 		System.out.println("로그인을 실행.." + PnH + "..." + memberId + "..." + memberPw);
 		// P = 개인 (Person)
 		// H = 병원 (Hospital)
-		String msg = "로그인 성공!";
+		String msg = "로그인 실패!";
 		String loc = "/";
 		H_Info_Count=1;
 		
@@ -312,18 +312,19 @@ public class MemberController {
 			m = service.loginMemberCheck(memberId);
 			
 			if(m==null) {
-				msg = "로그인 실패!";
+				
 			}else {
 				if(bcrypt.matches(memberPw, m.getMemberPw())) {
 					model.addAttribute("memberLoggedIn",m);
 					model.addAttribute("checkPH","P");
+					msg = "로그인 성공!";
 				}
 			}
 		}
 		if(PnH.equals("H")){
 			h = service.loginHospitalCheck(memberId);
 			if(h==null) {
-				msg = "로그인 실패!";
+				
 			}else {
 				String hos_admi = h.getHospitalAdmission();
 				HospitalInfos hospitalInfo = service.selectHospitalInfo(h.getHospitalNum());
@@ -346,6 +347,7 @@ public class MemberController {
 					}
 					
 					model.addAttribute("H_Info_Count", H_Info_Count);
+					msg = "로그인 성공!";
 					
 				}
 			}
@@ -490,15 +492,16 @@ public class MemberController {
 	}
 	
 	
-	/* 회원 삭제시 헬프존 게시물과 함께 삭제(해당 게시물의 병원 댓글도 함께) */
+	/* 일반 회원 탈퇴(회원 삭제시 헬프존 게시물과 함께 삭제(해당 게시물의 병원 댓글도 함께)) */
 	@RequestMapping("/member/deleteMember.do")
 	public String deleteMember() {
-		System.out.println("회원탈퇴를 들어옴");
+		System.out.println("일반 회원이 탈퇴를 들어옴");
 		
 		return "member/deleteMember";
 	}
 	
 	
+	/* 일반 회원 탈퇴를 실행 */
 	@RequestMapping("/member/deleteMemberEnd.do")
 	public String deleteMemberEnd(String memberId, String memberPw, Model model, SessionStatus sessionStatus) {
 		System.out.println("회원탈퇴를 실행함");
@@ -510,6 +513,42 @@ public class MemberController {
 			if(bcrypt.matches(memberPw, m.getMemberPw())) {
 				msg = "삭제 성공";
 				int result = service.deleteMember(m.getMemberNum());
+				sessionStatus.setComplete();
+			}
+		}
+		else {
+			msg = "해당 아이디는 존재하지 않습니다.";
+		}
+		model.addAttribute("msg", msg);
+		model.addAttribute("loc", loc);
+		
+		return "common/msg";
+	}
+	
+	
+	/*병원 회원 탈퇴 */
+	@RequestMapping("/member/deleteHospital.do")
+	public String deleteHospital(Model model) {
+		System.out.println("병원 회원이 탈퇴를 들어옴");
+		
+		return "member/deleteHospital";
+	}
+	
+	
+	/*병원회원 탈퇴 실행*/
+	@RequestMapping("/member/deleteHospitalEnd.do")
+	public String deleteHospitalEnd(String hospitalId, String hospitalPw, Model model, SessionStatus sessionStatus) {
+		System.out.println("병원회원탈퇴를 실행함");
+		String msg = "아이디와 비밀번호가 일치하지 않아 삭제하지 못했습니다.";
+		String loc = "";
+		
+		Hospital h = service.selectFindHospital(hospitalId);
+		if(h != null) {
+			if(bcrypt.matches(hospitalPw, h.getHospitalPw())) {
+				msg = "삭제 성공";
+				service.deleteDoctors(h.getHospitalNum());
+				service.deleteHospitalInfo(h.getHospitalNum());
+				service.updateHospital(h.getHospitalNum());
 				sessionStatus.setComplete();
 			}
 		}

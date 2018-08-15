@@ -294,6 +294,34 @@ public class MemberServiceImpl implements MemberService {
 		return dao.hospitalNameDoctorNum(sqlSession, doctorNum);
 		
 	}
+
+	@Override
+	public Hospital selectFindHospital(String hospitalId) {
+		
+		return dao.selectFindHospital(sqlSession, hospitalId);
+		
+	}
+
+	@Override
+	public int deleteDoctors(int hospitalNo) {
+		
+		return dao.deleteDoctors(sqlSession, hospitalNo);
+		
+	}
+
+	@Override
+	public int deleteHospitalInfo(int hospitalInfoNum) {
+		
+		return dao.deleteHospitalInfo(sqlSession, hospitalInfoNum);
+		
+	}
+
+	@Override
+	public int updateHospital(int hospitalNum) {
+		
+		return dao.updateHospital(sqlSession, hospitalNum);
+		
+	}
 	
 	
 }

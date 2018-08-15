@@ -57,6 +57,10 @@ public interface MemberDAO {
 	String selecthospitalName(SqlSessionTemplate sqlSession, int hospitalNum);
 	Hospital selectHospital(SqlSessionTemplate sqlSession, int hospitalNum);
 	int hospitalUpdate(SqlSessionTemplate sqlSession, Hospital hospital);
+	Hospital selectFindHospital(SqlSessionTemplate sqlSession, String hospitalId);
+	int deleteDoctors(SqlSessionTemplate sqlSession, int hospitalNo);
+	int deleteHospitalInfo(SqlSessionTemplate sqlSession, int hospitalInfoNum);
+	int updateHospital(SqlSessionTemplate sqlSession, int hospitalNum);
 	
 	/* 병원정보 */
 	int hospitalInfoinsert(SqlSessionTemplate sqlSession, HospitalInfos hospitalInfo);

@@ -293,5 +293,33 @@ public class MemberDAOImpl implements MemberDAO {
 		
 	}
 
+	@Override
+	public Hospital selectFindHospital(SqlSessionTemplate sqlSession, String hospitalId) {
+		
+		return sqlSession.selectOne("hospital.selectFindHospital", hospitalId);
+		
+	}
+
+	@Override
+	public int deleteDoctors(SqlSessionTemplate sqlSession, int hospitalNo) {
+		
+		return sqlSession.delete("hospital.deleteDoctors", hospitalNo);
+		
+	}
+
+	@Override
+	public int deleteHospitalInfo(SqlSessionTemplate sqlSession, int hospitalInfoNum) {
+		
+		return sqlSession.delete("hospital.deleteHospitalInfo", hospitalInfoNum);
+		
+	}
+
+	@Override
+	public int updateHospital(SqlSessionTemplate sqlSession, int hospitalNum) {
+		
+		return sqlSession.update("hospital.updateHospital", hospitalNum);
+		
+	}
+
 	
 }

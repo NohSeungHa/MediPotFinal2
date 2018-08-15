@@ -178,6 +178,11 @@
 							<input type="hidden" name="hospitalNum" value="${memberLoggedIn.hospitalNum }">
 						</td>
 					</tr>
+					<tr>
+						<td colspan="3" style="text-align: center;">
+							<input type="button" onclick="deleteHospital()" class="btn btn-lg btn-default" value="회 원 탈 퇴">
+						</td>
+					</tr>
 				</table>
 			</form>
 			<div style="width: 100%; height: 100px; line-height: 100px; text-align: center">
@@ -188,5 +193,11 @@
 		</div>
 	</div>
 	<div style="height: 100px"></div>
+	
+	<script>
+		function deleteHospital(){
+			location.href="${pageContext.request.contextPath}/member/deleteHospital.do";
+		}
+	</script>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

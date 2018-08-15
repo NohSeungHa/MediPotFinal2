@@ -167,4 +167,25 @@
 	<select id="hospitalNameDoctorNum" parameterType="_int" resultType="string">
 		select hospitalName from hospital where hospitalNum=(select hospitalNo from doctorInfo where doctorNum=#{doctorNum})
 	</select>
+	
+	<select id="selectFindHospital" parameterType="string" resultType="hospital">
+		select * from hospital where hospitalId=#{hospitalId}
+	</select>
+	
+	<delete id="deleteDoctors" parameterType="_int">
+		delete from doctorInfo where hospitalNo=#{hospitalNo}
+	</delete>
+	
+	<delete id="deleteHospitalInfo" parameterType="_int">
+		delete from hospitalInfo where hospitalInfoNum=#{hospitalInfoNum}
+	</delete>
+	
+	<update id="updateHospital">
+		update hospital set
+			hospitalId='탈퇴한 아이디',
+			hospitalName='탈퇴한 병원',
+			hospitalEmail='탈퇴한 이메일',
+			hospitalAddr='탈퇴한 주소'
+		where hospitalNum=#{hospitalNum}
+	</update>
 </mapper>
