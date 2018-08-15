@@ -132,14 +132,14 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public String FindId(SqlSessionTemplate sqlSession, Member m) {
+	public String MemberFindId(SqlSessionTemplate sqlSession, Member m) {
 		
 		return sqlSession.selectOne("member.FindId", m);
 		
 	}
 
 	@Override
-	public Member searchName(SqlSessionTemplate sqlSession, String findname) {
+	public Member searchMemberName(SqlSessionTemplate sqlSession, String findname) {
 		
 		return sqlSession.selectOne("member.searchName", findname);
 		
@@ -269,6 +269,27 @@ public class MemberDAOImpl implements MemberDAO {
 	public int deleteMember(SqlSessionTemplate sqlSession, int memberNum) {
 		
 		return sqlSession.delete("member.deleteMember", memberNum);
+		
+	}
+
+	@Override
+	public String HospitalFindId(SqlSessionTemplate sqlSession, Hospital h) {
+		
+		return sqlSession.selectOne("hospital.HospitalFindId", h);
+		
+	}
+
+	@Override
+	public Hospital searchHospitalName(SqlSessionTemplate sqlSession, String findname) {
+		
+		return sqlSession.selectOne("hospital.searchHospitalName", findname);
+		
+	}
+
+	@Override
+	public String hospitalNameDoctorNum(SqlSessionTemplate sqlSession, int doctorNum) {
+		
+		return sqlSession.selectOne("hospital.hospitalNameDoctorNum", doctorNum);
 		
 	}
 

@@ -135,16 +135,16 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public String FindId(Member m) {
+	public String MemberFindId(Member m) {
 		
-		return dao.FindId(sqlSession, m);
+		return dao.MemberFindId(sqlSession, m);
 		
 	}
 
 	@Override
-	public Member searchName(String findname) {
+	public Member searchMemberName(String findname) {
 		
-		return dao.searchName(sqlSession, findname);
+		return dao.searchMemberName(sqlSession, findname);
 		
 	}
 
@@ -271,6 +271,27 @@ public class MemberServiceImpl implements MemberService {
 	public int deleteMember(int memberNum) {
 		
 		return dao.deleteMember(sqlSession, memberNum);
+		
+	}
+
+	@Override
+	public String HospitalFindId(Hospital h) {
+		
+		return dao.HospitalFindId(sqlSession, h);
+		
+	}
+
+	@Override
+	public Hospital searchHospitalName(String findname) {
+		
+		return dao.searchHospitalName(sqlSession, findname);
+		
+	}
+
+	@Override
+	public String hospitalNameDoctorNum(int doctorNum) {
+		
+		return dao.hospitalNameDoctorNum(sqlSession, doctorNum);
 		
 	}
 	

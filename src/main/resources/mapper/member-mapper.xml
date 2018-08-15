@@ -59,7 +59,7 @@
 	</select>
 	
 	<select id="FindId" parameterType="member" resultType="string">
-		select rpad(substr(memberId,1,3),length(memberId),'*') from member where memberName=#{memberName} and memberEmail=#{memberEmail}
+		select rpad(substr(memberId,1,4),length(memberId),'*') from member where memberName=#{memberName} and memberEmail=#{memberEmail}
 	</select>
 	
 	<select id="searchName" parameterType="string" resultType="member">

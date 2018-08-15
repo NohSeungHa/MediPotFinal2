@@ -36,10 +36,12 @@ public interface MemberDAO {
 	
 	/* 아이디 찾기 */
 	int FindMemEmailCheck(SqlSessionTemplate sqlSession, String memberEmail);
-	String FindId(SqlSessionTemplate sqlSession, Member m);
-	Member searchName(SqlSessionTemplate sqlSession, String findname);
+	String MemberFindId(SqlSessionTemplate sqlSession, Member m);
+	Member searchMemberName(SqlSessionTemplate sqlSession, String findname);
 	
 	int FindHosEmailCheck(SqlSessionTemplate sqlSession, String memberEmail);
+	String HospitalFindId(SqlSessionTemplate sqlSession, Hospital h);
+	Hospital searchHospitalName(SqlSessionTemplate sqlSession, String findname);
 	
 	/* 비밀번호 찾기 */
 	Member searchID(SqlSessionTemplate sqlSession, String findid);
@@ -68,5 +70,6 @@ public interface MemberDAO {
 	DoctorInfos selectDoctorPhoto(SqlSessionTemplate sqlSession, int doctorNum);
 	int updateDoctorInfo(SqlSessionTemplate sqlSession, DoctorInfos doctorInfo);
 	String DoctorsProfessional(SqlSessionTemplate sqlSession, int doctorNum);
+	String hospitalNameDoctorNum(SqlSessionTemplate sqlSession, int doctorNum);
 	
 }

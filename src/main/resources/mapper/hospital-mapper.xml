@@ -155,4 +155,16 @@
 			timeInterval=#{timeInterval}
 		where doctorNum=#{doctorNum}
 	</update>
+	
+	<select id="HospitalFindId" parameterType="hospital" resultType="string">
+		select rpad(substr(hospitalId,1,4),length(hospitalId),'*') from hospital where hospitalName=#{hospitalName} and hospitalEmail=#{hospitalEmail}
+	</select>
+	
+	<select id="searchHospitalName" parameterType="string" resultType="hospital">
+		select * from hospital where hospitalName=#{hospitalName}
+	</select>
+	
+	<select id="hospitalNameDoctorNum" parameterType="_int" resultType="string">
+		select hospitalName from hospital where hospitalNum=(select hospitalNo from doctorInfo where doctorNum=#{doctorNum})
+	</select>
 </mapper>

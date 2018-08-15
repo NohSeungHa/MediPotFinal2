@@ -32,10 +32,12 @@ public interface MemberService {
 	
 	/* 아이디찾기 */
 	int FindMemEmailCheck(String memberEmail);
-	String FindId(Member m);
-	Member searchName(String findname);
+	String MemberFindId(Member m);
+	Member searchMemberName(String findname);
 	
 	int FindHosEmailCheck(String memberEmail);
+	String HospitalFindId(Hospital h);
+	Hospital searchHospitalName(String findname);
 	
 	/* 비밀번호 찾기 */
 	Member searchID(String findid);
@@ -64,5 +66,6 @@ public interface MemberService {
 	DoctorInfos selectDoctorPhoto(int doctorNum);
 	int updateDoctorInfo(DoctorInfos doctorInfo);
 	String DoctorsProfessional(int doctorNum);
+	String hospitalNameDoctorNum(int doctorNum);
 	
 }

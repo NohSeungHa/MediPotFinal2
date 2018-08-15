@@ -295,22 +295,6 @@ public class MemberController {
 	}
 	
 	
-	/* 아이디 찾기로 들어옴 */
-	@RequestMapping("/member/findId.do")
-	public String findid() {
-		System.out.println("아이디찾기로 들어옴");
-		return "member/findid";
-	}
-	
-	
-	/* 비밀번호 찾기로 들어옴 */
-	@RequestMapping("/member/findPassword.do")
-	public String findpassword() {
-		System.out.println("비밀번호찾기로 들어옴");
-		return "member/findPassword";
-	}
-	
-	
 	/* 로그인을 실행 */
 	@RequestMapping("/member/memberLogin.do")
 	public String login(String PnH, @RequestParam(value="memberId") String memberId,@RequestParam(value="memberPw") String memberPw, Model model, HttpServletRequest req) {
@@ -664,6 +648,22 @@ public class MemberController {
 	}
 	
 	
+	/* 아이디 찾기로 들어옴 */
+	@RequestMapping("/member/findId.do")
+	public String findid() {
+		System.out.println("아이디찾기로 들어옴");
+		return "member/findid";
+	}
+	
+	
+	/* 비밀번호 찾기로 들어옴 */
+	@RequestMapping("/member/findPassword.do")
+	public String findpassword() {
+		System.out.println("비밀번호찾기로 들어옴");
+		return "member/findPassword";
+	}
+	
+	
 	/* 찾기 중 입력한 이메일과 정보가 일치한지 */
 	@RequestMapping("/member/findCheckEmail.do")
 	@ResponseBody
@@ -680,25 +680,46 @@ public class MemberController {
 	
 	/* 아이디를 찾은 후 */
 	@RequestMapping("/member/memberFindId.do")
-	public String FindIdprint(String findname, String findemail, Model model) {
+	public String FindIdprint(String findname, String UserEmail, String findPnH, Model model) {
 		System.out.println("아이디를 찾음");
+		String msg = "";
+		String loc = "";
 		String view="";
-		Member m = service.searchName(findname);
-		String findid = service.FindId(m);
-		
-		if(findid.equals(null)) {
-			String msg = "회원 정보와 일치하는 아이디가 존재하지 않습니다.";
-			String loc = "member/findid";
-			model.addAttribute("msg",msg);
-			model.addAttribute("loc",loc);
-			view = "common/msg";
-			return view;
+		if(findPnH.equals("P")) {
+			Member m = service.searchMemberName(findname);
+			String findid = service.MemberFindId(m);
+			if(m.getMemberEmail().equals(UserEmail)) {
+				if(findid.equals(null)) {
+					msg = "회원 정보와 일치하는 아이디가 존재하지 않습니다.";
+					loc = "member/findid";
+					model.addAttribute("msg",msg);
+					model.addAttribute("loc",loc);
+					view = "common/msg";
+					return view;
+				}
+				else {
+					view="member/findidprint";
+					model.addAttribute("findid",findid);
+				}
+			}
+		} else {
+			Hospital h = service.searchHospitalName(findname);
+			String findid = service.HospitalFindId(h);
+			if(h.getHospitalEmail().equals(UserEmail)) {
+				if(findid.equals(null)) {
+					msg = "회원 정보와 일치하는 아이디가 존재하지 않습니다.";
+					loc = "member/findid";
+					model.addAttribute("msg",msg);
+					model.addAttribute("loc",loc);
+					view = "common/msg";
+					return view;
+				}
+				else {
+					view="member/findidprint";
+					model.addAttribute("findid",findid);
+				}
+			}
 		}
-		else {
-			view="member/findidprint";
-		}
-		
-		model.addAttribute("findid",findid);
 		
 		return view;
 	}
@@ -1076,6 +1097,7 @@ public class MemberController {
 		System.out.println(doctorNum);
 		DoctorInfos doctorInfo = service.selectDoctorPhoto(doctorNum);
 		String pro = service.DoctorsProfessional(doctorNum);
+		String hospitalName = service.hospitalNameDoctorNum(doctorNum);
 		
 		String[] professionalArray = pro.split(",");
 		ArrayList<String> professional = new ArrayList();
@@ -1083,7 +1105,7 @@ public class MemberController {
 			professional.add(professionalArray[i]);
 		}
 		
-		
+		model.addAttribute("hospitalName", hospitalName);
 		model.addAttribute("doctorInfo", doctorInfo);
 		model.addAttribute("professional", professional);
 		
