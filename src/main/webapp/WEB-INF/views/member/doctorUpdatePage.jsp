@@ -69,7 +69,6 @@
 				<th><br>병원 명</th>
 				<td><br>
 					<input type="text" class="form-control" style="width: 200px" name="hospitalName" value="${hospitalName }" readonly>
-					<input type="hidden" class="form-control" name="hospitalNum" value="${hospital.hospitalNum }" readonly>
 				</td>
 			</tr>
 			<tr>

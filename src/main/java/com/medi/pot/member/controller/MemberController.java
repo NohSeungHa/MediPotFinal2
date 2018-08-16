@@ -1168,7 +1168,7 @@ public class MemberController {
 	/* 의사 수정을 실행함 */
 	@RequestMapping("/member/doctorInfoUpdateEnd.do")
 	public String doctorUpdateEnd(Model model, String doctorName,
-			String doctorCareer, int hospitalNum, String[] professional,
+			String doctorCareer, String[] professional,
 			String doctorSlunch, String doctorElunch, String WeekdayStime,
 			String WeekdayEtime, String SatStime, String SatEtime,
 			String closed, String Specialized, String timeInterval, 
