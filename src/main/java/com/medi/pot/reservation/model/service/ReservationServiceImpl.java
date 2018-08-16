@@ -12,6 +12,7 @@ import com.medi.pot.reservation.model.vo.DoctorSchedule;
 import com.medi.pot.reservation.model.vo.HospitalInfo;
 import com.medi.pot.reservation.model.vo.MemberReservation;
 import com.medi.pot.reservation.model.vo.ReserList;
+import com.medi.pot.reservation.model.vo.SearchReserList;
 
 @Service
 public class ReservationServiceImpl implements ReservationService {
@@ -103,6 +104,16 @@ public class ReservationServiceImpl implements ReservationService {
 	@Override
 	public int deleteDateCan(Map<String, Object> map) {
 		return reserDAO.deleteDateCan(map);
+	}
+
+	@Override
+	public List<SearchReserList> searchReserM(Map<String, Object> map,int cPage,int numPerPage) {
+		return reserDAO.searchReserM(map,cPage,numPerPage);
+	}
+
+	@Override
+	public int searchReserCount(Map<String, Object> map) {
+		return reserDAO.searchReserCount(map);
 	}
 	
 	

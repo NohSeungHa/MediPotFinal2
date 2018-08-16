@@ -191,6 +191,9 @@
 		<button id="choiceReser">선택 시간 제외하기</button>
 		<button id="blockDate">현재 날짜 제외하기</button>
 	</div>
+	<div style="text-align:center;margin-top:20px;">
+		<button id="searchReserM">예약 회원 조회</button>
+	</div>
 	
 	<style>
 		#choiceReser{
@@ -213,10 +216,26 @@
 		    border-radius: 10px;
 		    box-shadow: 3px 3px 5px lightgrey;
     	}
+    	#searchReserM{
+    		width: 100%;
+		    height: 100px;
+		    font-size: 30px;
+		    background:#286090;
+		    color:white;
+		    border-radius: 10px;
+		    box-shadow: 3px 3px 5px lightgrey;
+    	}
     	#choiceReser:hover{
 	    	background: #2A5060;
 			color:white;
-    	
+    	}
+    	#blockDate:hover{
+	    	background: #2A5060;
+			color:white;
+    	}
+    	#searchReserM:hover{
+	    	background: #2A5060;
+			color:white;
     	}
 	</style>
 	<script>
@@ -256,7 +275,10 @@
 			if($('.ti').attr('name')!=null){
 				alert('예약된 회원이 있어 제외가 불가능합니다.');
 			}else{
-				location.href=location.href='${path}/medi/hBlockDate?docNum=<%=docTime.getDoctorNum()%>&hosNum=<%=docTime.getHospitalNo()%>&date=<%=time2%>';
+				location.href='${path}/medi/hBlockDate?docNum=<%=docTime.getDoctorNum()%>&hosNum=<%=docTime.getHospitalNo()%>&date=<%=time2%>';
 			}
+		});
+		$('#searchReserM').click(function () {
+			location.href='${path}/medi/searchReserM?docNum=<%=docTime.getDoctorNum()%>&date=<%=time2%>';
 		});
 	</script>

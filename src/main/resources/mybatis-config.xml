@@ -30,7 +30,8 @@
 		
 		<!-- 예약 List -->
 		<typeAlias alias="ReserList" type="com.medi.pot.reservation.model.vo.ReserList" />
-
+		<typeAlias alias="SearchReserList" type="com.medi.pot.reservation.model.vo.SearchReserList" />
+		
 		
 		<!-- 병원정보, 의사정보 적용중 -->
 		<typeAlias alias="hospitalInfos" type="com.medi.pot.member.model.vo.HospitalInfos" />
