@@ -186,15 +186,11 @@ $(function(){
 
 		<div id="enroll-container">
 
-
 		<div style="width: 100%; height: 100px; line-height: 100px; text-align: center">
 			<img src="${pageContext.request.contextPath }/resources/img/enroll/hospitalEnrollTop.png"
 				style="width: 100%; max-width: 760px; vertical-align: middle" />
 		</div>
 
-
-
-		
 		<h2>병원 회원가입</h2>
 		<p><b>(*)</b>는 필수 표시사항 입니다.</p>
 			<form action="${pageContext.request.contextPath }/member/hospitalEnrollEnd.do" method="post" onsubmit="return fn_enroll_validate();" enctype="multipart/form-data" >
@@ -208,7 +204,7 @@ $(function(){
 					<tr>
 						<td>
 						</td>
-						<td colspan="3">
+						<td>
 							<div id="hospitalId-container">
 								<span class="guide ok">해당 아이디는 사용가능 합니다.</span>
 								<span class="guide error">해당 아이디는 사용불가능 합니다.</span>
@@ -265,7 +261,6 @@ $(function(){
 							<input type="text" class="form-control" name="hospitalAddr" id="hospitalAddr" placeholder="도로명주소" readonly>
 						</td>
 						<td>
-							&nbsp;
 							<button type="button" onclick="sample4_execDaumPostcode()" class="btn btn-default" style="margin: 0 0 10px 10px">우편번호 찾기</button>
 							<span style="display: none" id="guide" style="color: #999"></span>
 						</td>

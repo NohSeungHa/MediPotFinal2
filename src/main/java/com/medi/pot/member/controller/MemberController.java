@@ -1003,8 +1003,7 @@ public class MemberController {
 		String msg = "";
 		String loc = "";
 		
-		HospitalInfos hospitalInfo = new HospitalInfos(
-				hospitalNum, hospitalInfoIntro, hospitalInfoNotice, null, null, hospitalInfoUsetime, hospitalInfoLunchtime);
+		HospitalInfos hospitalInfo = service.selectHospitalInfo(hospitalNum);
 		
 		if(hospitalPhoto != null) {
 			//파일 업로드
@@ -1036,6 +1035,11 @@ public class MemberController {
 				hospitalInfo.setHospitalRePhoto(renamedFileName);
 			}
 		}
+		
+		hospitalInfo.setHospitalInfoIntro(hospitalInfoIntro);
+		hospitalInfo.setHospitalInfoNotice(hospitalInfoNotice);
+		hospitalInfo.setHospitalInfoUsetime(hospitalInfoUsetime);
+		hospitalInfo.setHospitalInfoLunchtime(hospitalInfoLunchtime);
 		
 		int result = service.updateHospitalInfo(hospitalInfo);
 		
@@ -1168,7 +1172,7 @@ public class MemberController {
 			String doctorSlunch, String doctorElunch, String WeekdayStime,
 			String WeekdayEtime, String SatStime, String SatEtime,
 			String closed, String Specialized, String timeInterval, 
-			@RequestParam(value="doctorPhoto", required=false) MultipartFile doctorPhoto,
+			@RequestParam(value="doctorPhoto", required=false, defaultValue="null") MultipartFile doctorPhoto,
 			HttpServletRequest request, int doctorNum) {
 		
 		System.out.println("의사 수정을 실행함");

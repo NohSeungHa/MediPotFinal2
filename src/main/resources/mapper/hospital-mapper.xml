@@ -190,10 +190,11 @@
 	
 	<update id="updateHospital">
 		update hospital set
-			hospitalId='탈퇴한 아이디',
-			hospitalName='탈퇴한 병원',
-			hospitalEmail='탈퇴한 이메일',
-			hospitalAddr='탈퇴한 주소'
+			hospitalId='회원 탈퇴',
+			hospitalName='회원 탈퇴',
+			hospitalEmail='회원 탈퇴',
+			hospitalAddr='회원 탈퇴',
+			hospitalProfessional='회원 탈퇴'
 		where hospitalNum=#{hospitalNum}
 	</update>
 </mapper>
