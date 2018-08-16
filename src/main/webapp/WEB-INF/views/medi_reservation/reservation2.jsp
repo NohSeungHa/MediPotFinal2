@@ -454,7 +454,7 @@
 			의료진 정보
 		</div>
 		<div id="docInfoE" style="text-align:center;font-size:20px;">
-			** 제외 설정을 할 의사 선생님을 선택해 주세요  **
+			** 제외 설정 또는 예약 회원 검색 할 의사 선생님을 선택해 주세요  **
 		</div>
 		<c:if test="${empty list }">
 		<div style="text-align:center;">
@@ -495,7 +495,7 @@
 			날짜 선택
 		</div>
 		<div id="docInfoE2" style="text-align:center;font-size:20px;">
-			** 제외 설정을 할 날짜를 선택해 주세요  **
+			** 제외 설정 및 예약 회원 검색 할 날짜를 선택해 주세요  **
 		</div>
 		<div id="calList">
 			<table id="tbl-cal" align="center">
@@ -720,6 +720,7 @@
 		</div>
 		<div id="docInfoE3" style="text-align:center;font-size:20px;">
 			** 제외 설정을 할 시간을 선택한 후 제외하기 버튼을 눌러주세요  **
+			<br>** 예약 된 회원 리스트 검색은 아래 예약 회원 조회 버튼을 눌러주세요 **
 		</div>
 		<div id="timeImg" style="text-align:center;">
 			<img alt="달력사진" src="${path }/resources/img/reser/reserTime.png" height="300px;"></div>

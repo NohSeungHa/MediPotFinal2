@@ -13,6 +13,7 @@ import com.medi.pot.reservation.model.vo.DoctorSchedule;
 import com.medi.pot.reservation.model.vo.HospitalInfo;
 import com.medi.pot.reservation.model.vo.MemberReservation;
 import com.medi.pot.reservation.model.vo.ReserList;
+import com.medi.pot.reservation.model.vo.SearchReserList;
 
 @Repository
 public class ReservationDaoImpl implements ReservationDao {
@@ -107,6 +108,18 @@ public class ReservationDaoImpl implements ReservationDao {
 	public int deleteDateCan(Map<String, Object> map) {
 		return session.delete("reser.deleteDateCan",map);
 	}
+
+	@Override
+	public List<SearchReserList> searchReserM(Map<String, Object> map,int cPage,int numPerPage) {
+		RowBounds rowBounds=new RowBounds(((cPage-1)*numPerPage),numPerPage);
+		return session.selectList("reser.selectReserListM", map,rowBounds);
+	}
+
+	@Override
+	public int searchReserCount(Map<String, Object> map) {
+		return session.selectOne("reser.searchReserCount", map);
+	}
+	
 	
 	
 	

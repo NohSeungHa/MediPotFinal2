@@ -42,11 +42,26 @@
 	
 	List<MemberReservation> list=(List<MemberReservation>)request.getAttribute("mr");
 	List<MemberReservation> list2=new ArrayList();
-	for(int i=0;i<list.size();i++){
-		if(!list2.contains(list.get(i).getCheckTime())){
+	for(int i=0; i<list.size(); i++){
+		if(!list2.contains(list.get(i))){
 			list2.add(list.get(i));
 		}
 	}
+	/* if(list.size()>0){
+		list2.add(list.get(0));
+		for(int i=0;i<list.size();i++){
+			for(int j=0;j<list2.size();j++){
+				if (!list2.get(j).getCheckTime().equals(list.get(i).getCheckTime())){
+					for(int z=0;z<list2.size();z++){
+						if(!list2.get(z).getCheckTime().equals(list2.get(j).getCheckTime()))
+						list2.add(list.get(i));
+					}
+						
+				}
+			}
+		}
+	} */
+	//out.print(list2);
 	String checkTi="";
 	String checkTi2="";
 	String checkTi3="";
@@ -91,7 +106,7 @@
 			<c:if test="<%=!checkTi.contains(sd.format(lws)) %>">
 			<button class="timebut" value="<%=sd.format(lws)%>"><%=sd2.format(lws) %></button>
 			</c:if>
-			<%for(int j=0;j<list.size();j++){ %>
+			<%for(int j=0;j<list2.size();j++){ %>
 			<%if(list2.get(j).getCheckTime()!=null){ %>
 			<c:if test="<%=list2.get(j).getCheckTime().contains(sd.format(lws)) %>">
 			<button class="ti" value="<%=sd.format(lws)%>" name="<%=list2.get(j).getMemberNum() %>" title="<%=list2.get(j).getMemberName() %>" style="background-color:#A6A6A6;color:#FCFCFC;"><%=sd2.format(lws) %><%=list2.get(j).getMemberName() %></button>
@@ -111,7 +126,7 @@
 			<c:if test="<%=!checkTi.contains(sd.format(lel)) %>">
 			<button class="timebut" value="<%=sd.format(lel)%>"><%=sd2.format(lel) %></button>
 			</c:if>
-			<%for(int j=0;j<list.size();j++){ %>
+			<%for(int j=0;j<list2.size();j++){ %>
 			<%if(list2.get(j).getCheckTime()!=null){ %>
 			<c:if test="<%=list2.get(j).getCheckTime().contains(sd.format(lel)) %>">
 			<button class="ti" value="<%=sd.format(lel)%>" name="<%=list2.get(j).getMemberNum() %>" title="<%=list2.get(j).getMemberName() %>" style="background-color:#A6A6A6;color:#FCFCFC;"><%=sd2.format(lel) %><%=list2.get(j).getMemberName() %></button>
@@ -136,7 +151,7 @@
 			<c:if test="<%=!checkTi.contains(sd.format(lss)) %>">
 			<button class="timebut" value="<%=sd.format(lss)%>"><%=sd2.format(lss) %></button>
 			</c:if>
-			<%for(int j=0;j<list.size();j++){ %>
+			<%for(int j=0;j<list2.size();j++){ %>
 			<%if(list2.get(j).getCheckTime()!=null){ %>
 			<c:if test="<%=list2.get(j).getCheckTime().contains(sd.format(lss)) %>">
 			<button class="ti" value="<%=sd.format(lss)%>" name="<%=list2.get(j).getMemberNum() %>" title="<%=list2.get(j).getMemberName() %>" style="background-color:#A6A6A6;color:#FCFCFC;"><%=sd2.format(lss) %><br><%=list2.get(j).getMemberName() %></button>
@@ -155,7 +170,7 @@
 			<c:if test="<%=!checkTi.contains(sd.format(lel)) %>">
 			<button class="timebut" value="<%=sd.format(lel)%>"><%=sd2.format(lel) %></button>
 			</c:if>
-			<%for(int j=0;j<list.size();j++){ %>
+			<%for(int j=0;j<list2.size();j++){ %>
 			<%if(list2.get(j).getCheckTime()!=null){ %>
 			<c:if test="<%=list2.get(j).getCheckTime().contains(sd.format(lel)) %>">
 			<button class="ti" value="<%=sd.format(lel)%>" name="<%=list2.get(j).getMemberNum() %>" title="<%=list2.get(j).getMemberName() %>" style="background-color:#A6A6A6;color:#FCFCFC;"><%=sd2.format(lel) %><%=list2.get(j).getMemberName() %></button>
@@ -175,6 +190,9 @@
 	<div style="text-align:center;margin-top:20px;">
 		<button id="choiceReser">선택 시간 제외하기</button>
 		<button id="blockDate">현재 날짜 제외하기</button>
+	</div>
+	<div style="text-align:center;margin-top:20px;">
+		<button id="searchReserM">예약 회원 조회</button>
 	</div>
 	
 	<style>
@@ -198,10 +216,26 @@
 		    border-radius: 10px;
 		    box-shadow: 3px 3px 5px lightgrey;
     	}
+    	#searchReserM{
+    		width: 100%;
+		    height: 100px;
+		    font-size: 30px;
+		    background:#286090;
+		    color:white;
+		    border-radius: 10px;
+		    box-shadow: 3px 3px 5px lightgrey;
+    	}
     	#choiceReser:hover{
 	    	background: #2A5060;
 			color:white;
-    	
+    	}
+    	#blockDate:hover{
+	    	background: #2A5060;
+			color:white;
+    	}
+    	#searchReserM:hover{
+	    	background: #2A5060;
+			color:white;
     	}
 	</style>
 	<script>
@@ -216,7 +250,7 @@
 				$(this).css('background-color','#286090');
 				$(this).css('color','white');
 				choiceTime+=$(this).val()+',';
-				alert(choiceTime);
+				
 			}
 		});
 		$('#choiceReser').click(function () {
@@ -241,7 +275,10 @@
 			if($('.ti').attr('name')!=null){
 				alert('예약된 회원이 있어 제외가 불가능합니다.');
 			}else{
-				location.href=location.href='${path}/medi/hBlockDate?docNum=<%=docTime.getDoctorNum()%>&hosNum=<%=docTime.getHospitalNo()%>&date=<%=time2%>';
+				location.href='${path}/medi/hBlockDate?docNum=<%=docTime.getDoctorNum()%>&hosNum=<%=docTime.getHospitalNo()%>&date=<%=time2%>';
 			}
+		});
+		$('#searchReserM').click(function () {
+			location.href='${path}/medi/searchReserM?docNum=<%=docTime.getDoctorNum()%>&date=<%=time2%>';
 		});
 	</script>

@@ -20,6 +20,7 @@ import com.medi.pot.reservation.model.vo.DoctorSchedule;
 import com.medi.pot.reservation.model.vo.HospitalInfo;
 import com.medi.pot.reservation.model.vo.MemberReservation;
 import com.medi.pot.reservation.model.vo.ReserList;
+import com.medi.pot.reservation.model.vo.SearchReserList;
 import com.medi.pot.common.page.PageCreate2;
 
 @Controller
@@ -35,7 +36,7 @@ public class ReservationController {
 	}
 	
 	@RequestMapping("/medi/mediInfo")
-	public String mediInfo(String no,HttpServletRequest req) {
+	public String mediInfo(@RequestParam(value = "no")String no,HttpServletRequest req) {
 		int num=Integer.parseInt(no);
 		HospitalInfo hi=service.mediInfo(num);
 		req.setAttribute("hi", hi);
@@ -43,7 +44,7 @@ public class ReservationController {
 	}
 	
 	@RequestMapping("/medi/reser")
-	public String mediReser(String no,HttpServletRequest req) {
+	public String mediReser(@RequestParam(value = "no")String no,HttpServletRequest req) {
 		int num=Integer.parseInt(no);
 		List<DoctorInfo> list=service.selectDoctorList(num);
 		req.setAttribute("list", list);
@@ -51,7 +52,7 @@ public class ReservationController {
 	}
 	
 	@RequestMapping("/medi/medisearchList")
-	public String medisearchList(@RequestParam(value="cPage", required=false,defaultValue="1") int cPage, String loc,String sub,HttpServletRequest req) {
+	public String medisearchList(@RequestParam(value="cPage", required=false,defaultValue="1") int cPage, @RequestParam(value = "loc")String loc,@RequestParam(value = "sub")String sub,HttpServletRequest req) {
 		Map<String,String> map=new HashMap<String, String>();
 		map.put("loc", loc);
 		map.put("sub", sub);
@@ -66,7 +67,7 @@ public class ReservationController {
 	}
 	
 	@RequestMapping("/medi/medisearchList2")
-	public String medisearchList2(@RequestParam(value="cPage", required=false,defaultValue="1") int cPage, String loc,String sub,HttpServletRequest req) {
+	public String medisearchList2(@RequestParam(value="cPage", required=false,defaultValue="1") int cPage, @RequestParam(value = "loc")String loc,@RequestParam(value = "sub")String sub,HttpServletRequest req) {
 		Map<String,String> map=new HashMap<String, String>();
 		map.put("loc", loc);
 		map.put("sub", sub);
@@ -81,7 +82,7 @@ public class ReservationController {
 	}
 	
 	@RequestMapping("/medi/searchMedi")
-	public String searchMedi(String hName, HttpServletRequest req) {
+	public String searchMedi(@RequestParam(value = "hName")String hName, HttpServletRequest req) {
 		List<HospitalInfo> nameList=service.mediNameSearch(hName);
 		System.out.println(nameList);
 		req.setAttribute("nameList", nameList);
@@ -89,7 +90,7 @@ public class ReservationController {
 	}
 	
 	@RequestMapping("/medi/doctorS")
-	public String doctorSca(String docNum,String hosNum,HttpServletRequest req) {
+	public String doctorSca(@RequestParam(value = "docNum")String docNum,@RequestParam(value = "hosNum")String hosNum,HttpServletRequest req) {
 		int num=Integer.parseInt(hosNum);
 		int docNo=Integer.parseInt(docNum);
 		List<DoctorInfo> list=service.selectDoctorList(num);
@@ -102,7 +103,7 @@ public class ReservationController {
 		return "medi_reservation/reservation";
 	}
 	@RequestMapping("/medi/mediChoice")
-	public String mediChoice(String docNum,String time, HttpServletRequest req) {
+	public String mediChoice(@RequestParam(value = "docNum")String docNum,@RequestParam(value = "time")String time, HttpServletRequest req) {
 		Map<String,Object> map=new HashMap<String, Object>();
 		int num=Integer.parseInt(docNum);
 		String chDate=time.substring(0, 10);
@@ -118,6 +119,10 @@ public class ReservationController {
 		req.setAttribute("time", time);
 		return "medi_reservation/choiceTime";
 	}
+<<<<<<< HEAD
+=======
+	
+>>>>>>> mediSuper2
 	@RequestMapping("/medi/insertReser")
 	public String insertReser(MemberReservation mr,HttpServletRequest req) {
 		int result=service.insertReser(mr);
@@ -161,14 +166,13 @@ public class ReservationController {
 		int num=Integer.parseInt(userNum);
 		List<ReserList> list=service.reserList(num,cPage,numPerPage);
 		int totalCount=service.reserCount(num);
-		String pageBar=new PageCreate().getPageBar(cPage, numPerPage, totalCount, req.getContextPath()+"/medi/reserList");
+		String pageBar=new PageCreate().getPageBar3(cPage, numPerPage, totalCount, req.getContextPath()+"/medi/reserList", num);
 		req.setAttribute("pageBar", pageBar);
 		req.setAttribute("list", list);
 		req.setAttribute("msg", msg);
 		req.setAttribute("cPage", cPage);
 		return "medi_reservation/reserList";
 	}
-	
 	@RequestMapping("/medi/reser2")
 	public String mediReser2(String no,HttpServletRequest req) {
 		int num=Integer.parseInt(no);
@@ -347,4 +351,21 @@ public class ReservationController {
 		
 		return "medi_reservation/reservation2";
 	}
+<<<<<<< HEAD
+=======
+	
+	@RequestMapping("/medi/searchReserM")
+	public String searchReserM(@RequestParam(value="cPage", required=false,defaultValue="1") int cPage,@RequestParam(value = "docNum")int docNum,@RequestParam(value = "date")String date,HttpServletRequest req) {
+		Map<String, Object> map=new HashMap<String, Object>();
+		int numPerPage=10;
+		map.put("docNum", docNum);
+		map.put("date", date);
+		
+		List<SearchReserList> list=service.searchReserM(map,cPage,numPerPage);
+		int totalCount=service.searchReserCount(map);
+		req.setAttribute("list", list);
+		return "medi_reservation/searchReser";
+	}
+
+>>>>>>> mediSuper2
 }

@@ -1,5 +1,7 @@
 package com.medi.pot.reservation.model.vo;
 
+import java.util.Objects;
+
 public class MemberReservation {
 	private int checkNum;
 	private int checkDoctor;
@@ -14,14 +16,17 @@ public class MemberReservation {
 	private String blockCheck;
 	private String memberName;
 	private int memberNum;
+	private String sendMsg;
 	
 	public MemberReservation() {
 		// TODO Auto-generated constructor stub
 	}
 
+	
+
 	public MemberReservation(int checkNum, int checkDoctor, int checkHospital, int checkMember, String checkDate,
 			String checkTime, int blockDoctor, int blockHosplital, String blockDate, String blockTime,
-			String blockCheck, String memberName, int memberNum) {
+			String blockCheck, String memberName, int memberNum, String sendMsg) {
 		super();
 		this.checkNum = checkNum;
 		this.checkDoctor = checkDoctor;
@@ -36,7 +41,11 @@ public class MemberReservation {
 		this.blockCheck = blockCheck;
 		this.memberName = memberName;
 		this.memberNum = memberNum;
+		this.sendMsg = sendMsg;
 	}
+
+	
+
 
 	@Override
 	public String toString() {
@@ -44,111 +53,195 @@ public class MemberReservation {
 				+ checkHospital + ", checkMember=" + checkMember + ", checkDate=" + checkDate + ", checkTime="
 				+ checkTime + ", blockDoctor=" + blockDoctor + ", blockHosplital=" + blockHosplital + ", blockDate="
 				+ blockDate + ", blockTime=" + blockTime + ", blockCheck=" + blockCheck + ", memberName=" + memberName
-				+ ", memberNum=" + memberNum + "]";
+				+ ", memberNum=" + memberNum + ", sendMsg=" + sendMsg + "]";
 	}
+
+
 
 	public int getCheckNum() {
 		return checkNum;
 	}
 
+
+
 	public void setCheckNum(int checkNum) {
 		this.checkNum = checkNum;
 	}
+
+
 
 	public int getCheckDoctor() {
 		return checkDoctor;
 	}
 
+
+
 	public void setCheckDoctor(int checkDoctor) {
 		this.checkDoctor = checkDoctor;
 	}
+
+
 
 	public int getCheckHospital() {
 		return checkHospital;
 	}
 
+
+
 	public void setCheckHospital(int checkHospital) {
 		this.checkHospital = checkHospital;
 	}
+
+
 
 	public int getCheckMember() {
 		return checkMember;
 	}
 
+
+
 	public void setCheckMember(int checkMember) {
 		this.checkMember = checkMember;
 	}
+
+
 
 	public String getCheckDate() {
 		return checkDate;
 	}
 
+
+
 	public void setCheckDate(String checkDate) {
 		this.checkDate = checkDate;
 	}
+
+
 
 	public String getCheckTime() {
 		return checkTime;
 	}
 
+
+
 	public void setCheckTime(String checkTime) {
 		this.checkTime = checkTime;
 	}
+
+
 
 	public int getBlockDoctor() {
 		return blockDoctor;
 	}
 
+
+
 	public void setBlockDoctor(int blockDoctor) {
 		this.blockDoctor = blockDoctor;
 	}
+
+
 
 	public int getBlockHosplital() {
 		return blockHosplital;
 	}
 
+
+
 	public void setBlockHosplital(int blockHosplital) {
 		this.blockHosplital = blockHosplital;
 	}
+
+
 
 	public String getBlockDate() {
 		return blockDate;
 	}
 
+
+
 	public void setBlockDate(String blockDate) {
 		this.blockDate = blockDate;
 	}
+
+
 
 	public String getBlockTime() {
 		return blockTime;
 	}
 
+
+
 	public void setBlockTime(String blockTime) {
 		this.blockTime = blockTime;
 	}
+
+
 
 	public String getBlockCheck() {
 		return blockCheck;
 	}
 
+
+
 	public void setBlockCheck(String blockCheck) {
 		this.blockCheck = blockCheck;
 	}
+
+
 
 	public String getMemberName() {
 		return memberName;
 	}
 
+
+
 	public void setMemberName(String memberName) {
 		this.memberName = memberName;
 	}
+
+
 
 	public int getMemberNum() {
 		return memberNum;
 	}
 
+
+
 	public void setMemberNum(int memberNum) {
 		this.memberNum = memberNum;
+	}
+
+
+
+	public String getSendMsg() {
+		return sendMsg;
+	}
+
+
+
+	public void setSendMsg(String sendMsg) {
+		this.sendMsg = sendMsg;
+	}
+
+
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(checkTime);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		MemberReservation r=(MemberReservation)obj;
+		if(this.checkTime.equals(r.getCheckTime()))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 	

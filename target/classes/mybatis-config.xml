@@ -14,9 +14,15 @@
 		<typeAlias alias="MemberNotice" type="com.medi.pot.notice.vo.MemberNotice"/>
 		<!-- 자유게시판 -->
 		<typeAlias alias="Community" type="com.medi.pot.community.vo.Community"/>
+<<<<<<< HEAD
 		<!-- 자유게시판 댓글 -->
 		<typeAlias alias="CommunityComment" type="com.medi.pot.community.vo.CommunityComment"/>
 		
+=======
+
+		<!-- 자유게시판 댓글 -->
+		<typeAlias alias="CommunityComment" type="com.medi.pot.community.vo.CommunityComment"/>
+>>>>>>> mediSuper2
 		<typeAlias alias="member" type="com.medi.pot.member.model.vo.Member" />
 		<typeAlias alias="hospital" type="com.medi.pot.member.model.vo.Hospital" />
 		
@@ -30,7 +36,13 @@
 		
 		<!-- 예약 List -->
 		<typeAlias alias="ReserList" type="com.medi.pot.reservation.model.vo.ReserList" />
+<<<<<<< HEAD
 
+=======
+		<typeAlias alias="SearchReserList" type="com.medi.pot.reservation.model.vo.SearchReserList" />
+		
+		
+>>>>>>> mediSuper2
 		<!-- 병원정보, 의사정보 적용중 -->
 		<typeAlias alias="hospitalInfos" type="com.medi.pot.member.model.vo.HospitalInfos" />
 		<typeAlias alias="doctorInfos" type="com.medi.pot.member.model.vo.DoctorInfos" />

@@ -8,6 +8,7 @@ import com.medi.pot.reservation.model.vo.DoctorSchedule;
 import com.medi.pot.reservation.model.vo.HospitalInfo;
 import com.medi.pot.reservation.model.vo.MemberReservation;
 import com.medi.pot.reservation.model.vo.ReserList;
+import com.medi.pot.reservation.model.vo.SearchReserList;
 
 public interface ReservationService {
 	List<HospitalInfo> medisearchList(Map<String, String> map,int cPage,int numPerPage);
@@ -27,4 +28,6 @@ public interface ReservationService {
 	int bDeleteReser(Map<String, Object> map);
 	int hBlockDate(Map<String, Object> map);
 	int deleteDateCan(Map<String, Object> map);
+	List<SearchReserList> searchReserM(Map<String, Object> map,int cPage,int numPerPage);
+	int searchReserCount(Map<String, Object> map);
 }
