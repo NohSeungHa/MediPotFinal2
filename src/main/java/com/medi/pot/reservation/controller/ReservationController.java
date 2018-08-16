@@ -119,7 +119,6 @@ public class ReservationController {
 		return "medi_reservation/choiceTime";
 	}
 	
-<<<<<<< HEAD
 	@RequestMapping("/medi/insertReser")
 	public String insertReser(MemberReservation mr,HttpServletRequest req) {
 		int result=service.insertReser(mr);
@@ -349,6 +348,4 @@ public class ReservationController {
 		return "medi_reservation/reservation2";
 	}
 
-=======
->>>>>>> groot
 }
