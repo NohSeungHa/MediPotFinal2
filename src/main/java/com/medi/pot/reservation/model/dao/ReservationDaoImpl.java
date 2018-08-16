@@ -119,6 +119,22 @@ public class ReservationDaoImpl implements ReservationDao {
 	public int searchReserCount(Map<String, Object> map) {
 		return session.selectOne("reser.searchReserCount", map);
 	}
+
+	@Override
+	public int deleteSearchReser(int num) {
+		return session.delete("reser.deleteSearchReser", num);
+	}
+
+	@Override
+	public List<SearchReserList> searchReserMem(Map<String, Object> map, int cPage, int numPerPage) {
+		RowBounds rowBounds=new RowBounds(((cPage-1)*numPerPage),numPerPage);
+		return session.selectList("reser.selectListSearchMem", map, rowBounds);
+	}
+
+	@Override
+	public int searchReserMemCount(Map<String, Object> map) {
+		return session.selectOne("reser.selectCountReserMem", map);
+	}
 	
 	
 	

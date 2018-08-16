@@ -129,7 +129,12 @@
                            <li><a href="${pageContext.request.contextPath }/member/doctorInfoInsert.do?hospitalNum=${memberLoggedIn.hospitalNum}">의사 추가</a></li>
                            <li><a href="${pageContext.request.contextPath }/member/doctorInfoUpdate.do?hospitalNum=${memberLoggedIn.hospitalNum}">의사 수정</a></li>
                         </c:if>
+<<<<<<< HEAD
                         <li><a href="${pageContext.request.contextPath }/medi/reser2?no=${memberLoggedIn.hospitalNum}">예약 시간 설정</a></li>
+=======
+                        <li><a href="${pageContext.request.contextPath }/medi/reser2?no=${memberLoggedIn.hospitalNum}">예약 제외 설정 및 예약 회원 조회</a></li>
+                        <li><a href="${pageContext.request.contextPath }/medi/searchReserMember?no=${memberLoggedIn.hospitalNum}">예약 회원 검색</a></li>
+>>>>>>> sh
                      </ul>
                      </li>
                   </c:if>

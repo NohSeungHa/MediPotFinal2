@@ -358,8 +358,66 @@ public class ReservationController {
 		
 		List<SearchReserList> list=service.searchReserM(map,cPage,numPerPage);
 		int totalCount=service.searchReserCount(map);
+		String pageBar=new PageCreate2().getPageBar(cPage, numPerPage, totalCount, req.getContextPath()+"/medi/searchReserM",docNum,date );
+		req.setAttribute("pageBar", pageBar);
 		req.setAttribute("list", list);
+		req.setAttribute("cPage", cPage);
+		req.setAttribute("list", list);
+		req.setAttribute("date", date);
 		return "medi_reservation/searchReser";
+	}
+	
+	@RequestMapping("/medi/deleteSearchReser")
+	public String deleteSearchReser(@RequestParam(value="cPage", required=false,defaultValue="1") int cPage,@RequestParam(value = "num")int num,@RequestParam(value = "docNum")int docNum,@RequestParam(value = "date")String date, HttpServletRequest req) {
+		int result=service.deleteSearchReser(num);
+		String msg="";
+		if(result>0) {
+			msg="예약이 취소 되었습니다.";
+		}else {
+			msg="예약 취소에 실패 하였습니다.";
+		}
+		
+		Map<String, Object> map=new HashMap<String, Object>();
+		int numPerPage=10;
+		map.put("docNum", docNum);
+		map.put("date", date);
+		
+		List<SearchReserList> list=service.searchReserM(map,cPage,numPerPage);
+		int totalCount=service.searchReserCount(map);
+		String pageBar=new PageCreate2().getPageBar(cPage, numPerPage, totalCount, req.getContextPath()+"/medi/searchReserM",docNum,date);
+		req.setAttribute("pageBar", pageBar);
+		req.setAttribute("list", list);
+		req.setAttribute("cPage", cPage);
+		req.setAttribute("msg", msg);
+		req.setAttribute("date", date);
+		return "medi_reservation/searchReser";
+	}
+	
+	@RequestMapping("/medi/searchReserMember")
+	public String searchReserMember(@RequestParam(value="cPage", required=false,defaultValue="1") int cPage,@RequestParam(value = "no")int no,HttpServletRequest req) {
+		int numPerPage=10;
+		int totalCount=0;
+		String pageBar=new PageCreate2().getPageBar(cPage, numPerPage, totalCount, req.getContextPath()+"/medi/searchReserMember");
+		req.setAttribute("pageBar", pageBar);
+		req.setAttribute("hosNum", no);
+		return "medi_reservation/searchReserMember";
+	}
+	
+	@RequestMapping("/medi/searchReserMem")
+	public String searchReserMem(@RequestParam(value="cPage", required=false,defaultValue="1") int cPage,@RequestParam(value = "hosNum")int hosNum,@RequestParam(value = "searchKind") String searchKind,@RequestParam(value = "search") String search, HttpServletRequest req) {
+		int numPerPage=10;
+		Map<String, Object> map=new HashMap<String, Object>();
+		map.put("hosNum", hosNum);
+		map.put("kind", searchKind);
+		map.put("search", search);
+		List<SearchReserList> list=service.searchReserMem(map,cPage,numPerPage);
+		int totalCount=service.searchReserMemCount(map);
+		String pageBar=new PageCreate2().getPageBar2(cPage, numPerPage, totalCount, req.getContextPath()+"/medi/searchReserMember",hosNum,searchKind,search);
+		req.setAttribute("pageBar", pageBar);
+		req.setAttribute("list", list);
+		req.setAttribute("cPage", cPage);
+		req.setAttribute("hosNum", hosNum);
+		return "medi_reservation/searchReserMember";
 	}
 
 }

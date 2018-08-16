@@ -30,4 +30,7 @@ public interface ReservationService {
 	int deleteDateCan(Map<String, Object> map);
 	List<SearchReserList> searchReserM(Map<String, Object> map,int cPage,int numPerPage);
 	int searchReserCount(Map<String, Object> map);
+	int deleteSearchReser(int num);
+	List<SearchReserList> searchReserMem(Map<String, Object> map,int cPage,int numPerPage);
+	int searchReserMemCount(Map<String, Object> map);
 }

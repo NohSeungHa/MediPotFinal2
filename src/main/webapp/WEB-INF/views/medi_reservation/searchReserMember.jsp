@@ -10,9 +10,28 @@
 </jsp:include>
 <div style="height:1000px;">
 		<div style="position:relative;height:280px;">
-			<div style="position:absolute;left:470px;"><img src="${path }/resources/img/reser/listReser.png" width="1000px;" height="280px;"></div>
-			<div style="position: absolute;font-size:70px;left:920px;top:50px;">${date }</div>
+			<div style="position:absolute;left:470px;"><img src="${path }/resources/img/reser/searchr.png" width="1000px;" height="280px;"></div>
+			<div style="position: absolute;font-size:70px;left:890px;top:170px;">
+				<form name="noticeSearchFrm" action="${path}/medi/searchReserMem" method="get">
+			      	<select id="searchChoice" name="searchKind" class="form-control" style="width: 100px;height:35px;float: left;margin-right:5px;">
+			        	<option value="name">이름</option>
+			        	<option value="birth">생년월일</option>	
+			      	</select>
+			      	<input type="hidden" name="hosNum" value="${hosNum }">
+					<input id="searchBar" class="form-control mr-sm-2" type="text" placeholder="이름을 입력하세요" name="search" style="width: 300px;float:left">
+					<button class="btn btn-info" type="submit" style="margin-left: 5px;float:left;">검색</button>
+				</form>
+			</div>
 		</div>
+		<script>
+			$('#searchChoice').change(function () {
+				if($(this).val()=='birth'){
+					$('#searchBar').attr("placeholder","ex)920815 의 형식으로 입력해주세요");
+				}else{
+					$('#searchBar').attr("placeholder","이름을 입력하세요");
+				}
+			});
+		</script>
 		<br><br>
 		<table id="reserLi" class="table table-hover" style="text-align: center;border-top:2px solid lightgray;">
 			<thead>
@@ -46,7 +65,7 @@
 				</c:if>
 				<c:if test="${empty list}">
 					<tr>
-						<td colspan="9" style="text-align: center;"><h4>예약이 존재하지 않습니다.</h4></td>
+						<td colspan="9" style="text-align: center;"><h4>검색 회원이 없습니다.</h4></td>
 					</tr>
 				</c:if>
 			</tbody>
@@ -73,5 +92,6 @@
 		
 	});
 </script>
+		
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
