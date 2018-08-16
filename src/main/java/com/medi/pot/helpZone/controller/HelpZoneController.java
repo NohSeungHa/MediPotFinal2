@@ -219,17 +219,5 @@ public class HelpZoneController {
 		
 		return mv;
 	} 
-<<<<<<< HEAD
-	
-	
-	
-	
-	
-	
-	
-	
-	
-=======
->>>>>>> mediSuper2
 	
 }

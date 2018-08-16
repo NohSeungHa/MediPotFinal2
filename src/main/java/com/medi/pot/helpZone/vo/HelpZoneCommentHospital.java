@@ -1,7 +1,7 @@
 package com.medi.pot.helpZone.vo;
 
 import java.util.Date;
-
+//병원 회원 댓글 vo
 public class HelpZoneCommentHospital {
 	private int hzCommentNumH;			//병원 댓글 번호
 	private int hzNumH;					//헬프존 번호

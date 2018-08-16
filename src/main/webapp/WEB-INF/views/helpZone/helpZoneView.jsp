@@ -98,72 +98,55 @@
 	</c:if>
 <br><br>	
 <hr><!-- 1. 댓글등록창 시작 -->
-<table class="table table-helpZoneComment">
-	<tbody>
-		<tr>
-			<th>댓글작성</th>
-			<td><input type="text" placeholder="댓글을 작성해주세요." style="resize: none" name="hzCommentContent" id="hzCommentContent"
-			class="form-control" maxlength="40"></td>
-		</tr>
-		<tr>
-			<th>작성자</th>
-			<td>
-			<c:if test="${checkPH=='P'}">
-				<input type="hidden" name="hzCommentWriterNumH" id="hzCommentWriterNumH" value="${memberLoggedIn.memberNum }">
-				<input type="text" name="hzCommentWriter" id="hzCommentWriter" value="${memberLoggedIn.memberId}" readonly/>
+<input type="hidden" id="helpZoneNum" value="${helpZone.helpZoneNum }"/>
+<input type="hidden" id="cp" value="${cp }"/>
+<c:if test="${not empty memberLoggedIn }">
+	<div class="modal-body" style="border: 1px solid lightgray;">
+		<input type="hidden" name="hzCommentNumH" id="hzCommentNumH" value="${helpZone.helpZoneNum }"/>
+		<input type="hidden" name="hzCommentNumM" id="hzCommentNumM" value="${helpZone.helpZoneNum }"/>
+		<!-- 일반회원으로 로그인했을때  -->
+		<c:if test="${checkPH=='P' }">
+			<p type="text" id="hzCommentWriter" readonly>&nbsp;${memberLoggedIn.memberId }</p>
+			<input type="hidden" id="hzCommentWriterM" value="${membberLoggedIn.memberNum }"/>
+			<input type="hidden" id="checkPH" value="P"/>
+		</c:if>
+		<!-- 병원회원으로 로그인했을때 -->
+		<c:if test="${checkPH=='H' }">
+			<p type="text" id="hzCommentWriter" readonly>&nbsp;${memberLoggedIn.hospitalId }</p>
+			<input type="hidden" id="hzCommentWriterH" value="${membberLoggedIn.hospitalNum }"/>
+			<input type="hidden" id="checkPH" value="H"/>
+		</c:if>
+		<textarea class="form-control" style="width: 88%;height: 100px;resize: none; float: left; border: 1px solid lightgray;" id="helpZoneContent" name="helpZoneContent" onKeyUp="checkLength(this);" onKeyDown="checkLength(this);" placeholder="댓글을 입력하세요.(500자이내) 불쾌감을 주는 욕설과 악플은 삭제될 수 있습니다."></textarea>
+		<button id="helpZoneCommentInsert" type="submit" class="btn btn-success" style="height:100px; width:100px; margin-left: 10px;">댓글 등록</button>			
+	</div>
+</c:if>
+<br>
+<!-- 댓글 리스트 나오는곳 -->
+<h3>**댓글**</h3>
+<div id="hzc" class="modal-body">
+<c:if test="${not empty hzList }">
+	<c:forEach var='hz' items='${hzCommentList }' varStatus="vs">
+		<p id="commentWriter" readonly>작성자 : ${hz.commentWriter} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;작성일 : ${hz.commentDate }
+		<c:if test="${hz.commentCheckPH eq checkPH and checkPH eq 'P'}">
+			<c:if test="${hz.commentWriter eq memberLoggedIn.memberId and memberLoggedIn.memberId != 'admin' }">
+				<a data-toggle="modal" data-target="#deleteComment" style="color: red;float: right;" onclick="deleteCommentNum(${hz.commentNum})">&nbsp;&nbsp;&nbsp;댓글 삭제</a>
 			</c:if>
-			<c:if test="${checkPH=='H'}">	
-				<input type="hidden" name="hzCommentWriterNumM" id="hzCommentWriterNumM" value="${memberLoggedIn.hospitalNum }">
-				<input type="text" name="hzCommentWriter" id="hzCommentWriter" value="${memberLoggedIn.hospitalId}" readonly/>
+			<c:if test="${memberLoggedIn.memberId eq 'admin'}">
+				<a data-toggle="modal" data-target="#deleteComment" style="color: red;float: right;" onclick="deleteCommentNum(${hz.commentNum})">&nbsp;&nbsp;&nbsp;댓글 삭제</a>
 			</c:if>
-			</td>
-		</tr>
-	</tbody>
-</table>
-
-
-
-<div class="box box-warning">
-    <div class="box-header with-border">
-        <div class="text-lg"><span class="glyphicon glyphicon-pencil"></span>댓글 작성</div>
-    </div>
-    <div class="box-body">
-        <form class="form-horizontal">
-            <div class="form-group margin">
-                <div class="col-md-10">
-                    <textarea class="form-control" id="CommentText" rows="3" placeholder="댓글을 작성해주세요." style="resize: none"></textarea>
-                </div>
-                <div class="col-md-2">
-                    <input type="text" class="form-control" id="newReplyWriter" value="${memberLoggedIn.memberId }" readonly>
-                </div>
-                <hr/>
-                <div class="col-md-2">
-                    <button type="button" class="btn btn-primary btn-block replyAddBtn"><i class="fa fa-save"></i> 저장</button>
-                </div>
-            </div>
-        </form>
-    </div>
+		</c:if>
+		<c:if test="${hz.commentCheckPH eq checkPH and checkPH eq 'H'}">
+			<c:if test="${hz.commentWriter eq memberLoggedIn.hospitalId}">
+				<a data-toggle="modal" data-target="#deleteComment" style="color: red;float: right;" onclick="deleteCommentNum(${hz.commentNum})">&nbsp;&nbsp;&nbsp;댓글 삭제</a>
+			</c:if>
+		</c:if>
+		</p>
+		<p id="commentContent2" name="commentContent2">&nbsp;${hz.commentContent }</p>
+  		<hr>
+	</c:forEach>
+	${pageBar }
+</c:if>
 </div>
-<hr>
-<!-- 댓글 등록창 끝 -->
-<!-- 2. 댓글 목록 리스트 출력 시작 -->
-<div class="box box-success collapsed-box">
-    <%--댓글 유무 / 댓글 갯수--%>
-    <%--댓글 목록--%>
-    <div class="box-body repliesDiv">
-
-    </div>
-    <%--댓글 페이징--%>
-    <div class="box-footer">
-        <div class="text-center">
-            <ul class="pagination pagination-sm no-margin">
-
-            </ul>
-        </div>
-    </div>
-</div>
-
-
 
 </div>
 <br><br>
@@ -203,6 +186,33 @@ function validate(){
 	}
 	return true;
 }
+
+/* 댓글작성 메서드 */
+$('helpZoneCommentInsert').click(function() {
+	var writer = null;
+	var comment = $('helpZoneContent').val();
+	var helpZoneNum = $('#helpZoneNum').val();
+	var cp = $('#cp').val();
+	var check = $('#checkPH').val();
+	if(${checkPH=='P'}){
+		writer = $('#hzCommentWriterM').val();
+	}
+	if(${checkPH=='H'}){
+		writer = $('#hzCommentWriterH').val();
+	}
+	var allData = { "writer": writer, "comment": comment, "communityNum":communityNum, "cp":cp, "check":check };
+	  $.ajax({
+			url:"${path}/helpZone/inserthelpZoneComment.do",
+			type:'post',
+			data: allData,
+			dataType:"html",
+			success:function(data){
+				alert("댓글 등록 완료!");
+			   	$('#helpZonetContent').val("");
+			   	$('#cc2s').html(data);
+			}
+ 	});
+});
 </script>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
