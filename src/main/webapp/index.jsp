@@ -4,7 +4,7 @@
 <%@ taglib prefix='fmt' uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix='fn' uri="http://java.sun.com/jsp/jstl/functions"%>
 
-
+<c:set var="path" value="<%=request.getContextPath() %>"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 <jsp:param value="MediPot Index" name="pageTitle"></jsp:param>
 </jsp:include>

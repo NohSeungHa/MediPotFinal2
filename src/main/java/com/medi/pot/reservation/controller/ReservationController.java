@@ -170,7 +170,6 @@ public class ReservationController {
 		req.setAttribute("cPage", cPage);
 		return "medi_reservation/reserList";
 	}
-	
 	@RequestMapping("/medi/reser2")
 	public String mediReser2(String no,HttpServletRequest req) {
 		int num=Integer.parseInt(no);
