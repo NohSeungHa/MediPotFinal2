@@ -127,7 +127,7 @@
 	</c:if>
 	<div style="text-align: center;margin-top: 10px;">
 		<span style="font-size:20px;">** 병원측에 남기실 말이 있다면 적어주세요  **</span>
-		<textarea rows="3" cols="83" style="resize:none"></textarea>
+		<textarea rows="3" cols="83" style="resize:none" name="sendMsg" id="sendMsg"></textarea>
 	</div>
 	
 	<div style="text-align:center;margin-top:20px;">
@@ -172,8 +172,8 @@
 			if(choiceTime.length<1){
 				alert("시간을 선택해 주세요");
 			}else{
-				
-				location.href='${path}/medi/insertReser?checkDoctor=<%=docTime.getDoctorNum()%>&checkHospital=<%=docTime.getHospitalNo()%>&checkMember=${memberLoggedIn.memberNum}&checkTime='+choiceTime+'&checkDate=<%=time2%>';
+				var msg=$("#sendMsg").val();
+				location.href='${path}/medi/insertReser?checkDoctor=<%=docTime.getDoctorNum()%>&checkHospital=<%=docTime.getHospitalNo()%>&checkMember=${memberLoggedIn.memberNum}&checkTime='+choiceTime+'&checkDate=<%=time2%>&sendMsg='+msg;
 			}
 		});
 	</script>
