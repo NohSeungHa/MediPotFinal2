@@ -2,6 +2,7 @@ package com.medi.pot.reservation.model.vo;
 
 public class SearchReserList {
 	private int checkNum;
+	private int doctorNum;
 	private String doctorName;
 	private String memberName;
 	private String memberGender;
@@ -16,10 +17,12 @@ public class SearchReserList {
 		// TODO Auto-generated constructor stub
 	}
 
-	public SearchReserList(int checkNum, String doctorName, String memberName, String memberGender, String memberBirth,
-			String memberPhone, String memberAddr, String sendMsg, String checkDate, String checkTime) {
+	public SearchReserList(int checkNum, int doctorNum, String doctorName, String memberName, String memberGender,
+			String memberBirth, String memberPhone, String memberAddr, String sendMsg, String checkDate,
+			String checkTime) {
 		super();
 		this.checkNum = checkNum;
+		this.doctorNum = doctorNum;
 		this.doctorName = doctorName;
 		this.memberName = memberName;
 		this.memberGender = memberGender;
@@ -33,10 +36,10 @@ public class SearchReserList {
 
 	@Override
 	public String toString() {
-		return "SearchReserList [checkNum=" + checkNum + ", doctorName=" + doctorName + ", memberName=" + memberName
-				+ ", memberGender=" + memberGender + ", memberBirth=" + memberBirth + ", memberPhone=" + memberPhone
-				+ ", memberAddr=" + memberAddr + ", sendMsg=" + sendMsg + ", checkDate=" + checkDate + ", checkTime="
-				+ checkTime + "]";
+		return "SearchReserList [checkNum=" + checkNum + ", doctorNum=" + doctorNum + ", doctorName=" + doctorName
+				+ ", memberName=" + memberName + ", memberGender=" + memberGender + ", memberBirth=" + memberBirth
+				+ ", memberPhone=" + memberPhone + ", memberAddr=" + memberAddr + ", sendMsg=" + sendMsg
+				+ ", checkDate=" + checkDate + ", checkTime=" + checkTime + "]";
 	}
 
 	public int getCheckNum() {
@@ -45,6 +48,14 @@ public class SearchReserList {
 
 	public void setCheckNum(int checkNum) {
 		this.checkNum = checkNum;
+	}
+
+	public int getDoctorNum() {
+		return doctorNum;
+	}
+
+	public void setDoctorNum(int doctorNum) {
+		this.doctorNum = doctorNum;
 	}
 
 	public String getDoctorName() {
@@ -119,8 +130,6 @@ public class SearchReserList {
 		this.checkTime = checkTime;
 	}
 
-	
-	
 	
 	
 }

@@ -36,7 +36,7 @@
 	</insert>
 	
 	<select id="selectReserList" parameterType="_int" resultType="ReserList">
-		select * from MEMBERRESERVATION join hospital on(checkhospital=hospitalnum) where checkmember=#{userNum} order by checkdate desc
+		select * from MEMBERRESERVATION join hospital on(checkhospital=hospitalnum) where checkmember=#{userNum} order by checkdate desc, checktime desc
 	</select>
 	
 	<delete id="deleteReser" parameterType="_int">
@@ -68,10 +68,34 @@
 	</delete>
 	
 	<select id="selectReserListM" parameterType="map" resultType="SearchReserList">
-		select a.checknum, c.doctorname,b.membername,b.membergender,b.memberbirth,b.memberphone,b.memberaddr,a.sendmsg,a.checkdate,a.checktime from MEMBERRESERVATION a join member b on(checkmember=membernum) join doctorinfo c on(checkdoctor=doctornum) where checkdate=#{date} and checkdoctor=#{docNum} order by checktime desc
+		select a.checknum,c.doctornum, c.doctorname,b.membername,b.membergender,b.memberbirth,b.memberphone,b.memberaddr,a.sendmsg,a.checkdate,a.checktime from MEMBERRESERVATION a join member b on(checkmember=membernum) join doctorinfo c on(checkdoctor=doctornum) where checkdate=#{date} and checkdoctor=#{docNum} order by checktime desc
 	</select>
 	
 	<select id="searchReserCount" parameterType="map" resultType="_int">
 		select count(*) from MEMBERRESERVATION a join member b on(checkmember=membernum) join doctorinfo c on(checkdoctor=doctornum) where checkdate=#{date} and checkdoctor=#{docNum} order by checktime desc
+	</select>
+	
+	<delete id="deleteSearchReser" parameterType="_int">
+		delete MEMBERRESERVATION where checknum=#{num}
+	</delete>
+	
+	<select id="selectListSearchMem" parameterType="map" resultType="SearchReserList">
+		select a.checknum,c.doctornum, c.doctorname,b.membername,b.membergender,b.memberbirth,b.memberphone,b.memberaddr,a.sendmsg,a.checkdate,a.checktime from MEMBERRESERVATION a join member b on(checkmember=membernum) join doctorinfo c on(checkdoctor=doctornum) where CHECKHOSPITAL=${hosNum}
+		<if test="kind == 'name'">
+			and membername like '%'||#{search}||'%'  order by checktime desc
+		</if>
+		<if test="kind == 'birth'">
+			and memberbirth like '%'||#{search}||'%'  order by checktime desc
+		</if>
+	</select>
+	
+	<select id="selectCountReserMem" parameterType="map" resultType="SearchReserList">
+		select count(*) from MEMBERRESERVATION a join member b on(checkmember=membernum) join doctorinfo c on(checkdoctor=doctornum) where CHECKHOSPITAL=${hosNum}
+		<if test="kind == 'name'">
+			and membername like '%'||#{search}||'%'  order by checktime desc
+		</if>
+		<if test="kind == 'birth'">
+			and memberbirth like '%'||#{search}||'%'  order by checktime desc
+		</if>
 	</select>
 </mapper>

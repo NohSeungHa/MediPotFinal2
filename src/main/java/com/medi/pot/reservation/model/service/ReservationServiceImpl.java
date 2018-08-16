@@ -115,6 +115,21 @@ public class ReservationServiceImpl implements ReservationService {
 	public int searchReserCount(Map<String, Object> map) {
 		return reserDAO.searchReserCount(map);
 	}
+
+	@Override
+	public int deleteSearchReser(int num) {
+		return reserDAO.deleteSearchReser(num);
+	}
+
+	@Override
+	public List<SearchReserList> searchReserMem(Map<String, Object> map, int cPage, int numPerPage) {
+		return reserDAO.searchReserMem(map, cPage, numPerPage);
+	}
+
+	@Override
+	public int searchReserMemCount(Map<String, Object> map) {
+		return reserDAO.searchReserMemCount(map);
+	}
 	
 	
 	
