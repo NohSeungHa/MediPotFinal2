@@ -1,8 +1,11 @@
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
+<% ArrayList<String> professional = (ArrayList<String>) request.getAttribute("professional"); %>
 
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="병원 회원정보 수정" name="pageTitle"/>
@@ -141,7 +144,7 @@
 					<tr>
 						<th>사업자번호<b>(*)</b></th>
 						<td>
-						<input type="file" name="hospitalLicense" id="hospitalLicense" accept=".jpg, .png, .bmp" style="width: 200px" required>
+						<input type="file" name="hospitalLicense" id="hospitalLicense" accept=".jpg, .png, .bmp" style="width: 280px" required>
 						<input type="hidden" class="form-control" name="oldhospitalLicense" id="oldhospitalLicense" value="${memberLoggedIn.hospitalLicense }" readonly>
 						</td>
 					</tr>
@@ -167,6 +170,54 @@
 							<span id="guide" style="color: #999"></span>
 						</td>
 					</tr>
+					<tr>
+				<th><br>진료과목</th>
+				<td><br>
+					<input type="checkbox" name="professional" id="J1" value="정형외과"
+					<%=professional.contains("정형외과")?"checked":"" %> >
+					<label for="J1">정형외과&nbsp;&nbsp;</label>
+					
+					<input type="checkbox" name="professional" id="C1" value="치과"
+					<%=professional.contains("치과")?"checked":"" %> >
+					<label for="C1">치과&nbsp;&nbsp;</label>
+					
+					<input type="checkbox" name="professional" id="P1" value="피부과"
+					<%=professional.contains("피부과")?"checked":"" %> >
+					<label for="P1">피부과&nbsp;&nbsp;</label>
+					
+					<input type="checkbox" name="professional" id="S1" value="성형외과"
+					<%=professional.contains("성형외과")?"checked":"" %> >
+					<label for="S1">성형외과</label><br>
+					
+					<input type="checkbox" name="professional" id="A1" value="안과"
+					<%=professional.contains("안과")?"checked":"" %> >
+					<label for="A1">안과&nbsp;&nbsp;</label>
+					
+					<input type="checkbox" name="professional" id="B1" value="비뇨기과"
+					<%=professional.contains("비뇨기과")?"checked":"" %> >
+					<label for="B1">비뇨기과&nbsp;&nbsp;</label>
+					
+					<input type="checkbox" name="professional" id="S2" value="신경외과"
+					<%=professional.contains("신경외과")?"checked":"" %> >
+					<label for="S2">신경외과&nbsp;&nbsp;</label>
+					
+					<input type="checkbox" name="professional" id="N1" value="내과"
+					<%=professional.contains("내과")?"checked":"" %> >
+					<label for="N1">내과</label><br>
+					
+					<input type="checkbox" name="professional" id="E1" value="이비인후과"
+					<%=professional.contains("이비인후과")?"checked":"" %> >
+					<label for="E1">이비인후과&nbsp;&nbsp;</label>
+					
+					<input type="checkbox" name="professional" id="H1" value="한의원"
+					<%=professional.contains("한의원")?"checked":"" %> >
+					<label for="H1">한의원&nbsp;&nbsp;</label>
+					
+					<input type="checkbox" name="professional" id="SB1" value="산부인과"
+					<%=professional.contains("산부인과")?"checked":"" %> >
+					<label for="SB1">산부인과</label><br>
+				</td>
+			</tr>
 					<tr>
 						<td colspan="3" style="text-align:center;">
 							 <input type="submit" class="btn btn-lg btn-default" value="회원정보수정"/>

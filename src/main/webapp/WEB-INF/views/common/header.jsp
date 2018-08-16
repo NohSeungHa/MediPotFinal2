@@ -78,7 +78,6 @@
 							<ul class="dropdown-menu">
 								<li><a href="${pageContext.request.contextPath }/member/mypage.do?user_id=${memberLoggedIn.memberId}&checkPH=${checkPH}">마이페이지</a></li>
 								<li><a href="${pageContext.request.contextPath }/medi/reserList?userNum=${memberLoggedIn.memberNum}" >내 예약 정보</a></li>
-								<li><a href="${pageContext.request.contextPath }/member/deleteMember.do" >회원 탈퇴</a></li>
 								
 							</ul>
 							</li>

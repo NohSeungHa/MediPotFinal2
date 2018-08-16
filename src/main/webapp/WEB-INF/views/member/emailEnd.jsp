@@ -31,6 +31,7 @@ function check(){
         $("#successEmail",opener.document).css("display","block");
         $("#emailAuther",opener.document).css("display",'none');
         $('#UserEmail',opener.document).attr("readonly",true);
+        $('#UserEmail',opener.document).val("${UserEmail}");
         self.close();
     }
     

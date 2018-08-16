@@ -322,6 +322,13 @@ public class MemberServiceImpl implements MemberService {
 		return dao.updateHospital(sqlSession, hospitalNum);
 		
 	}
+
+	@Override
+	public String selectHospitalProfessional(String user_id) {
+		
+		return dao.selectHospitalProfessional(sqlSession, user_id);
+		
+	}
 	
 	
 }

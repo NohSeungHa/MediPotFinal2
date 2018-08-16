@@ -5,6 +5,10 @@
 	<resultMap type="doctorInfos" id="doctorInfosMap">
 		<result column="professional" property="professional" typeHandler="StringArray"/>
 	</resultMap>
+	
+	<resultMap type="hospital" id="hospitalMap">
+		<result column="hospitalprofessional" property="hospitalProfessional" typeHandler="StringArray" />
+	</resultMap>
 
 	<select id="checkId" parameterType="string" resultType="_int">
 		select count(*) from hospital where hospitalId=#{hospitalId}
@@ -24,7 +28,7 @@
 			sysdate,
 			#{hospitalLike},
 			0,
-			#{hospitalProfessional}
+			#{hospitalProfessional, typeHandler=StringArray}
 		)
 	</insert>
 	
@@ -170,6 +174,10 @@
 	
 	<select id="selectFindHospital" parameterType="string" resultType="hospital">
 		select * from hospital where hospitalId=#{hospitalId}
+	</select>
+	
+	<select id="selectHospitalProfessional" parameterType="string" resultType="string">
+		select hospitalProfessional from hospital where hospitalId=#{user_id}
 	</select>
 	
 	<delete id="deleteDoctors" parameterType="_int">

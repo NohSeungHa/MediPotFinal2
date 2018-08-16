@@ -237,7 +237,7 @@ $(function(){
 					<tr>
 						<th>사업자번호<b>(*)</b></th>
 						<td>	
-						<input type="file" name="hospitalLicense" id="hospitalLicense" accept=".jpg, .png, .bmp" style="width: 200px" required>
+						<input type="file" name="hospitalLicense" id="hospitalLicense" accept=".jpg, .png, .bmp" style="width: 280px" required>
 						</td>
 					</tr>
 					<tr>
@@ -266,10 +266,39 @@ $(function(){
 						</td>
 						<td>
 							&nbsp;
-							<button type="button" onclick="sample4_execDaumPostcode()" class="btn btn-default" style="margin: 0 0 30px 30px">우편번호 찾기</button>
+							<button type="button" onclick="sample4_execDaumPostcode()" class="btn btn-default" style="margin: 0 0 10px 10px">우편번호 찾기</button>
 							<span style="display: none" id="guide" style="color: #999"></span>
 						</td>
 					</tr>
+					<tr>
+				<th><br>진료과목</th>
+				<td><br>
+					<input type="checkbox" name="professional" id="J1" value="정형외과">
+					<label for="J1">정형외과&nbsp;&nbsp;</label>
+					<input type="checkbox" name="professional" id="C1" value="치과">
+					<label for="C1">치과&nbsp;&nbsp;</label>
+					<input type="checkbox" name="professional" id="P1" value="피부과">
+					<label for="P1">피부과&nbsp;&nbsp;</label>
+					<input type="checkbox" name="professional" id="S1" value="성형외과">
+					<label for="S1">성형외과</label><br>
+					
+					<input type="checkbox" name="professional" id="A1" value="안과">
+					<label for="A1">안과&nbsp;&nbsp;</label>
+					<input type="checkbox" name="professional" id="B1" value="비뇨기과">
+					<label for="B1">비뇨기과&nbsp;&nbsp;</label>
+					<input type="checkbox" name="professional" id="S2" value="신경외과">
+					<label for="S2">신경외과&nbsp;&nbsp;</label>
+					<input type="checkbox" name="professional" id="N1" value="내과">
+					<label for="N1">내과</label><br>
+					
+					<input type="checkbox" name="professional" id="E1" value="이비인후과">
+					<label for="E1">이비인후과&nbsp;&nbsp;</label>
+					<input type="checkbox" name="professional" id="H1" value="한의원">
+					<label for="H1">한의원&nbsp;&nbsp;</label>
+					<input type="checkbox" name="professional" id="SB1" value="산부인과">
+					<label for="SB1">산부인과</label><br>
+				</td>
+			</tr>
 				</table>
 				<br><br>
 					 <button onclick="return emailcheck()" type="submit" class="btn btn-lg btn-default">회원가입</button>
@@ -323,7 +352,7 @@ $(function(){
 	
 	function emailRequest(){
 		var nowemail = $('#UserEmail').val();
-		var url="${pageContext.request.contextPath }/member/emailEnd.do?memberEmail="+nowemail;
+		var url="${pageContext.request.contextPath }/member/emailEnd.do?UserEmail="+nowemail;
 		var title="emailAuther";
 		var status="left=500px, top=100px, width=600px, height=200px";
 		var popup=window.open(url,title,status);

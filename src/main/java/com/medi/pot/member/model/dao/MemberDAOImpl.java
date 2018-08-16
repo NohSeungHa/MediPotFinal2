@@ -321,5 +321,12 @@ public class MemberDAOImpl implements MemberDAO {
 		
 	}
 
+	@Override
+	public String selectHospitalProfessional(SqlSessionTemplate sqlSession, String user_id) {
+		
+		return sqlSession.selectOne("hospital.selectHospitalProfessional", user_id);
+		
+	}
+
 	
 }

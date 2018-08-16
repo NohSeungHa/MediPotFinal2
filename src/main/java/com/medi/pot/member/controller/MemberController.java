@@ -139,7 +139,7 @@ public class MemberController {
 	@RequestMapping("/member/hospitalEnrollEnd.do")
 	public String joinHospital1(Model model,
 			String hospitalId, String hospitalPw, String hospitalName,
-			String hospitalTel, String hospitalEmail, String hospitalAddr,
+			String hospitalTel, String hospitalEmail, String hospitalAddr, String[] professional,
 			HttpServletRequest request,@RequestParam(value="hospitalLicense",required=false) MultipartFile hospitalLicense) {
 		
 		System.out.println("회원가입(병원-승인중)으로 들어옴");
@@ -150,7 +150,7 @@ public class MemberController {
 		Hospital h = new Hospital(
 				0, hospitalId, hospitalPw, hospitalName,
 				null, null, hospitalTel, hospitalEmail,
-				hospitalAddr, null, 0, null, null);
+				hospitalAddr, null, 0, null, professional);
 		
 		if(hospitalLicense !=null) {
 			//파일 업로드
@@ -403,7 +403,14 @@ public class MemberController {
 			if(checkPH.equals("P")) {
 				view = "member/memberPage";
 			}else {
+				String pro = service.selectHospitalProfessional(user_id);
+				String[] profes = pro.split(",");
+				ArrayList<String> professional = new ArrayList<String>();
+				for(int i = 0; i < profes.length; i++) {
+					professional.add(profes[i]);
+				}
 				view = "member/hospitalPage";
+				model.addAttribute("professional", professional);
 			}
 		}
 		
@@ -526,6 +533,65 @@ public class MemberController {
 	}
 	
 	
+	/* 병원회원이 마이페이지 수정을 실행 */
+	@RequestMapping("/member/hospitalUpdate.do")
+	public String hospitalUpdate(int hospitalNum, String hospitalName, String hospitalTel, String hospitalAddr, String[] professional, Model model,
+			HttpServletRequest request,@RequestParam(value="hospitalLicense",required=false) MultipartFile hospitalLicense) {
+		System.out.println("병원회원이 수정을 실행함");
+		String msg = "수정 실패!";
+		String loc = "";
+		
+		Hospital hospital = service.selectHospital(hospitalNum); 
+		
+		if(hospitalLicense !=null) {
+			//파일 업로드
+			//저장위치지정
+			String saveDir=request.getSession().getServletContext().getRealPath("/resources/uploadfile/H_License");
+			
+			File dir=new File(saveDir);
+			if(dir.exists()==false) System.out.println(dir.mkdirs());//폴더생성
+			System.out.println(hospitalLicense);
+			if(!hospitalLicense.isEmpty()) {
+			String originalFileName=hospitalLicense.getOriginalFilename();
+			
+			//확장자 구하기
+			String ext=originalFileName.substring(originalFileName.lastIndexOf(".")+1);
+			SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
+			int rndNum=(int)(Math.random()*1000);
+			String renamedFileName=sdf.format(new Date(System.currentTimeMillis()));
+			renamedFileName+="_"+rndNum+"."+ext;
+			try 
+			{
+				hospitalLicense.transferTo(new File(saveDir+File.separator+renamedFileName));
+			}
+			catch(IOException e)
+			{
+				e.printStackTrace();
+			}
+				//DB에 저장할 첨부파일에 대한 정보를 구성!
+				hospital.setHospitalLicense(originalFileName);
+				hospital.setHospitalReLicense(renamedFileName);
+			}
+		}
+		
+		hospital.setHospitalName(hospitalName);
+		hospital.setHospitalTel(hospitalTel);
+		hospital.setHospitalAddr(hospitalAddr);
+		hospital.setHospitalProfessional(professional);
+		
+		int result = service.hospitalUpdate(hospital);
+		
+		if(result > 0) {
+			msg = "회원 수정 성공!";
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("loc", loc);
+		
+		return "common/msg";
+	}
+	
+	
 	/*병원 회원 탈퇴 */
 	@RequestMapping("/member/deleteHospital.do")
 	public String deleteHospital(Model model) {
@@ -610,7 +676,7 @@ public class MemberController {
 	
 	/* 각 회원의 이메일 인증 */
 	@RequestMapping("/member/emailEnd.do")
-	public String emailResponse(String memberEmail, Model model) {
+	public String emailResponse(String UserEmail, Model model) {
 
 		Properties prop = new Properties();
 		prop.put("mail.smtp.host", "smtp.gmail.com");
@@ -632,7 +698,7 @@ public class MemberController {
 	            
 
 			//수신자메일주소
-			message.addRecipient(Message.RecipientType.TO, new InternetAddress(memberEmail)); 
+			message.addRecipient(Message.RecipientType.TO, new InternetAddress(UserEmail)); 
 
 			// Subject
 			message.setSubject("MediPot 메일 인증"); //메일 제목을 입력
@@ -662,6 +728,7 @@ public class MemberController {
 		} 
 		
 		model.addAttribute("ra", ra);
+		model.addAttribute("UserEmail", UserEmail);
 		
 		return "member/emailEnd";
 	}
@@ -828,64 +895,6 @@ public class MemberController {
 			msg="해당 병원을 승인하였습니다.";
 		}else {
 			msg="병원 승인에 실패하였습니다.";
-		}
-		
-		model.addAttribute("msg", msg);
-		model.addAttribute("loc", loc);
-		
-		return "common/msg";
-	}
-	
-	
-	/* 병원회원이 마이페이지 수정을 실행 */
-	@RequestMapping("/member/hospitalUpdate.do")
-	public String hospitalUpdate(int hospitalNum, String hospitalName, String hospitalTel, String hospitalAddr, Model model,
-			HttpServletRequest request,@RequestParam(value="hospitalLicense",required=false) MultipartFile hospitalLicense) {
-		System.out.println("병원회원이 수정을 실행함");
-		String msg = "수정 실패!";
-		String loc = "";
-		
-		Hospital hospital = service.selectHospital(hospitalNum); 
-		
-		if(hospitalLicense !=null) {
-			//파일 업로드
-			//저장위치지정
-			String saveDir=request.getSession().getServletContext().getRealPath("/resources/uploadfile/H_License");
-			
-			File dir=new File(saveDir);
-			if(dir.exists()==false) System.out.println(dir.mkdirs());//폴더생성
-			System.out.println(hospitalLicense);
-			if(!hospitalLicense.isEmpty()) {
-			String originalFileName=hospitalLicense.getOriginalFilename();
-			
-			//확장자 구하기
-			String ext=originalFileName.substring(originalFileName.lastIndexOf(".")+1);
-			SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
-			int rndNum=(int)(Math.random()*1000);
-			String renamedFileName=sdf.format(new Date(System.currentTimeMillis()));
-			renamedFileName+="_"+rndNum+"."+ext;
-			try 
-			{
-				hospitalLicense.transferTo(new File(saveDir+File.separator+renamedFileName));
-			}
-			catch(IOException e)
-			{
-				e.printStackTrace();
-			}
-				//DB에 저장할 첨부파일에 대한 정보를 구성!
-				hospital.setHospitalLicense(originalFileName);
-				hospital.setHospitalReLicense(renamedFileName);
-			}
-		}
-		
-		hospital.setHospitalName(hospitalName);
-		hospital.setHospitalTel(hospitalTel);
-		hospital.setHospitalAddr(hospitalAddr);
-		
-		int result = service.hospitalUpdate(hospital);
-		
-		if(result > 0) {
-			msg = "회원 수정 성공!";
 		}
 		
 		model.addAttribute("msg", msg);

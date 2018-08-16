@@ -304,92 +304,66 @@ $(function(){
 		</div>
 				<br><br>
 		</div>
-	</div>
-	
-	<%-- <div class="modal fade" id="emailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-					<div class="modal-dialog" role="document">
-						<div class="modal-content">
-							<div class="modal-header">
-								<h5 class="modal-title" id="exampleModalLabel">이메일 인증</h5>
-								<button style="margin-top: -25px" type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
-							</div>
-							<form action="${pageContext.request.contextPath}/member/emailEnd.do" method="post">
-								<div class="modal-body" style="text-align: center">
-									<br><br>
-									<span style="display: inline-block;">인증코드 &nbsp;</span>
-									<input style="width: 70%; margin: 0 auto; display: inline-block;"type="text" class="form-control" id="emailCode" name="emailCode" placeholder="발송된 코드를 입력해주세요." required>
-									<a href="${pageContext.request.contextPath }/member/emailCodeResponse.do?email=${memberEmail}">인증코드발송</a>
-									<br><br>
-								</div>
-								<div class="modal-footer">
-									<button onclick="auther()" type="submit" class="btn btn-outline-success">확인</button>
-									<button type="button" class="btn btn-outline-success"
-										data-dismiss="modal">취소</button>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div> --%>
-				
-				<script>
-				$("#UserEmail").blur(function(){
-				      var email=$("#UserEmail").val();
-				         if(email.length!=0){
-				            if(email.match(/([@])/)){
-								if($('#successEmail').css("display")=="none"){
-					            	$("#emailAuther").css("display","block");								
-								} else{
-									$("#emailAuther").css("display","none");
-								}
-				            } 
-				         	else if(email.match(/([!,#,$,%,^,&,*,?,~,-])/)) {
-								alert("온전하지 못한 이메일입니다. ('@'를 제외한 특수문자가 존재합니다.)");
-								$("#UserEmail").val("");
-				                $("#UserEmail").focus();
-				                return false;
-				            } else {
-				            	alert("온전하지 못한 이메일입니다. 다시 한 번 입력해주세요.");
-				            	$("#UserEmail").val("");
-				                $("#UserEmail").focus();
-				            }
-				         }
-				         return true;
-				         $.ajax({
-							url:"${pageContext.request.contextPath}/member/PcheckEmail.do",
-							data:{memberEmail:$('#UserEmail').val()},
-							success:function(data){
-								if(data == 'true'){
-									alert("사용가능한 이메일입니다.");
-								} else{
-									alert("이메일이 중복되었습니다. 다른 이메일을 입력해주세요.");
-									$("#UserEmail").val("");
-					                $("#UserEmail").focus();
-								}
-							}
-				         })
-				    });
-				
-				function emailRequest(){
-					var nowemail = $('#UserEmail').val();
-					var url="${pageContext.request.contextPath }/member/emailEnd.do?memberEmail="+nowemail;
-					var title="emailAuther";
-					var status="left=500px, top=100px, width=600px, height=200px";
-					var popup=window.open(url,title,status);
-				}
-				
-				function joincheck(){
-					if($('#successEmail').css("display") == 'none'){
-						alert("이메일을 인증해주세요.");
-						return false;
+	</div>	
+		<script>
+		$("#UserEmail").blur(function(){
+		      var email=$("#UserEmail").val();
+		         if(email.length!=0){
+		            if(email.match(/([@])/)){
+						if($('#successEmail').css("display")=="none"){
+			            	$("#emailAuther").css("display","block");								
+						} else{
+							$("#emailAuther").css("display","none");
+						}
+		            } 
+		         	else if(email.match(/([!,#,$,%,^,&,*,?,~,-])/)) {
+						alert("온전하지 못한 이메일입니다. ('@'를 제외한 특수문자가 존재합니다.)");
+						$("#UserEmail").val("");
+		                $("#UserEmail").focus();
+		                return false;
+		            } else {
+		            	alert("온전하지 못한 이메일입니다. 다시 한 번 입력해주세요.");
+		            	$("#UserEmail").val("");
+		                $("#UserEmail").focus();
+		            }
+		         }
+		         return true;
+		         $.ajax({
+					url:"${pageContext.request.contextPath}/member/PcheckEmail.do",
+					data:{memberEmail:$('#UserEmail').val()},
+					success:function(data){
+						if(data == 'true'){
+							alert("사용가능한 이메일입니다.");
+						} else{
+							alert("이메일이 중복되었습니다. 다른 이메일을 입력해주세요.");
+							$("#UserEmail").val("");
+			                $("#UserEmail").focus();
+						}
 					}
-					if($('#memberId').val().trim().length < 4){
-						alert("아이디는 4글자 이상 입력해야 합니다.");
-						return false;
-					}
-					return true;
-				}
-				</script>
-	
-	<div style="height: 100px"></div>
+		         })
+		    });
+		
+		function emailRequest(){
+			var nowemail = $('#UserEmail').val();
+			var url="${pageContext.request.contextPath }/member/emailEnd.do?UserEmail="+nowemail;
+			var title="emailAuther";
+			var status="left=500px, top=100px, width=600px, height=200px";
+			var popup=window.open(url,title,status);
+		}
+		
+		function joincheck(){
+			if($('#successEmail').css("display") == 'none'){
+				alert("이메일을 인증해주세요.");
+				return false;
+			}
+			if($('#memberId').val().trim().length < 4){
+				alert("아이디는 4글자 이상 입력해야 합니다.");
+				return false;
+			}
+			return true;
+		}
+		</script>
+		
+<div style="height: 100px"></div>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

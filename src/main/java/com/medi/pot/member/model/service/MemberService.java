@@ -52,6 +52,7 @@ public interface MemberService {
 	int hospitalCount();
 	String selecthospitalName(int hospitalNum);
 	Hospital selectHospital(int hospitalNum);
+	String selectHospitalProfessional(String user_id);
 	int hospitalUpdate(Hospital hospital);
 	Hospital selectFindHospital(String hospitalId);
 	int deleteDoctors(int hospitalNo);
