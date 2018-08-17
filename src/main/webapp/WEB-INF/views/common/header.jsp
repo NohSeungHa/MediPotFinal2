@@ -216,9 +216,9 @@
 						action="${pageContext.request.contextPath}/member/memberLogin.do"
 						method="post">
 						<div class="modal-body">
-							<input type="radio" class="radio-inline" name="PnH" value="P"
-								style="font-size: 20" checked>개인 <input type="radio"
-								class="radio-inline" name="PnH" value="H" style="font-size: 20">병원
+							<input type="radio" class="radio-inline" id="P" name="PnH" value="P" style="font-size: 20; margin-top: -3px" checked> <label for="P">개인</label>
+							&nbsp; 
+							<input type="radio" class="radio-inline" id="H" name="PnH" value="H" style="font-size: 20; margin-top: -3px"> <label for="H">병원</label>
 							<br>
 							<br> <input type="text" class="form-control" name="memberId"
 								placeholder="아이디" required> <br> <input
