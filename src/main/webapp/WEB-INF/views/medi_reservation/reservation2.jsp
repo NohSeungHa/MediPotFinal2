@@ -465,7 +465,7 @@
 		<div class="docInfo-div" style="height:auto;margin-bottom:10px;" title="${list.doctorNum }" lang="${list.hospitalNo }">
 			<table id="docInfo">
 				<tr>
-					<td rowspan="4"><img src="${path }/resources/img/reser/${list.doctorPhoto }" width="200px;" height="250px;"></td>
+					<td rowspan="4"><img src="${path }/resources/uploadfile/dortors/${list.doctorRePhoto }" width="200px;" height="250px;"></td>
 					<th>이름</th>
 					<td>${list.doctorName }</td>
 				</tr>
