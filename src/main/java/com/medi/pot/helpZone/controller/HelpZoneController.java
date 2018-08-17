@@ -13,12 +13,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.medi.pot.common.page.PageCreate;
 import com.medi.pot.helpZone.service.HelpZoneService;
 import com.medi.pot.helpZone.vo.HelpZone;
+import com.medi.pot.helpZone.vo.HelpZoneCommentHospital;
+import com.medi.pot.helpZone.vo.HelpZoneCommentMember;
 import com.medi.pot.member.model.vo.Member;
 
 @Controller
@@ -219,5 +223,68 @@ public class HelpZoneController {
 		
 		return mv;
 	} 
+	
+	//댓글 ajax
+	@RequestMapping("/helpZone/insertHelpZoneComment.do")
+	@ResponseBody
+	public ModelAndView helpZoneCommentInsert(int writer,
+			String comment,
+			String checkPH,
+			String helpZoneNum,
+			String check,
+			@RequestParam(value="cPage",required=false,defaultValue="1") int cPage,
+			ModelAndView mv) throws JsonProcessingException,UnsupportedOperationException{
+		int numPerPage=10;
+		HelpZoneCommentMember hzMember = new HelpZoneCommentMember();
+		HelpZoneCommentHospital hzHospital = new HelpZoneCommentHospital();
+			if(checkPH.trim().equals("P")) {
+				hzMember.setHzCommentWriterNumM(writer);
+				hzMember.setHzCommentContentM(comment);
+				hzMember.setHzNumM(Integer.parseInt(helpZoneNum));
+				int result = service.insertCommentMember(hzMember);
+				if(result < 0) {
+				}
+				List<HelpZoneCommentMember> hzMember2 = null;
+				int totalCount = 0;
+				hzMember2 = service.selectMemberCommentList(cPage, numPerPage, Integer.parseInt(helpZoneNum));
+				String pageBar = new PageCreate().getPageBarComment2(cPage, numPerPage, totalCount, "helpZoneView.do", Integer.parseInt(helpZoneNum));
+				mv.addObject("hzMember2",hzMember2);
+				mv.addObject("pageBar", pageBar);
+				mv.addObject("cPage",cPage);
+				mv.addObject("totalCount", totalCount);
+				mv.addObject("no2", Integer.parseInt(helpZoneNum));
+				mv.setViewName("helpZone/helpZoneCommentLoad");
+			}else if(checkPH.trim().equals("H")) {
+				hzHospital.setHzCommentWriterNumH(writer);
+				hzHospital.setHzCommentContentH(comment);
+				hzHospital.setHzNumH(Integer.parseInt(helpZoneNum));
+				service.insertCommentHospital(hzHospital);
+				
+				List<HelpZoneCommentHospital> hzHospital2 = null;
+				int totalCount = 0;
+				hzHospital2 = service.selectHospitalList(cPage, numPerPage, Integer.parseInt(helpZoneNum));
+				String pageBar = new PageCreate().getPageBarComment2(cPage, numPerPage, totalCount, "helpZoneView,do", Integer.parseInt(helpZoneNum));
+				mv.addObject("hzHospital2", hzHospital2);
+				mv.addObject("pageBar", pageBar);
+				mv.addObject("cPage",cPage);
+				mv.addObject("totalCount", totalCount);
+				mv.addObject("no2", Integer.parseInt(helpZoneNum));
+				mv.setViewName("helpZone/helpZoneCommentLoad");
+			}			
+			return mv;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

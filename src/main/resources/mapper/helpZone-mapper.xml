@@ -35,4 +35,22 @@
 							    where helpZoneNum=#{helpZoneNum}
 	</update>
 	
+	<!-- 헬프존 일반회원 댓글 insert -->
+	<insert id="insertCommentMember" parameterType="HelpZoneCommentMember">
+		insert into HelpZoneCommentMember VALUES(HelpZoneCommentMember_SEQ.nextval, #{hzNumM}, #{hzCommentWriterNumM}, #{hzCommentContentM}, sysdate)
+	</insert>
+	<!-- 헬프존 병원회원 댓글 insert -->
+	<insert id="insertCommentHospital" parameterType="HelpZoneCommentHospital">
+		insert into HelpZoneCommentHospital VALUES(HelpZoneCommentHospital_SEQ.nextval, #{hzNumH}, #{hzCommentWriterNumH}, #{hzCommentContentH}, sysdate)
+	</insert>
+	
+	<!-- 일반회원 댓글 리스트 -->
+	<select id="selectMemberCommentList" resultType="HelpZoneCommentMember" parameterType="_int">
+		select * from HelpZoneCommentMember where hzCommentNumM=#{no} order by hzCommentDateM desc
+	</select>
+	<!-- 병원회원 댓글 리스트 -->
+	<select id="selectHospitalCommentList" resultType="HelpZoneCommentHospital" parameterType="_int">
+		select * from HelpZoneCommentHospital where hzCommentNumH=#{no} order by hzCommentDateH desc
+	</select>
+	
 </mapper>

@@ -29,7 +29,8 @@
 
 		<!-- 헬프존 -->
 		<typeAlias alias="HelpZone" type="com.medi.pot.helpZone.vo.HelpZone"/>
-		<typeAlias alias="MemberReservation" type="com.medi.pot.reservation.model.vo.MemberReservation" />
+		<typeAlias alias="HelpZoneCommentMember" type="com.medi.pot.helpZone.vo.HelpZoneCommentMember"/>
+		<typeAlias alias="HelpZoneCommentHospital" type="com.medi.pot.helpZone.vo.HelpZoneCommentHospital"/>
 		
 		<!-- 예약 List -->
 		<typeAlias alias="ReserList" type="com.medi.pot.reservation.model.vo.ReserList" />
@@ -39,6 +40,7 @@
 		<!-- 병원정보, 의사정보 적용중 -->
 		<typeAlias alias="hospitalInfos" type="com.medi.pot.member.model.vo.HospitalInfos" />
 		<typeAlias alias="doctorInfos" type="com.medi.pot.member.model.vo.DoctorInfos" />
+		<typeAlias alias="MemberReservation" type="com.medi.pot.reservation.model.vo.MemberReservation" />
 		
 		<!-- 체크박스 여러 개를 하나의 String으로 -->
 		<typeAlias alias="StringArray" type="com.medi.pot.member.model.vo.StringArrayTypeHandler"/>
