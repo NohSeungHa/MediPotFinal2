@@ -30,7 +30,8 @@ function check(){
         alert("인증완료");    
         $("#successEmail",opener.document).css("display","block");
         $("#emailAuther",opener.document).css("display",'none');
-        $('#PHemail',opener.document).attr("readonly",true);
+        $('#UserEmail',opener.document).attr("readonly",true);
+        $('#UserEmail',opener.document).val("${UserEmail}");
         self.close();
     }
     

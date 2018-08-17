@@ -132,14 +132,14 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public String FindId(SqlSessionTemplate sqlSession, Member m) {
+	public String MemberFindId(SqlSessionTemplate sqlSession, Member m) {
 		
 		return sqlSession.selectOne("member.FindId", m);
 		
 	}
 
 	@Override
-	public Member searchName(SqlSessionTemplate sqlSession, String findname) {
+	public Member searchMemberName(SqlSessionTemplate sqlSession, String findname) {
 		
 		return sqlSession.selectOne("member.searchName", findname);
 		
@@ -231,9 +231,9 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public DoctorInfos selectDoctorPhoto(SqlSessionTemplate sqlSession, int doctorNum) {
+	public DoctorInfos selectDoctorsPhoto(SqlSessionTemplate sqlSession, int doctorNum) {
 		
-		return sqlSession.selectOne("hospital.selectDoctorPhoto", doctorNum);
+		return sqlSession.selectOne("hospital.selectDoctorsPhoto", doctorNum);
 		
 	}
 
@@ -262,6 +262,90 @@ public class MemberDAOImpl implements MemberDAO {
 	public int FindHosEmailCheck(SqlSessionTemplate sqlSession, String memberEmail) {
 		
 		return sqlSession.selectOne("hospital.EmailCheck", memberEmail);
+		
+	}
+
+	@Override
+	public int deleteMember(SqlSessionTemplate sqlSession, int memberNum) {
+		
+		return sqlSession.delete("member.deleteMember", memberNum);
+		
+	}
+
+	@Override
+	public String HospitalFindId(SqlSessionTemplate sqlSession, Hospital h) {
+		
+		return sqlSession.selectOne("hospital.HospitalFindId", h);
+		
+	}
+
+	@Override
+	public Hospital searchHospitalName(SqlSessionTemplate sqlSession, String findname) {
+		
+		return sqlSession.selectOne("hospital.searchHospitalName", findname);
+		
+	}
+
+	@Override
+	public String hospitalNameDoctorNum(SqlSessionTemplate sqlSession, int doctorNum) {
+		
+		return sqlSession.selectOne("hospital.hospitalNameDoctorNum", doctorNum);
+		
+	}
+
+	@Override
+	public Hospital selectFindHospital(SqlSessionTemplate sqlSession, String hospitalId) {
+		
+		return sqlSession.selectOne("hospital.selectFindHospital", hospitalId);
+		
+	}
+
+	@Override
+	public int deleteDoctors(SqlSessionTemplate sqlSession, int hospitalNo) {
+		
+		return sqlSession.delete("hospital.deleteDoctors", hospitalNo);
+		
+	}
+
+	@Override
+	public int deleteHospitalInfo(SqlSessionTemplate sqlSession, int hospitalInfoNum) {
+		
+		return sqlSession.delete("hospital.deleteHospitalInfo", hospitalInfoNum);
+		
+	}
+
+	@Override
+	public int updateHospital(SqlSessionTemplate sqlSession, int hospitalNum) {
+		
+		return sqlSession.update("hospital.updateHospital", hospitalNum);
+		
+	}
+
+	@Override
+	public String selectHospitalProfessional(SqlSessionTemplate sqlSession, String user_id) {
+		
+		return sqlSession.selectOne("hospital.selectHospitalProfessional", user_id);
+		
+	}
+
+	@Override
+	public String selectDoctorPhoto(SqlSessionTemplate sqlSession, int hospitalNo) {
+		
+		return sqlSession.selectOne("hospital.selectDoctorPhoto", hospitalNo);
+		
+	}
+
+	@Override
+	public String selectHospitalInfoPhoto(SqlSessionTemplate sqlSession, int hospitalInfoNum) {
+		
+		return sqlSession.selectOne("hospital.selectHospitalInfoPhoto", hospitalInfoNum);
+		
+	}
+
+	@Override
+	public String selectHospitalLicense(SqlSessionTemplate sqlSession, int hospitalNum) {
+		
+		return sqlSession.selectOne("hospital.selectHospitalLicense", hospitalNum);
 		
 	}
 

@@ -26,6 +26,10 @@
 	.tblFrm td{
 		padding: 10px;
 	}
+	.doctorTime{
+		width: 150px;
+		display: inline-block;
+	}
 </style>
 <c:if test="${memberLoggedIn == null }">
 	<script>
@@ -35,7 +39,7 @@
 		})	
 	</script>
 </c:if>
-<div style="height: 200px">
+<div style="height: 100px">
 	
 </div>
 
@@ -65,7 +69,6 @@
 				<th><br>병원 명</th>
 				<td><br>
 					<input type="text" class="form-control" style="width: 200px" name="hospitalName" value="${hospitalName }" readonly>
-					<input type="hidden" class="form-control" name="hospitalNum" value="${hospital.hospitalNum }" readonly>
 				</td>
 			</tr>
 			<tr>
@@ -76,8 +79,8 @@
 				<td><br>
 					<input type="checkbox" name="professional" id="J1" value="정형외과"
 					<%=professional.contains("정형외과")?"checked":"" %> >
-					
 					<label for="J1">정형외과&nbsp;&nbsp;</label>
+					
 					<input type="checkbox" name="professional" id="C1" value="치과"
 					<%=professional.contains("치과")?"checked":"" %> >
 					<label for="C1">치과&nbsp;&nbsp;</label>
@@ -125,7 +128,7 @@
 			<tr>
 				<th><br>점심시간 (예 : 1200 ~ 1300)</th>
 				<td><br>
-					<input type="text" class="form-control" style="width: 150px; display: inline-block" name="doctorSlunch" id="doctorSlunch" value="${doctorInfo.doctorSlunch }"> ~ <input type="text" class="form-control" style="width: 150px; display: inline-block" name="doctorElunch" id="doctorElunch" value="${doctorInfo.doctorElunch }"> 
+					<input type="text" class="form-control doctorTime" name="doctorSlunch" id="doctorSlunch" value="${doctorInfo.doctorSlunch }"> ~ <input type="text" class="form-control doctorTime" name="doctorElunch" id="doctorElunch" value="${doctorInfo.doctorElunch }"> 
 				</td>
 			</tr>
 			<tr>
@@ -134,7 +137,7 @@
 			<tr>
 				<th><br>평일시간 (예 : 0900 ~ 1700)</th>
 				<td><br>
-					<input type="text" class="form-control" style="width: 150px; display: inline-block" name="weekdayStime" id="weekdayStime" value="${doctorInfo.weekdayStime }"/> ~ <input type="text" class="form-control" style="width: 150px; display: inline-block" name="weekdayEtime" id="weekdayEtime" value="${doctorInfo.weekdayEtime }"/>
+					<input type="text" class="form-control doctorTime" name="weekdayStime" id="weekdayStime" value="${doctorInfo.weekdayStime }"/> ~ <input type="text" class="form-control doctorTime" name="weekdayEtime" id="weekdayEtime" value="${doctorInfo.weekdayEtime }"/>
 				</td>
 			</tr>
 			<tr>
@@ -143,7 +146,7 @@
 			<tr>
 				<th><br>토요일시간 (예 : 0900 ~ 1200)</th>
 				<td><br>
-					<input type="text" class="form-control" style="width: 150px; display: inline-block" name="satStime" id="satStime" value="${doctorInfo.satStime }"> ~ <input type="text" class="form-control" style="width: 150px; display: inline-block" name="satEtime" id="satEtime" value="${doctorInfo.satEtime }">
+					<input type="text" class="form-control doctorTime" name="satStime" id="satStime" value="${doctorInfo.satStime }"> ~ <input type="text" class="form-control doctorTime" name="satEtime" id="satEtime" value="${doctorInfo.satEtime }">
 				</td>
 			</tr>
 			<tr>
@@ -171,8 +174,7 @@
 				<th><br>의사사진<br>
 				<span style="color: red">(수정 내용이 없다면 원본 사진으로)</span></th>
 				<td><br>
-					<input type="file" name="doctorPhoto" id="doctorPhoto" accept=".jpg, .png, .bmp" style="width: 200px" required>
-					<input type="hidden" name="olddoctorPhoto" id="olddoctorPhoto" style="width: 200px" value="${doctorInfo.doctorPhoto }" required>
+					<input type="file" name="doctorPhoto" id="doctorPhoto" accept=".jpg, .png, .bmp" style="width: 200px">
 				</td>
 			</tr>
 			<tr>
@@ -198,7 +200,7 @@
 	</form>
 </div>
 
-<div style="height: 200px">
+<div style="height: 100px">
 	
 </div>
 

@@ -5,6 +5,10 @@
 	<resultMap type="doctorInfos" id="doctorInfosMap">
 		<result column="professional" property="professional" typeHandler="StringArray"/>
 	</resultMap>
+	
+	<resultMap type="hospital" id="hospitalMap">
+		<result column="hospitalprofessional" property="hospitalProfessional" typeHandler="StringArray" />
+	</resultMap>
 
 	<select id="checkId" parameterType="string" resultType="_int">
 		select count(*) from hospital where hospitalId=#{hospitalId}
@@ -24,7 +28,7 @@
 			sysdate,
 			#{hospitalLike},
 			0,
-			#{hospitalProfessional}
+			#{hospitalProfessional, typeHandler=StringArray}
 		)
 	</insert>
 	
@@ -130,7 +134,7 @@
 		)
 	</insert>
 	
-	<select id="selectDoctorPhoto" parameterType="_int" resultType="doctorInfos">
+	<select id="selectDoctorsPhoto" parameterType="_int" resultType="doctorInfos">
 		select * from doctorInfo where doctorNum=#{doctorNum}
 	</select>
 	
@@ -155,4 +159,54 @@
 			timeInterval=#{timeInterval}
 		where doctorNum=#{doctorNum}
 	</update>
+	
+	<select id="HospitalFindId" parameterType="hospital" resultType="string">
+		select rpad(substr(hospitalId,1,4),length(hospitalId),'*') from hospital where hospitalName=#{hospitalName} and hospitalEmail=#{hospitalEmail}
+	</select>
+	
+	<select id="searchHospitalName" parameterType="string" resultType="hospital">
+		select * from hospital where hospitalName=#{hospitalName}
+	</select>
+	
+	<select id="hospitalNameDoctorNum" parameterType="_int" resultType="string">
+		select hospitalName from hospital where hospitalNum=(select hospitalNo from doctorInfo where doctorNum=#{doctorNum})
+	</select>
+	
+	<select id="selectFindHospital" parameterType="string" resultType="hospital">
+		select * from hospital where hospitalId=#{hospitalId}
+	</select>
+	
+	<select id="selectHospitalProfessional" parameterType="string" resultType="string">
+		select hospitalProfessional from hospital where hospitalId=#{user_id}
+	</select>
+	
+	<delete id="deleteDoctors" parameterType="_int">
+		delete from doctorInfo where hospitalNo=#{hospitalNo}
+	</delete>
+	
+	<delete id="deleteHospitalInfo" parameterType="_int">
+		delete from hospitalInfo where hospitalInfoNum=#{hospitalInfoNum}
+	</delete>
+	
+	<update id="updateHospital" parameterType="_int">
+		update hospital set
+			hospitalId='회원 탈퇴',
+			hospitalName='회원 탈퇴',
+			hospitalEmail='회원 탈퇴',
+			hospitalAddr='회원 탈퇴',
+			hospitalProfessional='회원 탈퇴'
+		where hospitalNum=#{hospitalNum}
+	</update>
+	
+	<select id="selectDoctorPhoto" parameterType="_int" resultType="string">
+		select doctorRePhoto from doctorInfo where doctorNum=#{doctorNum}
+	</select>
+	
+	<select id="selectHospitalInfoPhoto" parameterType="_int" resultType="string">
+		select hospitalRePhoto from hospitalInfo where hospitalInfoNum=#{hospitalInfoNum}
+	</select>
+	
+	<select id="selectHospitalLicense" parameterType="_int" resultType="string">
+		select hospitalReLicense from hospital where hospitalNum=#{hospitalNum}
+	</select>
 </mapper>

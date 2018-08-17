@@ -28,13 +28,16 @@ public interface MemberService {
 	int memberPwUpdate(Map<String, String> idpw);
 	List<Member> selectMemberList(int cPage, int numPerPage);
 	int selectCount();
+	int deleteMember(int memberNum);
 	
 	/* 아이디찾기 */
 	int FindMemEmailCheck(String memberEmail);
-	String FindId(Member m);
-	Member searchName(String findname);
+	String MemberFindId(Member m);
+	Member searchMemberName(String findname);
 	
 	int FindHosEmailCheck(String memberEmail);
+	String HospitalFindId(Hospital h);
+	Hospital searchHospitalName(String findname);
 	
 	/* 비밀번호 찾기 */
 	Member searchID(String findid);
@@ -49,7 +52,15 @@ public interface MemberService {
 	int hospitalCount();
 	String selecthospitalName(int hospitalNum);
 	Hospital selectHospital(int hospitalNum);
+	String selectHospitalProfessional(String user_id);
 	int hospitalUpdate(Hospital hospital);
+	Hospital selectFindHospital(String hospitalId);
+	int deleteDoctors(int hospitalNo);
+	int deleteHospitalInfo(int hospitalInfoNum);
+	int updateHospital(int hospitalNum);
+	String selectDoctorPhoto(int hospitalNo);
+	String selectHospitalInfoPhoto(int hospitalInfoNum);
+	String selectHospitalLicense(int hospitalNum);
 	
 	/* 병원정보 */
 	int hospitalInfoinsert(HospitalInfos hospitalInfo);
@@ -60,8 +71,9 @@ public interface MemberService {
 	/* 의사정보 */
 	List<DoctorInfos> selectDoctorInfo(int hospitalNum); // 전체뽑기
 	int doctorInfoInsert(DoctorInfos doctorInfo); // 등록
-	DoctorInfos selectDoctorPhoto(int doctorNum);
+	DoctorInfos selectDoctorsPhoto(int doctorNum);
 	int updateDoctorInfo(DoctorInfos doctorInfo);
 	String DoctorsProfessional(int doctorNum);
+	String hospitalNameDoctorNum(int doctorNum);
 	
 }

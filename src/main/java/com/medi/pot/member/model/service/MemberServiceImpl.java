@@ -135,16 +135,16 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public String FindId(Member m) {
+	public String MemberFindId(Member m) {
 		
-		return dao.FindId(sqlSession, m);
+		return dao.MemberFindId(sqlSession, m);
 		
 	}
 
 	@Override
-	public Member searchName(String findname) {
+	public Member searchMemberName(String findname) {
 		
-		return dao.searchName(sqlSession, findname);
+		return dao.searchMemberName(sqlSession, findname);
 		
 	}
 
@@ -233,9 +233,9 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public DoctorInfos selectDoctorPhoto(int doctorNum) {
+	public DoctorInfos selectDoctorsPhoto(int doctorNum) {
 		
-		return dao.selectDoctorPhoto(sqlSession, doctorNum);
+		return dao.selectDoctorsPhoto(sqlSession, doctorNum);
 		
 	}
 
@@ -264,6 +264,90 @@ public class MemberServiceImpl implements MemberService {
 	public int FindHosEmailCheck(String memberEmail) {
 		
 		return dao.FindHosEmailCheck(sqlSession, memberEmail);
+		
+	}
+
+	@Override
+	public int deleteMember(int memberNum) {
+		
+		return dao.deleteMember(sqlSession, memberNum);
+		
+	}
+
+	@Override
+	public String HospitalFindId(Hospital h) {
+		
+		return dao.HospitalFindId(sqlSession, h);
+		
+	}
+
+	@Override
+	public Hospital searchHospitalName(String findname) {
+		
+		return dao.searchHospitalName(sqlSession, findname);
+		
+	}
+
+	@Override
+	public String hospitalNameDoctorNum(int doctorNum) {
+		
+		return dao.hospitalNameDoctorNum(sqlSession, doctorNum);
+		
+	}
+
+	@Override
+	public Hospital selectFindHospital(String hospitalId) {
+		
+		return dao.selectFindHospital(sqlSession, hospitalId);
+		
+	}
+
+	@Override
+	public int deleteDoctors(int hospitalNo) {
+		
+		return dao.deleteDoctors(sqlSession, hospitalNo);
+		
+	}
+
+	@Override
+	public int deleteHospitalInfo(int hospitalInfoNum) {
+		
+		return dao.deleteHospitalInfo(sqlSession, hospitalInfoNum);
+		
+	}
+
+	@Override
+	public int updateHospital(int hospitalNum) {
+		
+		return dao.updateHospital(sqlSession, hospitalNum);
+		
+	}
+
+	@Override
+	public String selectHospitalProfessional(String user_id) {
+		
+		return dao.selectHospitalProfessional(sqlSession, user_id);
+		
+	}
+
+	@Override
+	public String selectDoctorPhoto(int hospitalNo) {
+		
+		return dao.selectDoctorPhoto(sqlSession, hospitalNo);
+		
+	}
+
+	@Override
+	public String selectHospitalInfoPhoto(int hospitalInfoNum) {
+		
+		return dao.selectHospitalInfoPhoto(sqlSession, hospitalInfoNum);
+		
+	}
+
+	@Override
+	public String selectHospitalLicense(int hospitalNum) {
+		
+		return dao.selectHospitalLicense(sqlSession, hospitalNum);
 		
 	}
 	
