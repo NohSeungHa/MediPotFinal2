@@ -211,9 +211,9 @@ $(function(){
 			<form name="memberEnrollFrm" action="${pageContext.request.contextPath }/member/memberEnrollEnd.do" method="post">
 				<table>
 					<tr>
-						<th>아이디<b>(*)</b></th>
+						<th style="min-width: 115px">아이디<b>(*)</b></th>
 						<td>
-							<input type="text" class="form-control" placeholder="4글자이상" name="memberId" id="memberId" required>
+							<input type="text" class="form-control" placeholder="4글자이상" name="memberId" id="memberId" style="width: 250px" required>
 						</td>
 					</tr>
 					<tr>

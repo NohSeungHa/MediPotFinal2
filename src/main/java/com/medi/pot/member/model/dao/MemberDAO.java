@@ -62,6 +62,9 @@ public interface MemberDAO {
 	int deleteDoctors(SqlSessionTemplate sqlSession, int hospitalNo);
 	int deleteHospitalInfo(SqlSessionTemplate sqlSession, int hospitalInfoNum);
 	int updateHospital(SqlSessionTemplate sqlSession, int hospitalNum);
+	String selectDoctorPhoto(SqlSessionTemplate sqlSession, int hospitalNo);
+	String selectHospitalInfoPhoto(SqlSessionTemplate sqlSession, int hospitalInfoNum);
+	String selectHospitalLicense(SqlSessionTemplate sqlSession, int hospitalNum);
 	
 	/* 병원정보 */
 	int hospitalInfoinsert(SqlSessionTemplate sqlSession, HospitalInfos hospitalInfo);
@@ -72,7 +75,7 @@ public interface MemberDAO {
 	/* 의사정보 */
 	List<DoctorInfos> selectDoctorInfo(SqlSessionTemplate sqlSession, int hospitalNum);
 	int doctorInfoInsert(SqlSessionTemplate sqlSession, DoctorInfos doctorInfo);
-	DoctorInfos selectDoctorPhoto(SqlSessionTemplate sqlSession, int doctorNum);
+	DoctorInfos selectDoctorsPhoto(SqlSessionTemplate sqlSession, int doctorNum);
 	int updateDoctorInfo(SqlSessionTemplate sqlSession, DoctorInfos doctorInfo);
 	String DoctorsProfessional(SqlSessionTemplate sqlSession, int doctorNum);
 	String hospitalNameDoctorNum(SqlSessionTemplate sqlSession, int doctorNum);

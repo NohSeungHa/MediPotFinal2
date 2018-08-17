@@ -233,9 +233,9 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public DoctorInfos selectDoctorPhoto(int doctorNum) {
+	public DoctorInfos selectDoctorsPhoto(int doctorNum) {
 		
-		return dao.selectDoctorPhoto(sqlSession, doctorNum);
+		return dao.selectDoctorsPhoto(sqlSession, doctorNum);
 		
 	}
 
@@ -327,6 +327,27 @@ public class MemberServiceImpl implements MemberService {
 	public String selectHospitalProfessional(String user_id) {
 		
 		return dao.selectHospitalProfessional(sqlSession, user_id);
+		
+	}
+
+	@Override
+	public String selectDoctorPhoto(int hospitalNo) {
+		
+		return dao.selectDoctorPhoto(sqlSession, hospitalNo);
+		
+	}
+
+	@Override
+	public String selectHospitalInfoPhoto(int hospitalInfoNum) {
+		
+		return dao.selectHospitalInfoPhoto(sqlSession, hospitalInfoNum);
+		
+	}
+
+	@Override
+	public String selectHospitalLicense(int hospitalNum) {
+		
+		return dao.selectHospitalLicense(sqlSession, hospitalNum);
 		
 	}
 	

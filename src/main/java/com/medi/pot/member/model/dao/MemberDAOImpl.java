@@ -231,9 +231,9 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public DoctorInfos selectDoctorPhoto(SqlSessionTemplate sqlSession, int doctorNum) {
+	public DoctorInfos selectDoctorsPhoto(SqlSessionTemplate sqlSession, int doctorNum) {
 		
-		return sqlSession.selectOne("hospital.selectDoctorPhoto", doctorNum);
+		return sqlSession.selectOne("hospital.selectDoctorsPhoto", doctorNum);
 		
 	}
 
@@ -325,6 +325,27 @@ public class MemberDAOImpl implements MemberDAO {
 	public String selectHospitalProfessional(SqlSessionTemplate sqlSession, String user_id) {
 		
 		return sqlSession.selectOne("hospital.selectHospitalProfessional", user_id);
+		
+	}
+
+	@Override
+	public String selectDoctorPhoto(SqlSessionTemplate sqlSession, int hospitalNo) {
+		
+		return sqlSession.selectOne("hospital.selectDoctorPhoto", hospitalNo);
+		
+	}
+
+	@Override
+	public String selectHospitalInfoPhoto(SqlSessionTemplate sqlSession, int hospitalInfoNum) {
+		
+		return sqlSession.selectOne("hospital.selectHospitalInfoPhoto", hospitalInfoNum);
+		
+	}
+
+	@Override
+	public String selectHospitalLicense(SqlSessionTemplate sqlSession, int hospitalNum) {
+		
+		return sqlSession.selectOne("hospital.selectHospitalLicense", hospitalNum);
 		
 	}
 

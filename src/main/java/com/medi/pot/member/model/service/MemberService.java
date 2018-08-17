@@ -58,6 +58,9 @@ public interface MemberService {
 	int deleteDoctors(int hospitalNo);
 	int deleteHospitalInfo(int hospitalInfoNum);
 	int updateHospital(int hospitalNum);
+	String selectDoctorPhoto(int hospitalNo);
+	String selectHospitalInfoPhoto(int hospitalInfoNum);
+	String selectHospitalLicense(int hospitalNum);
 	
 	/* 병원정보 */
 	int hospitalInfoinsert(HospitalInfos hospitalInfo);
@@ -68,7 +71,7 @@ public interface MemberService {
 	/* 의사정보 */
 	List<DoctorInfos> selectDoctorInfo(int hospitalNum); // 전체뽑기
 	int doctorInfoInsert(DoctorInfos doctorInfo); // 등록
-	DoctorInfos selectDoctorPhoto(int doctorNum);
+	DoctorInfos selectDoctorsPhoto(int doctorNum);
 	int updateDoctorInfo(DoctorInfos doctorInfo);
 	String DoctorsProfessional(int doctorNum);
 	String hospitalNameDoctorNum(int doctorNum);

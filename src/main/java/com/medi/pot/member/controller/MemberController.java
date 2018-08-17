@@ -544,7 +544,10 @@ public class MemberController {
 		Hospital hospital = service.selectHospital(hospitalNum); 
 		
 		if(hospitalLicense !=null) {
-			//파일 업로드
+			// 이전 파일을 삭제
+			File deletefile = new File("C:\\Medipot_Git\\MediPotFinal2\\src\\main\\webapp\\resources\\uploadfile\\H_License\\"+hospital.getHospitalReLicense());
+			deletefile.delete();
+			
 			//저장위치지정
 			String saveDir=request.getSession().getServletContext().getRealPath("/resources/uploadfile/H_License");
 			
@@ -612,9 +615,21 @@ public class MemberController {
 		if(h != null) {
 			if(bcrypt.matches(hospitalPw, h.getHospitalPw())) {
 				msg = "삭제 성공";
+				String deleteStr1 = service.selectDoctorPhoto(h.getHospitalNum()); // 의사 사진 삭제
 				service.deleteDoctors(h.getHospitalNum());
+				File deleteFile = new File("C:\\Medipot_Git\\MediPotFinal2\\src\\main\\webapp\\resources\\uploadfile\\dortors\\"+deleteStr1);
+				deleteFile.delete();
+				
+				String deleteStr2 = service.selectHospitalInfoPhoto(h.getHospitalNum()); // 병원 사진 삭제
 				service.deleteHospitalInfo(h.getHospitalNum());
+				deleteFile = new File("C:\\Medipot_Git\\MediPotFinal2\\src\\main\\webapp\\resources\\uploadfile\\hospitalInfo\\"+deleteStr2);
+				deleteFile.delete();
+				
+				String deleteStr3 = service.selectHospitalLicense(h.getHospitalNum()); // 병원 회원 사업자번호 사진 삭제
 				service.updateHospital(h.getHospitalNum());
+				deleteFile = new File("C:\\Medipot_Git\\MediPotFinal2\\src\\main\\webapp\\resources\\uploadfile\\H_License\\"+deleteStr3);
+				deleteFile.delete();
+				
 				sessionStatus.setComplete();
 			}
 		}
@@ -723,7 +738,6 @@ public class MemberController {
 			
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
 		
@@ -1006,7 +1020,10 @@ public class MemberController {
 		HospitalInfos hospitalInfo = service.selectHospitalInfo(hospitalNum);
 		
 		if(hospitalPhoto != null) {
-			//파일 업로드
+			// 이전 파일을 삭제
+			File deletefile = new File("C:\\Medipot_Git\\MediPotFinal2\\src\\main\\webapp\\resources\\uploadfile\\hospitalInfo\\"+hospitalInfo.getHospitalRePhoto());
+			deletefile.delete();
+			
 			//저장위치지정
 			String saveDir = request.getSession().getServletContext().getRealPath("/resources/uploadfile/hospitalInfo");
 	
@@ -1147,7 +1164,7 @@ public class MemberController {
 	@RequestMapping("/member/selectdoctor.do")
 	public String selectDoctor(int doctorNum, Model model) {
 		System.out.println(doctorNum);
-		DoctorInfos doctorInfo = service.selectDoctorPhoto(doctorNum);
+		DoctorInfos doctorInfo = service.selectDoctorsPhoto(doctorNum);
 		String pro = service.DoctorsProfessional(doctorNum);
 		String hospitalName = service.hospitalNameDoctorNum(doctorNum);
 		
@@ -1179,9 +1196,12 @@ public class MemberController {
 		String msg = "";
 		String loc = "";
 		
-		DoctorInfos doctorInfo = service.selectDoctorPhoto(doctorNum);
+		DoctorInfos doctorInfo = service.selectDoctorsPhoto(doctorNum);
 		
 		if(doctorPhoto != null) {
+			// 이전 파일을 삭제
+			File deletefile = new File("C:\\Medipot_Git\\MediPotFinal2\\src\\main\\webapp\\resources\\uploadfile\\dortors\\"+doctorInfo.getDoctorRePhoto());
+			deletefile.delete();
 			
 			String saveDir=request.getSession().getServletContext().getRealPath("/resources/uploadfile/dortors");
 			

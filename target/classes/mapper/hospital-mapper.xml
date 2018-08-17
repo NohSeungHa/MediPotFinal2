@@ -134,7 +134,7 @@
 		)
 	</insert>
 	
-	<select id="selectDoctorPhoto" parameterType="_int" resultType="doctorInfos">
+	<select id="selectDoctorsPhoto" parameterType="_int" resultType="doctorInfos">
 		select * from doctorInfo where doctorNum=#{doctorNum}
 	</select>
 	
@@ -188,7 +188,7 @@
 		delete from hospitalInfo where hospitalInfoNum=#{hospitalInfoNum}
 	</delete>
 	
-	<update id="updateHospital">
+	<update id="updateHospital" parameterType="_int">
 		update hospital set
 			hospitalId='회원 탈퇴',
 			hospitalName='회원 탈퇴',
@@ -197,4 +197,16 @@
 			hospitalProfessional='회원 탈퇴'
 		where hospitalNum=#{hospitalNum}
 	</update>
+	
+	<select id="selectDoctorPhoto" parameterType="_int" resultType="string">
+		select doctorRePhoto from doctorInfo where doctorNum=#{doctorNum}
+	</select>
+	
+	<select id="selectHospitalInfoPhoto" parameterType="_int" resultType="string">
+		select hospitalRePhoto from hospitalInfo where hospitalInfoNum=#{hospitalInfoNum}
+	</select>
+	
+	<select id="selectHospitalLicense" parameterType="_int" resultType="string">
+		select hospitalReLicense from hospital where hospitalNum=#{hospitalNum}
+	</select>
 </mapper>
