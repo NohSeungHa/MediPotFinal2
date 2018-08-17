@@ -126,7 +126,7 @@
 	</div>
 	<c:forEach var="list" items="${nameList }" >
 	<div class="mediList" id="${list.hospitalNum }" style="display:inline-block;width:49%;margin-right:5px; position:relative;margin-bottom:20px;">
-		<div style="display: inline-block;"><img src="${path }/resources/img/reser/${list.hospitalPhoto}" width="200px;" height="200px;"></div>
+		<div style="display: inline-block;"><img src="${path }/resources/uploadfile/hospitalInfo/${list.hospitalRePhoto}" width="200px;" height="200px;"></div>
 		<div id="hlist" style="display: inline-block;position:absolute;">
 			<p><span style="font-size:20px;color: #286090">병원명</span>&nbsp;&nbsp;
 			<span style="font-size:20px;">${list.hospitalName }</span></p>
