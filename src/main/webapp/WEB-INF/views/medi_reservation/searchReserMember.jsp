@@ -43,7 +43,7 @@
 					<th style="width: 90px;text-align: center;"><h4>핸드폰</h4></th>
 					<th style="width: 300px;text-align: center;"><h4>주소</h4></th>
 					<th style="text-align: center;width: 600px;"><h4>남긴메세지</h4></th>
-					<th style="text-align: center;width: 100px;"><h4>예약날짜</h4></th>
+					<th style="text-align: center;width: 110px;"><h4>예약날짜</h4></th>
 					<th style="text-align: center;width: 90px;"><h4>예약시간</h4></th>
 					<th style="text-align: center;width: 90px;"><h4>예약취소</h4></th>
 				</tr>
