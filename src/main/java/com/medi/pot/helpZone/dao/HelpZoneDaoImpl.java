@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.medi.pot.helpZone.vo.HelpZone;
+import com.medi.pot.helpZone.vo.HelpZoneCommentHospital;
+import com.medi.pot.helpZone.vo.HelpZoneCommentMember;
 import com.medi.pot.member.model.vo.Member;
 
 @Repository
@@ -51,7 +53,32 @@ public class HelpZoneDaoImpl implements HelpZoneDao {
 	public int updateHelpZone(HelpZone helpZone) {		
 		return session.update("helpZone.updateHelpZone",helpZone);
 	}
+	
+	//일반회원 댓글 insert
+	@Override
+	public int insertCommentMember(HelpZoneCommentMember hzMember) {
+		return session.insert("helpZone.insertCommentMember", hzMember);
+	}
+	
+	//병원회원 댓글 insert
+	@Override
+	public int insertCommentHospital(HelpZoneCommentHospital hzHospital) {
+		return session.insert("helpZone.insertCommentHospital", hzHospital);
+	}
 
+	@Override
+	public List<HelpZoneCommentMember> selectMemberCommentList(int cPage, int numPerPage, int no) {
+		RowBounds rb=new RowBounds((cPage-1)*numPerPage,numPerPage);
+		return session.selectList("helpZone.selectMemberCommentList", no, rb);
+	}
+
+	@Override
+	public List<HelpZoneCommentHospital> selectHospitalCommentList(int cPage, int numPerPage, int no) {
+		RowBounds rb=new RowBounds((cPage-1)*numPerPage,numPerPage);
+		return session.selectList("helpZone.selectHospitalCommentList", no, rb);
+	}
+
+		
 	
 
 }

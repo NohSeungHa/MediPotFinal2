@@ -107,7 +107,7 @@
 		<!-- 일반회원으로 로그인했을때  -->
 		<c:if test="${checkPH=='P' }">
 			<p type="text" id="hzCommentWriter" readonly>&nbsp;${memberLoggedIn.memberId }</p>
-			<input type="hidden" id="hzCommentWriterM" value="${membberLoggedIn.memberNum }"/>
+			<input type="hidden" id="hzCommentWriterM" value="${memberLoggedIn.memberNum }"/>
 			<input type="hidden" id="checkPH" value="P"/>
 		</c:if>
 		<!-- 병원회원으로 로그인했을때 -->
@@ -116,7 +116,7 @@
 			<input type="hidden" id="hzCommentWriterH" value="${membberLoggedIn.hospitalNum }"/>
 			<input type="hidden" id="checkPH" value="H"/>
 		</c:if>
-		<textarea class="form-control" style="width: 88%;height: 100px;resize: none; float: left; border: 1px solid lightgray;" id="helpZoneContent" name="helpZoneContent" onKeyUp="checkLength(this);" onKeyDown="checkLength(this);" placeholder="댓글을 입력하세요.(500자이내) 불쾌감을 주는 욕설과 악플은 삭제될 수 있습니다."></textarea>
+		<textarea class="form-control" style="width: 88%;height: 100px;resize: none; float: left; border: 1px solid lightgray;" id="helpZoneComment" name="helpZoneComment" onKeyUp="checkLength(this);" onKeyDown="checkLength(this);" placeholder="댓글을 입력하세요.(500자이내) 불쾌감을 주는 욕설과 악플은 삭제될 수 있습니다."></textarea>
 		<button id="helpZoneCommentInsert" type="submit" class="btn btn-success" style="height:100px; width:100px; margin-left: 10px;">댓글 등록</button>			
 	</div>
 </c:if>
@@ -188,28 +188,28 @@ function validate(){
 }
 
 /* 댓글작성 메서드 */
-$('helpZoneCommentInsert').click(function() {
-	var writer = null;
-	var comment = $('helpZoneContent').val();
+$('#helpZoneCommentInsert').click(function() {
+	var writer = 0;
+	var comment = $('#helpZoneComment').val();
 	var helpZoneNum = $('#helpZoneNum').val();
-	var cp = $('#cp').val();
-	var check = $('#checkPH').val();
-	if(${checkPH=='P'}){
+	var checkPH = $('#checkPH').val();
+	alert(comment);
+	if(checkPH=='P'){
 		writer = $('#hzCommentWriterM').val();
 	}
-	if(${checkPH=='H'}){
+	if(checkPH=='H'){
 		writer = $('#hzCommentWriterH').val();
 	}
-	var allData = { "writer": writer, "comment": comment, "communityNum":communityNum, "cp":cp, "check":check };
+	var allData = { "writer": writer, "comment": comment, "helpZoneNum":helpZoneNum,"checkPH":checkPH };
 	  $.ajax({
-			url:"${path}/helpZone/inserthelpZoneComment.do",
+			url:"${path}/helpZone/insertHelpZoneComment.do",
 			type:'post',
 			data: allData,
 			dataType:"html",
 			success:function(data){
 				alert("댓글 등록 완료!");
-			   	$('#helpZonetContent').val("");
-			   	$('#cc2s').html(data);
+			   	$('#helpZoneContent').val("");
+			   	$('#hzc').html(data);
 			}
  	});
 });
