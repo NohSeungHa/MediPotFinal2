@@ -84,8 +84,12 @@ public class ReservationController {
 	@RequestMapping("/medi/searchMedi")
 	public String searchMedi(@RequestParam(value = "hName")String hName, HttpServletRequest req) {
 		List<HospitalInfo> nameList=service.mediNameSearch(hName);
-		System.out.println(nameList);
 		req.setAttribute("nameList", nameList);
+		String ch="";
+		if(nameList.size()<1) {
+			ch="none";
+		}
+		req.setAttribute("ch", ch);
 		return "medi_reservation/mediFindList";
 	}
 	
