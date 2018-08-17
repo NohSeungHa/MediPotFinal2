@@ -1186,9 +1186,9 @@ public class MemberController {
 	@RequestMapping("/member/doctorInfoUpdateEnd.do")
 	public String doctorUpdateEnd(Model model, String doctorName,
 			String doctorCareer, String[] professional,
-			String doctorSlunch, String doctorElunch, String WeekdayStime,
-			String WeekdayEtime, String SatStime, String SatEtime,
-			String closed, String Specialized, String timeInterval, 
+			String doctorSlunch, String doctorElunch, String weekdayStime,
+			String weekdayEtime, String satStime, String satEtime,
+			String closed, String specialized, String timeInterval, 
 			@RequestParam(value="doctorPhoto", required=false, defaultValue="null") MultipartFile doctorPhoto,
 			HttpServletRequest request, int doctorNum) {
 		
@@ -1235,12 +1235,12 @@ public class MemberController {
 		doctorInfo.setProfessional(professional);
 		doctorInfo.setDoctorSlunch(doctorSlunch);
 		doctorInfo.setDoctorElunch(doctorElunch);
-		doctorInfo.setWeekdayStime(WeekdayStime);
-		doctorInfo.setWeekdayEtime(WeekdayEtime);
-		doctorInfo.setSatStime(SatStime);
-		doctorInfo.setSatEtime(SatEtime);
+		doctorInfo.setWeekdayStime(weekdayStime);
+		doctorInfo.setWeekdayEtime(weekdayEtime);
+		doctorInfo.setSatStime(satStime);
+		doctorInfo.setSatEtime(satEtime);
 		doctorInfo.setClosed(closed);
-		doctorInfo.setSpecialized(Specialized);
+		doctorInfo.setSpecialized(specialized);
 		doctorInfo.setTimeInterval(timeInterval);
 		
 		int result = service.updateDoctorInfo(doctorInfo);
