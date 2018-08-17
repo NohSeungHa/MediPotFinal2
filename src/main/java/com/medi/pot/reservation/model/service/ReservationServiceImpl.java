@@ -130,6 +130,11 @@ public class ReservationServiceImpl implements ReservationService {
 	public int searchReserMemCount(Map<String, Object> map) {
 		return reserDAO.searchReserMemCount(map);
 	}
+
+	@Override
+	public int deleteSearchReserMember(int num) {
+		return reserDAO.deleteSearchReserMember(num);
+	}
 	
 	
 	

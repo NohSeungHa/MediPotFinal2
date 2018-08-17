@@ -8,7 +8,7 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 <jsp:param value="HomeSpring" name="pageTitle"></jsp:param>
 </jsp:include>
-<div style="height:1000px;">
+<div style="height:auto;">
 		<div style="position:relative;height:280px;">
 			<div style="position:absolute;left:470px;"><img src="${path }/resources/img/reser/searchr.png" width="1000px;" height="280px;"></div>
 			<div style="position: absolute;font-size:70px;left:890px;top:170px;">
@@ -43,6 +43,7 @@
 					<th style="width: 90px;text-align: center;"><h4>핸드폰</h4></th>
 					<th style="width: 300px;text-align: center;"><h4>주소</h4></th>
 					<th style="text-align: center;width: 600px;"><h4>남긴메세지</h4></th>
+					<th style="text-align: center;width: 100px;"><h4>예약날짜</h4></th>
 					<th style="text-align: center;width: 90px;"><h4>예약시간</h4></th>
 					<th style="text-align: center;width: 90px;"><h4>예약취소</h4></th>
 				</tr>
@@ -58,19 +59,22 @@
 							<td><h4>${resr.memberPhone }</h4></td>
 							<td><h4>${resr.memberAddr }</h4></td>
 							<td><h4>${resr.sendMsg }</h4></td>
+							<td><h4>${resr.checkDate }</h4></td>
 							<td><h4>${fn:substring(resr.checkTime,0,2) }:${fn:substring(resr.checkTime,2,4) }</h4></td>
-							<td><button class="btn can" title="${resr.checkNum }" name="${resr.doctorNum }" value="${resr.checkDate }">예약 취소</button></td>
+							<td><button class="btn can" title="${resr.checkNum }">예약 취소</button></td>
 						</tr>
 					</c:forEach>
 				</c:if>
 				<c:if test="${empty list}">
 					<tr>
-						<td colspan="9" style="text-align: center;"><h4>검색 회원이 없습니다.</h4></td>
+						<td colspan="10" style="text-align: center;"><h4>검색 회원이 없습니다.</h4></td>
 					</tr>
 				</c:if>
 			</tbody>
 		</table>
+		<br>
 		<div> ${pageBar }</div>
+		<br>
 	</div>
 
 <style>
@@ -86,7 +90,7 @@
 		}
 		$('.can').click(function () {
 			if(confirm('예약을 취소 하겠습니까?')){
-				location.href='${path}/medi/deleteSearchReser?num='+$(this).attr("title")+'&docNum='+$(this).attr("name")+'&date='+$(this).val();
+				location.href='${path}/medi/deleteSearchReserMember?num='+$(this).attr("title")+'&hosNum=${hosNum}&searchKind=${kind}&search=${search}';
 			}
 		});
 		

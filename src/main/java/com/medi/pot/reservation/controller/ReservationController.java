@@ -412,11 +412,44 @@ public class ReservationController {
 		map.put("search", search);
 		List<SearchReserList> list=service.searchReserMem(map,cPage,numPerPage);
 		int totalCount=service.searchReserMemCount(map);
-		String pageBar=new PageCreate2().getPageBar2(cPage, numPerPage, totalCount, req.getContextPath()+"/medi/searchReserMember",hosNum,searchKind,search);
+		String pageBar=new PageCreate2().getPageBar2(cPage, numPerPage, totalCount, req.getContextPath()+"/medi/searchReserMem",hosNum,searchKind,search);
 		req.setAttribute("pageBar", pageBar);
 		req.setAttribute("list", list);
 		req.setAttribute("cPage", cPage);
+		
 		req.setAttribute("hosNum", hosNum);
+		req.setAttribute("kind", searchKind);
+		req.setAttribute("search", search);
+		return "medi_reservation/searchReserMember";
+	}
+	
+	@RequestMapping("/medi/deleteSearchReserMember")
+	public String deleteSearchReserMember(@RequestParam(value="cPage", required=false,defaultValue="1") int cPage,@RequestParam(value = "num")int num,@RequestParam(value = "hosNum")int hosNum,@RequestParam(value = "searchKind") String searchKind,@RequestParam(value = "search") String search, HttpServletRequest req) {
+		int result=service.deleteSearchReserMember(num);
+		String msg="";
+		if(result>0) {
+			msg="예약이 취소 되었습니다.";
+		}else {
+			msg="예약 취소에 실패 하였습니다.";
+		}
+
+	
+		int numPerPage=10;
+		Map<String, Object> map=new HashMap<String, Object>();
+		map.put("hosNum", hosNum);
+		map.put("kind", searchKind);
+		map.put("search", search);
+		List<SearchReserList> list=service.searchReserMem(map,cPage,numPerPage);
+		int totalCount=service.searchReserMemCount(map);
+		String pageBar=new PageCreate2().getPageBar2(cPage, numPerPage, totalCount, req.getContextPath()+"/medi/searchReserMem",hosNum,searchKind,search);
+		req.setAttribute("pageBar", pageBar);
+		req.setAttribute("list", list);
+		req.setAttribute("cPage", cPage);
+		
+		req.setAttribute("hosNum", hosNum);
+		req.setAttribute("kind", searchKind);
+		req.setAttribute("search", search);
+		req.setAttribute("msg", msg);
 		return "medi_reservation/searchReserMember";
 	}
 

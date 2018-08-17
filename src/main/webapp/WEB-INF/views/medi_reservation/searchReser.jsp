@@ -8,7 +8,7 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 <jsp:param value="HomeSpring" name="pageTitle"></jsp:param>
 </jsp:include>
-<div style="height:1000px;">
+<div style="height:auto;">
 		<div style="position:relative;height:280px;">
 			<div style="position:absolute;left:470px;"><img src="${path }/resources/img/reser/listReser.png" width="1000px;" height="280px;"></div>
 			<div style="position: absolute;font-size:70px;left:920px;top:50px;">${date }</div>
@@ -51,7 +51,9 @@
 				</c:if>
 			</tbody>
 		</table>
+		<br>
 		<div> ${pageBar }</div>
+		<br>
 	</div>
 
 <style>
