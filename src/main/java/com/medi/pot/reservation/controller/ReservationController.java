@@ -119,11 +119,7 @@ public class ReservationController {
 		req.setAttribute("time", time);
 		return "medi_reservation/choiceTime";
 	}
-<<<<<<< HEAD
 
-=======
-	
->>>>>>> groot
 	@RequestMapping("/medi/insertReser")
 	public String insertReser(MemberReservation mr,HttpServletRequest req) {
 		int result=service.insertReser(mr);
@@ -353,7 +349,6 @@ public class ReservationController {
 		return "medi_reservation/reservation2";
 	}
 
-<<<<<<< HEAD
 	@RequestMapping("/medi/searchReserM")
 	public String searchReserM(@RequestParam(value="cPage", required=false,defaultValue="1") int cPage,@RequestParam(value = "docNum")int docNum,@RequestParam(value = "date")String date,HttpServletRequest req) {
 		Map<String, Object> map=new HashMap<String, Object>();
@@ -457,7 +452,6 @@ public class ReservationController {
 		req.setAttribute("msg", msg);
 		return "medi_reservation/searchReserMember";
 	}
-=======
->>>>>>> groot
+
 
 }

@@ -199,11 +199,7 @@ public class PageCreate {
       
       
    }
-<<<<<<< HEAD
 
-=======
-   
->>>>>>> groot
    public String getPageBar3(int cPage, int numPerPage, int totalCount, String url,int userNum)
    {
       String pageBar="";
@@ -273,16 +269,11 @@ public class PageCreate {
       
       
    }
-<<<<<<< HEAD
-   //자유게시판 검색 페이징 처리
-   public String getPageBar(int cPage, int numPerPage, int totalCount,String searchKind,String searchContent, String url) {
-      
-=======
+
    
    //자유게시판 검색 페이징 처리
    public String getPageBar(int cPage, int numPerPage, int totalCount,String searchKind,String searchContent, String url)
    {
->>>>>>> groot
       String pageBar="";
       int pageSize=5;
       
@@ -301,15 +292,9 @@ public class PageCreate {
       }
       else 
       {
-<<<<<<< HEAD
 
          pageBar+="<li class='previous active'>";
-
          pageBar+="<li class='previous'>";
-
-=======
-         pageBar+="<li class='previous'>";
->>>>>>> groot
          pageBar+="<a href='javascript:fn_paging("+(pageNo-1)+")'>이전</a>";
          pageBar+="</li>";
       }
