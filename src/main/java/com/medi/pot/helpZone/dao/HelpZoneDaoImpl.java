@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.medi.pot.helpZone.vo.HelpZone;
 import com.medi.pot.helpZone.vo.HelpZoneCommentHospital;
 import com.medi.pot.helpZone.vo.HelpZoneCommentMember;
+import com.medi.pot.member.model.vo.Hospital;
 import com.medi.pot.member.model.vo.Member;
 
 @Repository
@@ -78,7 +79,22 @@ public class HelpZoneDaoImpl implements HelpZoneDao {
 		return session.selectList("helpZone.selectHospitalCommentList", no, rb);
 	}
 
-		
+	//댓글 개수
+	@Override
+	public int helpZoneCommentCountM(int hzNumM) {
+		return session.selectOne("helpZone.helpZoneCommentCountM", hzNumM);
+	}
 	
+	//댓글 개수
+		@Override
+		public int helpZoneCommentCountH(int hzNumH) {
+			return session.selectOne("helpZone.helpZoneCommentCountH", hzNumH);
+		}
+
+	@Override
+	public Hospital selectHospital(int hospitalNum) {
+		return session.selectOne("helpZone.selectHospital", hospitalNum);
+	}
+
 
 }

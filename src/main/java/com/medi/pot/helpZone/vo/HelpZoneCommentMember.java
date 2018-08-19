@@ -1,6 +1,6 @@
 package com.medi.pot.helpZone.vo;
 
-import java.util.Date;
+import java.sql.Date;
 //일반회원 댓글 vo
 public class HelpZoneCommentMember {
 	private int hzCommentM;				//댓글 번호

@@ -9,6 +9,7 @@ import com.medi.pot.helpZone.dao.HelpZoneDao;
 import com.medi.pot.helpZone.vo.HelpZone;
 import com.medi.pot.helpZone.vo.HelpZoneCommentHospital;
 import com.medi.pot.helpZone.vo.HelpZoneCommentMember;
+import com.medi.pot.member.model.vo.Hospital;
 import com.medi.pot.member.model.vo.Member;
 
 @Service
@@ -72,13 +73,25 @@ public class HelpZoneServiceImpl implements HelpZoneService {
 	}
 
 	@Override
-	public List<HelpZoneCommentHospital> selectHospitalList(int cPage, int numPerPage, int no) {
+	public List<HelpZoneCommentHospital> selectHospitalCommentList(int cPage, int numPerPage, int no) {
 		return helpZoneDao.selectHospitalCommentList(cPage,numPerPage,no);
 	}
+
+	//
+	@Override
+	public int helpZoneCommentCountM(int hzNumM) {
+		return helpZoneDao.helpZoneCommentCountM(hzNumM);
+	}
 	
-	
-	
-	
+	@Override
+	public int helpZoneCommentCountH(int hzNumH) {
+		return helpZoneDao.helpZoneCommentCountH(hzNumH);
+	}
+
+	@Override
+	public Hospital selectHospital(int hospitalNum) {
+		return helpZoneDao.selectHospital(hospitalNum);
+	}
 	
 
 	

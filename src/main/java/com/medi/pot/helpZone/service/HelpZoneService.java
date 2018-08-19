@@ -5,6 +5,7 @@ import java.util.List;
 import com.medi.pot.helpZone.vo.HelpZone;
 import com.medi.pot.helpZone.vo.HelpZoneCommentHospital;
 import com.medi.pot.helpZone.vo.HelpZoneCommentMember;
+import com.medi.pot.member.model.vo.Hospital;
 import com.medi.pot.member.model.vo.Member;
 
 public interface HelpZoneService {
@@ -19,6 +20,9 @@ public interface HelpZoneService {
 	int insertCommentMember(HelpZoneCommentMember hzMember);		//일반회원 댓글 등록
 	int insertCommentHospital(HelpZoneCommentHospital hzHospital);	//병원회원 댓글 등록
 	List<HelpZoneCommentMember> selectMemberCommentList(int cPage, int numPerPage, int no);	//일반회원 댓글 리스트 불러오기
-	List<HelpZoneCommentHospital> selectHospitalList(int cPage, int numPerPage, int no);	//병원회원 댓글 리스트 불러오기
+	List<HelpZoneCommentHospital> selectHospitalCommentList(int cPage, int numPerPage, int no);	//병원회원 댓글 리스트 불러오기
+	int helpZoneCommentCountM(int hzNumM);							//헬프존 댓글 갯수(일반)
+	int helpZoneCommentCountH(int hzNumH);							//헬프존 댓글 갯수(병원)
+	Hospital selectHospital(int hospitalNum);						// 작성자 불러오기
 	
 }

@@ -3,6 +3,7 @@ package com.medi.pot.helpZone.controller;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -23,6 +24,7 @@ import com.medi.pot.helpZone.service.HelpZoneService;
 import com.medi.pot.helpZone.vo.HelpZone;
 import com.medi.pot.helpZone.vo.HelpZoneCommentHospital;
 import com.medi.pot.helpZone.vo.HelpZoneCommentMember;
+import com.medi.pot.member.model.vo.Hospital;
 import com.medi.pot.member.model.vo.Member;
 
 @Controller
@@ -37,7 +39,6 @@ public class HelpZoneController {
 		ModelAndView mv = new ModelAndView();
 		int numPerPage=6;		
 		List<HelpZone> list = service.selectHelpZoneList(cPage,numPerPage);
-		System.out.println("list : "+list);
 		
 		int totalCount=service.selectCount();
 		
@@ -112,13 +113,33 @@ public class HelpZoneController {
 	      
 	      return mv;
 	}
-	
+	//헬프존 보기
 	@RequestMapping("/helpZone/helpZoneView.do")
-	public String helpZoneView(int helpZoneNum, HttpServletRequest req){
-		HelpZone helpZone = service.selectHelpZone(helpZoneNum);//헬프존 불러오는 메서드
+	public String helpZoneView(int no, HttpServletRequest req, 
+			@RequestParam(value="cPageM",required=false,defaultValue="1") int cPageM,
+			@RequestParam(value="cPageH",required=false,defaultValue="1") int cPageH){
+		HelpZone helpZone = service.selectHelpZone(no);//헬프존 불러오는 메서드
 		Member m = service.selectMember(helpZone.getHelpZoneQuestioner());	//작성자 불러오는 메서드
+		
+		//댓글 불러오는 메소드
+		int numPerPage=10;
+		int totalCountM = service.helpZoneCommentCountM(no);
+		int totalCountH = service.helpZoneCommentCountH(no);
+		List<HelpZoneCommentMember> hzMember2 = service.selectMemberCommentList(cPageM, numPerPage, no);
+		List<HelpZoneCommentHospital> hzHospital2 = service.selectHospitalCommentList(cPageH, numPerPage, no);
+		
+		String pageBarM = new PageCreate().getPageBarCommentM2(cPageM, numPerPage, totalCountM, "helpZoneView.do", no);
+		String pageBarH = new PageCreate().getPageBarCommentH2(cPageH, numPerPage, totalCountH, "helpZoneView.do", no);
+		
+		
 		req.setAttribute("helpZone", helpZone);
 		req.setAttribute("helpZoneQuestioner", m);
+		req.setAttribute("pageBarM", pageBarM);
+		req.setAttribute("pageBarH", pageBarH);
+		req.setAttribute("cPageM", cPageM);
+		req.setAttribute("cPageH", cPageH);
+		req.setAttribute("hzMember2", hzMember2);
+		req.setAttribute("hzHospital2", hzHospital2);
 		return "helpZone/helpZoneView";
 	}
 	
@@ -230,60 +251,54 @@ public class HelpZoneController {
 	public ModelAndView helpZoneCommentInsert(int writer,
 			String comment,
 			String checkPH,
-			String helpZoneNum,
+			int helpZoneNum,
 			String check,
-			@RequestParam(value="cPage",required=false,defaultValue="1") int cPage,
+			@RequestParam(value="cPageM",required=false,defaultValue="1") int cPageM,
+			@RequestParam(value="cPageH",required=false,defaultValue="1") int cPageH,
 			ModelAndView mv) throws JsonProcessingException,UnsupportedOperationException{
+		
 		int numPerPage=10;
 		HelpZoneCommentMember hzMember = new HelpZoneCommentMember();
-		HelpZoneCommentHospital hzHospital = new HelpZoneCommentHospital();
+		HelpZoneCommentHospital hzHospital = new HelpZoneCommentHospital();			
+		
+		
+		int totalCountM = 0;
+		int totalCountH = 0;
 			if(checkPH.trim().equals("P")) {
 				hzMember.setHzCommentWriterNumM(writer);
 				hzMember.setHzCommentContentM(comment);
-				hzMember.setHzNumM(Integer.parseInt(helpZoneNum));
-				int result = service.insertCommentMember(hzMember);
-				if(result < 0) {
-				}
-				List<HelpZoneCommentMember> hzMember2 = null;
-				int totalCount = 0;
-				hzMember2 = service.selectMemberCommentList(cPage, numPerPage, Integer.parseInt(helpZoneNum));
-				String pageBar = new PageCreate().getPageBarComment2(cPage, numPerPage, totalCount, "helpZoneView.do", Integer.parseInt(helpZoneNum));
-				mv.addObject("hzMember2",hzMember2);
-				mv.addObject("pageBar", pageBar);
-				mv.addObject("cPage",cPage);
-				mv.addObject("totalCount", totalCount);
-				mv.addObject("no2", Integer.parseInt(helpZoneNum));
-				mv.setViewName("helpZone/helpZoneCommentLoad");
-			}else if(checkPH.trim().equals("H")) {
+				hzMember.setHzNumM(helpZoneNum);
+				service.insertCommentMember(hzMember);
+				
+			}
+			else if(checkPH.trim().equals("H")) {
 				hzHospital.setHzCommentWriterNumH(writer);
 				hzHospital.setHzCommentContentH(comment);
-				hzHospital.setHzNumH(Integer.parseInt(helpZoneNum));
+				hzHospital.setHzNumH(helpZoneNum);
 				service.insertCommentHospital(hzHospital);
 				
-				List<HelpZoneCommentHospital> hzHospital2 = null;
-				int totalCount = 0;
-				hzHospital2 = service.selectHospitalList(cPage, numPerPage, Integer.parseInt(helpZoneNum));
-				String pageBar = new PageCreate().getPageBarComment2(cPage, numPerPage, totalCount, "helpZoneView,do", Integer.parseInt(helpZoneNum));
-				mv.addObject("hzHospital2", hzHospital2);
-				mv.addObject("pageBar", pageBar);
-				mv.addObject("cPage",cPage);
-				mv.addObject("totalCount", totalCount);
-				mv.addObject("no2", Integer.parseInt(helpZoneNum));
-				mv.setViewName("helpZone/helpZoneCommentLoad");
-			}			
+			}
+			List<HelpZoneCommentMember> hzMember2 = service.selectMemberCommentList(cPageM, numPerPage, helpZoneNum);
+			System.out.println(hzMember2);
+			List<HelpZoneCommentHospital> hzHospital2 = service.selectHospitalCommentList(cPageH, numPerPage, helpZoneNum);
+			System.out.println(hzHospital2);
+			
+			totalCountM = service.helpZoneCommentCountM(helpZoneNum);
+			totalCountH = service.helpZoneCommentCountH(helpZoneNum);
+			
+			String pageBarM = new PageCreate().getPageBarCommentM2(cPageM, numPerPage, totalCountM, "helpZoneView,do", helpZoneNum);
+			String pageBarH = new PageCreate().getPageBarCommentH2(cPageH, numPerPage, totalCountH, "helpZoneView,do", helpZoneNum);
+			
+			mv.addObject("hzMember2",hzMember2);
+			mv.addObject("hzHospital2", hzHospital2);
+			mv.addObject("pageBarM", pageBarM);
+			mv.addObject("pageBarH", pageBarH);
+			mv.addObject("cPageM",cPageM);
+			mv.addObject("cPageH",cPageH);
+			mv.addObject("no2", helpZoneNum);
+			mv.setViewName("helpZone/helpZoneCommentLoad");
 			return mv;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	

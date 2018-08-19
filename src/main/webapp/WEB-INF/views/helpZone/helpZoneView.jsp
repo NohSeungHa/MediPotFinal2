@@ -99,7 +99,6 @@
 <br><br>	
 <hr><!-- 1. 댓글등록창 시작 -->
 <input type="hidden" id="helpZoneNum" value="${helpZone.helpZoneNum }"/>
-<input type="hidden" id="cp" value="${cp }"/>
 <c:if test="${not empty memberLoggedIn }">
 	<div class="modal-body" style="border: 1px solid lightgray;">
 		<input type="hidden" name="hzCommentNumH" id="hzCommentNumH" value="${helpZone.helpZoneNum }"/>
@@ -113,7 +112,7 @@
 		<!-- 병원회원으로 로그인했을때 -->
 		<c:if test="${checkPH=='H' }">
 			<p type="text" id="hzCommentWriter" readonly>&nbsp;${memberLoggedIn.hospitalId }</p>
-			<input type="hidden" id="hzCommentWriterH" value="${membberLoggedIn.hospitalNum }"/>
+			<input type="hidden" id="hzCommentWriterH" value="${memberLoggedIn.hospitalNum}"/>
 			<input type="hidden" id="checkPH" value="H"/>
 		</c:if>
 		<textarea class="form-control" style="width: 88%;height: 100px;resize: none; float: left; border: 1px solid lightgray;" id="helpZoneComment" name="helpZoneComment" onKeyUp="checkLength(this);" onKeyDown="checkLength(this);" placeholder="댓글을 입력하세요.(500자이내) 불쾌감을 주는 욕설과 악플은 삭제될 수 있습니다."></textarea>
@@ -122,30 +121,57 @@
 </c:if>
 <br>
 <!-- 댓글 리스트 나오는곳 -->
-<h3>**댓글**</h3>
+<h3>**댓글보기**</h3>
 <div id="hzc" class="modal-body">
-<c:if test="${not empty hzList }">
-	<c:forEach var='hz' items='${hzCommentList }' varStatus="vs">
-		<p id="commentWriter" readonly>작성자 : ${hz.commentWriter} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;작성일 : ${hz.commentDate }
-		<c:if test="${hz.commentCheckPH eq checkPH and checkPH eq 'P'}">
-			<c:if test="${hz.commentWriter eq memberLoggedIn.memberId and memberLoggedIn.memberId != 'admin' }">
-				<a data-toggle="modal" data-target="#deleteComment" style="color: red;float: right;" onclick="deleteCommentNum(${hz.commentNum})">&nbsp;&nbsp;&nbsp;댓글 삭제</a>
+<ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#totalcomment">일반회원 댓글만 보기</a></li>
+    <li><a data-toggle="tab" href="#hospital">병원회원 댓글만 보기</a></li>
+  </ul>
+  <div class="tab-content">
+  <div id="totalcomment" class="tab-pane fade in active">
+  <br><br>
+  <c:if test="${empty hzMember2 }">
+  	<p>일반회원 댓글이 없습니다.</p>
+  </c:if>
+	<c:if test="${not empty hzMember2 }">
+	<c:forEach var='hzm' items='${hzMember2 }' varStatus="vs">
+		<p id="commentWriter" readonly>작성자 : 일반회원 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;작성일 : ${hzm.hzCommentDateM }
+			<c:if test="${checkPH=='P' }">
+				<c:if test="${hzm.hzCommentWriterNumM eq memberLoggedIn.memberNum and memberLoggedIn.memberId != 'admin' }">
+					<a data-toggle="modal" data-target="#deleteComment" style="color: red;float: right;" onclick="deleteCommentNum(${hzm.hzCommentM})">&nbsp;&nbsp;&nbsp;댓글 삭제</a>
+				</c:if>
+				<c:if test="${memberLoggedIn.memberId eq 'admin'}">
+					<a data-toggle="modal" data-target="#deleteComment" style="color: red;float: right;" onclick="deleteCommentNum(${hzm.hzCommentM})">&nbsp;&nbsp;&nbsp;댓글 삭제</a>
+				</c:if>
 			</c:if>
-			<c:if test="${memberLoggedIn.memberId eq 'admin'}">
-				<a data-toggle="modal" data-target="#deleteComment" style="color: red;float: right;" onclick="deleteCommentNum(${hz.commentNum})">&nbsp;&nbsp;&nbsp;댓글 삭제</a>
-			</c:if>
-		</c:if>
-		<c:if test="${hz.commentCheckPH eq checkPH and checkPH eq 'H'}">
-			<c:if test="${hz.commentWriter eq memberLoggedIn.hospitalId}">
-				<a data-toggle="modal" data-target="#deleteComment" style="color: red;float: right;" onclick="deleteCommentNum(${hz.commentNum})">&nbsp;&nbsp;&nbsp;댓글 삭제</a>
-			</c:if>
-		</c:if>
 		</p>
-		<p id="commentContent2" name="commentContent2">&nbsp;${hz.commentContent }</p>
+		<p id="commentContent2" name="commentContent2">&nbsp;${hzm.hzCommentContentM }</p>
   		<hr>
 	</c:forEach>
-	${pageBar }
-</c:if>
+	${pageBarM }
+	</c:if>
+    </div>
+    <div id="hospital" class="tab-pane fade">
+    <br><br>
+    <c:if test="${empty hzHospital2 }">
+      <p>병원회원 댓글이 없습니다.</p>
+    </c:if>
+    <c:if test="${not empty hzHospital2 }">
+	<c:forEach var='hzh' items='${hzHospital2 }' varStatus="vs">
+		<p id="commentWriter" readonly>작성자 : 병원회원 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;작성일 : ${hzh.hzCommentDateH }
+			<c:if test="${checkPH=='H' }">
+				<c:if test="${hzh.hzCommentWriterNumH eq memberLoggedIn.hospitalNum}">
+					<a data-toggle="modal" data-target="#deleteComment" style="color: red;float: right;" onclick="deleteCommentNum(${hzh.hzCommentContentH})">&nbsp;&nbsp;&nbsp;댓글 삭제</a>
+				</c:if>
+			</c:if>
+		</p>
+		<p id="commentContent2" name="commentContent2">&nbsp;${hzh.hzCommentContentH }</p>
+  		<hr>
+	</c:forEach>
+	${pageBarH }
+	</c:if>
+    </div>
+	</div>
 </div>
 
 </div>
@@ -193,7 +219,6 @@ $('#helpZoneCommentInsert').click(function() {
 	var comment = $('#helpZoneComment').val();
 	var helpZoneNum = $('#helpZoneNum').val();
 	var checkPH = $('#checkPH').val();
-	alert(comment);
 	if(checkPH=='P'){
 		writer = $('#hzCommentWriterM').val();
 	}
@@ -208,7 +233,7 @@ $('#helpZoneCommentInsert').click(function() {
 			dataType:"html",
 			success:function(data){
 				alert("댓글 등록 완료!");
-			   	$('#helpZoneContent').val("");
+			   	$('#helpZoneComment').val("");
 			   	$('#hzc').html(data);
 			}
  	});
