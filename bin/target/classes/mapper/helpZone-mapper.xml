@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="helpZone">
+	<!-- 글 등록 -->
+	<insert id="helpZoneInsert" parameterType="HelpZone">
+		insert into HelpZone VALUES(HelpZone_SEQ.nextval, #{helpZoneTitle}, #{helpZoneQuestioner}, #{helpZoneKeyWord}, #{helpZoneContent}, #{helpZoneFile}, #{helpZoneReFile}, #{helpZoneReadCount}, sysdate, #{helpZoneLikeNum})
+	</insert>
+	<!-- 글 모두 불러오기 -->
+	<select id="helpZoneSelectList" resultType="HelpZone">
+		select * from helpzone order by helpzonedate desc
+	</select>
+	<!-- 글 개수 -->
+	<select id="count" resultType="_int">
+		select count(*) from HELPZONE
+	</select>
+	<!-- 해당글 하나 불러오기 -->
+	<select id="selectHelpZone" parameterType="_int" resultType="HelpZone">
+		select * from helpZone where helpZoneNum=#{helpZoneNum}
+	</select>
+	<!-- 작성자 불러오기 -->
+	<select id="selectMember" parameterType="_int" resultType="Member">
+		select * from member where membernum=#{helpZoneQuestioner}
+	</select>
+	<!-- 글 삭제 -->
+	<delete id="deleteHelpZone" parameterType="_int">
+		delete from helpZone where helpZoneNum=#{num}
+	</delete>
+	<!-- 글 수정 -->
+	<update id="updateHelpZone" parameterType="HelpZone">
+		update HelpZone set helpZoneTitle=#{helpZoneTitle},
+							 helpZoneKeyWord=#{helpZoneKeyWord},
+							  helpZoneContent=#{helpZoneContent},
+							   helpZoneFile=#{helpZoneFile},
+							    helpZoneReFile=#{helpZoneReFile}
+							    where helpZoneNum=#{helpZoneNum}
+	</update>
+	
+	<!-- 헬프존 일반회원 댓글 insert -->
+	<insert id="insertCommentMember" parameterType="HelpZoneCommentMember">
+		insert into HelpZoneCommentMember VALUES(HelpZoneCommentMember_SEQ.nextval, #{hzNumM}, #{hzCommentWriterNumM}, #{hzCommentContentM}, sysdate)
+	</insert>
+	<!-- 헬프존 병원회원 댓글 insert -->
+	<insert id="insertCommentHospital" parameterType="HelpZoneCommentHospital">
+		insert into HelpZoneCommentHospital VALUES(HelpZoneCommentHospital_SEQ.nextval, #{hzNumH}, #{hzCommentWriterNumH}, #{hzCommentContentH}, sysdate, 0)
+	</insert>
+	
+	<!-- 일반회원 댓글 리스트 -->
+	<select id="selectMemberCommentList" resultType="HelpZoneCommentMember" parameterType="_int">
+		select * from HelpZoneCommentMember order by hzCommentNumM desc
+	</select>
+	<!-- 병원회원 댓글 리스트 -->
+	<select id="selectHospitalCommentList" resultType="HelpZoneCommentHospital" parameterType="_int">
+		select * from HelpZoneCommentHospital where hzNumH=#{no} order by hzCommentNumH desc
+	</select>
+	<!-- 댓글 개수(일반) -->
+	<select id="helpZoneCommentCountM" resultType="_int" parameterType="_int">
+		select count(*) From helpZoneCommentMember where hzNumM=#{hzNumM} 
+	</select>
+	<!-- 댓글 개수(병원) -->
+	<select id="helpZoneCommentCountH" resultType="_int" parameterType="_int">
+		select count(*) From helpZoneCommentHospital where hzNumH=#{hzNumH} 
+	</select>
+	
+	<select id="selectHospital" parameterType="_int" resultType="hospital">
+		select * from hospital where hospitalNum=#{hospitalNum}
+	</select>
+</mapper>
