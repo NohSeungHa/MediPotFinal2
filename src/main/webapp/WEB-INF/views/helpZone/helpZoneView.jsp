@@ -85,7 +85,7 @@
 				</tr>
 				<tr><!-- 첨부사진 올려주기 -->
 					<th>첨부사진:</th>
-					<td><img src="${path}/resources/uploadfile/helpZone/${helpZone.helpZoneReFile}" style="width: 300px; height: 200px"></td>
+					<td><img id="imghover" src="${path}/resources/uploadfile/helpZone/${helpZone.helpZoneReFile}" style="width: 300px; height: 200px"></td>
 				</tr>
 			</tbody>
 		</table>		
@@ -108,12 +108,14 @@
 			<p type="text" id="hzCommentWriter" readonly>&nbsp;${memberLoggedIn.memberId }</p>
 			<input type="hidden" id="hzCommentWriterM" value="${memberLoggedIn.memberNum }"/>
 			<input type="hidden" id="checkPH" value="P"/>
+			<input type="hidden" id="cPageM" value="${cPageM }"/>
 		</c:if>
 		<!-- 병원회원으로 로그인했을때 -->
 		<c:if test="${checkPH=='H' }">
 			<p type="text" id="hzCommentWriter" readonly>&nbsp;${memberLoggedIn.hospitalId }</p>
 			<input type="hidden" id="hzCommentWriterH" value="${memberLoggedIn.hospitalNum}"/>
 			<input type="hidden" id="checkPH" value="H"/>
+			<input type="hidden" id="cPageH" value="${cPageH }"/>
 		</c:if>
 		<textarea class="form-control" style="width: 88%;height: 100px;resize: none; float: left; border: 1px solid lightgray;" id="helpZoneComment" name="helpZoneComment" onKeyUp="checkLength(this);" onKeyDown="checkLength(this);" placeholder="댓글을 입력하세요.(500자이내) 불쾌감을 주는 욕설과 악플은 삭제될 수 있습니다."></textarea>
 		<button id="helpZoneCommentInsert" type="submit" class="btn btn-success" style="height:100px; width:100px; margin-left: 10px;">댓글 등록</button>			
@@ -124,18 +126,18 @@
 <h3>**댓글보기**</h3>
 <div id="hzc" class="modal-body">
 <ul class="nav nav-tabs">
-    <li class="active"><a data-toggle="tab" href="#totalcomment">일반회원 댓글만 보기</a></li>
-    <li><a data-toggle="tab" href="#hospital">병원회원 댓글만 보기</a></li>
+    <li id="commentM"><a data-toggle="tab" href="#member">일반회원 댓글만 보기</a></li>
+    <li id="commentH"><a data-toggle="tab" href="#hospital">병원회원 댓글만 보기</a></li>
   </ul>
   <div class="tab-content">
-  <div id="totalcomment" class="tab-pane fade in active">
+  <div id="member" class="tab-pane fade">
   <br><br>
   <c:if test="${empty hzMember2 }">
   	<p>일반회원 댓글이 없습니다.</p>
   </c:if>
 	<c:if test="${not empty hzMember2 }">
 	<c:forEach var='hzm' items='${hzMember2 }' varStatus="vs">
-		<p id="commentWriter" readonly>작성자 : 일반회원 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;작성일 : ${hzm.hzCommentDateM }
+		<p id="commentWriter" readonly>작성자 : <span id="memberCustomer" style="margin-right: 100px">일반회원</span> 작성일 : ${hzm.hzCommentDateM }
 			<c:if test="${checkPH=='P' }">
 				<c:if test="${hzm.hzCommentWriterNumM eq memberLoggedIn.memberNum and memberLoggedIn.memberId != 'admin' }">
 					<a data-toggle="modal" data-target="#deleteComment" style="color: red;float: right;" onclick="deleteCommentNum(${hzm.hzCommentM})">&nbsp;&nbsp;&nbsp;댓글 삭제</a>
@@ -158,7 +160,11 @@
     </c:if>
     <c:if test="${not empty hzHospital2 }">
 	<c:forEach var='hzh' items='${hzHospital2 }' varStatus="vs">
-		<p id="commentWriter" readonly>작성자 : 병원회원 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;작성일 : ${hzh.hzCommentDateH }
+		<p id="commentWriter" readonly>작성자 : <span id="hospitalCustomer" style="margin-right: 100px">병원회원</span> 작성일 : ${hzh.hzCommentDateH }
+		<span id="choiceHospitalComment" style="display: none">채택된 병원회원의 댓글입니다.</span>
+		<c:if test="${checkPH=='P' }">
+			<a id="choiceFalse" data-toggle="modal" data-target="#choiceComment" style="color: red;float: right; display: none;" onclick="choiceCommentNum(${hzh.hzCommentContentH})">&nbsp;&nbsp;&nbsp;채택하기</a>
+		</c:if>
 			<c:if test="${checkPH=='H' }">
 				<c:if test="${hzh.hzCommentWriterNumH eq memberLoggedIn.hospitalNum}">
 					<a data-toggle="modal" data-target="#deleteComment" style="color: red;float: right;" onclick="deleteCommentNum(${hzh.hzCommentContentH})">&nbsp;&nbsp;&nbsp;댓글 삭제</a>
@@ -177,6 +183,44 @@
 </div>
 <br><br>
 <script>
+$(function(){
+	if(${choice==true}){
+		$('#choiceHospitalComment').css("display","block");
+		$('#choiceFalse').css("display","none");
+	}
+	if(${choice==false}){
+		$('#choiceFalse').css("display","block");
+		$('#choiceHospitalComment').css("display","none");
+	}
+})
+function choiceCommentNum(e){
+	location.href=""
+}
+
+$(function(){
+	var checkPH = $('#checkPH').val();
+	if(checkPH=='P'){
+		$('#commentM').addClass('active');
+		$('#member').addClass('in active');
+	}
+	if(checkPH=='H'){
+		$('#commentH').addClass('active');
+		$('#hospital').addClass('in active');
+	}
+});
+
+$(function(){
+	var cPageM = $('#cPageM').val();
+	var cPageH = $('#cPageH').val();
+	var hzc = $('#hzc');
+	$('#M'+cPageM).click(function(){
+		hzc.offset({top: 400});
+	});
+	$('#H'+cPageH).click(function(){
+		hzc.offset({top: 400});
+	});
+})
+
 /* 게시글 수정 함수 */
 function helpZoneUpdate(){
 	location.href="${path}/helpZone/updateHelpZone.do?num=${helpZone.helpZoneNum}";

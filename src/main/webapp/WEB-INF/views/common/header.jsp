@@ -222,8 +222,8 @@
                         placeholder="비밀번호" required>
                   </div>
                   <div class="modal-footer">
-                     <a href="${pageContext.request.contextPath}/member/findId.do" style="color: #000F75">아이디 찾기</a>
-                     <a href="${pageContext.request.contextPath}/member/findPassword.do" style="margin-right: 300px; color: #000F75">비밀번호 찾기</a>
+                     <a href="${pageContext.request.contextPath}/member/findId.do" style="float: left; margin-top: 6px; color: #000F75">아이디 찾기&nbsp;<span class="glyphicon glyphicon-search"></span></a>
+                     <a href="${pageContext.request.contextPath}/member/findPassword.do" style="margin-right: 250px; color: #000F75">비밀번호 찾기&nbsp;<span class="glyphicon glyphicon-search"></span></a>
                      <button type="submit" class="btn btn-outline-success">로그인</button>
                      <button type="button" class="btn btn-outline-success"
                         data-dismiss="modal">취소</button>
