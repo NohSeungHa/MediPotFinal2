@@ -448,7 +448,7 @@
 	}
 </style>
 
-<div style="height:1000px;">
+<div style="height:1100px;">
 	<div class="col-sm-4">
 		<div style="width:100%;height:50px;font-size:20px;text-align:center;background-color:#286090;padding-top:11px;color:white;border-radius:8px;margin-bottom:10px;">
 			의료진 정보

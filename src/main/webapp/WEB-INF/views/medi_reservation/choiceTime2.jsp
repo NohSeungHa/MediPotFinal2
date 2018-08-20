@@ -43,8 +43,10 @@
 	List<MemberReservation> list=(List<MemberReservation>)request.getAttribute("mr");
 	List<MemberReservation> list2=new ArrayList();
 	for(int i=0; i<list.size(); i++){
-		if(!list2.contains(list.get(i))){
-			list2.add(list.get(i));
+		if(list.get(i).getCheckTime()!=null){
+			if(!list2.contains(list.get(i))){
+				list2.add(list.get(i));
+			}
 		}
 	}
 	/* if(list.size()>0){
