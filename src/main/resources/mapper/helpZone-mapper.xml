@@ -35,4 +35,33 @@
 							    where helpZoneNum=#{helpZoneNum}
 	</update>
 	
+	<!-- 헬프존 일반회원 댓글 insert -->
+	<insert id="insertCommentMember" parameterType="HelpZoneCommentMember">
+		insert into HelpZoneCommentMember VALUES(HelpZoneCommentMember_SEQ.nextval, #{hzNumM}, #{hzCommentWriterNumM}, #{hzCommentContentM}, sysdate)
+	</insert>
+	<!-- 헬프존 병원회원 댓글 insert -->
+	<insert id="insertCommentHospital" parameterType="HelpZoneCommentHospital">
+		insert into HelpZoneCommentHospital VALUES(HelpZoneCommentHospital_SEQ.nextval, #{hzNumH}, #{hzCommentWriterNumH}, #{hzCommentContentH}, sysdate, 0)
+	</insert>
+	
+	<!-- 일반회원 댓글 리스트 -->
+	<select id="selectMemberCommentList" resultType="HelpZoneCommentMember" parameterType="_int">
+		select * from HelpZoneCommentMember order by hzCommentNumM desc
+	</select>
+	<!-- 병원회원 댓글 리스트 -->
+	<select id="selectHospitalCommentList" resultType="HelpZoneCommentHospital" parameterType="_int">
+		select * from HelpZoneCommentHospital where hzNumH=#{no} order by hzCommentNumH desc
+	</select>
+	<!-- 댓글 개수(일반) -->
+	<select id="helpZoneCommentCountM" resultType="_int" parameterType="_int">
+		select count(*) From helpZoneCommentMember where hzNumM=#{hzNumM} 
+	</select>
+	<!-- 댓글 개수(병원) -->
+	<select id="helpZoneCommentCountH" resultType="_int" parameterType="_int">
+		select count(*) From helpZoneCommentHospital where hzNumH=#{hzNumH} 
+	</select>
+	
+	<select id="selectHospital" parameterType="_int" resultType="hospital">
+		select * from hospital where hospitalNum=#{hospitalNum}
+	</select>
 </mapper>

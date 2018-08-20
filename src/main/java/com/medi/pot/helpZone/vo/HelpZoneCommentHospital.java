@@ -1,13 +1,13 @@
 package com.medi.pot.helpZone.vo;
 
-import java.util.Date;
+import java.sql.Date;
 //병원 회원 댓글 vo
 public class HelpZoneCommentHospital {
 	private int hzCommentNumH;			//병원 댓글 번호
 	private int hzNumH;					//헬프존 번호
 	private int hzCommentWriterNumH;	//병원 회원 작성자
 	private String hzCommentContentH;	//댓글내용
-	private Date date;					//날짜
+	private Date hzCommentDateH;		//날짜
 	private int hzCommentLevelH;		//댓글 레벨
 	private char hzCommentChoice;		//채택여부
 	
@@ -16,13 +16,13 @@ public class HelpZoneCommentHospital {
 	}
 
 	public HelpZoneCommentHospital(int hzCommentNumH, int hzNumH, int hzCommentWriterNumH, String hzCommentContentH,
-			Date date, int hzCommentLevelH, char hzCommentChoice) {
+			Date hzCommentDateH, int hzCommentLevelH, char hzCommentChoice) {
 		super();
 		this.hzCommentNumH = hzCommentNumH;
 		this.hzNumH = hzNumH;
 		this.hzCommentWriterNumH = hzCommentWriterNumH;
 		this.hzCommentContentH = hzCommentContentH;
-		this.date = date;
+		this.hzCommentDateH = hzCommentDateH;
 		this.hzCommentLevelH = hzCommentLevelH;
 		this.hzCommentChoice = hzCommentChoice;
 	}
@@ -59,12 +59,12 @@ public class HelpZoneCommentHospital {
 		this.hzCommentContentH = hzCommentContentH;
 	}
 
-	public Date getDate() {
-		return date;
+	public Date getHzCommentDateH() {
+		return hzCommentDateH;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
+	public void setHzCommentDateH(Date hzCommentDateH) {
+		this.hzCommentDateH = hzCommentDateH;
 	}
 
 	public int getHzCommentLevelH() {
@@ -88,7 +88,7 @@ public class HelpZoneCommentHospital {
 		StringBuilder builder = new StringBuilder();
 		builder.append("HelpZoneCommentHospital [hzCommentNumH=").append(hzCommentNumH).append(", hzNumH=")
 				.append(hzNumH).append(", hzCommentWriterNumH=").append(hzCommentWriterNumH)
-				.append(", hzCommentContentH=").append(hzCommentContentH).append(", date=").append(date)
+				.append(", hzCommentContentH=").append(hzCommentContentH).append(", hzCommentDateH=").append(hzCommentDateH)
 				.append(", hzCommentLevelH=").append(hzCommentLevelH).append(", hzCommentChoice=")
 				.append(hzCommentChoice).append("]");
 		return builder.toString();
