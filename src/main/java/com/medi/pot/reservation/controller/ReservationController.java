@@ -197,11 +197,15 @@ public class ReservationController {
 	}
 	
 	@RequestMapping("/medi/mediChoice2")
-	public String mediChoice2(String docNum,String time, HttpServletRequest req) {
+	public String mediChoice2(String docNum,String hos,String time, HttpServletRequest req) {
 		Map<String,Object> map=new HashMap<String, Object>();
 		int num=Integer.parseInt(docNum);
+		int num2=Integer.parseInt(hos);
 		String chDate=time.substring(0, 10);
+		System.out.println("값 확인11111: "+docNum);
+		System.out.println("값 확인2222 : "+hos);
 		map.put("num", docNum);
+		map.put("num2", num2);
 		map.put("chDate", chDate);
 		DoctorInfo doctor=service.selectDoctor(num);
 		List<MemberReservation> mr=service.selectReser(map);

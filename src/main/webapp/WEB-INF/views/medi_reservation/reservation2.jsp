@@ -735,13 +735,15 @@
 		}
 		var docNum=${doctor.doctorNum }
 		$('.calb').click(function () {
+			var hos=${doctor.hospitalNo }
+			alert('${doctor.hospitalNo}');
 			$('.calb').css('background-color','white');
 			$('.calb').css('color','black');
 			$(this).css('background-color','#286090');
 			$(this).css('color','white');
 			$.ajax({
 				url:"${path}/medi/mediChoice2",
-				data:{docNum:docNum,time:$(this).val()},
+				data:{docNum:docNum,time:$(this).val(),hos:hos},
 				dataType:"html",
 				success:function(data){
 					$('#timeImg').css("display",'none');
