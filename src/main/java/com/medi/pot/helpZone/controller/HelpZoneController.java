@@ -132,13 +132,14 @@ public class HelpZoneController {
 		String pageBarM = new PageCreate().getPageBarCommentM2(cPageMem, numPerPage, totalCountM, "helpZoneView.do", no);
 		String pageBarH = new PageCreate().getPageBarCommentH2(cPageHos, numPerPage, totalCountH, "helpZoneView.do", no);
 		boolean checkchoice = false;
-		if(hzHospital2.size() > 0) {
+		if(hzHospital2.size() > 1) {
 			int choicecomment = service.commentchoice(helpZone.getHelpZoneNum());
 			if(choicecomment == 1) {
 				checkchoice=true;
 			}
 		}		
 		
+		req.setAttribute("no", no);
 		req.setAttribute("helpZone", helpZone);
 		req.setAttribute("helpZoneQuestioner", m);
 		req.setAttribute("checkchoice", checkchoice);
@@ -297,7 +298,13 @@ public class HelpZoneController {
 			String pageBarM = new PageCreate().getPageBarCommentM2(cPageMem, numPerPage, totalCountM, "helpZoneView,do", helpZoneNum);
 			String pageBarH = new PageCreate().getPageBarCommentH2(cPageHos, numPerPage, totalCountH, "helpZoneView,do", helpZoneNum);
 			
-			boolean checkchoice = service.commentchoice(helpZoneNum)==1?true:false;
+			boolean checkchoice = false;
+			if(hzHospital2.size() > 1) {
+				int choicecomment = service.commentchoice(helpZoneNum);
+				if(choicecomment == 1) {
+					checkchoice=true;
+				}
+			}	
 			
 			mv.addObject("hzMember2",hzMember2);
 			mv.addObject("hzHospital2", hzHospital2);
@@ -312,13 +319,18 @@ public class HelpZoneController {
 	}
 	
 	@RequestMapping("/helpZone/helpZoneChoice.do")
-	public String helpZoneChoice(int hzCommentNumH, Model model) {
+	public String helpZoneChoice(int hzCommentNumH, int hzNumH, Model model) {
 		String msg = "";
 		String loc = "";
 		
-		int result = service.helpZoneChoice(hzCommentNumH);
+		HelpZoneCommentHospital helpZoneCommentHospital = new HelpZoneCommentHospital();
+		helpZoneCommentHospital.setHzCommentNumH(hzCommentNumH);
+		helpZoneCommentHospital.setHzNumH(hzNumH);
+		int result = service.helpZoneChoice(helpZoneCommentHospital);
+		
 		if(result > 0) {
 			msg = "채택되었습니다.";
+			service.hospitalAddLike(helpZoneCommentHospital);
 		} else {
 			msg = "채택 중 오류가 발생했습니다.";
 		}
@@ -329,5 +341,34 @@ public class HelpZoneController {
 		return "common/msg";
 	}
 	
+	@RequestMapping("/helpZone/deleteHelpZoneComment")
+	public String deleteHelpZoneComment(int hzCommentNum, int hzNum, String checkPH, Model model) {
+		String msg = "";
+		String loc = "";
+		int result = 0;
+		HelpZoneCommentMember helpZoneCommentMember = new HelpZoneCommentMember();
+		HelpZoneCommentHospital helpZoneCommentHospital = new HelpZoneCommentHospital();
+		
+		if(checkPH.equals("P")) {
+			helpZoneCommentMember.setHzCommentNumM(hzCommentNum);
+			helpZoneCommentMember.setHzNumM(hzNum);
+			result = service.deleteHelpZoneCommentM(helpZoneCommentMember);
+		} else if(checkPH.equals("H")) {
+			helpZoneCommentHospital.setHzCommentNumH(hzCommentNum);
+			helpZoneCommentHospital.setHzNumH(hzNum);
+			result = service.deleteHelpZoneCommentH(helpZoneCommentHospital);
+		}
+		
+		if(result > 0) {
+			msg = "댓글 삭제 성공";
+		} else {
+			msg = "댓글 삭제 실패";
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("loc", loc);
+		
+		return "common/msg";
+	}
 	
 }

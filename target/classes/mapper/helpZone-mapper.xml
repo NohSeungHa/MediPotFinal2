@@ -65,13 +65,31 @@
 		select * from hospital where hospitalNum=#{hospitalNum}
 	</select>
 	
-	<update id="helpZoneChoice" parameterType="_int">
+	<update id="helpZoneChoice" parameterType="HelpZoneCommentHospital">
 		update HelpZoneCommentHospital set
 			hzCommentChoice=1
-		where hzCommentNumH=#{hzCommentNumH}
+		where hzCommentNumH=#{hzCommentNumH} and hzNumH=#{hzNumH}
+	</update>
+	
+	<update id="hospitalAddLike" parameterType="HelpZoneCommentHospital">
+		update hospital set
+			hospitalLike=hospitalLike+1
+		where hospitalNum=(
+			select hzCommentWriterNumH
+			from HelpZoneCommentHospital
+			where hzCommentNumH=#{hzCommentNumH} and hzNumH=#{hzNumH}
+		)
 	</update>
 	
 	<select id="commentchoice" parameterType="_int" resultType="_int">
 		select hzCommentChoice from HelpZoneCommentHospital where hzNumH=#{helpZoneNum} and hzCommentChoice=1
 	</select>
+	
+	<delete id="deleteHelpZoneCommentM" parameterType="HelpZoneCommentMember">
+		delete from HelpZoneCommentMember where hzCommentNumM=#{hzCommentNumM} and hzNumM=#{hzNumM}
+	</delete>
+	
+	<delete id="deleteHelpZoneCommentH" parameterType="HelpZoneCommentHospital">
+		delete from HelpZoneCommentHospital where hzCommentNumH=#{hzCommentNumH} and hzNumM=#{hzNumH}
+	</delete>
 </mapper>

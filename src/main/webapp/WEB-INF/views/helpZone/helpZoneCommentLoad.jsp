@@ -44,10 +44,14 @@
     </c:if>
     <c:forEach var='hz' items='${hzHospital2 }' varStatus="vs">
 		<p id="commentWriter" readonly>작성자 : 병원회원 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;작성일 : ${hz.hzCommentDateH }
-		<span id="choiceHospitalComment" style="display: none">채택된 병원회원의 댓글입니다.</span>
-			<c:if test="${checkPH=='P' }">
-				<a id="choiceFalse" data-toggle="modal" data-target="#choiceComment" style="color: red;float: right; display: none;" onclick="choiceCommentNum(${hzh.hzCommentNumH})">&nbsp;&nbsp;&nbsp;채택하기</a>
+		<c:if test="${checkPH=='P' }">
+			<c:if test="${choice==true }">
+				<span style="color: orange; font-size: 10pt;">채택된 병원회원의 댓글입니다.</span>
 			</c:if>
+			<c:if test="${choice==false }">
+				<a id="choiceFalse" data-toggle="modal" data-target="#choiceComment" style="color: red;float: right;" onclick="choiceCommentNum(${hzh.hzCommentNumH})">&nbsp;&nbsp;&nbsp;채택하기</a>
+			</c:if>
+		</c:if>
 			<c:if test="${checkPH=='H' }">
 			<c:if test="${hz.hzCommentWriterNumH eq memberLoggedIn.hospitalNum}">
 				<a data-toggle="modal" data-target="#deleteComment" style="color: red;float: right;" onclick="deleteCommentNum(${hz.hzCommentNumH})">&nbsp;&nbsp;&nbsp;댓글 삭제</a>
@@ -62,17 +66,6 @@
     </div>
     
     <script>
-    $(function(){
-    	if(${choice==true}){
-    		$('#choiceHospitalComment').css("display","block");
-    		$('#choiceFalse').css("display","none");
-    	}
-    	if(${choice==false}){
-    		$('#choiceFalse').css("display","block");
-    		$('#choiceHospitalComment').css("display","none");
-    	}
-    });
-    
 	$(function(){
 		var checkPH = $('#checkPH').val();
 		if(checkPH=='P'){

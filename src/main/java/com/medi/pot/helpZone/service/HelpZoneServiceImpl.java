@@ -94,13 +94,28 @@ public class HelpZoneServiceImpl implements HelpZoneService {
 	}
 
 	@Override
-	public int helpZoneChoice(int hzCommentNumH) {
-		return helpZoneDao.helpZoneChoice(hzCommentNumH);
+	public int helpZoneChoice(HelpZoneCommentHospital helpZoneCommentHospital) {
+		return helpZoneDao.helpZoneChoice(helpZoneCommentHospital);
 	}
 
 	@Override
 	public int commentchoice(int helpZoneNum) {
 		return helpZoneDao.commentchoice(helpZoneNum);
+	}
+
+	@Override
+	public int hospitalAddLike(HelpZoneCommentHospital helpZoneCommentHospital) {
+		return helpZoneDao.hospitalAddLike(helpZoneCommentHospital);
+	}
+
+	@Override
+	public int deleteHelpZoneCommentM(HelpZoneCommentMember helpZoneCommentMember) {
+		return helpZoneDao.deleteHelpZoneCommentM(helpZoneCommentMember);
+	}
+
+	@Override
+	public int deleteHelpZoneCommentH(HelpZoneCommentHospital helpZoneCommentHospital) {
+		return helpZoneDao.deleteHelpZoneCommentH(helpZoneCommentHospital);
 	}
 
 	

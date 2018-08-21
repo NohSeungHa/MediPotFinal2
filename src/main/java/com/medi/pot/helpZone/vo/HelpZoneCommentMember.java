@@ -3,7 +3,7 @@ package com.medi.pot.helpZone.vo;
 import java.sql.Date;
 //일반회원 댓글 vo
 public class HelpZoneCommentMember {
-	private int hzCommentM;				//댓글 번호
+	private int hzCommentNumM;			//댓글 번호
 	private int hzNumM;					//헬프존 글번호
 	private int hzCommentWriterNumM;	//작성자 번호
 	private String hzCommentContentM;	//댓글 내용
@@ -13,24 +13,13 @@ public class HelpZoneCommentMember {
 	public HelpZoneCommentMember() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	public HelpZoneCommentMember(int hzCommentM, int hzNumM, int hzCommentWriterNumM, String hzCommentContentM,
-			Date hzCommentDateM, int hzCommentLevelM) {
-		super();
-		this.hzCommentM = hzCommentM;
-		this.hzNumM = hzNumM;
-		this.hzCommentWriterNumM = hzCommentWriterNumM;
-		this.hzCommentContentM = hzCommentContentM;
-		this.hzCommentDateM = hzCommentDateM;
-		this.hzCommentLevelM = hzCommentLevelM;
+
+	public int getHzCommentNumM() {
+		return hzCommentNumM;
 	}
 
-	public int getHzCommentM() {
-		return hzCommentM;
-	}
-
-	public void setHzCommentM(int hzCommentM) {
-		this.hzCommentM = hzCommentM;
+	public void setHzCommentNumM(int hzCommentNumM) {
+		this.hzCommentNumM = hzCommentNumM;
 	}
 
 	public int getHzNumM() {
@@ -73,17 +62,23 @@ public class HelpZoneCommentMember {
 		this.hzCommentLevelM = hzCommentLevelM;
 	}
 
+	public HelpZoneCommentMember(int hzCommentNumM, int hzNumM, int hzCommentWriterNumM, String hzCommentContentM,
+			Date hzCommentDateM, int hzCommentLevelM) {
+		super();
+		this.hzCommentNumM = hzCommentNumM;
+		this.hzNumM = hzNumM;
+		this.hzCommentWriterNumM = hzCommentWriterNumM;
+		this.hzCommentContentM = hzCommentContentM;
+		this.hzCommentDateM = hzCommentDateM;
+		this.hzCommentLevelM = hzCommentLevelM;
+	}
+
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("HelpZoneCommentMember [hzCommentM=").append(hzCommentM).append(", hzNumM=").append(hzNumM)
-				.append(", hzCommentWriterNumM=").append(hzCommentWriterNumM).append(", hzCommentContentM=")
-				.append(hzCommentContentM).append(", hzCommentDateM=").append(hzCommentDateM)
-				.append(", hzCommentLevelM=").append(hzCommentLevelM).append("]");
-		return builder.toString();
+		return "HelpZoneCommentMember [hzCommentNumM=" + hzCommentNumM + ", hzNumM=" + hzNumM + ", hzCommentWriterNumM="
+				+ hzCommentWriterNumM + ", hzCommentContentM=" + hzCommentContentM + ", hzCommentDateM="
+				+ hzCommentDateM + ", hzCommentLevelM=" + hzCommentLevelM + "]";
 	}
-	
-	
 	
 	
 	
