@@ -16,12 +16,8 @@
 		<typeAlias alias="Community" type="com.medi.pot.community.vo.Community"/>
 		<!-- 자유게시판 댓글 -->
 		<typeAlias alias="CommunityComment" type="com.medi.pot.community.vo.CommunityComment"/>
-<<<<<<< HEAD
 		<!-- 1:1 문의  -->
 		<typeAlias alias="Inquiry" type="com.medi.pot.inquiry.vo.Inquiry"/>
-=======
-		
->>>>>>> 983868703c227af70440b663527361809c13bb13
 		<typeAlias alias="member" type="com.medi.pot.member.model.vo.Member" />
 		<typeAlias alias="hospital" type="com.medi.pot.member.model.vo.Hospital" />
 		

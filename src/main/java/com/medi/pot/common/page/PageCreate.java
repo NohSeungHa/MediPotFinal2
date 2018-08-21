@@ -199,11 +199,7 @@ public class PageCreate {
       
       
    }
-<<<<<<< HEAD
    
-=======
-
->>>>>>> 983868703c227af70440b663527361809c13bb13
    public String getPageBar3(int cPage, int numPerPage, int totalCount, String url,int userNum)
    {
       String pageBar="";
@@ -273,10 +269,6 @@ public class PageCreate {
       
       
    }
-<<<<<<< HEAD
-=======
-
->>>>>>> 983868703c227af70440b663527361809c13bb13
    
    //자유게시판 검색 페이징 처리
    public String getPageBar(int cPage, int numPerPage, int totalCount,String searchKind,String searchContent, String url)
@@ -299,11 +291,6 @@ public class PageCreate {
       }
       else 
       {
-<<<<<<< HEAD
-=======
-
-         pageBar+="<li class='previous active'>";
->>>>>>> 983868703c227af70440b663527361809c13bb13
          pageBar+="<li class='previous'>";
          pageBar+="<a href='javascript:fn_paging("+(pageNo-1)+")'>이전</a>";
          pageBar+="</li>";
@@ -417,14 +404,8 @@ public class PageCreate {
       
    }
    
-<<<<<<< HEAD
  //1:1 문의 페이징
    public String getPageBarInquiry(int cPage, int numPerPage, int totalCount, String url,String checkPH,String id)
-=======
-   //헬프존 댓글 페이징
- //자유게시판 댓글 페이징
-   public String getPageBarComment2(int cPage, int numPerPage, int totalCount, String url,int no)
->>>>>>> 983868703c227af70440b663527361809c13bb13
    {
       String pageBar="";
       int pageSize=5;
@@ -479,10 +460,7 @@ public class PageCreate {
       
       pageBar+="<script>";
       pageBar+="function fn_paging(cPage, numPerPage){";
-<<<<<<< HEAD
       pageBar+="location.href='"+url+"?checkPH="+checkPH+"&id="+id+"&cPage='+cPage;";
-=======
-      pageBar+="location.href='"+url+"?no="+no+"&cPage='+cPage;";
       pageBar+="}";
       pageBar+="</script>";
          
@@ -492,14 +470,14 @@ public class PageCreate {
       
       
    }
-   
-   public String getPageBarCommentM2(int cPageM, int numPerPage, int totalCount, String url,int no)
+
+public String getPageBarCommentM2(int cPageMem, int numPerPage, int totalCount, String url,int no)
    {
       String pageBar="";
       int pageSize=5;
       
       int totalPage=(int)Math.ceil((double)totalCount/numPerPage);
-      int pageNo=((cPageM-1)/pageSize)*pageSize+1;
+      int pageNo=((cPageMem-1)/pageSize)*pageSize+1;
       int pageEnd=pageNo+pageSize-1;
       
       pageBar+="<ul class='pagination' style='display:table;margin-left:auto;margin-right: auto;'>";
@@ -514,12 +492,12 @@ public class PageCreate {
       else 
       {
          pageBar+="<li class='previous'>";
-         pageBar+="<a href='javascript:fn_paging("+(pageNo-1)+")'>이전</a>";
+         pageBar+="<a onclick='pagingM("+(pageNo-1)+")'>이전</a>";
          pageBar+="</li>";
       }
       while(!(pageNo>pageEnd||pageNo>totalPage))
       {
-         if(cPageM==pageNo)
+         if(cPageMem==pageNo)
          {
             pageBar+="<li class='active'>";
             pageBar+="<a>"+pageNo+"</a>";
@@ -528,7 +506,7 @@ public class PageCreate {
          else
          {
             pageBar += "<li>";
-            pageBar += "<a href='javascript:fn_paging("+pageNo+")'>"+pageNo+"</a>";
+            pageBar += "<a id='M"+pageNo+"' onclick='pagingM("+pageNo+")'>"+pageNo+"</a>";
             pageBar += "</li>";
          }
          pageNo++;
@@ -541,14 +519,14 @@ public class PageCreate {
          
       } else {
          pageBar += "<li class='next'>";
-         pageBar += "<a href='javascript:fn_paging("+pageNo+")'>다음</a> ";
+         pageBar += "<a onclick='pagingM("+pageNo+")'>다음</a> ";
          pageBar += "</li>";
       }
       pageBar+="</ul>";
       
       pageBar+="<script>";
-      pageBar+="function fn_paging(cPageM, numPerPage){";
-      pageBar+="location.href='"+url+"?no="+no+"&cPageM='+cPageM;";
+      pageBar+="function pagingM(cPageMem){";
+      pageBar+="location.href='"+url+"?no="+no+"&cPageMem='+cPageMem;";
       pageBar+="}";
       pageBar+="</script>";
          
@@ -559,13 +537,13 @@ public class PageCreate {
       
    }
    
-   public String getPageBarCommentH2(int cPageH, int numPerPage, int totalCount, String url,int no)
+   public String getPageBarCommentH2(int cPageHos, int numPerPage, int totalCount, String url,int no)
    {
       String pageBar="";
       int pageSize=5;
       
       int totalPage=(int)Math.ceil((double)totalCount/numPerPage);
-      int pageNo=((cPageH-1)/pageSize)*pageSize+1;
+      int pageNo=((cPageHos-1)/pageSize)*pageSize+1;
       int pageEnd=pageNo+pageSize-1;
       
       pageBar+="<ul class='pagination' style='display:table;margin-left:auto;margin-right: auto;'>";
@@ -580,12 +558,12 @@ public class PageCreate {
       else 
       {
          pageBar+="<li class='previous'>";
-         pageBar+="<a href='javascript:fn_paging("+(pageNo-1)+")'>이전</a>";
+         pageBar+="<a onclick='pagingH("+(pageNo-1)+")'>이전</a>";
          pageBar+="</li>";
       }
       while(!(pageNo>pageEnd||pageNo>totalPage))
       {
-         if(cPageH==pageNo)
+         if(cPageHos==pageNo)
          {
             pageBar+="<li class='active'>";
             pageBar+="<a>"+pageNo+"</a>";
@@ -594,7 +572,7 @@ public class PageCreate {
          else
          {
             pageBar += "<li>";
-            pageBar += "<a href='javascript:fn_paging("+pageNo+")'>"+pageNo+"</a>";
+            pageBar += "<a id='H"+pageNo+"' onclick='pagingH("+pageNo+")'>"+pageNo+"</a>";
             pageBar += "</li>";
          }
          pageNo++;
@@ -607,15 +585,14 @@ public class PageCreate {
          
       } else {
          pageBar += "<li class='next'>";
-         pageBar += "<a href='javascript:fn_paging("+pageNo+")'>다음</a> ";
+         pageBar += "<a onclick='pagingH("+pageNo+")'>다음</a> ";
          pageBar += "</li>";
       }
       pageBar+="</ul>";
       
       pageBar+="<script>";
-      pageBar+="function fn_paging(cPageH, numPerPage){";
-      pageBar+="location.href='"+url+"?no="+no+"&cPageH='+cPageH;";
->>>>>>> 983868703c227af70440b663527361809c13bb13
+      pageBar+="function pagingH(cPageHos){";
+      pageBar+="location.href='"+url+"?no="+no+"&cPageHos='+cPageHos;";
       pageBar+="}";
       pageBar+="</script>";
          
@@ -625,8 +602,4 @@ public class PageCreate {
       
       
    }
-<<<<<<< HEAD
-=======
-   
->>>>>>> 983868703c227af70440b663527361809c13bb13
 }

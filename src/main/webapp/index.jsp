@@ -5,10 +5,6 @@
 <%@ taglib prefix='fn' uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <c:set var="path" value="<%=request.getContextPath() %>"/>
-<<<<<<< HEAD
-=======
-
->>>>>>> 983868703c227af70440b663527361809c13bb13
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 <jsp:param value="MediPot Index" name="pageTitle"></jsp:param>
 </jsp:include>

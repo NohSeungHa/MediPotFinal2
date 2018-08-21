@@ -243,9 +243,6 @@ public class HelpZoneController {
 		mv.setViewName("common/msg");
 		
 		return mv;
-<<<<<<< HEAD
-	}
-=======
 	} 
 	
 	//댓글 ajax
@@ -303,7 +300,5 @@ public class HelpZoneController {
 			return mv;
 	}
 	
-	
->>>>>>> 983868703c227af70440b663527361809c13bb13
 	
 }
