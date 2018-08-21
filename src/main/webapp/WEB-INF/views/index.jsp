@@ -264,11 +264,55 @@ to {
 	</div>
 	<hr>
 	<!-- 중간 부분 끝 -->
-	<div class="col-md-12">
+	<div class="col-md-7">
 		<img src="${path}/resources/img/common/index_1.png" style="margin-bottom: 35px;width:600px;height:600px">
 	</div>
-	
-
+	<div id="lankDiv" class="col-md-5" style="text-align: center;">
+		<h1 style="color: #FAED7D;font-size: 70px;padding-left:10px;">명 예 전 당</h1>
+		<table id="lank" align="center" style="text-align:center;font-size:30px;">
+			<c:if test="${list!=null }">
+				<tr>
+					<th>순위</th>
+					<th>병원명</th>
+					<th>진료과목</th>
+				</tr>
+			<c:forEach var="list" items="${list }" varStatus="s" end="2">
+				<tr>
+					<td><img src="${path}/resources/img/common/${s.count }st.jpg" width="60px;" height="60px;"></td>
+					<td><a href="${path}/medi/mediInfo?no=${list.hospitalNum}">${list.hospitalName }</a></td>
+					<td>${list.hospitalProfessional }</td>
+				</tr>
+			</c:forEach>
+			</c:if>
+			<c:if test="${list==null }">
+				<tr>
+					<td>명예 병원이<br>없습니다.</td>
+				</tr>
+			</c:if>
+		</table>
+	</div>
+	<style>
+		#lankDiv{
+			padding-top:40px;
+			background-image:url("${path}/resources/img/common/lankImg2.jpg");
+			background-size: 490px 470px;
+			background-repeat: no-repeat;
+			height:500px;
+		}
+		#lank td{
+			width:170px;
+			height:70px;
+		}
+		#lank th{
+			text-align: center;
+		}
+		#lank a{
+			color: #286090;;
+		}
+		#lank a:hover{
+			color: #2A5060;
+		}
+	</style>
 
 
 

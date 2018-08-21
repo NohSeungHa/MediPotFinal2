@@ -102,4 +102,9 @@
 	<delete id="deleteSearchReserMember" parameterType="_int">
 		delete MEMBERRESERVATION where checknum=#{num}
 	</delete>
+	
+	<select id="selectHos" resultType="HospitalInfo">
+		select * from hospital order by hospitallike desc
+	</select>
+	
 </mapper>

@@ -135,6 +135,11 @@ public class ReservationServiceImpl implements ReservationService {
 	public int deleteSearchReserMember(int num) {
 		return reserDAO.deleteSearchReserMember(num);
 	}
+
+	@Override
+	public List<HospitalInfo> selectHosList() {
+		return reserDAO.selectHosList();
+	}
 	
 	
 	

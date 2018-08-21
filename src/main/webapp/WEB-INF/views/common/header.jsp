@@ -166,7 +166,6 @@
 							<li><a href="${path}/notice/noticeList.do?checkPH=P" id="bemember" style="display: block">공지사항</a></li>
 						</c:if>
 						
-						<li><a href="${path}/notice/noticeList.do?checkPH=P" id="bemember" style="display: block">공지사항</a></li>
 						
 							<li><a href="${path}/community/communityList.do">자유게시판</a></li>
 							<li><a href="${path}/PageFAQ/PageFAQ.do">FAQ</a></li>

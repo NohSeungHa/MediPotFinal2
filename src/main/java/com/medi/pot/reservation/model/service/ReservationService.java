@@ -34,4 +34,5 @@ public interface ReservationService {
 	List<SearchReserList> searchReserMem(Map<String, Object> map,int cPage,int numPerPage);
 	int searchReserMemCount(Map<String, Object> map);
 	int deleteSearchReserMember(int num);
+	List<HospitalInfo> selectHosList();
 }

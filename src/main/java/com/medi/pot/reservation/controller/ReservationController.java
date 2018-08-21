@@ -462,6 +462,23 @@ public class ReservationController {
 		req.setAttribute("msg", msg);
 		return "medi_reservation/searchReserMember";
 	}
+	
+	@RequestMapping("/")
+	public String hosList(HttpServletRequest req) {
+		List<HospitalInfo> list=service.selectHosList();
+		String str="";
+		for(HospitalInfo h : list) {
+			if(h.getHospitalLike()>0) {
+				str="ok";
+			}
+		}
+		if(!str.equals("ok")) {
+			list=null;
+		}
+		req.setAttribute("list", list);
+		System.out.println("list : "+list);
+		return "index";
+	}
 
 
 }

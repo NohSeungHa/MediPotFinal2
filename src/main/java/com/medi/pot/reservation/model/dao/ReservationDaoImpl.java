@@ -140,6 +140,11 @@ public class ReservationDaoImpl implements ReservationDao {
 	public int deleteSearchReserMember(int num) {
 		return session.delete("reser.deleteSearchReserMember", num);
 	}
+
+	@Override
+	public List<HospitalInfo> selectHosList() {
+		return session.selectList("reser.selectHos");
+	}
 	
 	
 	
