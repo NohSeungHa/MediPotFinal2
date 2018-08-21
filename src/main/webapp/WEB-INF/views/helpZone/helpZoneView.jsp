@@ -35,8 +35,7 @@
 
   </style>
 	
-	
-<body>
+
 <!-- 점보트론 -->
 <div class="jumbotron">
   <div class="container2">
@@ -53,9 +52,8 @@
 	<p style="float: right;">
 		<b style="margin-right:10px;">></b>
 	</p>
-	<a id="home" href="${path}" style="float:right;width:70px;"><img
-		src="${path }/resources/img/notice/home.jpg"
-		style="width: 30%; height: 30%;"> 홈으로</a>
+	<a id="home" href="${path}" style="float:right;width:70px;">
+	<img src="${path }/resources/img/notice/home.jpg" style="width: 30%; height: 30%;"> 홈으로</a>
 		<br><br>
 		
 		<table class="table table-bordered">
@@ -73,7 +71,7 @@
 				<tr>
 					<th>키워드</th>
 					<td>
-						<label class="form-control" readonly><c:out value="${helpZone.helpZoneKeyWord }"/></label>
+						<label class="form-control"><c:out value="${helpZone.helpZoneKeyWord }"/></label>
 					
 					</td>
 				</tr>
@@ -105,14 +103,14 @@
 		<input type="hidden" name="hzCommentNumM" id="hzCommentNumM" value="${helpZone.helpZoneNum }"/>
 		<!-- 일반회원으로 로그인했을때  -->
 		<c:if test="${checkPH=='P' }">
-			<p type="text" id="hzCommentWriter" readonly>&nbsp;${memberLoggedIn.memberId }</p>
+			<p id="hzCommentWriter">&nbsp;${memberLoggedIn.memberId }</p>
 			<input type="hidden" id="hzCommentWriterM" value="${memberLoggedIn.memberNum }"/>
 			<input type="hidden" id="checkPH" value="P"/>
 			<input type="hidden" id="cPageM" value="${cPageM }"/>
 		</c:if>
 		<!-- 병원회원으로 로그인했을때 -->
 		<c:if test="${checkPH=='H' }">
-			<p type="text" id="hzCommentWriter" readonly>&nbsp;${memberLoggedIn.hospitalId }</p>
+			<p id="hzCommentWriter">&nbsp;${memberLoggedIn.hospitalId }</p>
 			<input type="hidden" id="hzCommentWriterH" value="${memberLoggedIn.hospitalNum}"/>
 			<input type="hidden" id="checkPH" value="H"/>
 			<input type="hidden" id="cPageH" value="${cPageH }"/>
@@ -137,17 +135,17 @@
   </c:if>
 	<c:if test="${not empty hzMember2 }">
 	<c:forEach var='hzm' items='${hzMember2 }' varStatus="vs">
-		<p id="commentWriter" readonly>작성자 : <span id="memberCustomer" style="margin-right: 100px">일반회원</span> 작성일 : ${hzm.hzCommentDateM }
+		<p id="commentWriter">작성자 : <span id="memberCustomer" style="margin-right: 100px">일반회원</span> 작성일 : ${hzm.hzCommentDateM }
 			<c:if test="${checkPH=='P' }">
 				<c:if test="${hzm.hzCommentWriterNumM eq memberLoggedIn.memberNum and memberLoggedIn.memberId != 'admin' }">
-					<a data-toggle="modal" data-target="#deleteComment" style="color: red;float: right;" onclick="deleteCommentNum(${hzm.hzCommentM})">&nbsp;&nbsp;&nbsp;댓글 삭제</a>
+					<a data-toggle="modal" data-target="#deleteComment" style="color: red;float: right;" onclick="deleteCommentNum(${hzm.hzCommentNumM})">&nbsp;&nbsp;&nbsp;댓글 삭제</a>
 				</c:if>
 				<c:if test="${memberLoggedIn.memberId eq 'admin'}">
-					<a data-toggle="modal" data-target="#deleteComment" style="color: red;float: right;" onclick="deleteCommentNum(${hzm.hzCommentM})">&nbsp;&nbsp;&nbsp;댓글 삭제</a>
+					<a data-toggle="modal" data-target="#deleteComment" style="color: red;float: right;" onclick="deleteCommentNum(${hzm.hzCommentNumM})">&nbsp;&nbsp;&nbsp;댓글 삭제</a>
 				</c:if>
 			</c:if>
 		</p>
-		<p id="commentContent2" name="commentContent2">&nbsp;${hzm.hzCommentContentM }</p>
+		<p>&nbsp;${hzm.hzCommentContentM }</p>
   		<hr>
 	</c:forEach>
 	${pageBarM }
@@ -160,18 +158,22 @@
     </c:if>
     <c:if test="${not empty hzHospital2 }">
 	<c:forEach var='hzh' items='${hzHospital2 }' varStatus="vs">
-		<p id="commentWriter" readonly>작성자 : <span id="hospitalCustomer" style="margin-right: 100px">병원회원</span> 작성일 : ${hzh.hzCommentDateH }
-		<span id="choiceHospitalComment" style="display: none">채택된 병원회원의 댓글입니다.</span>
+		<p id="commentWriter">작성자 : <span id="hospitalCustomer" style="margin-right: 100px">병원회원</span> 작성일 : ${hzh.hzCommentDateH }
 		<c:if test="${checkPH=='P' }">
-			<a id="choiceFalse" data-toggle="modal" data-target="#choiceComment" style="color: red;float: right; display: none;" onclick="choiceCommentNum(${hzh.hzCommentContentH})">&nbsp;&nbsp;&nbsp;채택하기</a>
+			<c:if test="${choice==true }">
+				<span id="choiceHospitalComment" style="display: none">채택된 병원회원의 댓글입니다.</span>
+			</c:if>
+			<c:if test="${choice==false }">
+				<a id="choiceFalse" data-toggle="modal" data-target="#choiceComment" style="color: red;float: right; display: none;" onclick="choiceCommentNum(${hzh.hzCommentNumH})">&nbsp;&nbsp;&nbsp;채택하기</a>
+			</c:if>
 		</c:if>
 			<c:if test="${checkPH=='H' }">
 				<c:if test="${hzh.hzCommentWriterNumH eq memberLoggedIn.hospitalNum}">
-					<a data-toggle="modal" data-target="#deleteComment" style="color: red;float: right;" onclick="deleteCommentNum(${hzh.hzCommentContentH})">&nbsp;&nbsp;&nbsp;댓글 삭제</a>
+					<a data-toggle="modal" data-target="#deleteComment" style="color: red;float: right;" onclick="deleteCommentNum(${hzh.hzCommentNumH})">&nbsp;&nbsp;&nbsp;댓글 삭제</a>
 				</c:if>
 			</c:if>
 		</p>
-		<p id="commentContent2" name="commentContent2">&nbsp;${hzh.hzCommentContentH }</p>
+		<p>&nbsp;${hzh.hzCommentContentH }</p>
   		<hr>
 	</c:forEach>
 	${pageBarH }
@@ -182,19 +184,10 @@
 
 </div>
 <br><br>
+
 <script>
-$(function(){
-	if(${choice==true}){
-		$('#choiceHospitalComment').css("display","block");
-		$('#choiceFalse').css("display","none");
-	}
-	if(${choice==false}){
-		$('#choiceFalse').css("display","block");
-		$('#choiceHospitalComment').css("display","none");
-	}
-})
-function choiceCommentNum(e){
-	location.href=""
+function choiceCommentNum(commentNum){
+	location.href="${path}/helpZone/helpZoneChoice.do?hzCommentNumH="+hzCommentNumH;
 }
 
 $(function(){
@@ -209,17 +202,17 @@ $(function(){
 	}
 });
 
-$(function(){
+/* $(function(){
 	var cPageM = $('#cPageM').val();
 	var cPageH = $('#cPageH').val();
 	var hzc = $('#hzc');
 	$('#M'+cPageM).click(function(){
-		hzc.offset({top: 400});
+		hzc.offset({top: 800});
 	});
 	$('#H'+cPageH).click(function(){
-		hzc.offset({top: 400});
+		hzc.offset({top: 800});
 	});
-})
+}); */
 
 /* 게시글 수정 함수 */
 function helpZoneUpdate(){
@@ -263,8 +256,10 @@ $('#helpZoneCommentInsert').click(function() {
 	var comment = $('#helpZoneComment').val();
 	var helpZoneNum = $('#helpZoneNum').val();
 	var checkPH = $('#checkPH').val();
+	alert("들어오니?1");
 	if(checkPH=='P'){
 		writer = $('#hzCommentWriterM').val();
+		alert("들어오니?2");
 	}
 	if(checkPH=='H'){
 		writer = $('#hzCommentWriterH').val();

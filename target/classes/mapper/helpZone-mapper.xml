@@ -64,4 +64,14 @@
 	<select id="selectHospital" parameterType="_int" resultType="hospital">
 		select * from hospital where hospitalNum=#{hospitalNum}
 	</select>
+	
+	<update id="helpZoneChoice" parameterType="_int">
+		update HelpZoneCommentHospital set
+			hzCommentChoice=1
+		where hzCommentNumH=#{hzCommentNumH}
+	</update>
+	
+	<select id="commentchoice" parameterType="_int" resultType="_int">
+		select hzCommentChoice from HelpZoneCommentHospital where hzNumH=#{helpZoneNum} and hzCommentChoice=1
+	</select>
 </mapper>

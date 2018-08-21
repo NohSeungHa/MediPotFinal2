@@ -92,7 +92,16 @@ public class HelpZoneServiceImpl implements HelpZoneService {
 	public Hospital selectHospital(int hospitalNum) {
 		return helpZoneDao.selectHospital(hospitalNum);
 	}
-	
+
+	@Override
+	public int helpZoneChoice(int hzCommentNumH) {
+		return helpZoneDao.helpZoneChoice(hzCommentNumH);
+	}
+
+	@Override
+	public int commentchoice(int helpZoneNum) {
+		return helpZoneDao.commentchoice(helpZoneNum);
+	}
 
 	
 }

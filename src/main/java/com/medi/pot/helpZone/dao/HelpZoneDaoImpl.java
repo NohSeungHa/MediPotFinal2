@@ -96,5 +96,15 @@ public class HelpZoneDaoImpl implements HelpZoneDao {
 		return session.selectOne("helpZone.selectHospital", hospitalNum);
 	}
 
+	@Override
+	public int helpZoneChoice(int hzCommentNumH) {
+		return session.update("helpZone.helpZoneChoice", hzCommentNumH);
+	}
+
+	@Override
+	public int commentchoice(int helpZoneNum) {
+		return session.selectOne("helpZone.commentchoice", helpZoneNum);
+	}
+
 
 }

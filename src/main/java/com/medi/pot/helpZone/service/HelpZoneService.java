@@ -24,5 +24,7 @@ public interface HelpZoneService {
 	int helpZoneCommentCountM(int hzNumM);							//헬프존 댓글 갯수(일반)
 	int helpZoneCommentCountH(int hzNumH);							//헬프존 댓글 갯수(병원)
 	Hospital selectHospital(int hospitalNum);						// 작성자 불러오기
+	int helpZoneChoice(int hzCommentNumH);							//업데이트로 채택하기
+	int commentchoice(int helpZoneNum);								// 채택불러오기
 	
 }

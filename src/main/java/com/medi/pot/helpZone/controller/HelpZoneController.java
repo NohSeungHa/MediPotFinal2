@@ -131,10 +131,17 @@ public class HelpZoneController {
 		
 		String pageBarM = new PageCreate().getPageBarCommentM2(cPageMem, numPerPage, totalCountM, "helpZoneView.do", no);
 		String pageBarH = new PageCreate().getPageBarCommentH2(cPageHos, numPerPage, totalCountH, "helpZoneView.do", no);
-		
+		boolean checkchoice = false;
+		if(hzHospital2.size() > 0) {
+			int choicecomment = service.commentchoice(helpZone.getHelpZoneNum());
+			if(choicecomment == 1) {
+				checkchoice=true;
+			}
+		}		
 		
 		req.setAttribute("helpZone", helpZone);
 		req.setAttribute("helpZoneQuestioner", m);
+		req.setAttribute("checkchoice", checkchoice);
 		req.setAttribute("pageBarM", pageBarM);
 		req.setAttribute("pageBarH", pageBarH);
 		req.setAttribute("cPageMem", cPageMem);
@@ -250,11 +257,10 @@ public class HelpZoneController {
 	@RequestMapping("/helpZone/insertHelpZoneComment.do")
 	@ResponseBody
 	public ModelAndView helpZoneCommentInsert(
-			@RequestParam(value = "writer")int writer,
-			@RequestParam(value = "comment")String comment,
-			@RequestParam(value = "checkPH")String checkPH,
-			@RequestParam(value = "helpZoneNum")int helpZoneNum,
-			@RequestParam(value = "check")String check,
+			int writer,
+			String comment,
+			int helpZoneNum,
+			String checkPH,
 			@RequestParam(value="cPageMem",required=false,defaultValue="1") int cPageMem,
 			@RequestParam(value="cPageHos",required=false,defaultValue="1") int cPageHos,
 			ModelAndView mv) throws JsonProcessingException,UnsupportedOperationException{
@@ -291,8 +297,11 @@ public class HelpZoneController {
 			String pageBarM = new PageCreate().getPageBarCommentM2(cPageMem, numPerPage, totalCountM, "helpZoneView,do", helpZoneNum);
 			String pageBarH = new PageCreate().getPageBarCommentH2(cPageHos, numPerPage, totalCountH, "helpZoneView,do", helpZoneNum);
 			
+			boolean checkchoice = service.commentchoice(helpZoneNum)==1?true:false;
+			
 			mv.addObject("hzMember2",hzMember2);
 			mv.addObject("hzHospital2", hzHospital2);
+			mv.addObject("checkchoice", checkchoice);
 			mv.addObject("pageBarM", pageBarM);
 			mv.addObject("pageBarH", pageBarH);
 			mv.addObject("cPageMem",cPageMem);
@@ -302,6 +311,23 @@ public class HelpZoneController {
 			return mv;
 	}
 	
+	@RequestMapping("/helpZone/helpZoneChoice.do")
+	public String helpZoneChoice(int hzCommentNumH, Model model) {
+		String msg = "";
+		String loc = "";
+		
+		int result = service.helpZoneChoice(hzCommentNumH);
+		if(result > 0) {
+			msg = "채택되었습니다.";
+		} else {
+			msg = "채택 중 오류가 발생했습니다.";
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("loc", loc);
+		
+		return "common/msg";
+	}
 	
 	
 }
