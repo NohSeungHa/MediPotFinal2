@@ -232,9 +232,9 @@ to {
 			<h3>MediPot 서비스란?</h3>
 			<p>전국 병원을 예약할 수 있는 사이트 입니다.</p>
 			<p>메디팟에서는 많은 병원과 협약을 맺고있습니다.</p>
-			<p>메디팟시스템을 이용하실 관리자분은 아래의 링크를 클릭하세요</p>
+			<p>메디팟시스템을 이용하실 일반회원과 병원 관리자분들은 회원가입 후 이용해 주세요</p>
 			<p>
-				<a class="btn btn-default" data-target="#modal" data-toggle="modal">협약하러가기</a>
+				<a class="btn btn-default" href="${pageContext.request.contextPath }/member/join.do">회원가입하러가기</a>
 			</p>
 		</div>
 		<div class="col-md-2">
