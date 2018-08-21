@@ -16,21 +16,36 @@
 		<typeAlias alias="Community" type="com.medi.pot.community.vo.Community"/>
 		<!-- 자유게시판 댓글 -->
 		<typeAlias alias="CommunityComment" type="com.medi.pot.community.vo.CommunityComment"/>
+<<<<<<< HEAD
 		<!-- 1:1 문의  -->
 		<typeAlias alias="Inquiry" type="com.medi.pot.inquiry.vo.Inquiry"/>
+=======
+		
+>>>>>>> 983868703c227af70440b663527361809c13bb13
 		<typeAlias alias="member" type="com.medi.pot.member.model.vo.Member" />
 		<typeAlias alias="hospital" type="com.medi.pot.member.model.vo.Hospital" />
+		
 		<typeAlias alias="HospitalInfo" type="com.medi.pot.reservation.model.vo.HospitalInfo" />
 		<typeAlias alias="DoctorInfo" type="com.medi.pot.reservation.model.vo.DoctorInfo" />
 		<typeAlias alias="DoctorSchedule" type="com.medi.pot.reservation.model.vo.DoctorSchedule" />
 
 		<!-- 헬프존 -->
 		<typeAlias alias="HelpZone" type="com.medi.pot.helpZone.vo.HelpZone"/>
-		<typeAlias alias="MemberReservation" type="com.medi.pot.reservation.model.vo.MemberReservation" />
+		<typeAlias alias="HelpZoneCommentMember" type="com.medi.pot.helpZone.vo.HelpZoneCommentMember"/>
+		<typeAlias alias="HelpZoneCommentHospital" type="com.medi.pot.helpZone.vo.HelpZoneCommentHospital"/>
 		
 		<!-- 예약 List -->
 		<typeAlias alias="ReserList" type="com.medi.pot.reservation.model.vo.ReserList" />
-
+		<typeAlias alias="SearchReserList" type="com.medi.pot.reservation.model.vo.SearchReserList" />
+		
+		<!-- 병원정보, 의사정보 적용중 -->
+		<typeAlias alias="hospitalInfos" type="com.medi.pot.member.model.vo.HospitalInfos" />
+		<typeAlias alias="doctorInfos" type="com.medi.pot.member.model.vo.DoctorInfos" />
+		<typeAlias alias="MemberReservation" type="com.medi.pot.reservation.model.vo.MemberReservation" />
+		
+		<!-- 체크박스 여러 개를 하나의 String으로 -->
+		<typeAlias alias="StringArray" type="com.medi.pot.member.model.vo.StringArrayTypeHandler"/>
+		
 	</typeAliases>
 
 </configuration>

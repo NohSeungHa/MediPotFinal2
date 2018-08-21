@@ -87,7 +87,7 @@
 	</style>
 	<br>
 	<c:if test="${empty nameList }">
-	<div style="margin-bottom:10px;position:relative;height:auto;">
+	<div id="choiceLocList" style="margin-bottom:10px;position:relative;height:auto;">
 	<div style="width:100%;height:50px;font-size:25px;text-align:center;background-color:#286090;padding-top:11px;color:white;border-radius:8px;">
 			지역 선택 및 진료과목 선택
 	</div>
@@ -126,7 +126,7 @@
 	</div>
 	<c:forEach var="list" items="${nameList }" >
 	<div class="mediList" id="${list.hospitalNum }" style="display:inline-block;width:49%;margin-right:5px; position:relative;margin-bottom:20px;">
-		<div style="display: inline-block;"><img src="${path }/resources/img/reser/${list.hospitalPhoto}" width="200px;" height="200px;"></div>
+		<div style="display: inline-block;"><img src="${path }/resources/uploadfile/hospitalInfo/${list.hospitalRePhoto}" width="200px;" height="200px;"></div>
 		<div id="hlist" style="display: inline-block;position:absolute;">
 			<p><span style="font-size:20px;color: #286090">병원명</span>&nbsp;&nbsp;
 			<span style="font-size:20px;">${list.hospitalName }</span></p>
@@ -145,6 +145,17 @@
 	</div>
 	</c:forEach>
 	</c:if>
+	<div id="noneList">
+		<div style="width:100%;height:50px;font-size:20px;text-align:center;background-color:#286090;padding-top:11px;color:white;border-radius:8px;margin-bottom:10px;">
+		병원 리스트
+		</div>
+		<h1 style="text-align: center;">검색 결과가 없습니다.</h1>
+	</div>
+	<style>
+		#noneList{
+			display:none;
+		}
+	</style>
 	<script>
 		$(function () {
 			$(".mediList").click(function () {
@@ -188,6 +199,13 @@
 				}
 			}); 
 			
+		});
+		
+		$(function () {
+			if(${ch=='none'} && ${empty nameList}){
+				$('#choiceLocList').hide();
+				$('#noneList').css("display","block");
+			}
 		});
 	</script>
 	<div style="border:2px solid lightgray;width:100%;"></div>

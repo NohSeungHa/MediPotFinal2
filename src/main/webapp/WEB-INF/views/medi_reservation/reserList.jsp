@@ -8,15 +8,16 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 <jsp:param value="HomeSpring" name="pageTitle"></jsp:param>
 </jsp:include>
-<div class="container">
 	<div style="height:auto;">
-		<div><img src="${path }/resources/img/reser/listImg5.png" width="100%" height="280px;"></div>
+		<div style="text-align: center;"><img src="${path }/resources/img/reser/listImg5.png" width="60%;" height="280px;"></div>
+
 		<br><br>
 		<table id="reserLi" class="table table-hover" style="text-align: center;border-top:2px solid lightgray;">
 			<thead>
 				<tr>
 					<th style="width: 100px;text-align: center;"><h4>병원 이름</h4></th>
-					<th style="text-align: center;width: 500px;"><h4>병원 주소</h4></th>
+					<th style="text-align: center;width: 400px;"><h4>남긴 메세지</h4></th>
+					<th style="text-align: center;width: 400px;"><h4>병원 주소</h4></th>
 					<th style="width: 180px;text-align: center;"><h4>전화번호</h4></th>
 					<th style="width: 90px;text-align: center;"><h4>진료과목</h4></th>
 					<th style="width: 150px;text-align: center;"><h4>예약날짜</h4></th>
@@ -29,6 +30,7 @@
 					<c:forEach var="resr" items="${list }">
 						<tr>
 							<td class="hospiName" title="${resr.hospitalNum }"><h4>${resr.hospitalName }</h4></td>
+							<td><h4>${resr.sendMsg }</h4></td>
 							<td><h4>${resr.hospitalAddr }</h4></td>
 							<td><h4>${resr.hospitalTel }</h4></td>
 							<td><h4>${resr.hospitalProfessional }</h4></td>
@@ -40,14 +42,14 @@
 				</c:if>
 				<c:if test="${empty list}">
 					<tr>
-						<td colspan="7" style="text-align: center;"><h4>게시글이 존재하지 않습니다.</h4></td>
+						<td colspan="8" style="text-align: center;"><h4>예약이 존재하지 않습니다.</h4></td>
 					</tr>
 				</c:if>
 			</tbody>
 		</table>
 		<div>${pageBar }</div>
 	</div>
-</div>
+
 <style>
 	.hospiName{
 		color:#286090;

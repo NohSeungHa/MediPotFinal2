@@ -1,8 +1,11 @@
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
+<% ArrayList<String> professional = (ArrayList<String>) request.getAttribute("professional"); %>
 
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="병원 회원정보 수정" name="pageTitle"/>
@@ -99,7 +102,14 @@
 </script>
 <!-- 다음 주소 API끝 -->
 
-
+<c:if test="${memberLoggedIn == null }">
+	<script>
+		$(function(){
+			alert("잘못된 접근입니다.");
+			location.href="${pageContext.request.contextPath}";
+		})	
+	</script>
+</c:if>
 <div style="height: 100px"></div>
 <div class="jointab">
 
@@ -110,16 +120,15 @@
 			<img src="${pageContext.request.contextPath }/resources/img/enroll/hospitalEnrollTop.png"
 				style="width: 100%; max-width: 760px; vertical-align: middle" />
 		</div>
-
-
-
 		
 		<h2>병원 회원정보 수정</h2>
-		<p><b>(*)</b>는 필수 표시사항 입니다.</p>
-			<form name="" action="" method="post" onsubmit="return fn_enroll_validate();" >
+		<p>** <b>(*)</b>는 필수 표시사항 입니다. **<br>
+		** 이메일 수정을 원할 시 관리자에게 문의해주세요. **<br>
+		** 사업자번호를 수정하지 않는다면 원본으로 출력됩니다. **</p>
+			<form action="${pageContext.request.contextPath }/member/hospitalUpdate.do" method="post" onsubmit="return fn_enroll_validate();" enctype="multipart/form-data">
 				<table>
 					<tr>
-						<th>병원 아이디<b>(*)</b></th>
+						<th style="min-width: 130px">병원 아이디<b>(*)</b></th>
 						<td>
 							<div id="hospitalId-container">
 								<input type="text" class="form-control" placeholder="4글자이상" name="hospitalId" id="hospitalId_" value="${memberLoggedIn.hospitalId }" readonly>
@@ -134,9 +143,9 @@
 					</tr>
 					<tr>
 						<th>사업자번호<b>(*)</b></th>
-						<td>	
-						<input type="text" class="form-control" name="hospitalLicense" id="hospitalLicense" 
-							maxlength="6" placeholder="6자리로 입력해주십시오." value="${memberLoggedIn.hospitalLicense }" readonly>
+						<td>
+						<input type="file" name="hospitalLicense" id="hospitalLicense" accept=".jpg, .png, .bmp" style="width: 280px" required>
+						<input type="hidden" class="form-control" name="oldhospitalLicense" id="oldhospitalLicense" value="${memberLoggedIn.hospitalLicense }" readonly>
 						</td>
 					</tr>
 					<tr>
@@ -148,7 +157,7 @@
 					<tr>
 						<th>이메일</th>
 						<td>	
-							<input type="email" class="form-control" placeholder="abc@xyz.com" name="hospitalEmail" value="${memberLoggedIn.hospitalEmail }" id="hospitalEmail">
+							<input type="email" class="form-control" placeholder="abc@xyz.com" name="hospitalEmail" value="${memberLoggedIn.hospitalEmail }" id="hospitalEmail" readonly>
 						</td>
 					</tr>
 					<tr>
@@ -157,11 +166,58 @@
 							<input type="text" class="form-control" name="hospitalAddr" id="hospitalAddr" placeholder="도로명주소" value="${memberLoggedIn.hospitalAddr }" readonly>
 						</td>
 						<td>
-							&nbsp;
-							<button type="button" onclick="sample4_execDaumPostcode()" class="btn btn-default" style="margin-bottom:10px;">우편번호 찾기</button> 
+							<button type="button" onclick="sample4_execDaumPostcode()" class="btn btn-default" style="margin:0 0 10px 10px;">우편번호 찾기</button> 
 							<span id="guide" style="color: #999"></span>
 						</td>
 					</tr>
+					<tr>
+				<th><br>진료과목</th>
+				<td><br>
+					<input type="checkbox" name="professional" id="J1" value="정형외과"
+					<%=professional.contains("정형외과")?"checked":"" %> >
+					<label for="J1">정형외과&nbsp;&nbsp;</label>
+					
+					<input type="checkbox" name="professional" id="C1" value="치과"
+					<%=professional.contains("치과")?"checked":"" %> >
+					<label for="C1">치과&nbsp;&nbsp;</label>
+					
+					<input type="checkbox" name="professional" id="P1" value="피부과"
+					<%=professional.contains("피부과")?"checked":"" %> >
+					<label for="P1">피부과&nbsp;&nbsp;</label>
+					
+					<input type="checkbox" name="professional" id="S1" value="성형외과"
+					<%=professional.contains("성형외과")?"checked":"" %> >
+					<label for="S1">성형외과</label><br>
+					
+					<input type="checkbox" name="professional" id="A1" value="안과"
+					<%=professional.contains("안과")?"checked":"" %> >
+					<label for="A1">안과&nbsp;&nbsp;</label>
+					
+					<input type="checkbox" name="professional" id="B1" value="비뇨기과"
+					<%=professional.contains("비뇨기과")?"checked":"" %> >
+					<label for="B1">비뇨기과&nbsp;&nbsp;</label>
+					
+					<input type="checkbox" name="professional" id="S2" value="신경외과"
+					<%=professional.contains("신경외과")?"checked":"" %> >
+					<label for="S2">신경외과&nbsp;&nbsp;</label>
+					
+					<input type="checkbox" name="professional" id="N1" value="내과"
+					<%=professional.contains("내과")?"checked":"" %> >
+					<label for="N1">내과</label><br>
+					
+					<input type="checkbox" name="professional" id="E1" value="이비인후과"
+					<%=professional.contains("이비인후과")?"checked":"" %> >
+					<label for="E1">이비인후과&nbsp;&nbsp;</label>
+					
+					<input type="checkbox" name="professional" id="H1" value="한의원"
+					<%=professional.contains("한의원")?"checked":"" %> >
+					<label for="H1">한의원&nbsp;&nbsp;</label>
+					
+					<input type="checkbox" name="professional" id="SB1" value="산부인과"
+					<%=professional.contains("산부인과")?"checked":"" %> >
+					<label for="SB1">산부인과</label><br>
+				</td>
+			</tr>
 					<tr>
 						<td colspan="3" style="text-align:center;">
 							 <input type="submit" class="btn btn-lg btn-default" value="회원정보수정"/>
@@ -170,6 +226,12 @@
 					<tr>
 						<td colspan="3" style="text-align:center;">
 							<input type="button" onclick="location.href='${path}/'" class="btn btn-lg btn-default" value="비밀번호수정"/>
+							<input type="hidden" name="hospitalNum" value="${memberLoggedIn.hospitalNum }">
+						</td>
+					</tr>
+					<tr>
+						<td colspan="3" style="text-align: center;">
+							<input type="button" onclick="deleteHospital()" class="btn btn-lg btn-default" value="회 원 탈 퇴">
 						</td>
 					</tr>
 				</table>
@@ -182,5 +244,11 @@
 		</div>
 	</div>
 	<div style="height: 100px"></div>
+	
+	<script>
+		function deleteHospital(){
+			location.href="${pageContext.request.contextPath}/member/deleteHospital.do";
+		}
+	</script>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

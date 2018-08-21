@@ -16,7 +16,7 @@ public class Hospital {
 	private Date hospitalDate;
 	private int hospitalLike;
 	private String hospitalAdmission;
-	private String hospitalProfessional;
+	private String[] hospitalProfessional;
 	
 	public Hospital() {}
 
@@ -116,17 +116,17 @@ public class Hospital {
 		this.hospitalAdmission = hospitalAdmission;
 	}
 
-	public String getHospitalProfessional() {
+	public String[] getHospitalProfessional() {
 		return hospitalProfessional;
 	}
 
-	public void setHospitalProfessional(String hospitalProfessional) {
+	public void setHospitalProfessional(String[] hospitalProfessional) {
 		this.hospitalProfessional = hospitalProfessional;
 	}
 
 	public Hospital(int hospitalNum, String hospitalId, String hospitalPw, String hospitalName, String hospitalLicense,
 			String hospitalReLicense, String hospitalTel, String hospitalEmail, String hospitalAddr, Date hospitalDate,
-			int hospitalLike, String hospitalAdmission, String hospitalProfessional) {
+			int hospitalLike, String hospitalAdmission, String[] hospitalProfessional) {
 		super();
 		this.hospitalNum = hospitalNum;
 		this.hospitalId = hospitalId;

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="reser">
 	<select id="mediList" parameterType="map" resultType="HospitalInfo">
-		select * from hospital join hospitalinfo on(hospitalnum=hospitalinfonum) where hospital.HOSPITALPROFESSIONAL=#{sub} and hospital.hospitaladdr like '%'||#{loc}||'%'
+		select * from hospital join hospitalinfo on(hospitalnum=hospitalinfonum) where hospital.HOSPITALPROFESSIONAL like '%'||#{sub}||'%' and hospital.hospitaladdr like '%'||#{loc}||'%'
 	</select>
 	
 	<select id="selectCount" parameterType="map" resultType="_int">
@@ -28,15 +28,15 @@
 	</select>
 	
 	<select id="selectReser" parameterType="map" resultType="MemberReservation">
-		select a.*,b.*,c.membername,c.membernum from MEMBERRESERVATION a full join reservationblock b on(blockdate=checkdate) full join member c on(checkmember=membernum) where ((checkdoctor=#{num} and checkdate=#{chDate}) or (blockdoctor=#{num} and blockdate=#{chDate} and blockcheck='N'))
+		select a.*,b.*,c.membername,c.membernum from MEMBERRESERVATION a full join reservationblock b on(blockdate=checkdate and checkdoctor=blockdoctor) full join member c on(checkmember=membernum) where ((checkdoctor=#{num} and checkdate=#{chDate} and checkhospital=#{num2}) or (blockdoctor=#{num} and blockdate=#{chDate} and blockcheck='N' and blockhospital=#{num2}))
 	</select>
 	
 	<insert id="insertReser" parameterType="MemberReservation">
-		insert into MEMBERRESERVATION values(memberreservation_SEQ.nextval,#{checkDoctor},#{checkHospital},#{checkMember},#{checkDate},#{checkTime})
+		insert into MEMBERRESERVATION values(memberreservation_SEQ.nextval,#{checkDoctor},#{checkHospital},#{checkMember},#{checkDate},#{checkTime},#{sendMsg})
 	</insert>
 	
 	<select id="selectReserList" parameterType="_int" resultType="ReserList">
-		select * from MEMBERRESERVATION join hospital on(checkhospital=hospitalnum) where checkmember=#{userNum} order by checkdate desc
+		select * from MEMBERRESERVATION join hospital on(checkhospital=hospitalnum) where checkmember=#{userNum} order by checkdate desc, checktime desc
 	</select>
 	
 	<delete id="deleteReser" parameterType="_int">
@@ -65,5 +65,41 @@
 	
 	<delete id="deleteDateCan" parameterType="map">
 		delete RESERVATIONBLOCK where blockdoctor=#{docNum} and blockhospital=#{hosNum} and blockdate=#{date} and blockcheck='Y'
+	</delete>
+	
+	<select id="selectReserListM" parameterType="map" resultType="SearchReserList">
+		select a.checknum,c.doctornum, c.doctorname,b.membername,b.membergender,b.memberbirth,b.memberphone,b.memberaddr,a.sendmsg,a.checkdate,a.checktime from MEMBERRESERVATION a join member b on(checkmember=membernum) join doctorinfo c on(checkdoctor=doctornum) where checkdate=#{date} and checkdoctor=#{docNum} order by checktime desc
+	</select>
+	
+	<select id="searchReserCount" parameterType="map" resultType="_int">
+		select count(*) from MEMBERRESERVATION a join member b on(checkmember=membernum) join doctorinfo c on(checkdoctor=doctornum) where checkdate=#{date} and checkdoctor=#{docNum} order by checktime desc
+	</select>
+	
+	<delete id="deleteSearchReser" parameterType="_int">
+		delete MEMBERRESERVATION where checknum=#{num}
+	</delete>
+	
+	<select id="selectListSearchMem" parameterType="map" resultType="SearchReserList">
+		select a.checknum,c.doctornum, c.doctorname,b.membername,b.membergender,b.memberbirth,b.memberphone,b.memberaddr,a.sendmsg,a.checkdate,a.checktime from MEMBERRESERVATION a join member b on(checkmember=membernum) join doctorinfo c on(checkdoctor=doctornum) where CHECKHOSPITAL=#{hosNum}
+		<if test="kind == 'name'">
+			and membername like '%'||#{search}||'%'  order by checkdate desc, checktime desc
+		</if>
+		<if test="kind == 'birth'">
+			and memberbirth like '%'||#{search}||'%'  order by checkdate desc, checktime desc
+		</if>
+	</select>
+	
+	<select id="selectCountReserMem" parameterType="map" resultType="_int">
+		select count(*) from MEMBERRESERVATION a join member b on(checkmember=membernum) join doctorinfo c on(checkdoctor=doctornum) where CHECKHOSPITAL=#{hosNum}
+		<if test="kind == 'name'">
+			and membername like '%'||#{search}||'%'  order by checkdate desc, checktime desc
+		</if>
+		<if test="kind == 'birth'">
+			and memberbirth like '%'||#{search}||'%'  order by checkdate desc, checktime desc
+		</if>
+	</select>
+	
+	<delete id="deleteSearchReserMember" parameterType="_int">
+		delete MEMBERRESERVATION where checknum=#{num}
 	</delete>
 </mapper>

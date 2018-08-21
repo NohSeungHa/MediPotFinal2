@@ -7,7 +7,9 @@ import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.medi.pot.member.model.vo.DoctorInfos;
 import com.medi.pot.member.model.vo.Hospital;
+import com.medi.pot.member.model.vo.HospitalInfos;
 import com.medi.pot.member.model.vo.Member;
 
 @Repository
@@ -130,14 +132,14 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public String FindId(SqlSessionTemplate sqlSession, Member m) {
+	public String MemberFindId(SqlSessionTemplate sqlSession, Member m) {
 		
 		return sqlSession.selectOne("member.FindId", m);
 		
 	}
 
 	@Override
-	public Member searchName(SqlSessionTemplate sqlSession, String findname) {
+	public Member searchMemberName(SqlSessionTemplate sqlSession, String findname) {
 		
 		return sqlSession.selectOne("member.searchName", findname);
 		
@@ -169,6 +171,181 @@ public class MemberDAOImpl implements MemberDAO {
 	public int hospitalCount(SqlSessionTemplate sqlSession) {
 		
 		return sqlSession.selectOne("hospital.hoscnt");
+		
+	}
+
+	@Override
+	public String selecthospitalName(SqlSessionTemplate sqlSession, int hospitalNum) {
+		
+		return sqlSession.selectOne("hospital.hospitalNameinput", hospitalNum);
+		
+	}
+
+	@Override
+	public Hospital selectHospital(SqlSessionTemplate sqlSession, int hospitalNum) {
+		
+		return sqlSession.selectOne("hospital.selectHospital", hospitalNum);
+		
+	}
+
+	@Override
+	public int hospitalInfoinsert(SqlSessionTemplate sqlSession, HospitalInfos hospitalInfo) {
+		
+		return sqlSession.insert("hospital.hospitalInfoinsert", hospitalInfo);
+		
+	}
+
+	@Override
+	public HospitalInfos selectHospitalInfo(SqlSessionTemplate sqlSession, int hospitalNum) {
+		
+		return sqlSession.selectOne("hospital.selectHospitalInfo", hospitalNum);
+		
+	}
+
+	@Override
+	public int loadHospitalInfo(SqlSessionTemplate sqlSession, int hospitalNum) {
+		
+		return sqlSession.selectOne("hospital.loadHospitalInfo", hospitalNum);
+		
+	}
+
+	@Override
+	public List<DoctorInfos> selectDoctorInfo(SqlSessionTemplate sqlSession, int hospitalNum) {
+		
+		return sqlSession.selectList("hospital.selectDoctorInfo", hospitalNum);
+		
+	}
+
+	@Override
+	public int doctorInfoInsert(SqlSessionTemplate sqlSession, DoctorInfos doctorInfo) {
+		
+		return sqlSession.insert("hospital.doctorinfoinsert", doctorInfo);
+		
+	}
+
+	@Override
+	public int updateHospitalInfo(SqlSessionTemplate sqlSession, HospitalInfos hospitalInfo) {
+		
+		return sqlSession.update("hospital.updateHospitalInfo", hospitalInfo);
+		
+	}
+
+	@Override
+	public DoctorInfos selectDoctorsPhoto(SqlSessionTemplate sqlSession, int doctorNum) {
+		
+		return sqlSession.selectOne("hospital.selectDoctorsPhoto", doctorNum);
+		
+	}
+
+	@Override
+	public int updateDoctorInfo(SqlSessionTemplate sqlSession, DoctorInfos doctorInfo) {
+		
+		return sqlSession.update("hospital.updateDoctorInfo", doctorInfo);
+		
+	}
+
+	@Override
+	public String DoctorsProfessional(SqlSessionTemplate sqlSession, int doctorNum) {
+		
+		return sqlSession.selectOne("hospital.DoctorsProfessional", doctorNum);
+		
+	}
+
+	@Override
+	public int hospitalUpdate(SqlSessionTemplate sqlSession, Hospital hospital) {
+		
+		return sqlSession.update("hospital.hospitalUpdate", hospital);
+		
+	}
+
+	@Override
+	public int FindHosEmailCheck(SqlSessionTemplate sqlSession, String memberEmail) {
+		
+		return sqlSession.selectOne("hospital.EmailCheck", memberEmail);
+		
+	}
+
+	@Override
+	public int deleteMember(SqlSessionTemplate sqlSession, int memberNum) {
+		
+		return sqlSession.delete("member.deleteMember", memberNum);
+		
+	}
+
+	@Override
+	public String HospitalFindId(SqlSessionTemplate sqlSession, Hospital h) {
+		
+		return sqlSession.selectOne("hospital.HospitalFindId", h);
+		
+	}
+
+	@Override
+	public Hospital searchHospitalName(SqlSessionTemplate sqlSession, String findname) {
+		
+		return sqlSession.selectOne("hospital.searchHospitalName", findname);
+		
+	}
+
+	@Override
+	public String hospitalNameDoctorNum(SqlSessionTemplate sqlSession, int doctorNum) {
+		
+		return sqlSession.selectOne("hospital.hospitalNameDoctorNum", doctorNum);
+		
+	}
+
+	@Override
+	public Hospital selectFindHospital(SqlSessionTemplate sqlSession, String hospitalId) {
+		
+		return sqlSession.selectOne("hospital.selectFindHospital", hospitalId);
+		
+	}
+
+	@Override
+	public int deleteDoctors(SqlSessionTemplate sqlSession, int hospitalNo) {
+		
+		return sqlSession.delete("hospital.deleteDoctors", hospitalNo);
+		
+	}
+
+	@Override
+	public int deleteHospitalInfo(SqlSessionTemplate sqlSession, int hospitalInfoNum) {
+		
+		return sqlSession.delete("hospital.deleteHospitalInfo", hospitalInfoNum);
+		
+	}
+
+	@Override
+	public int updateHospital(SqlSessionTemplate sqlSession, int hospitalNum) {
+		
+		return sqlSession.update("hospital.updateHospital", hospitalNum);
+		
+	}
+
+	@Override
+	public String selectHospitalProfessional(SqlSessionTemplate sqlSession, String user_id) {
+		
+		return sqlSession.selectOne("hospital.selectHospitalProfessional", user_id);
+		
+	}
+
+	@Override
+	public String selectDoctorPhoto(SqlSessionTemplate sqlSession, int hospitalNo) {
+		
+		return sqlSession.selectOne("hospital.selectDoctorPhoto", hospitalNo);
+		
+	}
+
+	@Override
+	public String selectHospitalInfoPhoto(SqlSessionTemplate sqlSession, int hospitalInfoNum) {
+		
+		return sqlSession.selectOne("hospital.selectHospitalInfoPhoto", hospitalInfoNum);
+		
+	}
+
+	@Override
+	public String selectHospitalLicense(SqlSessionTemplate sqlSession, int hospitalNum) {
+		
+		return sqlSession.selectOne("hospital.selectHospitalLicense", hospitalNum);
 		
 	}
 

@@ -16,12 +16,15 @@
 		border-top-right-radius: 50px;
 		border-bottom-right-radius: 50px;
 		width: 500px;
-		height: 600px;
+		height: 700px;
 		margin: 0 auto;
 	}
 	
 	.findid table{
 		font-size: 1.2em;
+	}
+	.center{
+		text-align: center;
 	}
 	
 </style>
@@ -30,14 +33,15 @@
 
 
 <div class="findid">
-	<br><br><br><br>
+	<br>
+	<h2 class="center">아이디 찾기</h2>
+	<br><br><br>
 	<form action="${pageContext.request.contextPath }/member/memberFindId.do">
 	<table style="margin: 0 auto;">
 	<tr>
-		<td></td>
-		<td>
+		<td colspan="5" class="center">
 			<input type="radio" value="P" id="findP" name="findPnH" checked>개인
-			<input type="radio" value="H" name="findPnH">병원
+			<input type="radio" value="H" name="findPnH" style="margin-left: 50px">병원
 		</td>
 	</tr>
 	<tr>
@@ -61,7 +65,7 @@
 		<td> </td>
 		<td> <b>이메일</b> </td>
 		<td> &nbsp;:&nbsp; </td>
-		<td> <input class="form-control" type="email" placeholder="abc@xyz.com" maxlength="30" id="findemail" name="findemail"> </td>
+		<td> <input class="form-control" type="email" placeholder="abc@xyz.com" maxlength="30" id="UserEmail" name="UserEmail"> </td>
 		<td style="width: 100px"> </td>
 	</tr>	
 	<tr>
@@ -89,7 +93,7 @@
 	<tr>
 		<td colspan="5" style="text-align: right;">
 			<br><br>
-			<a href="${pageContext.request.contextPath }">비밀번호를 잃어버리셨나요?</a>
+			<a href="${pageContext.request.contextPath }/member/findPassword.do">비밀번호를 잃어버리셨나요?</a>
 		</td>
 	</tr>
 	</table>
@@ -100,8 +104,8 @@
 <div style="height: 200px"></div>
 <script>
 	// 이메일 유효성검사
-	$("#findemail").blur(function(){
-		var email = $('#findemail').val();
+	$("#UserEmail").blur(function(){
+		var email = $('#UserEmail').val();
 		if(email.length!=0) {
 			if(email.match(/([@])/)){
 				if($('#successEmail').css("display")=='none'){
@@ -112,20 +116,21 @@
 			}
 			else if(email.match(/([!,#,$,%,^,&,*,?,~,-])/)) {
 				alert("온전하지 못한 이메일입니다. ('@'를 제외한 특수문자가 존재합니다.)");
-				$("#findemail").val("");
-                $("#findemail").focus();
+				$("#UserEmail").val("");
+                $("#UserEmail").focus();
                 return false;
 			}
 			else {
 				alert("온전하지 못한 이메일입니다. 다시 한 번 입력해주세요.");
-				$("#findemail").val("");
-                $("#findemail").focus();
+				$("#UserEmail").val("");
+                $("#UserEmail").focus();
                 return false;
 			}
 		}
+		return true;
 		$.ajax({
 			url:"${pageContext.request.contextPath}/member/findCheckEmail.do?PnH="+$('#findP').val(),
-			data:{memberEmail:$('#findemail').val()},
+			data:{memberEmail:$('#UserEmail').val()},
 			success:function(data){
 				if(data == 'true'){
 					alert("등록된 이메일과 일치합니다");
@@ -136,8 +141,8 @@
 					}
 				} else{
 					alert("등록되지 않은 이메일입니다.");
-					$("#findemail").val("");
-	                $("#findemail").focus();
+					$("#UserEmail").val("");
+	                $("#UserEmail").focus();
 				}
 			}
          })
@@ -158,8 +163,8 @@
     });
 	
 	function emailAuther(){
-		var nowemail = $('#findemail').val();
-		var url="${pageContext.request.contextPath }/member/FindemailEnd.do?memberEmail="+nowemail;
+		var nowemail = $('#UserEmail').val();
+		var url="${pageContext.request.contextPath }/member/emailEnd.do?memberEmail="+nowemail;
 		var title="emailAuther";
 		var status="left=500px, top=100px, width=600px, height=200px";
 		var popup=window.open(url,title,status);

@@ -448,13 +448,13 @@
 	}
 </style>
 
-<div style="height:1000px;">
+<div style="height:1100px;">
 	<div class="col-sm-4">
 		<div style="width:100%;height:50px;font-size:20px;text-align:center;background-color:#286090;padding-top:11px;color:white;border-radius:8px;margin-bottom:10px;">
 			의료진 정보
 		</div>
 		<div id="docInfoE" style="text-align:center;font-size:20px;">
-			** 제외 설정을 할 의사 선생님을 선택해 주세요  **
+			** 제외 설정 또는 예약 회원 검색 할 의사 선생님을 선택해 주세요  **
 		</div>
 		<c:if test="${empty list }">
 		<div style="text-align:center;">
@@ -465,7 +465,7 @@
 		<div class="docInfo-div" style="height:auto;margin-bottom:10px;" title="${list.doctorNum }" lang="${list.hospitalNo }">
 			<table id="docInfo">
 				<tr>
-					<td rowspan="4"><img src="${path }/resources/img/reser/${list.doctorPhoto }" width="200px;" height="250px;"></td>
+					<td rowspan="4"><img src="${path }/resources/uploadfile/dortors/${list.doctorRePhoto }" width="200px;" height="250px;"></td>
 					<th>이름</th>
 					<td>${list.doctorName }</td>
 				</tr>
@@ -495,7 +495,7 @@
 			날짜 선택
 		</div>
 		<div id="docInfoE2" style="text-align:center;font-size:20px;">
-			** 제외 설정을 할 날짜를 선택해 주세요  **
+			** 제외 설정 및 예약 회원 검색 할 날짜를 선택해 주세요  **
 		</div>
 		<div id="calList">
 			<table id="tbl-cal" align="center">
@@ -720,6 +720,7 @@
 		</div>
 		<div id="docInfoE3" style="text-align:center;font-size:20px;">
 			** 제외 설정을 할 시간을 선택한 후 제외하기 버튼을 눌러주세요  **
+			<br>** 예약 된 회원 리스트 검색은 아래 예약 회원 조회 버튼을 눌러주세요 **
 		</div>
 		<div id="timeImg" style="text-align:center;">
 			<img alt="달력사진" src="${path }/resources/img/reser/reserTime.png" height="300px;"></div>
@@ -734,13 +735,15 @@
 		}
 		var docNum=${doctor.doctorNum }
 		$('.calb').click(function () {
+			var hos=${doctor.hospitalNo }
+			alert('${doctor.hospitalNo}');
 			$('.calb').css('background-color','white');
 			$('.calb').css('color','black');
 			$(this).css('background-color','#286090');
 			$(this).css('color','white');
 			$.ajax({
 				url:"${path}/medi/mediChoice2",
-				data:{docNum:docNum,time:$(this).val()},
+				data:{docNum:docNum,time:$(this).val(),hos:hos},
 				dataType:"html",
 				success:function(data){
 					$('#timeImg').css("display",'none');

@@ -239,7 +239,7 @@
 				   	$('#commentContent').val("");
 				   	$('#cc2s').html(data);
 				}
-	   	})
+	   	});
 	   	
 	});
 	

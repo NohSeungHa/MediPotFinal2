@@ -451,7 +451,6 @@ public class CommunityController {
 			cc1.setCommentCheckPH(check);
 			service.insertCommunityComment(cc1);
 		}
-		System.out.println("!!!@");
 		List<CommunityComment> cc2=null;
 		int totalCount=0;
 		cc2=service.selectListCommunityComment(cPage,numPerPage,Integer.parseInt(communityNum));

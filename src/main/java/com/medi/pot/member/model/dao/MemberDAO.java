@@ -5,7 +5,9 @@ import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
+import com.medi.pot.member.model.vo.DoctorInfos;
 import com.medi.pot.member.model.vo.Hospital;
+import com.medi.pot.member.model.vo.HospitalInfos;
 import com.medi.pot.member.model.vo.Member;
 
 
@@ -30,11 +32,16 @@ public interface MemberDAO {
 	int memberPwUpdate(SqlSessionTemplate sqlSession, Map<String, String> idpw);
 	List<Member> selectMemberList(SqlSessionTemplate sqlSession, int cPage, int numPerPage);
 	int selectCount(SqlSessionTemplate sqlSession);
+	int deleteMember(SqlSessionTemplate sqlSession, int memberNum);
 	
 	/* 아이디 찾기 */
 	int FindMemEmailCheck(SqlSessionTemplate sqlSession, String memberEmail);
-	String FindId(SqlSessionTemplate sqlSession, Member m);
-	Member searchName(SqlSessionTemplate sqlSession, String findname);
+	String MemberFindId(SqlSessionTemplate sqlSession, Member m);
+	Member searchMemberName(SqlSessionTemplate sqlSession, String findname);
+	
+	int FindHosEmailCheck(SqlSessionTemplate sqlSession, String memberEmail);
+	String HospitalFindId(SqlSessionTemplate sqlSession, Hospital h);
+	Hospital searchHospitalName(SqlSessionTemplate sqlSession, String findname);
 	
 	/* 비밀번호 찾기 */
 	Member searchID(SqlSessionTemplate sqlSession, String findid);
@@ -47,4 +54,30 @@ public interface MemberDAO {
 	int selectHospitalCount(SqlSessionTemplate sqlSession);
 	int updateAdmission(SqlSessionTemplate sqlSession, int hospitalNum);
 	int hospitalCount(SqlSessionTemplate sqlSession);
+	String selecthospitalName(SqlSessionTemplate sqlSession, int hospitalNum);
+	Hospital selectHospital(SqlSessionTemplate sqlSession, int hospitalNum);
+	String selectHospitalProfessional(SqlSessionTemplate sqlSession, String user_id);
+	int hospitalUpdate(SqlSessionTemplate sqlSession, Hospital hospital);
+	Hospital selectFindHospital(SqlSessionTemplate sqlSession, String hospitalId);
+	int deleteDoctors(SqlSessionTemplate sqlSession, int hospitalNo);
+	int deleteHospitalInfo(SqlSessionTemplate sqlSession, int hospitalInfoNum);
+	int updateHospital(SqlSessionTemplate sqlSession, int hospitalNum);
+	String selectDoctorPhoto(SqlSessionTemplate sqlSession, int hospitalNo);
+	String selectHospitalInfoPhoto(SqlSessionTemplate sqlSession, int hospitalInfoNum);
+	String selectHospitalLicense(SqlSessionTemplate sqlSession, int hospitalNum);
+	
+	/* 병원정보 */
+	int hospitalInfoinsert(SqlSessionTemplate sqlSession, HospitalInfos hospitalInfo);
+	HospitalInfos selectHospitalInfo(SqlSessionTemplate sqlSession, int hospitalNum);
+	int loadHospitalInfo(SqlSessionTemplate sqlSession, int hospitalNum);
+	int updateHospitalInfo(SqlSessionTemplate sqlSession, HospitalInfos hospitalInfo);
+	
+	/* 의사정보 */
+	List<DoctorInfos> selectDoctorInfo(SqlSessionTemplate sqlSession, int hospitalNum);
+	int doctorInfoInsert(SqlSessionTemplate sqlSession, DoctorInfos doctorInfo);
+	DoctorInfos selectDoctorsPhoto(SqlSessionTemplate sqlSession, int doctorNum);
+	int updateDoctorInfo(SqlSessionTemplate sqlSession, DoctorInfos doctorInfo);
+	String DoctorsProfessional(SqlSessionTemplate sqlSession, int doctorNum);
+	String hospitalNameDoctorNum(SqlSessionTemplate sqlSession, int doctorNum);
+	
 }

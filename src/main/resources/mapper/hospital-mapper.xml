@@ -2,6 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="hospital">
 
+	<resultMap type="doctorInfos" id="doctorInfosMap">
+		<result column="professional" property="professional" typeHandler="StringArray"/>
+	</resultMap>
+	
+	<resultMap type="hospital" id="hospitalMap">
+		<result column="hospitalprofessional" property="hospitalProfessional" typeHandler="StringArray" />
+	</resultMap>
+
 	<select id="checkId" parameterType="string" resultType="_int">
 		select count(*) from hospital where hospitalId=#{hospitalId}
 	</select>
@@ -20,7 +28,7 @@
 			sysdate,
 			#{hospitalLike},
 			0,
-			#{hospitalProfessional}
+			#{hospitalProfessional, typeHandler=StringArray}
 		)
 	</insert>
 	
@@ -46,5 +54,159 @@
 
 	<select id="hoscnt" resultType="_int">
 		select count(*) from hospital where hospitalAdmission=0
+	</select>
+	
+	<select id="EmailCheck" parameterType="string" resultType="_int">
+		select count(*) from hospital where hospitalEmail=#{hospitalEmail}
+	</select>
+	
+	<select id="hospitalNameinput" parameterType="_int" resultType="string">
+		select hospitalName from hospital where hospitalNum=#{hospitalNum}
+	</select>
+	
+	<select id="selectHospital" parameterType="_int" resultType="hospital">
+		select * from hospital where hospitalNum=#{hospitalNum}
+	</select>
+	
+	<update id="hospitalUpdate" parameterType="hospital">
+		update hospital set
+			hospitalName=#{hospitalName},
+			hospitalTel=#{hospitalTel},
+			hospitalLicense=#{hospitalLicense},
+			hospitalReLicense=#{hospitalReLicense},
+			hospitalAddr=#{hospitalAddr}
+		where hospitalNum=#{hospitalNum}
+	</update>
+	
+	<insert id="hospitalInfoinsert" parameterType="hospitalInfos">
+		INSERT INTO HOSPITALINFO values(
+			#{hospitalInfoNum},
+			#{hospitalInfoIntro},
+			#{hospitalInfoNotice},
+			#{hospitalPhoto},
+			#{hospitalRePhoto},
+			#{hospitalInfoUsetime},
+			#{hospitalInfoLunchtime}
+		)
+	</insert>
+	
+	<select id="selectHospitalInfo" parameterType="_int" resultType="hospitalInfos">
+		select * from hospitalInfo where hospitalInfoNum=#{hospitalNum}
+	</select>
+	
+	<select id="loadHospitalInfo" parameterType="_int" resultType="_int">
+		select count(*) from hospitalInfo where hospitalInfoNum=#{hospitalNum}
+	</select>
+	
+	<update id="updateHospitalInfo" parameterType="hospitalInfos">
+		update hospitalInfo set 
+			hospitalInfoIntro=#{hospitalInfoIntro},
+			hospitalInfoNotice=#{hospitalInfoNotice},
+			hospitalPhoto=#{hospitalPhoto},
+			hospitalRePhoto=#{hospitalRePhoto},
+			hospitalInfoUsetime=#{hospitalInfoUsetime},
+			hospitalInfoLunchtime=#{hospitalInfoLunchtime}
+		where hospitalInfoNum=#{hospitalInfoNum}
+	</update>
+	
+	<select id="selectDoctorInfo" parameterType="_int" resultType="doctorInfos">
+		select * from doctorInfo where hospitalNo=#{hospitalNum}
+	</select>
+	
+	<insert id="doctorinfoinsert" parameterType="doctorInfos">
+		insert into doctorInfo values(
+			doctorinfo_seq.nextval,
+			#{doctorName},
+			#{doctorCareer},
+			#{hospitalNo},
+			#{professional, typeHandler=StringArray},
+			#{doctorSlunch},
+			#{doctorElunch},
+			#{weekdayStime},
+			#{weekdayEtime},
+			#{satStime},
+			#{satEtime},
+			#{closed},
+			#{specialized},
+			#{doctorPhoto},
+			#{doctorRePhoto},
+			#{timeInterval}
+		)
+	</insert>
+	
+	<select id="selectDoctorsPhoto" parameterType="_int" resultType="doctorInfos">
+		select * from doctorInfo where doctorNum=#{doctorNum}
+	</select>
+	
+	<select id="DoctorsProfessional" parameterType="_int" resultType="string">
+		select professional from doctorInfo where doctorNum=#{doctorNum}
+	</select>
+	
+	<update id="updateDoctorInfo" parameterType="doctorInfos">
+		update doctorInfo set
+			doctorCareer=#{doctorCareer},
+			professional=#{professional, typeHandler=StringArray},
+			doctorSlunch=#{doctorSlunch},
+			doctorElunch=#{doctorElunch},
+			weekdayStime=#{weekdayStime},
+			weekdayEtime=#{weekdayEtime},
+			satStime=#{satStime},
+			satEtime=#{satEtime},
+			closed=#{closed},
+			specialized=#{specialized},
+			doctorPhoto=#{doctorPhoto},
+			doctorRePhoto=#{doctorRePhoto},
+			timeInterval=#{timeInterval}
+		where doctorNum=#{doctorNum}
+	</update>
+	
+	<select id="HospitalFindId" parameterType="hospital" resultType="string">
+		select rpad(substr(hospitalId,1,4),length(hospitalId),'*') from hospital where hospitalName=#{hospitalName} and hospitalEmail=#{hospitalEmail}
+	</select>
+	
+	<select id="searchHospitalName" parameterType="string" resultType="hospital">
+		select * from hospital where hospitalName=#{hospitalName}
+	</select>
+	
+	<select id="hospitalNameDoctorNum" parameterType="_int" resultType="string">
+		select hospitalName from hospital where hospitalNum=(select hospitalNo from doctorInfo where doctorNum=#{doctorNum})
+	</select>
+	
+	<select id="selectFindHospital" parameterType="string" resultType="hospital">
+		select * from hospital where hospitalId=#{hospitalId}
+	</select>
+	
+	<select id="selectHospitalProfessional" parameterType="string" resultType="string">
+		select hospitalProfessional from hospital where hospitalId=#{user_id}
+	</select>
+	
+	<delete id="deleteDoctors" parameterType="_int">
+		delete from doctorInfo where hospitalNo=#{hospitalNo}
+	</delete>
+	
+	<delete id="deleteHospitalInfo" parameterType="_int">
+		delete from hospitalInfo where hospitalInfoNum=#{hospitalInfoNum}
+	</delete>
+	
+	<update id="updateHospital" parameterType="_int">
+		update hospital set
+			hospitalId='회원 탈퇴',
+			hospitalName='회원 탈퇴',
+			hospitalEmail='회원 탈퇴',
+			hospitalAddr='회원 탈퇴',
+			hospitalProfessional='회원 탈퇴'
+		where hospitalNum=#{hospitalNum}
+	</update>
+	
+	<select id="selectDoctorPhoto" parameterType="_int" resultType="string">
+		select doctorRePhoto from doctorInfo where doctorNum=#{doctorNum}
+	</select>
+	
+	<select id="selectHospitalInfoPhoto" parameterType="_int" resultType="string">
+		select hospitalRePhoto from hospitalInfo where hospitalInfoNum=#{hospitalInfoNum}
+	</select>
+	
+	<select id="selectHospitalLicense" parameterType="_int" resultType="string">
+		select hospitalReLicense from hospital where hospitalNum=#{hospitalNum}
 	</select>
 </mapper>

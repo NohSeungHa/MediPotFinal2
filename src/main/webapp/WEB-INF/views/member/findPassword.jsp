@@ -5,7 +5,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <jsp:include page="/WEB-INF/views/common/header.jsp">
-	<jsp:param value="아이디찾기" name="pageTitle"/>
+	<jsp:param value="비밀번호찾기" name="pageTitle"/>
 </jsp:include>
 
 <style>
@@ -23,14 +23,18 @@
 	.findid table{
 		font-size: 1.2em;
 	}
-	
+	.center{
+		text-align: center;
+	}
 </style>
 
 <div style="height: 200px"></div>
 
 
 <div class="findid">
-	<br><br><br><br>
+	<br>
+	<h2 class="center">비밀번호 찾기</h2>
+	<br><br><br>
 	<form action="${pageContext.request.contextPath }/member/memberFindPw.do">
 	<table style="margin: 0 auto;">
 	<tr>
@@ -61,7 +65,7 @@
 		<td> </td>
 		<td> <b>이메일</b> </td>
 		<td> &nbsp;:&nbsp; </td>
-		<td> <input class="form-control" type="email" placeholder="abc@xyz.com" maxlength="50" id="findemail" name="findemail"> </td>
+		<td> <input class="form-control" type="email" placeholder="abc@xyz.com" maxlength="50" id="UserEmail" name="UserEmail"> </td>
 		<td style="width: 100px"> </td>
 	</tr>	
 	<tr>
@@ -100,8 +104,8 @@
 <div style="height: 200px"></div>
 <script>
 	// 이메일 유효성검사
-	$("#findemail").blur(function(){
-		var email = $('#findemail').val();
+	$("#UserEmail").blur(function(){
+		var email = $('#UserEmail').val();
 		if(email.length!=0) {
 			if(email.match(/([@])/)){
 				if($('#successEmail').css("display")=='none'){
@@ -112,20 +116,21 @@
 			}
 			else if(email.match(/([!,#,$,%,^,&,*,?,~,-])/)) {
 				alert("온전하지 못한 이메일입니다. ('@'를 제외한 특수문자가 존재합니다.)");
-				$("#findemail").val("");
-                $("#findemail").focus();
+				$("#UserEmail").val("");
+                $("#UserEmail").focus();
                 return false;
 			}
 			else {
 				alert("온전하지 못한 이메일입니다. 다시 한 번 입력해주세요.");
-				$("#findemail").val("");
-                $("#findemail").focus();
+				$("#UserEmail").val("");
+                $("#UserEmail").focus();
                 return false;
 			}
 		}
+		return true;
 		$.ajax({
 			url:"${pageContext.request.contextPath}/member/findCheckEmail.do?PnH="+$('#findP').val(),
-			data:{memberEmail:$('#findemail').val()},
+			data:{memberEmail:$('#UserEmail').val()},
 			success:function(data){
 				if(email.length > 0){
 					if(data == 'true'){
@@ -138,8 +143,8 @@
 						return true;
 					} else{
 						alert("등록되지 않은 이메일입니다.");
-						$("#findemail").val("");
-		                $("#findemail").focus();
+						$("#UserEmail").val("");
+		                $("#UserEmail").focus();
 		                return false;
 					}
 				}
@@ -174,8 +179,8 @@
 	});
 	
 	function emailAuther(){
-		var nowemail = $('#findemail').val();
-		var url="${pageContext.request.contextPath }/member/FindemailEnd.do?memberEmail="+nowemail;
+		var nowemail = $('#UserEmail').val();
+		var url="${pageContext.request.contextPath }/member/emailEnd.do?memberEmail="+nowemail;
 		var title="emailAuther";
 		var status="left=500px, top=100px, width=600px, height=200px";
 		var popup=window.open(url,title,status);
