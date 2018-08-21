@@ -92,7 +92,7 @@
 	</c:if>
   	<br>
   	<!-- 댓글  -->
-  	<h2>댓글</h2>
+  	<h2 id="commentMain">댓글</h2>
   
   <div id="cc2s" class="modal-body" >
   <c:if test="${not empty cc2}">
@@ -242,6 +242,15 @@
 	   	})
 	   	
 	});
+	
+	var flag=${flag};
+    if(flag!=0){
+       $(function(){
+          $('html, body').animate({
+             scrollTop: $('#commentMain').offset().top
+             }, 'slow');
+          });   
+    }
 </script>
 <!-- 게시글 삭제 modal -->
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -281,7 +290,7 @@
 								function deleteCommentNum(num){
 									var no=num;
 									$('#commentNum').val(no);
-								};
+								}
 							</script>
 							<input type="hidden" id="no2" name="no2" value="${com.communityNum}"/>
 							<input type="hidden" id="cp2" name="cp2" value="${cp}"/>

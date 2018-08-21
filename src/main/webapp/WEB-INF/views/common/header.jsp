@@ -123,9 +123,20 @@
 						<c:if test="${checkPH=='H' }">
 							<li><a href="${path}/notice/noticeList.do?checkPH=${checkPH}">공지사항</a></li>
 						</c:if>
+						<c:if test="${empty checkPH}">
 							<li><a href="${path}/notice/noticeList.do?checkPH=P" id="bemember" style="display: block">공지사항</a></li>
+						</c:if>
 							<li><a href="${path}/community/communityList.do">자유게시판</a></li>
-							<li><a href="${path}">FAQ</a></li>
+							<li><a href="${path}/PageFAQ/PageFAQ.do">FAQ</a></li>
+						<c:if test="${empty checkPH}">
+							<li><a href="${path}/Inquiry/InquiryList.do">1:1 문의</a></li>
+						</c:if>
+						<c:if test="${checkPH=='P' }">
+							<li><a href="${path}/Inquiry/InquiryList.do?checkPH=${checkPH}&id=${memberLoggedIn.memberId}">1:1 문의</a></li>
+						</c:if>
+						<c:if test="${checkPH=='H' }">
+							<li><a href="${path}/Inquiry/InquiryList.do?checkPH=${checkPH}&id=${memberLoggedIn.hospitalId}">1:1 문의</a></li>
+						</c:if>
 						</ul>
 					</li>
 						<li><a href="${path}/helpZone/helpZoneList.do">HELP ZONE</a></li>

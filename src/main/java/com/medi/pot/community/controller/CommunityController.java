@@ -173,12 +173,20 @@ public class CommunityController {
 	
 	//자유게시판 view
 	@RequestMapping("/community/communityView.do")
-	public String communityView(int no,Model model,HttpServletResponse response, HttpServletRequest request,int cp,String searchKind,String searchContent,@RequestParam(value="cPage",required=false,defaultValue="1") int cPage) {
+	public String communityView(int no,Model model,HttpServletResponse response, HttpServletRequest request,int cp,String searchKind,String searchContent,@RequestParam(value="cPage",required=false,defaultValue="0") int cPage) {
 		//조회수 증가
 		Cookie[] cookie=request.getCookies();
 		String communityCookieVal="";
 		boolean hasRead=false;
-
+		if(cPage==0)
+	      {
+			model.addAttribute("flag","0");
+			cPage=1;         
+	      }
+	      else {
+	    	  model.addAttribute("flag","1");
+	      }
+		
 		if(cookie!=null) { 
 			outter:  
 				for(Cookie c : cookie) {
@@ -428,7 +436,6 @@ public class CommunityController {
 	@ResponseBody
 	public ModelAndView communityInsert(String writer,
 			String comment,
-			String checkPH,
 			String communityNum,
 			int cp,
 			String check,
@@ -455,8 +462,8 @@ public class CommunityController {
 		mv.addObject("pageBar", pageBar);
 		mv.addObject("cPage", cPage);
 		mv.addObject("totalCount", totalCount);
-		mv.addObject("no2", Integer.parseInt(communityNum));
-		mv.addObject("cp2",cp);
+		mv.addObject("no", Integer.parseInt(communityNum));
+		mv.addObject("cp",cp);
 		mv.setViewName("community/CommunityCommentLoad");
 	
 		return mv;
@@ -482,7 +489,13 @@ public class CommunityController {
 		mv.addObject("msg",msg);
 		mv.addObject("loc", "/community/communityView.do?no="+no2+"&cp="+cp2);
 		mv.setViewName("common/msg");
-		
+		mv.addObject("parkjh", "stupid");
 		return mv;
+	}
+	
+	//자주 묻는 질문 FAQ
+	@RequestMapping("/PageFAQ/PageFAQ.do")
+	public String PageFAQ() {
+		return "community/pageFAQ";
 	}
 }
