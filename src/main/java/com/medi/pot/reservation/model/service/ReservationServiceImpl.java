@@ -140,6 +140,12 @@ public class ReservationServiceImpl implements ReservationService {
 	public List<HospitalInfo> selectHosList() {
 		return reserDAO.selectHosList();
 	}
+
+	@Override
+	public List<HospitalInfo> selectAll() {
+		return reserDAO.selectAll();
+	}
+	
 	
 	
 	

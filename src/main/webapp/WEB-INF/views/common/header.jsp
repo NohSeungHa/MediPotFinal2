@@ -50,7 +50,7 @@
 			</div>
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<!-- 검색창 만들기 -->
-				<form class="navbar-form navbar-left" action="${path }/medi/searchMedi" style="margin-top: 2%;margin-left:5%;">
+				<form class="navbar-form navbar-left" action="${path }/medi/searchMedi" style="margin-top: 2.5%;margin-left:5%;">
 					<input type="text" name="hName" class="form-control" placeholder="병원이름 검색">
 					<button type="submit" class="btn btn-default">검색</button>
 				</form>
@@ -145,7 +145,7 @@
 
 				<!-- 드롭다운 메뉴 -->
 				<ul class="nav navbar-nav navbar-right" style="font-size:35px;margin-top:2.0%;margin-right:2%;">
-					<li><a style="margin-right:300px;"><span style="font-size:20px;">병원 전체 보기</span></a></li>
+					<li><a href="${path}/medi/mediAll" style="margin-right:397px;"><span style="font-size:20px;">병원 전체 보기</span></a></li>
 					<li><a href="${path}/medi/medireser.do">병원예약</a></li>
 					<!-- 드랍다운 메뉴 만들기 기본 셋팅-->
 					<li class="dropdown">

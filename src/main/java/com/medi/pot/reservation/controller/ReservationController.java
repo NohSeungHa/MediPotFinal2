@@ -476,8 +476,15 @@ public class ReservationController {
 			list=null;
 		}
 		req.setAttribute("list", list);
-		System.out.println("list : "+list);
 		return "index";
+	}
+	
+	@RequestMapping("/medi/mediAll")
+	public String mediAll(HttpServletRequest req) {
+		List<HospitalInfo> list=service.selectAll();
+		System.out.println("list 확인 : "+list);
+		req.setAttribute("list", list);
+		return "medi_reservation/allMediList";
 	}
 
 

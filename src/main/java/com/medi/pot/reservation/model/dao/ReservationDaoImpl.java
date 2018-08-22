@@ -145,6 +145,11 @@ public class ReservationDaoImpl implements ReservationDao {
 	public List<HospitalInfo> selectHosList() {
 		return session.selectList("reser.selectHos");
 	}
+
+	@Override
+	public List<HospitalInfo> selectAll() {
+		return session.selectList("reser.selectAll");
+	}
 	
 	
 	

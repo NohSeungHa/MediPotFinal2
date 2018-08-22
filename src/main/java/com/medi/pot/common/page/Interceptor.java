@@ -1,6 +1,5 @@
 package com.medi.pot.common.page;
 
-import static org.hamcrest.CoreMatchers.instanceOf;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
