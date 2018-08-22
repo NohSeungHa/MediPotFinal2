@@ -81,8 +81,8 @@
 		)
 	</update>
 	
-	<select id="commentchoice" parameterType="_int" resultType="_int">
-		select hzCommentChoice from HelpZoneCommentHospital where hzNumH=#{helpZoneNum} and hzCommentChoice=1
+	<select id="commentchoice" parameterType="_int" resultType="HelpZoneCommentHospital">
+		select * from HelpZoneCommentHospital where hzNumH=#{helpZoneNum} and hzCommentChoice=1
 	</select>
 	
 	<delete id="deleteHelpZoneCommentM" parameterType="HelpZoneCommentMember">

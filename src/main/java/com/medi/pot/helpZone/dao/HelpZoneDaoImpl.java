@@ -102,7 +102,7 @@ public class HelpZoneDaoImpl implements HelpZoneDao {
 	}
 
 	@Override
-	public int commentchoice(int helpZoneNum) {
+	public HelpZoneCommentHospital commentchoice(int helpZoneNum) {
 		return session.selectOne("helpZone.commentchoice", helpZoneNum);
 	}
 

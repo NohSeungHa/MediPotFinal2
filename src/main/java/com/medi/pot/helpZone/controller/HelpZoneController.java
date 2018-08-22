@@ -117,10 +117,26 @@ public class HelpZoneController {
 	@RequestMapping("/helpZone/helpZoneView.do")
 	public String helpZoneView(HttpServletRequest req,
 			@RequestParam(value="no",required=false,defaultValue="1") int no, 
-			@RequestParam(value="cPageMem",required=false,defaultValue="1") int cPageMem,
-			@RequestParam(value="cPageHos",required=false,defaultValue="1") int cPageHos){
+			@RequestParam(value="cPageMem",required=false,defaultValue="0") int cPageMem,
+			@RequestParam(value="cPageHos",required=false,defaultValue="0") int cPageHos){
 		HelpZone helpZone = service.selectHelpZone(no);//헬프존 불러오는 메서드
 		Member m = service.selectMember(helpZone.getHelpZoneQuestioner());	//작성자 불러오는 메서드
+		
+		if(cPageMem==0) {
+	        req.setAttribute("flagM","0");
+	        cPageMem=1;         
+        }
+        else {
+           req.setAttribute("flagM","1");
+        }
+		
+		if(cPageHos==0) {
+	        req.setAttribute("flagH","0");
+	        cPageHos=1;         
+        }
+        else {
+           req.setAttribute("flagH","1");
+        }
 		
 		//댓글 불러오는 메소드
 		int numPerPage=10;
@@ -132,17 +148,19 @@ public class HelpZoneController {
 		String pageBarM = new PageCreate().getPageBarCommentM2(cPageMem, numPerPage, totalCountM, "helpZoneView.do", no);
 		String pageBarH = new PageCreate().getPageBarCommentH2(cPageHos, numPerPage, totalCountH, "helpZoneView.do", no);
 		boolean checkchoice = false;
-		if(hzHospital2.size() > 1) {
-			int choicecomment = service.commentchoice(helpZone.getHelpZoneNum());
-			if(choicecomment == 1) {
-				checkchoice=true;
-			}
-		}		
+		HelpZoneCommentHospital helpZoneCommentHospital = new HelpZoneCommentHospital();
+		
+		if(hzHospital2.size() > 0) {
+			helpZoneCommentHospital = service.commentchoice(helpZone.getHelpZoneNum());
+			System.out.println(helpZoneCommentHospital.getHzCommentWriterNumH());
+			checkchoice=true;				
+		}
 		
 		req.setAttribute("no", no);
 		req.setAttribute("helpZone", helpZone);
 		req.setAttribute("helpZoneQuestioner", m);
 		req.setAttribute("checkchoice", checkchoice);
+		req.setAttribute("choiceWriter", helpZoneCommentHospital);
 		req.setAttribute("pageBarM", pageBarM);
 		req.setAttribute("pageBarH", pageBarH);
 		req.setAttribute("cPageMem", cPageMem);
@@ -299,16 +317,17 @@ public class HelpZoneController {
 			String pageBarH = new PageCreate().getPageBarCommentH2(cPageHos, numPerPage, totalCountH, "helpZoneView,do", helpZoneNum);
 			
 			boolean checkchoice = false;
-			if(hzHospital2.size() > 1) {
-				int choicecomment = service.commentchoice(helpZoneNum);
-				if(choicecomment == 1) {
-					checkchoice=true;
-				}
+			HelpZoneCommentHospital helpZoneCommentHospital = new HelpZoneCommentHospital();
+			if(hzHospital2.size() > 0) {
+				helpZoneCommentHospital = service.commentchoice(helpZoneNum);
+				System.out.println(helpZoneCommentHospital.getHzCommentWriterNumH());
+				checkchoice=true;
 			}	
-			
+	
 			mv.addObject("hzMember2",hzMember2);
 			mv.addObject("hzHospital2", hzHospital2);
 			mv.addObject("checkchoice", checkchoice);
+			mv.addObject("choiceWriter", helpZoneCommentHospital);
 			mv.addObject("pageBarM", pageBarM);
 			mv.addObject("pageBarH", pageBarH);
 			mv.addObject("cPageMem",cPageMem);
@@ -321,7 +340,8 @@ public class HelpZoneController {
 	@RequestMapping("/helpZone/helpZoneChoice.do")
 	public String helpZoneChoice(int hzCommentNumH, int hzNumH, Model model) {
 		String msg = "";
-		String loc = "";
+		String loc = "/helpZone/helpZoneView.do?no="+hzNumH;
+		boolean checkchoice = false;
 		
 		HelpZoneCommentHospital helpZoneCommentHospital = new HelpZoneCommentHospital();
 		helpZoneCommentHospital.setHzCommentNumH(hzCommentNumH);
@@ -330,6 +350,7 @@ public class HelpZoneController {
 		
 		if(result > 0) {
 			msg = "채택되었습니다.";
+			checkchoice = true;
 			service.hospitalAddLike(helpZoneCommentHospital);
 		} else {
 			msg = "채택 중 오류가 발생했습니다.";
@@ -337,14 +358,15 @@ public class HelpZoneController {
 		
 		model.addAttribute("msg", msg);
 		model.addAttribute("loc", loc);
+		model.addAttribute("checkchoice", checkchoice);
 		
 		return "common/msg";
 	}
 	
-	@RequestMapping("/helpZone/deleteHelpZoneComment")
+	@RequestMapping("/helpZone/deleteHelpZoneComment.do")
 	public String deleteHelpZoneComment(int hzCommentNum, int hzNum, String checkPH, Model model) {
 		String msg = "";
-		String loc = "";
+		String loc = "/helpZone/helpZoneView.do?no="+hzNum;
 		int result = 0;
 		HelpZoneCommentMember helpZoneCommentMember = new HelpZoneCommentMember();
 		HelpZoneCommentHospital helpZoneCommentHospital = new HelpZoneCommentHospital();

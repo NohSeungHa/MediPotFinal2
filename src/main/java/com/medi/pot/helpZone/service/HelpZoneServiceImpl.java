@@ -99,7 +99,7 @@ public class HelpZoneServiceImpl implements HelpZoneService {
 	}
 
 	@Override
-	public int commentchoice(int helpZoneNum) {
+	public HelpZoneCommentHospital commentchoice(int helpZoneNum) {
 		return helpZoneDao.commentchoice(helpZoneNum);
 	}
 
