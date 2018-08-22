@@ -152,7 +152,6 @@ public class HelpZoneController {
 		
 		if(hzHospital2.size() > 0) {
 			helpZoneCommentHospital = service.commentchoice(helpZone.getHelpZoneNum());
-			System.out.println(helpZoneCommentHospital.getHzCommentWriterNumH());
 			checkchoice=true;				
 		}
 		
@@ -276,7 +275,7 @@ public class HelpZoneController {
 	@RequestMapping("/helpZone/insertHelpZoneComment.do")
 	@ResponseBody
 	public ModelAndView helpZoneCommentInsert(
-			int writer,
+			@RequestParam(value = "writer")String writer,
 			String comment,
 			int helpZoneNum,
 			String checkPH,
@@ -292,14 +291,14 @@ public class HelpZoneController {
 		int totalCountM = 0;
 		int totalCountH = 0;
 			if(checkPH.trim().equals("P")) {
-				hzMember.setHzCommentWriterNumM(writer);
+				hzMember.setHzCommentWriterNumM(Integer.parseInt(writer));
 				hzMember.setHzCommentContentM(comment);
 				hzMember.setHzNumM(helpZoneNum);
 				service.insertCommentMember(hzMember);
 				
 			}
 			else if(checkPH.trim().equals("H")) {
-				hzHospital.setHzCommentWriterNumH(writer);
+				hzHospital.setHzCommentWriterNumH(Integer.parseInt(writer));
 				hzHospital.setHzCommentContentH(comment);
 				hzHospital.setHzNumH(helpZoneNum);
 				service.insertCommentHospital(hzHospital);
@@ -320,7 +319,6 @@ public class HelpZoneController {
 			HelpZoneCommentHospital helpZoneCommentHospital = new HelpZoneCommentHospital();
 			if(hzHospital2.size() > 0) {
 				helpZoneCommentHospital = service.commentchoice(helpZoneNum);
-				System.out.println(helpZoneCommentHospital.getHzCommentWriterNumH());
 				checkchoice=true;
 			}	
 	

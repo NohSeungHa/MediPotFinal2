@@ -81,10 +81,12 @@
 							rows="5" id="helpZoneContent" name="helpZoneContent" readonly>${helpZone.helpZoneContent }</textarea>							
 					</td>
 				</tr>
+					<c:if test="${helpZone.helpZoneReFile!=null }">
 				<tr><!-- 첨부사진 올려주기 -->
 					<th>첨부사진:</th>
 					<td><img id="imghover" src="${path}/resources/uploadfile/helpZone/${helpZone.helpZoneReFile}" style="width: 300px; height: 200px"></td>
 				</tr>
+					</c:if>
 			</tbody>
 		</table>		
 		
