@@ -743,7 +743,6 @@
 			});
 		});
 		$('.docInfo-div').click(function () {
-			alert('들어가기전');
 			location.href='${path}/medi/doctorS?docNum='+$(this).attr('title')+'&hosNum='+$(this).attr('lang');
 		});
 		

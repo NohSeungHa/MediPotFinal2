@@ -241,7 +241,6 @@
     	}
 	</style>
 	<script>
-		alert('<%=checkTi%>');
 		var choiceTime='';
 		$('.timebut').click(function () {
 			if($(this).css('background-color')=='rgb(40, 96, 144)'){
@@ -259,7 +258,6 @@
 			if(choiceTime.length<1){
 				alert("시간을 선택해 주세요");
 			}else{
-				alert('<%=time2%>');
 				location.href='${path}/medi/insertBlock?docNum=<%=docTime.getDoctorNum()%>&hosNum=<%=docTime.getHospitalNo()%>&time=<%=time2%>&choiceTime='+choiceTime;
 			}
 		});

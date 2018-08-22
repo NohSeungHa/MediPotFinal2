@@ -153,7 +153,6 @@
     	}
 	</style>
 	<script>
-		alert('<%=checkTi%>');
 		var choiceTime='';
 		$('.timebut').click(function () {
 			if($(this).css('background-color')=='rgb(40, 96, 144)'){

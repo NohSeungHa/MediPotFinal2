@@ -736,7 +736,6 @@
 		var docNum=${doctor.doctorNum }
 		$('.calb').click(function () {
 			var hos=${doctor.hospitalNo }
-			alert('${doctor.hospitalNo}');
 			$('.calb').css('background-color','white');
 			$('.calb').css('color','black');
 			$(this).css('background-color','#286090');
@@ -754,7 +753,6 @@
 			});
 		});
 		$('.docInfo-div').click(function () {
-			alert('들어가기전');
 			location.href='${path}/medi/doctorS2?docNum='+$(this).attr('title')+'&hosNum='+$(this).attr('lang');
 		});
 		
@@ -771,7 +769,6 @@
 		
 	}
 	$('.blockD').click(function () {
-		alert($(this).val());
 		if(confirm('날짜 제외를 취소 하시겠습니까?')){
 			<%if(docInfo!=null){%>
 			location.href='${path}/medi/deleteDateCan?docNum=<%=docInfo.getDoctorNum()%>&hosNum=<%=docInfo.getHospitalNo()%>&blockD='+$(this).val();
