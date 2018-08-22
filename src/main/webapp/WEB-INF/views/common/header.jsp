@@ -55,7 +55,7 @@
 					<button type="submit" class="btn btn-default">검색</button>
 				</form>
 				<!-- 검색창만들기 끝 -->
-
+				
 
 				<!-- 로그인 전 -->
 				<c:if test="${memberLoggedIn==null }">
@@ -144,7 +144,8 @@
 
 
 				<!-- 드롭다운 메뉴 -->
-				<ul class="nav navbar-nav navbar-right" style="font-size:35px;margin-top:2.5%;margin-right:2%;">
+				<ul class="nav navbar-nav navbar-right" style="font-size:35px;margin-top:2.0%;margin-right:2%;">
+					<li><a style="margin-right:300px;"><span style="font-size:20px;">병원 전체 보기</span></a></li>
 					<li><a href="${path}/medi/medireser.do">병원예약</a></li>
 					<!-- 드랍다운 메뉴 만들기 기본 셋팅-->
 					<li class="dropdown">
