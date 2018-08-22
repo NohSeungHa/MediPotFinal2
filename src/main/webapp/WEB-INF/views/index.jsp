@@ -278,7 +278,7 @@ to {
 				</tr>
 			<c:forEach var="list" items="${list }" varStatus="s" end="2">
 				<tr>
-					<td><img src="${path}/resources/img/common/${s.count }st.jpg" width="60px;" height="60px;"></td>
+					<td><img src="${path}/resources/img/common/${s.count }lank.png" width="60px;" height="60px;"></td>
 					<td><a href="${path}/medi/mediInfo?no=${list.hospitalNum}">${list.hospitalName }</a></td>
 					<td>${list.hospitalProfessional }</td>
 				</tr>
