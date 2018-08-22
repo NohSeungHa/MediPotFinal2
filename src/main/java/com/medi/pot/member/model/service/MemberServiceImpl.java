@@ -350,6 +350,41 @@ public class MemberServiceImpl implements MemberService {
 		return dao.selectHospitalLicense(sqlSession, hospitalNum);
 		
 	}
+
+	@Override
+	public int deleteNoticeComment(int commentNo) {
+		
+		return dao.deleteNoticeComment(sqlSession, commentNo);
+		
+	}
+
+	@Override
+	public List<String> selectNoticePhoto(String memberId) {
+		
+		return dao.selectNoticePhoto(sqlSession, memberId);
+		
+	}
+
+	@Override
+	public int deleteNotice(String memberId) {
+		
+		return dao.deleteNotice(sqlSession, memberId);
+		
+	}
+
+	@Override
+	public int deleteInquiry(String memberId) {
+		
+		return dao.deleteInquiry(sqlSession, memberId);
+		
+	}
+
+	@Override
+	public List<Integer> selectNoticeNums(String memberId) {
+		
+		return dao.selectNoticeNums(sqlSession, memberId);
+		
+	}
 	
 	
 }

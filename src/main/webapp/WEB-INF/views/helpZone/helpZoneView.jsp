@@ -235,7 +235,7 @@ function deleteCommentNum(num){
 
 $(function(){
 	var checkPH = $('#checkPH').val();
-	if(checkPH=='P'){
+	if(checkPH=='P' || checkPH==null ){
 		$('#commentM').addClass('active');
 		$('#member').addClass('in active');
 	}

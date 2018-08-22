@@ -518,8 +518,23 @@ public class MemberController {
 		Member m = service.selectMember(memberId);
 		if(m != null) {
 			if(bcrypt.matches(memberPw, m.getMemberPw())) {
-				msg = "삭제 성공";
-				int result = service.deleteMember(m.getMemberNum());
+				msg = "회원 삭제 성공";
+				// 자유게시판 댓글 삭제 후 게시글 삭제
+				List<Integer> noticeNum = service.selectNoticeNums(memberId);
+				List<String> noticeStr = service.selectNoticePhoto(memberId); // 게시물 안 사진파일 이름 받기
+				for(int j = 0; j < noticeNum.size(); j++) {
+					service.deleteNoticeComment(noticeNum.get(j)); // 댓글 삭제					
+				}
+				service.deleteNotice(memberId); // 게시물 삭제
+				// 게시글 삭제 중 파일이 있으면 파일도 삭제
+				for(int i = 0; i < noticeStr.size(); i++) {
+					File deleteNotice = new File("C:\\Medipot_Git\\MediPotFinal2\\src\\main\\webapp\\resources\\uploadfile\\notice\\"+noticeStr.get(i));
+					deleteNotice.delete();
+				}
+				// 1:1문의 삭제
+				service.deleteInquiry(memberId);
+				// 회원 탈퇴
+				service.deleteMember(m.getMemberNum());
 				sessionStatus.setComplete();
 			}
 		}
@@ -615,6 +630,10 @@ public class MemberController {
 		if(h != null) {
 			if(bcrypt.matches(hospitalPw, h.getHospitalPw())) {
 				msg = "삭제 성공";
+				
+				// 예약 예외처리 부터 지우기
+				// 예약 회원 지우기
+				
 				String deleteStr1 = service.selectDoctorPhoto(h.getHospitalNum()); // 의사 사진 삭제
 				service.deleteDoctors(h.getHospitalNum());
 				File deleteFile = new File("C:\\Medipot_Git\\MediPotFinal2\\src\\main\\webapp\\resources\\uploadfile\\dortors\\"+deleteStr1);
@@ -847,13 +866,13 @@ public class MemberController {
 	
 	/* 비밀번호를 찾음 */
 	@RequestMapping("/member/memberFindPw.do")
-	public String memberFindPw(String findid, String findemail, Model model) {
+	public String memberFindPw(String findid, String UserEmail, Model model) {
 		System.out.println("비밀번호를 찾음");
 		String view="";
 		System.out.println("아이디는?? " + findid);
 		Member m = service.searchID(findid);
 		
-		if(m.getMemberEmail().equals(findemail)) {
+		if(m.getMemberEmail().equals(UserEmail)) {
 			System.out.println("회원정보가 일치");
 			view = "member/findPasswordprint";
 			model.addAttribute("findid",findid);
@@ -885,7 +904,7 @@ public class MemberController {
 		int result = service.MemberUpdate(m);
 		
 		if(result>0) {
-			msg = "이제 로그인 하시면 됩니다.";
+			msg = "비밀번호가 변경되었습니다. 변경된 비밀번호로 로그인을 하시면 됩니다.";
 		}
 		else {
 			msg = "새로운 비밀번호를 받는 도중에 오류가 발생했습니다.";

@@ -20,7 +20,7 @@ public interface MemberService {
 	int checkEmail(String memberEmail); // 일반회원
 	int checkHospitalEmail(String HospitalEmail); // 병원회원
 	
-	/*일반회원*/
+	/* 일반회원 */
 	Member loginMemberCheck(String memberId);
 	int insertMember(Member m);
 	int memberPageUpdate(Member m);
@@ -28,7 +28,14 @@ public interface MemberService {
 	int memberPwUpdate(Map<String, String> idpw);
 	List<Member> selectMemberList(int cPage, int numPerPage);
 	int selectCount();
+	
+	/* 일반회원 탈퇴 */
+	List<Integer> selectNoticeNums(String memberId);
 	int deleteMember(int memberNum);
+	int deleteNoticeComment(int commentNo);
+	List<String> selectNoticePhoto(String memberId);
+	int deleteNotice(String memberId);
+	int deleteInquiry(String memberId);
 	
 	/* 아이디찾기 */
 	int FindMemEmailCheck(String memberEmail);
@@ -55,6 +62,8 @@ public interface MemberService {
 	String selectHospitalProfessional(String user_id);
 	int hospitalUpdate(Hospital hospital);
 	Hospital selectFindHospital(String hospitalId);
+	
+	/* 병원회원 탈퇴 */
 	int deleteDoctors(int hospitalNo);
 	int deleteHospitalInfo(int hospitalInfoNum);
 	int updateHospital(int hospitalNum);

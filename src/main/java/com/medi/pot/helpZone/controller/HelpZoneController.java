@@ -40,16 +40,6 @@ public class HelpZoneController {
 		int numPerPage=6;		
 		List<HelpZone> list = service.selectHelpZoneList(cPage,numPerPage);
 		
-		int totalCountM = 0;
-		int totalCountH = 0;
-		for(int i = 0; i < list.size(); i++) {
-			totalCountM = service.helpZoneCommentCountM(list.get(i).getHelpZoneNum());
-			totalCountH = service.helpZoneCommentCountH(list.get(i).getHelpZoneNum());
-			
-			list.set(index, element);
-			
-		}
-		
 		int totalCount=service.selectCount();
 		
 		String pageBar=new PageCreate().getPageBar(cPage, numPerPage,totalCount,"helpZoneList.do");
@@ -57,7 +47,6 @@ public class HelpZoneController {
 		mv.addObject("list",list);
 		mv.addObject("cPage",cPage);
 		mv.addObject("totalCount",totalCount);
-		mv.addObject("totalList",totalList);
 		mv.setViewName("/helpZone/helpZoneMain");
 		return mv;
 	}
@@ -127,7 +116,7 @@ public class HelpZoneController {
 	//헬프존 보기
 	@RequestMapping("/helpZone/helpZoneView.do")
 	public String helpZoneView(HttpServletRequest req,
-			@RequestParam(value="no",required=false,defaultValue="1") int no, 
+			@RequestParam(value="no",required=false) int no, 
 			@RequestParam(value="cPageMem",required=false,defaultValue="0") int cPageMem,
 			@RequestParam(value="cPageHos",required=false,defaultValue="0") int cPageHos){
 		HelpZone helpZone = service.selectHelpZone(no);//헬프존 불러오는 메서드
@@ -153,6 +142,7 @@ public class HelpZoneController {
 		int numPerPage=10;
 		int totalCountM = service.helpZoneCommentCountM(no);
 		int totalCountH = service.helpZoneCommentCountH(no);
+		
 		List<HelpZoneCommentMember> hzMember2 = service.selectMemberCommentList(cPageMem, numPerPage, no);
 		List<HelpZoneCommentHospital> hzHospital2 = service.selectHospitalCommentList(cPageHos, numPerPage, no);
 		

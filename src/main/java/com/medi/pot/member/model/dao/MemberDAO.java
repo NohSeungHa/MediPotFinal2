@@ -32,7 +32,14 @@ public interface MemberDAO {
 	int memberPwUpdate(SqlSessionTemplate sqlSession, Map<String, String> idpw);
 	List<Member> selectMemberList(SqlSessionTemplate sqlSession, int cPage, int numPerPage);
 	int selectCount(SqlSessionTemplate sqlSession);
+	
+	/* 일반회원 탈퇴 */
+	List<Integer> selectNoticeNums(SqlSessionTemplate sqlSession, String memberId);
 	int deleteMember(SqlSessionTemplate sqlSession, int memberNum);
+	int deleteNoticeComment(SqlSessionTemplate sqlSession, int commentNo);
+	List<String> selectNoticePhoto(SqlSessionTemplate sqlSession, String memberId);
+	int deleteNotice(SqlSessionTemplate sqlSession, String memberId);
+	int deleteInquiry(SqlSessionTemplate sqlSession, String memberId);
 	
 	/* 아이디 찾기 */
 	int FindMemEmailCheck(SqlSessionTemplate sqlSession, String memberEmail);

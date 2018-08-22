@@ -95,7 +95,7 @@
 	        <div class="panel-body"><a href="${path }/helpZone/helpZoneView.do?no=${list.helpZoneNum}"><img src="${path }/resources/img/helpZone/other.jpg" class="img-responsive" style="width:100%;height:140px" alt="Image"></a></div>        
 	        </c:if>
 	        
-	        <div class="panel-footer">현재 답글수 : ${totalList }</div>
+	        <div class="panel-footer">현재 답글수 : ${list.helpZoneCommentCount }</div>
 	      </div>
 	    </div>
 	</c:forEach>

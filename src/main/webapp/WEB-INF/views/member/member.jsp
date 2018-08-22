@@ -132,6 +132,25 @@ $(function(){
 		});
 	});
 <!-- 아이디 잘 못 입력시 ajax이용한 출력문 스크립트 끝 -->
+$(function(){
+	$('#memberBirth').on("keyup",function(){
+		var memberBirth=$('#memberBirth').val().trim();
+		if(memberBirth.length==6){
+			if(memberBirth.match(/([0-9])/) ){
+				return true;
+			}
+		} else {
+			if(!memberBirth.match(/([0-9])/) ){
+				alert("생년월일은 숫자로만 입력이 가능합니다.");
+				$('#memberBirth').val("");
+				$('#memberBirth').focus();
+				return false;
+			}
+			
+		}
+
+	});
+})
 
 </script>
 

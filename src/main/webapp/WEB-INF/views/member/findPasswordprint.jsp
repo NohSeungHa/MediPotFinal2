@@ -50,6 +50,7 @@
 						<td style="width: 20px"></td>
 						<td>
 							<input type="password" class="form-control" name="newPw" id="newPw" required>
+							<br>
 						</td>
 					</tr>
 					<tr>
