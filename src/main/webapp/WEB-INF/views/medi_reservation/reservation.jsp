@@ -490,7 +490,8 @@
 			날짜 선택
 		</div>
 		<div id="calList2" style="text-align:center;font-size:20px;">
-			** 원하는 날짜를 선택해 주세요 **
+			** 원하는 날짜를 선택해 주세요 **<br>
+			** 선택 할 수 없는 날짜는 병원 또는 의사선생님의 휴무일 입니다 **
 		</div>
 		<div id="calList">
 			<table id="tbl-cal" align="center">
@@ -714,7 +715,8 @@
 			시간 선택
 		</div>
 		<div id="calList3" style="text-align:center;font-size:20px;">
-			** 원하는 시간을 선택 후 예약하기 버튼을 눌러주세요  **
+			** 원하는 시간을 선택 후 예약하기 버튼을 눌러주세요  **<br>
+			** 회색으로 된 시간은 이미 예약 되었거나 병원측에서 제외한 시간입니다 **
 		</div>
 		<div id="timeImg" style="text-align:center;">
 			<img alt="달력사진" src="${path }/resources/img/reser/reserTime.png" height="300px;"></div>

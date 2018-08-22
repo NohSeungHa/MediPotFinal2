@@ -495,7 +495,9 @@
 			날짜 선택
 		</div>
 		<div id="docInfoE2" style="text-align:center;font-size:20px;">
-			** 제외 설정 및 예약 회원 검색 할 날짜를 선택해 주세요  **
+			** 제외 설정 및 예약 회원 검색 할 날짜를 선택해 주세요  **<br>
+			** 제외 설정된 날짜는 회색으로 처리됩니다 **<br>
+			** 제외 취소를 원하실 경우 제외된 날짜를 다시 눌러주세요 **
 		</div>
 		<div id="calList">
 			<table id="tbl-cal" align="center">

@@ -117,7 +117,7 @@ public class ReservationController {
 		System.out.println("확인하기 : "+chDate);
 		DoctorInfo doctor=service.selectDoctor(num);
 		List<MemberReservation> mr=service.selectReser(map);
-		
+		System.out.println("list : "+mr);
 		req.setAttribute("doctor", doctor);
 		req.setAttribute("mr", mr);
 		req.setAttribute("time", time);
