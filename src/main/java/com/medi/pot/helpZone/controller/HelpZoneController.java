@@ -40,6 +40,16 @@ public class HelpZoneController {
 		int numPerPage=6;		
 		List<HelpZone> list = service.selectHelpZoneList(cPage,numPerPage);
 		
+		int totalCountM = 0;
+		int totalCountH = 0;
+		for(int i = 0; i < list.size(); i++) {
+			totalCountM = service.helpZoneCommentCountM(list.get(i).getHelpZoneNum());
+			totalCountH = service.helpZoneCommentCountH(list.get(i).getHelpZoneNum());
+			
+			list.set(index, element);
+			
+		}
+		
 		int totalCount=service.selectCount();
 		
 		String pageBar=new PageCreate().getPageBar(cPage, numPerPage,totalCount,"helpZoneList.do");
@@ -47,6 +57,7 @@ public class HelpZoneController {
 		mv.addObject("list",list);
 		mv.addObject("cPage",cPage);
 		mv.addObject("totalCount",totalCount);
+		mv.addObject("totalList",totalList);
 		mv.setViewName("/helpZone/helpZoneMain");
 		return mv;
 	}
@@ -152,8 +163,9 @@ public class HelpZoneController {
 		
 		if(hzHospital2.size() > 0) {
 			helpZoneCommentHospital = service.commentchoice(helpZone.getHelpZoneNum());
-			System.out.println(helpZoneCommentHospital.getHzCommentWriterNumH());
-			checkchoice=true;				
+			if(helpZoneCommentHospital != null) {
+				checkchoice=true;								
+			}
 		}
 		
 		req.setAttribute("no", no);
@@ -274,15 +286,17 @@ public class HelpZoneController {
 	
 	//댓글 ajax
 	@RequestMapping("/helpZone/insertHelpZoneComment.do")
-	@ResponseBody
-	public ModelAndView helpZoneCommentInsert(
+	public String helpZoneCommentInsert(
 			int writer,
 			String comment,
 			int helpZoneNum,
 			String checkPH,
 			@RequestParam(value="cPageMem",required=false,defaultValue="1") int cPageMem,
 			@RequestParam(value="cPageHos",required=false,defaultValue="1") int cPageHos,
-			ModelAndView mv) throws JsonProcessingException,UnsupportedOperationException{
+			Model model) throws JsonProcessingException,UnsupportedOperationException{
+		
+		HelpZone helpZone = service.selectHelpZone(helpZoneNum);//헬프존 불러오는 메서드
+		Member m = service.selectMember(helpZone.getHelpZoneQuestioner());	//작성자 불러오는 메서드
 		
 		int numPerPage=10;
 		HelpZoneCommentMember hzMember = new HelpZoneCommentMember();
@@ -320,21 +334,14 @@ public class HelpZoneController {
 			HelpZoneCommentHospital helpZoneCommentHospital = new HelpZoneCommentHospital();
 			if(hzHospital2.size() > 0) {
 				helpZoneCommentHospital = service.commentchoice(helpZoneNum);
-				System.out.println(helpZoneCommentHospital.getHzCommentWriterNumH());
-				checkchoice=true;
+				if(helpZoneCommentHospital != null && helpZoneCommentHospital.getHzCommentChoice()==1) {
+					checkchoice=true;								
+				}
 			}	
-	
-			mv.addObject("hzMember2",hzMember2);
-			mv.addObject("hzHospital2", hzHospital2);
-			mv.addObject("checkchoice", checkchoice);
-			mv.addObject("choiceWriter", helpZoneCommentHospital);
-			mv.addObject("pageBarM", pageBarM);
-			mv.addObject("pageBarH", pageBarH);
-			mv.addObject("cPageMem",cPageMem);
-			mv.addObject("cPageHos",cPageHos);
-			mv.addObject("no2", helpZoneNum);
-			mv.setViewName("helpZone/helpZoneCommentLoad");
-			return mv;
+			/*model.addAttribute("no", helpZoneNum);*/
+			model.addAttribute("msg", "댓글 성공");
+			model.addAttribute("loc", "/helpZone/helpZoneView.do?no="+helpZoneNum);
+			return "common/msg";
 	}
 	
 	@RequestMapping("/helpZone/helpZoneChoice.do")
@@ -363,8 +370,6 @@ public class HelpZoneController {
 		return "common/msg";
 	}
 	
-<<<<<<< HEAD
-=======
 	@RequestMapping("/helpZone/deleteHelpZoneComment.do")
 	public String deleteHelpZoneComment(int hzCommentNum, int hzNum, String checkPH, Model model) {
 		String msg = "";
@@ -395,5 +400,4 @@ public class HelpZoneController {
 		return "common/msg";
 	}
 	
->>>>>>> groot
 }

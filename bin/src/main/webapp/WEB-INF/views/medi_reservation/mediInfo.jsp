@@ -63,7 +63,7 @@
 		<div id="mediInfo">
 			<table id="tblInfo" align="center">
 				<tr>
-					<th style="width:350px;"><img src="${path }/resources/img/reser/${hi.hospitalPhoto }" width="300px;" height="230px;"></th>
+					<th style="width:350px;"><img src="${path }/resources/uploadfile/hospitalInfo/${hi.hospitalRePhoto }" width="300px;" height="230px;"></th>
 					<td style="text-align:center;"><div id="notice"><p style="color: black;"><공 지></p><p style="color:white;">${hi.hospitalInfoNotice }</p></div></td>
 				</tr>
 				<tr>

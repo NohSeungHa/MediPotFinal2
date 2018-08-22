@@ -47,7 +47,7 @@
 <hr>
 
 
-<!--첫번째줄) 1줄에 3개씩 -->
+
 <div class="container">	
 
 		<div>
@@ -79,127 +79,28 @@
 	<!-- 질문글 시작 -->
 	
 	<div class="row">
-    <div class="col-sm-4">
-      <div class="panel panel-success">
-        <div class="panel-heading"><c:out value="${list[0].helpZoneTitle}"/> </div>
-        <c:if test="${list[0].helpZoneKeyWord eq '건강'}">
-        <div class="panel-body"><a href="${path }/helpZone/helpZoneView.do?no=${list[0].helpZoneNum}"><img src="${path }/resources/img/helpZone/fitness.jpg" class="img-responsive" style="width:100%;height:140px" alt="Image"></a></div>        
-        </c:if>
-        
-        <c:if test="${list[0].helpZoneKeyWord eq '치료'}">
-        <div class="panel-body"><a href="${path }/helpZone/helpZoneView.do?no=${list[0].helpZoneNum}"><img src="${path }/resources/img/helpZone/treatment.jpg" class="img-responsive" style="width:100%;height:140px" alt="Image"></a></div>
-        </c:if>
-        
-        <c:if test="${list[0].helpZoneKeyWord eq '기타'}">
-        <div class="panel-body"><a href="${path }/helpZone/helpZoneView.do?no=${list[0].helpZoneNum}"><img src="${path }/resources/img/helpZone/other.jpg" class="img-responsive" style="width:100%;height:140px" alt="Image"></a></div>        
-        </c:if>
-        
-        <div class="panel-footer">현재 답글수</div>
-        <div class="panel-footer">좋아요</div>
-      </div>
-    </div>
-    <div class="col-sm-4"> 
-      <div class="panel panel-danger">
-        <div class="panel-heading"><c:out value="${list[1].helpZoneTitle}"/> </div>
-         <c:if test="${list[1].helpZoneKeyWord eq '건강'}">
-        <div class="panel-body"><a href="${path }/helpZone/helpZoneView.do?no=${list[1].helpZoneNum}"><img src="${path }/resources/img/helpZone/fitness.jpg" class="img-responsive" style="width:100%;height:140px" alt="Image"></a></div>        
-        </c:if>
-        
-        <c:if test="${list[1].helpZoneKeyWord eq '치료'}">
-        <div class="panel-body"><a href="${path }/helpZone/helpZoneView.do?no=${list[1].helpZoneNum}"><img src="${path }/resources/img/helpZone/treatment.jpg" class="img-responsive" style="width:100%;height:140px" alt="Image"></a></div>
-        </c:if>
-        
-        <c:if test="${list[1].helpZoneKeyWord eq '기타'}">
-        <div class="panel-body"><a href="${path }/helpZone/helpZoneView.do?no=${list[1].helpZoneNum}"><img src="${path }/resources/img/helpZone/other.jpg" class="img-responsive" style="width:100%;height:140px" alt="Image"></a></div>        
-        </c:if>
-        
-        <div class="panel-footer">현재 답글수</div>
-        <div class="panel-footer">좋아요</div>
-      </div>
-    </div>
-    <div class="col-sm-4"> 
-      <div class="panel panel-success">
-        <div class="panel-heading"><c:out value="${list[2].helpZoneTitle}"/> </div>
-        <c:if test="${list[2].helpZoneKeyWord eq '건강'}">
-        <div class="panel-body"><a href="${path }/helpZone/helpZoneView.do?no=${list[2].helpZoneNum}"><img src="${path }/resources/img/helpZone/fitness.jpg" class="img-responsive" style="width:100%;height:140px" alt="Image"></a></div>        
-        </c:if>
-        
-        <c:if test="${list[2].helpZoneKeyWord eq '치료'}">
-        <div class="panel-body"><a href="${path }/helpZone/helpZoneView.do?no=${list[2].helpZoneNum}"><img src="${path }/resources/img/helpZone/treatment.jpg" class="img-responsive" style="width:100%;height:140px" alt="Image"></a></div>
-        </c:if>
-        
-        <c:if test="${list[2].helpZoneKeyWord eq '기타'}">
-        <div class="panel-body"><a href="${path }/helpZone/helpZoneView.do?no=${list[2].helpZoneNum}"><img src="${path }/resources/img/helpZone/other.jpg" class="img-responsive" style="width:100%;height:140px" alt="Image"></a></div>        
-        </c:if>
-        
-        <div class="panel-footer">현재 답글수</div>
-        <div class="panel-footer">좋아요</div>
-      </div>
-    </div>
-  </div>
-</div><br>
+	<c:forEach var="list" items="${list }">
+		<div class="col-sm-4" style="display: inline-block">
+	      <div class="panel panel-success">
+	        <div class="panel-heading"><c:out value="${list.helpZoneTitle}"/> </div>
+	        <c:if test="${list.helpZoneKeyWord eq '건강'}">
+	        <div class="panel-body"><a href="${path }/helpZone/helpZoneView.do?no=${list.helpZoneNum}"><img src="${path }/resources/img/helpZone/fitness.jpg" class="img-responsive" style="width:100%;height:140px" alt="Image"></a></div>        
+	        </c:if>
+	        
+	        <c:if test="${list.helpZoneKeyWord eq '치료'}">
+	        <div class="panel-body"><a href="${path }/helpZone/helpZoneView.do?no=${list.helpZoneNum}"><img src="${path }/resources/img/helpZone/treatment.jpg" class="img-responsive" style="width:100%;height:140px" alt="Image"></a></div>
+	        </c:if>
+	        
+	        <c:if test="${list.helpZoneKeyWord eq '기타'}">
+	        <div class="panel-body"><a href="${path }/helpZone/helpZoneView.do?no=${list.helpZoneNum}"><img src="${path }/resources/img/helpZone/other.jpg" class="img-responsive" style="width:100%;height:140px" alt="Image"></a></div>        
+	        </c:if>
+	        
+	        <div class="panel-footer">현재 답글수 : ${totalList }</div>
+	      </div>
+	    </div>
+	</c:forEach>
+	</div>
 
-<!--두번째줄 -->
-<div class="container">    
-  <div class="row">
-    <div class="col-sm-4">
-      <div class="panel panel-danger">
-        <div class="panel-heading"><c:out value="${list[3].helpZoneTitle}"/> </div>
-        <c:if test="${list[3].helpZoneKeyWord eq '건강'}">
-        <div class="panel-body"><a href="${path }/helpZone/helpZoneView.do?no=${list[3].helpZoneNum}"><img src="${path }/resources/img/helpZone/fitness.jpg" class="img-responsive" style="width:100%;height:140px" alt="Image"></a></div>        
-        </c:if>        
-        <c:if test="${list[3].helpZoneKeyWord eq '치료'}">
-        <div class="panel-body"><a href="${path }/helpZone/helpZoneView.do?no=${list[3].helpZoneNum}"><img src="${path }/resources/img/helpZone/treatment.jpg" class="img-responsive" style="width:100%;height:140px" alt="Image"></a></div>
-        </c:if>        
-        <c:if test="${list[3].helpZoneKeyWord eq '기타'}">
-        <div class="panel-body"><a href="${path }/helpZone/helpZoneView.do?no=${list[3].helpZoneNum}"><img src="${path }/resources/img/helpZone/other.jpg" class="img-responsive" style="width:100%;height:140px" alt="Image"></a></div>        
-        </c:if>
-        
-        
-        <div class="panel-footer">현재 답글수</div>
-        <div class="panel-footer">좋아요</div>
-      </div>
-    </div>
-    <div class="col-sm-4"> 
-      <div class="panel panel-success">
-        <div class="panel-heading"><c:out value="${list[4].helpZoneTitle}"/> </div>
-         <c:if test="${list[4].helpZoneKeyWord eq '건강'}">
-        <div class="panel-body"><a href="${path }/helpZone/helpZoneView.do?no=${list[4].helpZoneNum}"><img src="${path }/resources/img/helpZone/fitness.jpg" class="img-responsive" style="width:100%;height:140px" alt="Image"></a></div>        
-        </c:if>
-        
-        <c:if test="${list[4].helpZoneKeyWord eq '치료'}">
-        <div class="panel-body"><a href="${path }/helpZone/helpZoneView.do?no=${list[4].helpZoneNum}"><img src="${path }/resources/img/helpZone/treatment.jpg" class="img-responsive" style="width:100%;height:140px" alt="Image"></a></div>
-        </c:if>
-        
-        <c:if test="${list[4].helpZoneKeyWord eq '기타'}">
-        <div class="panel-body"><a href="${path }/helpZone/helpZoneView.do?no=${list[4].helpZoneNum}"><img src="${path }/resources/img/helpZone/other.jpg" class="img-responsive" style="width:100%;height:140px" alt="Image"></a></div>        
-        </c:if>
-        
-        <div class="panel-footer">현재 답글수</div>
-        <div class="panel-footer">좋아요</div>
-      </div>
-    </div>
-    <div class="col-sm-4"> 
-      <div class="panel panel-danger">
-        <div class="panel-heading"><c:out value="${list[5].helpZoneTitle}"/> </div>
-         <c:if test="${list[5].helpZoneKeyWord eq '건강'}">
-        <div class="panel-body"><a href="${path }/helpZone/helpZoneView.do?no=${list[5].helpZoneNum}"><img src="${path }/resources/img/helpZone/fitness.jpg" class="img-responsive" style="width:100%;height:140px" alt="Image"></a></div>        
-        </c:if>
-        
-        <c:if test="${list[5].helpZoneKeyWord eq '치료'}">
-        <div class="panel-body"><a href="${path }/helpZone/helpZoneView.do?no=${list[5].helpZoneNum}"><img src="${path }/resources/img/helpZone/treatment.jpg" class="img-responsive" style="width:100%;height:140px" alt="Image"></a></div>
-        </c:if>
-        
-        <c:if test="${list[5].helpZoneKeyWord eq '기타'}">
-        <div class="panel-body"><a href="${path }/helpZone/helpZoneView.do?no=${list[5].helpZoneNum}"><img src="${path }/resources/img/helpZone/other.jpg" class="img-responsive" style="width:100%;height:140px" alt="Image"></a></div>        
-        </c:if>
-        
-        <div class="panel-footer">현재 답글수</div>
-        <div class="panel-footer">좋아요</div>
-      </div>
-    </div>
-  </div>
-  
 <br>            
 	  ${pageBar }
 </div><br><br><!-- container끝 -->

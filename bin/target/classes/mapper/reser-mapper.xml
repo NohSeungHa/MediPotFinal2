@@ -28,7 +28,7 @@
 	</select>
 	
 	<select id="selectReser" parameterType="map" resultType="MemberReservation">
-		select a.*,b.*,c.membername,c.membernum from MEMBERRESERVATION a full join reservationblock b on(blockdate=checkdate) full join member c on(checkmember=membernum) where ((checkdoctor=#{num} and checkdate=#{chDate}) or (blockdoctor=#{num} and blockdate=#{chDate} and blockcheck='N'))
+		select a.*,b.*,c.membername,c.membernum from MEMBERRESERVATION a full join reservationblock b on(blockdate=checkdate and checkdoctor=blockdoctor) full join member c on(checkmember=membernum) where ((checkdoctor=#{num} and checkdate=#{chDate} and checkhospital=#{num2}) or (blockdoctor=#{num} and blockdate=#{chDate} and blockcheck='N' and blockhospital=#{num2}))
 	</select>
 	
 	<insert id="insertReser" parameterType="MemberReservation">
@@ -102,4 +102,9 @@
 	<delete id="deleteSearchReserMember" parameterType="_int">
 		delete MEMBERRESERVATION where checknum=#{num}
 	</delete>
+	
+	<select id="selectHos" resultType="HospitalInfo">
+		select * from hospital order by hospitallike desc
+	</select>
+	
 </mapper>

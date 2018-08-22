@@ -81,10 +81,12 @@
 							rows="5" id="helpZoneContent" name="helpZoneContent" readonly>${helpZone.helpZoneContent }</textarea>							
 					</td>
 				</tr>
+				<c:if test="${helpZone.helpZoneReFile != null}">
 				<tr><!-- 첨부사진 올려주기 -->
 					<th>첨부사진:</th>
 					<td><img id="imghover" src="${path}/resources/uploadfile/helpZone/${helpZone.helpZoneReFile}" style="width: 300px; height: 200px"></td>
 				</tr>
+				</c:if>
 			</tbody>
 		</table>		
 		
@@ -166,7 +168,7 @@
 			<span style="color: orange; font-size: 15pt;">채택된 병원회원의 댓글입니다.</span>
 		</c:if>
 		<c:if test="${checkPH=='P' }">
-			<c:if test="${checkchoice==false && helpZoneQuestioner.memberId==memberLoggedIn.memberId }">
+			<c:if test="${checkchoice==false && helpZoneQuestioner.memberId eq memberLoggedIn.memberId }">
 				<a id="choiceFalse${hzh.hzCommentNumH }" data-toggle="modal" data-target="#choiceComment" style="color: red;float: right;" onclick="sendComment('${hzh.hzCommentNumH }')">&nbsp;&nbsp;&nbsp;채택하기</a>
 				<input id="sendCommentNum${hzh.hzCommentNumH }" type="hidden" value="${hzh.hzCommentNumH }">
 			</c:if>
@@ -303,18 +305,9 @@ $('#helpZoneCommentInsert').click(function() {
 	if(checkPH=='H'){
 		writer = $('#hzCommentWriterH').val();
 	}
-	var allData = { "writer": writer, "comment": comment, "helpZoneNum":helpZoneNum,"checkPH":checkPH };
-	  $.ajax({
-			url:"${path}/helpZone/insertHelpZoneComment.do",
-			type:'post',
-			data: allData,
-			dataType:"html",
-			success:function(data){
-				alert("댓글 등록 완료!");
-			   	$('#helpZoneComment').val("");
-			   	$('#hzc').html(data);
-			}
- 	});
+	
+	location.href="${path}/helpZone/insertHelpZoneComment.do?writer="+writer+"&comment="+comment+"&helpZoneNum="+helpZoneNum+"&checkPH="+checkPH;
+ 	
 });
 </script>
 
@@ -330,9 +323,7 @@ $('#helpZoneCommentInsert').click(function() {
                      X
                   </button>
                </div>
-               <form
-                  action="${path}/helpZone/helpZoneChoice.do"
-                  method="post">
+               <form action="${path}/helpZone/helpZoneChoice.do" method="post">
                   <div class="modal-body">
                     <br>
 					<h3>해당 병원회원의 글을 채택하시겠습니까?</h3>

@@ -40,7 +40,7 @@
 	</style>
 <div class="container">
 	<br> 
-	<img class="img-thumbnail" src="/pot/resources/img/community/communityMain.jpg" style="width: 100%;"> 
+	<img class="img-thumbnail" src="${path}/resources/img/community/communityMain.jpg" style="width: 1200px; height: 300px;"> 
 	<br>
 	<br>
 	<a id="communityHv" href="${path}/community/communityList.do" style="float: right;">자유게시판</a>
@@ -48,7 +48,7 @@
 		<b style="margin-right:10px;">></b>
 	</p>
 	<a id="home" href="${path}" style="float:right;width:70px;"><img
-		src="/pot/resources/img/notice/home.jpg"
+		src="${path}/resources/img/notice/home.jpg"
 		style="width: 30%; height: 30%;"> 홈으로</a>
 	<br><br>
 	<c:if test="${checkPH=='P' }">
@@ -79,7 +79,7 @@
 						<td><h4>${community.communityNum }</h4></td>
 						<td><h4 id="txt_line" ><a href='${path}/community/communityView.do?no=${community.communityNum }&cp=${cPage}'>${community.communityTitle }</a></h4></td>
 						<c:if test="${community.communityFile!=null }">
-							<td>&nbsp;<img src="/pot/resources/img/notice/fileImge1.jpg" style="margin-left:10px; width: 20px;height: 20px;"></td>
+							<td>&nbsp;<img src="${path}/resources/img/notice/fileImge1.jpg" style="margin-left:10px; width: 20px;height: 20px;"></td>
 						</c:if>
 						<c:if test="${community.communityFile==null }">
 							<td></td>

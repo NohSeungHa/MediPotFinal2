@@ -27,15 +27,15 @@
 <br>
 <div class="container">
 	<img class="img-thumbnail"
-		src="/pot/resources/img/community/communityInsert.jpg"
-		style="width: 100%;"> <br>
+		src="${path}/resources/img/community/communityInsert.jpg"
+		style="width: 1200px; height: 300px;"> <br>
 	<br>
 	<a id="communityHv" href="${path}/community/communityList.do" style="float: right;">자유게시판</a>
 	<p style="float: right;">
 		<b style="margin-right:10px;">></b>
 	</p>
 	<a id="home" href="${path}" style="float:right;width:70px;"><img
-		src="/pot/resources/img/notice/home.jpg"
+		src="${path}/resources/img/notice/home.jpg"
 		style="width: 30%; height: 30%;"> 홈으로</a>
 	<form name="communityFrm" action="${path}/community/communityInsertEnd.do" method="post" onsubmit="return validate();"  enctype="multipart/form-data" >
 		<table class="table table-bordered">

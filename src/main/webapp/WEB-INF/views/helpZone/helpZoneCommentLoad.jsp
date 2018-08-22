@@ -5,12 +5,6 @@
     <%@ taglib prefix='fn' uri="http://java.sun.com/jsp/jstl/functions"%>
 	<c:set var="path" value="<%=request.getContextPath() %>"/>
 	
-	<c:if test="${checkPH==P }">
-		<input type="hidden" id="checkPH" value="P"/>
-	</c:if>
-	<c:if test="${checkPH==H }">
-		<input type="hidden" id="checkPH" value="H"/>
-	</c:if>
 	<ul class="nav nav-tabs">
     <li id="commentM"><a data-toggle="tab" href="#member">일반회원 댓글만 보기</a></li>
     <li id="commentH"><a data-toggle="tab" href="#hospital">병원회원 댓글만 보기</a></li>

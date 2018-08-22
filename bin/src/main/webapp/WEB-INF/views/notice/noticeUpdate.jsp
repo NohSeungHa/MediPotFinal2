@@ -27,7 +27,7 @@
 <br>
 <div class="container">
 	<img class="img-thumbnail"
-		src="/pot/resources/img/notice/hnoticeupdate.jpg"
+		src="${path}/resources/img/notice/hnoticeupdate.jpg"
 		style="width: 100%;"> <br>
 	<br>
 	<a id="noticeHv" href="${path}/notice/noticeList.do?checkPH=${chPH}" style="float: right;">공지사항</a>
@@ -35,7 +35,7 @@
 		<b style="margin-right:10px;">></b>
 	</p>
 	<a id="home" href="${path}" style="float:right;width:70px;"><img
-		src="/pot/resources/img/notice/home.jpg"
+		src="${path}/resources/img/notice/home.jpg"
 		style="width: 30%; height: 30%;"> 홈으로</a>
 	<form name="noticeUpdateFrm" action="${path}/notice/noticeUpdateEnd.do" method="post" onsubmit="return validate();"  enctype="multipart/form-data" >
 		<table class="table table-bordered">

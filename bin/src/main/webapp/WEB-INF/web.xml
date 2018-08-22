@@ -32,6 +32,7 @@
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
+
 	
 	<!-- 인코딩을 해두는 작업 -->
    <filter>
