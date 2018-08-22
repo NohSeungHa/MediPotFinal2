@@ -363,8 +363,7 @@ public class HelpZoneController {
 		return "common/msg";
 	}
 	
-<<<<<<< HEAD
-=======
+
 	@RequestMapping("/helpZone/deleteHelpZoneComment.do")
 	public String deleteHelpZoneComment(int hzCommentNum, int hzNum, String checkPH, Model model) {
 		String msg = "";
@@ -395,5 +394,5 @@ public class HelpZoneController {
 		return "common/msg";
 	}
 	
->>>>>>> groot
+
 }

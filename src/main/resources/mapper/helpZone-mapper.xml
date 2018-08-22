@@ -3,7 +3,7 @@
 <mapper namespace="helpZone">
 	<!-- 글 등록 -->
 	<insert id="helpZoneInsert" parameterType="HelpZone">
-		insert into HelpZone VALUES(HelpZone_SEQ.nextval, #{helpZoneTitle}, #{helpZoneQuestioner}, #{helpZoneKeyWord}, #{helpZoneContent}, #{helpZoneFile}, #{helpZoneReFile}, #{helpZoneReadCount}, sysdate, #{helpZoneLikeNum})
+		insert into HelpZone VALUES(HelpZone_SEQ.nextval, #{helpZoneTitle}, #{helpZoneQuestioner}, #{helpZoneKeyWord}, #{helpZoneContent}, #{helpZoneFile}, #{helpZoneReFile}, #{helpZoneReadCount}, sysdate)
 	</insert>
 	<!-- 글 모두 불러오기 -->
 	<select id="helpZoneSelectList" resultType="HelpZone">

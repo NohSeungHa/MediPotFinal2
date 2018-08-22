@@ -13,6 +13,7 @@ public class HelpZone {
 	int helpZoneReadCount;			//조회수
 	Date helpZoneDate;				//작성 날짜
 	
+	
 	public HelpZone() {
 	}
 

@@ -45,7 +45,7 @@
 <!-- Container (Contact Section) -->
 <div class="container">
 	<br>
-	<a id="helpZoneHv" href="${path}/helpZone/helpZoneList.do?" style="float: right;">공지사항</a>
+	<a id="helpZoneHv" href="${path}/helpZone/helpZoneList.do?" style="float: right;">HELP ZONE</a>
 	<p style="float: right;">
 		<b style="margin-right:10px;">></b>
 	</p>
