@@ -24,5 +24,11 @@ public interface HelpZoneService {
 	int helpZoneCommentCountM(int hzNumM);							//헬프존 댓글 갯수(일반)
 	int helpZoneCommentCountH(int hzNumH);							//헬프존 댓글 갯수(병원)
 	Hospital selectHospital(int hospitalNum);						// 작성자 불러오기
+	int helpZoneChoice(HelpZoneCommentHospital helpZoneCommentHospital); // 업데이트로 채택하기
+	int hospitalAddLike(HelpZoneCommentHospital helpZoneCommentHospital); // 채택 후 병원회원의 좋아요 추가
+	HelpZoneCommentHospital commentchoice(int helpZoneNum);								// 채택불러오기
+	int deleteHelpZoneCommentM(HelpZoneCommentMember helpZoneCommentMember);	// 일반회원 댓글 삭제
+	int deleteHelpZoneCommentH(HelpZoneCommentHospital helpZoneCommentHospital);	// 병원회원 댓글 삭제
+	
 	
 }

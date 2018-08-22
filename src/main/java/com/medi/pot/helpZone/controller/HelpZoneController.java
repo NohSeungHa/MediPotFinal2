@@ -115,29 +115,56 @@ public class HelpZoneController {
 	}
 	//헬프존 보기
 	@RequestMapping("/helpZone/helpZoneView.do")
-	public String helpZoneView(int no, HttpServletRequest req, 
-			@RequestParam(value="cPageM",required=false,defaultValue="1") int cPageM,
-			@RequestParam(value="cPageH",required=false,defaultValue="1") int cPageH){
+	public String helpZoneView(HttpServletRequest req,
+			@RequestParam(value="no",required=false,defaultValue="1") int no, 
+			@RequestParam(value="cPageMem",required=false,defaultValue="0") int cPageMem,
+			@RequestParam(value="cPageHos",required=false,defaultValue="0") int cPageHos){
 		HelpZone helpZone = service.selectHelpZone(no);//헬프존 불러오는 메서드
 		Member m = service.selectMember(helpZone.getHelpZoneQuestioner());	//작성자 불러오는 메서드
+		
+		if(cPageMem==0) {
+	        req.setAttribute("flagM","0");
+	        cPageMem=1;         
+        }
+        else {
+           req.setAttribute("flagM","1");
+        }
+		
+		if(cPageHos==0) {
+	        req.setAttribute("flagH","0");
+	        cPageHos=1;         
+        }
+        else {
+           req.setAttribute("flagH","1");
+        }
 		
 		//댓글 불러오는 메소드
 		int numPerPage=10;
 		int totalCountM = service.helpZoneCommentCountM(no);
 		int totalCountH = service.helpZoneCommentCountH(no);
-		List<HelpZoneCommentMember> hzMember2 = service.selectMemberCommentList(cPageM, numPerPage, no);
-		List<HelpZoneCommentHospital> hzHospital2 = service.selectHospitalCommentList(cPageH, numPerPage, no);
+		List<HelpZoneCommentMember> hzMember2 = service.selectMemberCommentList(cPageMem, numPerPage, no);
+		List<HelpZoneCommentHospital> hzHospital2 = service.selectHospitalCommentList(cPageHos, numPerPage, no);
 		
-		String pageBarM = new PageCreate().getPageBarCommentM2(cPageM, numPerPage, totalCountM, "helpZoneView.do", no);
-		String pageBarH = new PageCreate().getPageBarCommentH2(cPageH, numPerPage, totalCountH, "helpZoneView.do", no);
+		String pageBarM = new PageCreate().getPageBarCommentM2(cPageMem, numPerPage, totalCountM, "helpZoneView.do", no);
+		String pageBarH = new PageCreate().getPageBarCommentH2(cPageHos, numPerPage, totalCountH, "helpZoneView.do", no);
+		boolean checkchoice = false;
+		HelpZoneCommentHospital helpZoneCommentHospital = new HelpZoneCommentHospital();
 		
+		if(hzHospital2.size() > 0) {
+			helpZoneCommentHospital = service.commentchoice(helpZone.getHelpZoneNum());
+			System.out.println(helpZoneCommentHospital.getHzCommentWriterNumH());
+			checkchoice=true;				
+		}
 		
+		req.setAttribute("no", no);
 		req.setAttribute("helpZone", helpZone);
 		req.setAttribute("helpZoneQuestioner", m);
+		req.setAttribute("checkchoice", checkchoice);
+		req.setAttribute("choiceWriter", helpZoneCommentHospital);
 		req.setAttribute("pageBarM", pageBarM);
 		req.setAttribute("pageBarH", pageBarH);
-		req.setAttribute("cPageM", cPageM);
-		req.setAttribute("cPageH", cPageH);
+		req.setAttribute("cPageMem", cPageMem);
+		req.setAttribute("cPageHos", cPageHos);
 		req.setAttribute("hzMember2", hzMember2);
 		req.setAttribute("hzHospital2", hzHospital2);
 		return "helpZone/helpZoneView";
@@ -248,13 +275,13 @@ public class HelpZoneController {
 	//댓글 ajax
 	@RequestMapping("/helpZone/insertHelpZoneComment.do")
 	@ResponseBody
-	public ModelAndView helpZoneCommentInsert(int writer,
+	public ModelAndView helpZoneCommentInsert(
+			int writer,
 			String comment,
-			String checkPH,
 			int helpZoneNum,
-			String check,
-			@RequestParam(value="cPageM",required=false,defaultValue="1") int cPageM,
-			@RequestParam(value="cPageH",required=false,defaultValue="1") int cPageH,
+			String checkPH,
+			@RequestParam(value="cPageMem",required=false,defaultValue="1") int cPageMem,
+			@RequestParam(value="cPageHos",required=false,defaultValue="1") int cPageHos,
 			ModelAndView mv) throws JsonProcessingException,UnsupportedOperationException{
 		
 		int numPerPage=10;
@@ -278,27 +305,95 @@ public class HelpZoneController {
 				service.insertCommentHospital(hzHospital);
 				
 			}
-			List<HelpZoneCommentMember> hzMember2 = service.selectMemberCommentList(cPageM, numPerPage, helpZoneNum);
+			List<HelpZoneCommentMember> hzMember2 = service.selectMemberCommentList(cPageMem, numPerPage, helpZoneNum);
 			System.out.println(hzMember2);
-			List<HelpZoneCommentHospital> hzHospital2 = service.selectHospitalCommentList(cPageH, numPerPage, helpZoneNum);
+			List<HelpZoneCommentHospital> hzHospital2 = service.selectHospitalCommentList(cPageHos, numPerPage, helpZoneNum);
 			System.out.println(hzHospital2);
 			
 			totalCountM = service.helpZoneCommentCountM(helpZoneNum);
 			totalCountH = service.helpZoneCommentCountH(helpZoneNum);
 			
-			String pageBarM = new PageCreate().getPageBarCommentM2(cPageM, numPerPage, totalCountM, "helpZoneView,do", helpZoneNum);
-			String pageBarH = new PageCreate().getPageBarCommentH2(cPageH, numPerPage, totalCountH, "helpZoneView,do", helpZoneNum);
+			String pageBarM = new PageCreate().getPageBarCommentM2(cPageMem, numPerPage, totalCountM, "helpZoneView,do", helpZoneNum);
+			String pageBarH = new PageCreate().getPageBarCommentH2(cPageHos, numPerPage, totalCountH, "helpZoneView,do", helpZoneNum);
 			
+			boolean checkchoice = false;
+			HelpZoneCommentHospital helpZoneCommentHospital = new HelpZoneCommentHospital();
+			if(hzHospital2.size() > 0) {
+				helpZoneCommentHospital = service.commentchoice(helpZoneNum);
+				System.out.println(helpZoneCommentHospital.getHzCommentWriterNumH());
+				checkchoice=true;
+			}	
+	
 			mv.addObject("hzMember2",hzMember2);
 			mv.addObject("hzHospital2", hzHospital2);
+			mv.addObject("checkchoice", checkchoice);
+			mv.addObject("choiceWriter", helpZoneCommentHospital);
 			mv.addObject("pageBarM", pageBarM);
 			mv.addObject("pageBarH", pageBarH);
-			mv.addObject("cPageM",cPageM);
-			mv.addObject("cPageH",cPageH);
+			mv.addObject("cPageMem",cPageMem);
+			mv.addObject("cPageHos",cPageHos);
 			mv.addObject("no2", helpZoneNum);
 			mv.setViewName("helpZone/helpZoneCommentLoad");
 			return mv;
 	}
 	
+	@RequestMapping("/helpZone/helpZoneChoice.do")
+	public String helpZoneChoice(int hzCommentNumH, int hzNumH, Model model) {
+		String msg = "";
+		String loc = "/helpZone/helpZoneView.do?no="+hzNumH;
+		boolean checkchoice = false;
+		
+		HelpZoneCommentHospital helpZoneCommentHospital = new HelpZoneCommentHospital();
+		helpZoneCommentHospital.setHzCommentNumH(hzCommentNumH);
+		helpZoneCommentHospital.setHzNumH(hzNumH);
+		int result = service.helpZoneChoice(helpZoneCommentHospital);
+		
+		if(result > 0) {
+			msg = "채택되었습니다.";
+			checkchoice = true;
+			service.hospitalAddLike(helpZoneCommentHospital);
+		} else {
+			msg = "채택 중 오류가 발생했습니다.";
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("loc", loc);
+		model.addAttribute("checkchoice", checkchoice);
+		
+		return "common/msg";
+	}
 	
+<<<<<<< HEAD
+=======
+	@RequestMapping("/helpZone/deleteHelpZoneComment.do")
+	public String deleteHelpZoneComment(int hzCommentNum, int hzNum, String checkPH, Model model) {
+		String msg = "";
+		String loc = "/helpZone/helpZoneView.do?no="+hzNum;
+		int result = 0;
+		HelpZoneCommentMember helpZoneCommentMember = new HelpZoneCommentMember();
+		HelpZoneCommentHospital helpZoneCommentHospital = new HelpZoneCommentHospital();
+		
+		if(checkPH.equals("P")) {
+			helpZoneCommentMember.setHzCommentNumM(hzCommentNum);
+			helpZoneCommentMember.setHzNumM(hzNum);
+			result = service.deleteHelpZoneCommentM(helpZoneCommentMember);
+		} else if(checkPH.equals("H")) {
+			helpZoneCommentHospital.setHzCommentNumH(hzCommentNum);
+			helpZoneCommentHospital.setHzNumH(hzNum);
+			result = service.deleteHelpZoneCommentH(helpZoneCommentHospital);
+		}
+		
+		if(result > 0) {
+			msg = "댓글 삭제 성공";
+		} else {
+			msg = "댓글 삭제 실패";
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("loc", loc);
+		
+		return "common/msg";
+	}
+	
+>>>>>>> groot
 }

@@ -35,8 +35,7 @@
 
   </style>
 	
-	
-<body>
+
 <!-- 점보트론 -->
 <div class="jumbotron">
   <div class="container2">
@@ -53,9 +52,8 @@
 	<p style="float: right;">
 		<b style="margin-right:10px;">></b>
 	</p>
-	<a id="home" href="${path}" style="float:right;width:70px;"><img
-		src="${path }/resources/img/notice/home.jpg"
-		style="width: 30%; height: 30%;"> 홈으로</a>
+	<a id="home" href="${path}" style="float:right;width:70px;">
+	<img src="${path }/resources/img/notice/home.jpg" style="width: 30%; height: 30%;"> 홈으로</a>
 		<br><br>
 		
 		<table class="table table-bordered">
@@ -73,7 +71,7 @@
 				<tr>
 					<th>키워드</th>
 					<td>
-						<label class="form-control" readonly><c:out value="${helpZone.helpZoneKeyWord }"/></label>
+						<label class="form-control"><c:out value="${helpZone.helpZoneKeyWord }"/></label>
 					
 					</td>
 				</tr>
@@ -85,7 +83,7 @@
 				</tr>
 				<tr><!-- 첨부사진 올려주기 -->
 					<th>첨부사진:</th>
-					<td><img src="${path}/resources/uploadfile/helpZone/${helpZone.helpZoneReFile}" style="width: 300px; height: 200px"></td>
+					<td><img id="imghover" src="${path}/resources/uploadfile/helpZone/${helpZone.helpZoneReFile}" style="width: 300px; height: 200px"></td>
 				</tr>
 			</tbody>
 		</table>		
@@ -105,15 +103,17 @@
 		<input type="hidden" name="hzCommentNumM" id="hzCommentNumM" value="${helpZone.helpZoneNum }"/>
 		<!-- 일반회원으로 로그인했을때  -->
 		<c:if test="${checkPH=='P' }">
-			<p type="text" id="hzCommentWriter" readonly>&nbsp;${memberLoggedIn.memberId }</p>
+			<p id="hzCommentWriter">&nbsp;${memberLoggedIn.memberId }</p>
 			<input type="hidden" id="hzCommentWriterM" value="${memberLoggedIn.memberNum }"/>
 			<input type="hidden" id="checkPH" value="P"/>
+			<input type="hidden" id="cPageM" value="${cPageM }"/>
 		</c:if>
 		<!-- 병원회원으로 로그인했을때 -->
 		<c:if test="${checkPH=='H' }">
-			<p type="text" id="hzCommentWriter" readonly>&nbsp;${memberLoggedIn.hospitalId }</p>
+			<p id="hzCommentWriter">&nbsp;${memberLoggedIn.hospitalId }</p>
 			<input type="hidden" id="hzCommentWriterH" value="${memberLoggedIn.hospitalNum}"/>
 			<input type="hidden" id="checkPH" value="H"/>
+			<input type="hidden" id="cPageH" value="${cPageH }"/>
 		</c:if>
 		<textarea class="form-control" style="width: 88%;height: 100px;resize: none; float: left; border: 1px solid lightgray;" id="helpZoneComment" name="helpZoneComment" onKeyUp="checkLength(this);" onKeyDown="checkLength(this);" placeholder="댓글을 입력하세요.(500자이내) 불쾌감을 주는 욕설과 악플은 삭제될 수 있습니다."></textarea>
 		<button id="helpZoneCommentInsert" type="submit" class="btn btn-success" style="height:100px; width:100px; margin-left: 10px;">댓글 등록</button>			
@@ -124,28 +124,30 @@
 <h3>**댓글보기**</h3>
 <div id="hzc" class="modal-body">
 <ul class="nav nav-tabs">
-    <li class="active"><a data-toggle="tab" href="#totalcomment">일반회원 댓글만 보기</a></li>
-    <li><a data-toggle="tab" href="#hospital">병원회원 댓글만 보기</a></li>
+    <li id="commentM"><a data-toggle="tab" href="#member">일반회원 댓글만 보기</a></li>
+    <li id="commentH"><a data-toggle="tab" href="#hospital">병원회원 댓글만 보기</a></li>
   </ul>
   <div class="tab-content">
-  <div id="totalcomment" class="tab-pane fade in active">
+  <div id="member" class="tab-pane fade">
   <br><br>
   <c:if test="${empty hzMember2 }">
   	<p>일반회원 댓글이 없습니다.</p>
   </c:if>
 	<c:if test="${not empty hzMember2 }">
 	<c:forEach var='hzm' items='${hzMember2 }' varStatus="vs">
-		<p id="commentWriter" readonly>작성자 : 일반회원 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;작성일 : ${hzm.hzCommentDateM }
+		<p id="commentWriter">작성자 : <span id="memberCustomer" style="margin-right: 100px">일반회원</span> 작성일 : ${hzm.hzCommentDateM }
 			<c:if test="${checkPH=='P' }">
 				<c:if test="${hzm.hzCommentWriterNumM eq memberLoggedIn.memberNum and memberLoggedIn.memberId != 'admin' }">
-					<a data-toggle="modal" data-target="#deleteComment" style="color: red;float: right;" onclick="deleteCommentNum(${hzm.hzCommentM})">&nbsp;&nbsp;&nbsp;댓글 삭제</a>
+					<a id="sendNumM${hzm.hzCommentNumM }" data-toggle="modal" data-target="#deleteComment" style="color: red;float: right;" onclick="deleteCommentNum('${hzm.hzCommentNumM}')">&nbsp;&nbsp;&nbsp;댓글 삭제</a>
+					<input id="sendDeleteCommentNumM${hzm.hzCommentNumM}" type="hidden" value="${hzm.hzCommentNumM}">
 				</c:if>
 				<c:if test="${memberLoggedIn.memberId eq 'admin'}">
-					<a data-toggle="modal" data-target="#deleteComment" style="color: red;float: right;" onclick="deleteCommentNum(${hzm.hzCommentM})">&nbsp;&nbsp;&nbsp;댓글 삭제</a>
+					<a id="sendNumM${hzm.hzCommentNumM }" data-toggle="modal" data-target="#deleteComment" style="color: red;float: right;" onclick="deleteCommentNum('${hzm.hzCommentNumM}')">&nbsp;&nbsp;&nbsp;댓글 삭제</a>
+					<input id="sendDeleteCommentNumM${hzm.hzCommentNumM}" type="hidden" value="${hzm.hzCommentNumM}">
 				</c:if>
 			</c:if>
 		</p>
-		<p id="commentContent2" name="commentContent2">&nbsp;${hzm.hzCommentContentM }</p>
+		<p>&nbsp;${hzm.hzCommentContentM }</p>
   		<hr>
 	</c:forEach>
 	${pageBarM }
@@ -158,14 +160,25 @@
     </c:if>
     <c:if test="${not empty hzHospital2 }">
 	<c:forEach var='hzh' items='${hzHospital2 }' varStatus="vs">
-		<p id="commentWriter" readonly>작성자 : 병원회원 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;작성일 : ${hzh.hzCommentDateH }
+		<p id="commentWriter">작성자 : <span id="hospitalCustomer" style="margin-right: 100px">병원회원</span> 작성일 : ${hzh.hzCommentDateH }
+		<c:if test="${checkchoice==true && choiceWriter.hzCommentWriterNumH==hzh.hzCommentWriterNumH && choiceWriter.hzCommentChoice==hzh.hzCommentChoice }">
+			<br>
+			<span style="color: orange; font-size: 15pt;">채택된 병원회원의 댓글입니다.</span>
+		</c:if>
+		<c:if test="${checkPH=='P' }">
+			<c:if test="${checkchoice==false && helpZoneQuestioner.memberId==memberLoggedIn.memberId }">
+				<a id="choiceFalse${hzh.hzCommentNumH }" data-toggle="modal" data-target="#choiceComment" style="color: red;float: right;" onclick="sendComment('${hzh.hzCommentNumH }')">&nbsp;&nbsp;&nbsp;채택하기</a>
+				<input id="sendCommentNum${hzh.hzCommentNumH }" type="hidden" value="${hzh.hzCommentNumH }">
+			</c:if>
+		</c:if>
 			<c:if test="${checkPH=='H' }">
 				<c:if test="${hzh.hzCommentWriterNumH eq memberLoggedIn.hospitalNum}">
-					<a data-toggle="modal" data-target="#deleteComment" style="color: red;float: right;" onclick="deleteCommentNum(${hzh.hzCommentContentH})">&nbsp;&nbsp;&nbsp;댓글 삭제</a>
+					<a data-toggle="modal" data-target="#deleteComment" style="color: red;float: right;" onclick="deleteCommentNum('${hzh.hzCommentNumH}')">&nbsp;&nbsp;&nbsp;댓글 삭제</a>
+					<input id="sendDeleteCommentNumH${hzh.hzCommentNumH}" type="hidden" value="${hzh.hzCommentNumH}">
 				</c:if>
 			</c:if>
 		</p>
-		<p id="commentContent2" name="commentContent2">&nbsp;${hzh.hzCommentContentH }</p>
+		<p>&nbsp;${hzh.hzCommentContentH }</p>
   		<hr>
 	</c:forEach>
 	${pageBarH }
@@ -176,16 +189,81 @@
 
 </div>
 <br><br>
+
 <script>
+var flagM=${flagM};
+var flagH=${flagH};
+
+if(flagM!=0){
+   $(function(){
+      $('html, body').animate({
+         scrollTop: $('#hzc').offset().top
+         }, 'slow');
+      });   
+}
+
+if(flagH!=0){
+   $(function(){
+      $('html, body').animate({
+         scrollTop: $('#hzc').offset().top
+         }, 'slow');
+      });   
+}
+
+function sendComment(num){
+	var checkPH = $('#checkPH').val();
+	if(checkPH=='P'){
+		var sendCommentNum = $('#sendCommentNum'+num).val();
+		$('#receiveCommentNum').val(sendCommentNum);
+	}
+}
+
+
+function deleteCommentNum(num){
+	var checkPH = $('#checkPH').val();
+	if(checkPH=='P'){
+		var sendDeleteCommentMNum = $('#sendDeleteCommentNumM'+num).val();
+		$('#receiveDeleteCommentNumM').val(sendDeleteCommentMNum);	
+	}
+	if(checkPH=='H'){
+		var sendDeleteCommentHNum = $('#sendDeleteCommentNumH'+num).val();
+		$('#receiveDeleteCommentNumH').val(sendDeleteCommentHNum);		
+	}
+}
+
+$(function(){
+	var checkPH = $('#checkPH').val();
+	if(checkPH=='P'){
+		$('#commentM').addClass('active');
+		$('#member').addClass('in active');
+	}
+	if(checkPH=='H'){
+		$('#commentH').addClass('active');
+		$('#hospital').addClass('in active');
+	}
+});
+
+/* $(function(){
+	var cPageM = $('#cPageM').val();
+	var cPageH = $('#cPageH').val();
+	var hzc = $('#hzc');
+	$('#M'+cPageM).click(function(){
+		hzc.offset({top: 800});
+	});
+	$('#H'+cPageH).click(function(){
+		hzc.offset({top: 800});
+	});
+}); */
+
 /* 게시글 수정 함수 */
 function helpZoneUpdate(){
-	location.href="${path}/helpZone/updateHelpZone.do?num=${helpZone.helpZoneNum}";
+	location.href="${path}/helpZone/updateHelpZone.do?num="+${helpZone.helpZoneNum};
 }
 
 /* 게시글 삭제 함수 */
 function helpZoneDelete(){
 	if(confirm("정말 게시글을 정말 삭제하시겠습니까?")){
-	location.href="${path}/helpZone/deleteHelpZone.do?num=${helpZone.helpZoneNum}";
+		location.href="${path}/helpZone/deleteHelpZone.do?num="+${helpZone.helpZoneNum};
 	}else{
 		return false;
 	}
@@ -239,5 +317,77 @@ $('#helpZoneCommentInsert').click(function() {
  	});
 });
 </script>
+
+<!-- 채택 modal 시작 -->
+<div class="modal fade" id="choiceComment" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal-dialog" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">채택하기</h5>
+                  <button style="margin-top: -25px" type="button" class="close" data-dismiss="modal"
+                     aria-label="Close">
+                     X
+                  </button>
+               </div>
+               <form
+                  action="${path}/helpZone/helpZoneChoice.do"
+                  method="post">
+                  <div class="modal-body">
+                    <br>
+					<h3>해당 병원회원의 글을 채택하시겠습니까?</h3>
+					<br>
+					<input id="receiveCommentNum" type="hidden" name="hzCommentNumH">
+					<input type="hidden" name="hzNumH" value="${no }">
+                  </div>
+                  <div class="modal-footer">
+                     
+                     <button type="submit" class="btn btn-outline-success">확인</button>
+                     <button type="button" class="btn btn-outline-success"
+                        data-dismiss="modal">취소</button>
+                  </div>
+               </form>
+            </div>
+         </div>
+      </div>
+      
+      <!-- 댓글삭제 modal 시작 -->
+	<div class="modal fade" id="deleteComment" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal-dialog" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">삭제하기</h5>
+                  <button style="margin-top: -25px" type="button" class="close" data-dismiss="modal"
+                     aria-label="Close">
+                     X
+                  </button>
+               </div>
+               <form
+                  action="${path}/helpZone/deleteHelpZoneComment.do"
+                  method="post">
+                  <div class="modal-body">
+                    <br>
+					<h3>해당 댓글을 삭제하시겠습니까?</h3>
+					<br>
+					<c:if test="${checkPH=='P' }">
+						<input id="receiveDeleteCommentNumM" type="hidden" name="hzCommentNum" value="0">
+					</c:if>
+					<c:if test="${checkPH=='H' }">
+						<input id="receiveDeleteCommentNumH" type="hidden" name="hzCommentNum" value="0">
+					</c:if>
+					<input type="hidden" name="hzNum" value="${no }">
+					<input type="hidden" name="checkPH" value="${checkPH }">
+                  </div>
+                  <div class="modal-footer">
+                     
+                     <button type="submit" class="btn btn-outline-success">확인</button>
+                     <button type="button" class="btn btn-outline-success"
+                        data-dismiss="modal">취소</button>
+                  </div>
+               </form>
+            </div>
+         </div>
+      </div>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

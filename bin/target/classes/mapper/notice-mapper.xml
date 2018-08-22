@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="notice">
+	<select id="hospitalNoticeList" resultType="HospitalNotice">
+		<!-- select * from hospital_notice -->
+		select * from HospitalNotice order by hospitalNoticeDate desc
+	</select>
+	<insert id="hospitalNoticeInsert" parameterType="HospitalNotice">
+		insert into HospitalNotice VALUES(HospitalNotice_SEQ.nextval, #{hospitalNoticeTitle}, #{hospitalNoticeWriter}, #{hospitalNoticeContent}, #{hospitalNoticeFile},#{hospitalNoticeRefile},0,sysdate)
+	</insert>
+	<select id="selectOneNotice" resultType="HospitalNotice" parameterType="_int">
+		select * from hospitalNotice where hospitalNoticeNum=#{no}
+	</select>
+	<update id="updateCount" parameterType="_int">
+		UPDATE hospitalNotice SET hospitalNoticeReadcount=hospitalNoticeReadcount + 1 WHERE hospitalNoticeNum = #{no}
+	</update>
+	<select id="selectCount" resultType="_int">
+		select count(*) from HospitalNotice
+	</select>
+	<select id="selectNoticeNumber" resultType="_int">
+		select hospitalNoticeNum from HospitalNotice order by hospitalNoticeDate desc
+	</select>
+	<!-- 검색한 게시글 번호 -->
+	<select id="searchTitleNumber" resultType="_int" parameterType="string">
+		select hospitalNoticeNum from HospitalNotice where hospitalNoticeTitle LIKE #{searchContent} order by hospitalNoticeDate desc
+	</select>
+	<select id="searchContentNumber" resultType="_int" parameterType="string">
+		select hospitalNoticeNum from HospitalNotice WHERE hospitalNoticeContent LIKE #{searchContent} order by hospitalNoticeDate desc
+	</select>
+	<!-- 게시글 삭제 -->
+	<delete id="deleteHospitalNotice" parameterType="_int">
+		delete from HospitalNotice where hospitalNoticeNum=#{no}
+	</delete>
+	<!-- 게시글 검색(제목) -->
+	<select id="selectTitleSearch" resultType="HospitalNotice" parameterType="string">
+		select * from HospitalNotice WHERE hospitalNoticeTitle LIKE #{searchContent} order by hospitalNoticeDate desc
+	</select>
+	<!-- 게시글 검색(내용) -->
+	<select id="selectContentSearch" resultType="HospitalNotice" parameterType="string">
+		select * from HospitalNotice WHERE hospitalNoticeContent LIKE #{searchContent} order by hospitalNoticeDate desc
+	</select>
+	<!-- 게시글 검색 count -->
+	<select id="selectTitleSearchCount" resultType="_int" parameterType="string">
+		select count(*) from HospitalNotice where hospitalNoticeTitle LIKE #{searchContent} order by hospitalNoticeDate desc
+	</select>
+	<select id="selectContentSearchCount" resultType="_int" parameterType="string">
+		select count(*) from HospitalNotice WHERE hospitalNoticeContent LIKE #{searchContent} order by hospitalNoticeDate desc
+	</select>
+	<!-- 게시글 수정 -->
+	<update id="updateNotice" parameterType="HospitalNotice">
+		update HospitalNotice set hospitalNoticeTitle=#{hospitalNoticeTitle}, hospitalNoticeWriter=#{hospitalNoticeWriter}, hospitalNoticeContent=#{hospitalNoticeContent},
+		hospitalNoticeFile=#{hospitalNoticeFile}, hospitalNoticeRefile=#{hospitalNoticeRefile } where hospitalNoticeNum=#{hospitalNoticeNum}
+	</update>
+	
+	
+	
+	<!-- 일반회원,비회원 -->
+	<select id="memberNoticeList" resultType="MemberNotice">
+		<!-- select * from hospital_notice -->
+		select * from MemberNotice order by memberNoticeDate desc
+	</select>
+	<select id="selectMemberCount" resultType="_int">
+		select count(*) from MemberNotice
+	</select>
+	<select id="selectOneMemberNotice" resultType="MemberNotice" parameterType="_int">
+		select * from MemberNotice where memberNoticeNum=#{no}
+	</select>
+	<select id="selectMemberNoticeNumber" resultType="_int">
+		select memberNoticeNum from MemberNotice order by memberNoticeDate desc
+	</select>
+	<update id="updateMemberCount" parameterType="_int">
+		UPDATE MemberNotice SET memberNoticeReadcount=memberNoticeReadcount + 1 WHERE memberNoticeNum = #{no}
+	</update>
+	<insert id="insertMemberNotice" parameterType="MemberNotice">
+		insert into MemberNotice VALUES(MemberNotice_SEQ.nextval, #{memberNoticeTitle}, #{memberNoticeWriter}, #{memberNoticeContent}, #{memberNoticeFile},#{memberNoticeRefile},0,sysdate)
+	</insert>
+	<!-- 일반 게시판 삭제 -->
+	<delete id="deleteMemberNotice" parameterType="_int">
+		delete from MemberNotice where memberNoticeNum=#{no}
+	</delete>
+	<!-- 게시글 검색(제목) -->
+	<select id="selectMtitleSearch" resultType="MemberNotice" parameterType="string">
+		select * from MemberNotice WHERE memberNoticeTitle LIKE #{searchContent} order by memberNoticeDate desc
+	</select>
+	<!-- 게시글 검색(내용) -->
+	<select id="selectMcontentSearch" resultType="MemberNotice" parameterType="string">
+		select * from MemberNotice WHERE memberNoticeContent LIKE #{searchContent} order by memberNoticeDate desc
+	</select>
+	<!-- 게시글 검색 count -->
+	<select id="selectMtitleSearchCount" resultType="_int" parameterType="string">
+		select count(*) from MemberNotice where memberNoticeTitle LIKE #{searchContent}
+	</select>
+	<select id="selectMcontentSearchCount" resultType="_int" parameterType="string">
+		select count(*) from MemberNotice WHERE memberNoticeContent LIKE #{searchContent}
+	</select>
+	<!-- 검색한 게시글 번호 -->
+	<select id="searchMtitleNumber" resultType="_int" parameterType="string">
+		select memberNoticeNum from MemberNotice WHERE memberNoticeTitle LIKE #{searchContent} order by memberNoticeDate desc
+	</select>
+	<select id="searchMcontentNumber" resultType="_int" parameterType="string">
+		select memberNoticeNum from MemberNotice WHERE memberNoticeContent LIKE #{searchContent} order by memberNoticeDate desc
+	</select>
+	<!-- 게시글 수정 -->
+	<update id="updateMemberNotice" parameterType="MemberNotice">
+		update MemberNotice set memberNoticeTitle=#{memberNoticeTitle}, memberNoticeWriter=#{memberNoticeWriter}, memberNoticeContent=#{memberNoticeContent},
+		memberNoticeFile=#{memberNoticeFile}, memberNoticeRefile=#{memberNoticeRefile } where memberNoticeNum=#{memberNoticeNum}
+	</update>
+	
+</mapper>

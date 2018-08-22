@@ -470,8 +470,13 @@ public class PageCreate {
       
       
    }
+<<<<<<< HEAD
 
 public String getPageBarCommentM2(int cPageMem, int numPerPage, int totalCount, String url,int no)
+=======
+   
+   public String getPageBarCommentM2(int cPageMem, int numPerPage, int totalCount, String url,int no)
+>>>>>>> groot
    {
       String pageBar="";
       int pageSize=5;

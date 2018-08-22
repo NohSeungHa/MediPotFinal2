@@ -24,4 +24,9 @@ public interface HelpZoneDao {
 	int helpZoneCommentCountM(int hzNumM);	//댓글 개수 불러오기(일반)
 	int helpZoneCommentCountH(int hzNumH);	//댓글 개수 불러오기(병원)
 	Hospital selectHospital(int hospitalNum);
+	int helpZoneChoice(HelpZoneCommentHospital helpZoneCommentHospital);
+	HelpZoneCommentHospital commentchoice(int helpZoneNum);
+	int hospitalAddLike(HelpZoneCommentHospital helpZoneCommentHospital);
+	int deleteHelpZoneCommentM(HelpZoneCommentMember helpZoneCommentMember);
+	int deleteHelpZoneCommentH(HelpZoneCommentHospital helpZoneCommentHospital);
 }

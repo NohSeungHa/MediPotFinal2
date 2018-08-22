@@ -12,14 +12,13 @@ public class HelpZone {
 	String helpZoneReFile;			//새로운 파일 이름
 	int helpZoneReadCount;			//조회수
 	Date helpZoneDate;				//작성 날짜
-	int helpZoneLikeNum;			//좋아요 갯수
 	
 	public HelpZone() {
 	}
 
 	public HelpZone(int helpZoneNum, String helpZoneTitle, int helpZoneQuestioner, String helpZoneKeyWord,
 			String helpZoneContent, String helpZoneFile, String helpZoneReFile, int helpZoneReadCount,
-			Date helpZoneDate, int helpZoneLikeNum) {
+			Date helpZoneDate) {
 		super();
 		this.helpZoneNum = helpZoneNum;
 		this.helpZoneTitle = helpZoneTitle;
@@ -30,7 +29,6 @@ public class HelpZone {
 		this.helpZoneReFile = helpZoneReFile;
 		this.helpZoneReadCount = helpZoneReadCount;
 		this.helpZoneDate = helpZoneDate;
-		this.helpZoneLikeNum = helpZoneLikeNum;
 	}
 
 	public int getHelpZoneNum() {
@@ -105,14 +103,6 @@ public class HelpZone {
 		this.helpZoneDate = helpZoneDate;
 	}
 
-	public int getHelpZoneLikeNum() {
-		return helpZoneLikeNum;
-	}
-
-	public void setHelpZoneLikeNum(int helpZoneLikeNum) {
-		this.helpZoneLikeNum = helpZoneLikeNum;
-	}
-
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -121,7 +111,7 @@ public class HelpZone {
 				.append(helpZoneKeyWord).append(", helpZoneContent=").append(helpZoneContent).append(", helpZoneFile=")
 				.append(helpZoneFile).append(", helpZoneReFile=").append(helpZoneReFile).append(", helpZoneReadCount=")
 				.append(helpZoneReadCount).append(", helpZoneDate=").append(helpZoneDate).append(", helpZoneLikeNum=")
-				.append(helpZoneLikeNum).append("]");
+				.append("]");
 		return builder.toString();
 	}
 	
