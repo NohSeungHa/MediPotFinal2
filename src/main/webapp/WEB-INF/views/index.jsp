@@ -268,7 +268,7 @@ to {
 		<img src="${path}/resources/img/common/index_1.png" style="margin-bottom: 35px;width:600px;height:600px">
 	</div>
 	<div id="lankDiv" class="col-md-5" style="text-align: center;">
-		<h1 style="color: #FAED7D;font-size: 70px;padding-left:10px;">명 예 전 당</h1>
+		<h1 style="color: #002266;font-size: 70px;padding-left:10px;font-weight:900">명 예 전 당</h1>
 		<table id="lank" align="center" style="text-align:center;font-size:30px;">
 			<c:if test="${list!=null }">
 				<tr>
@@ -278,7 +278,7 @@ to {
 				</tr>
 			<c:forEach var="list" items="${list }" varStatus="s" end="2">
 				<tr>
-					<td><img src="${path}/resources/img/common/${s.count }st.jpg" width="60px;" height="60px;"></td>
+					<td><img src="${path}/resources/img/common/${s.count }lank.png" width="60px;" height="60px;"></td>
 					<td><a href="${path}/medi/mediInfo?no=${list.hospitalNum}">${list.hospitalName }</a></td>
 					<td>${list.hospitalProfessional }</td>
 				</tr>
@@ -290,18 +290,22 @@ to {
 				</tr>
 			</c:if>
 		</table>
+		<br><br><br>
+		<span style="font-size:30px;">명예전당이란?</span>
+		<br>
+		<p>HELP ZONE에서 가장 많은 채택을 받은 병원들의 순위 입니다.</p>
 	</div>
 	<style>
 		#lankDiv{
-			padding-top:40px;
-			background-image:url("${path}/resources/img/common/lankImg2.jpg");
+			padding-top:33px;
+			background-image:url("${path}/resources/img/common/l13.jpg");
 			background-size: 490px 470px;
 			background-repeat: no-repeat;
 			height:500px;
 		}
 		#lank td{
 			width:170px;
-			height:70px;
+			height:85px;
 		}
 		#lank th{
 			text-align: center;
@@ -312,6 +316,7 @@ to {
 		#lank a:hover{
 			color: #2A5060;
 		}
+		
 	</style>
 
 
