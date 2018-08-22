@@ -4,6 +4,7 @@
 <%@ taglib prefix='fmt' uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix='fn' uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="path" value="<%=request.getContextPath() %>"/>
+<h2 id="commentMain">댓글</h2>
 <c:forEach var='cc' items='${cc2 }' varStatus="vs">
 		<p id="commentWriter" readonly>작성자 : ${cc.commentWriter} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;작성일 : ${cc.commentDate }
 		<c:if test="${cc.commentCheckPH eq checkPH and checkPH eq 'P'}">

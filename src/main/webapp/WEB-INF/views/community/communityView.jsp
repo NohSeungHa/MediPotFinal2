@@ -92,10 +92,10 @@
 	</c:if>
   	<br>
   	<!-- 댓글  -->
-  	<h2 id="commentMain">댓글</h2>
   
   <div id="cc2s" class="modal-body" >
   <c:if test="${not empty cc2}">
+  	<h2 id="commentMain">댓글</h2>
   	<c:forEach var='cc' items='${cc2 }' varStatus="vs">
 		<p id="commentWriter" readonly>작성자 : ${cc.commentWriter} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;작성일 : ${cc.commentDate }
 		<c:if test="${cc.commentCheckPH eq checkPH and checkPH eq 'P'}">
