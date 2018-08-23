@@ -145,7 +145,7 @@
 
 				<!-- 드롭다운 메뉴 -->
 				<ul class="nav navbar-nav navbar-right" style="font-size:35px;margin-top:2.0%;margin-right:2%;">
-					<li><a href="${path}/medi/mediAll" style="margin-right:397px;"><span style="font-size:20px;">병원 전체 보기</span></a></li>
+					<li><a href="${path}/medi/mediAll"><span>병원전체보기</span></a></li>
 					<li><a href="${path}/medi/medireser.do">병원예약</a></li>
 					<!-- 드랍다운 메뉴 만들기 기본 셋팅-->
 					<li class="dropdown">
