@@ -144,7 +144,7 @@
 					<tr>
 						<th>사업자번호<b>(*)</b></th>
 						<td>
-						<input type="file" name="hospitalLicense" id="hospitalLicense" accept=".jpg, .png, .bmp" style="width: 280px" required>
+						<input type="file" name="hospitalLicense" id="hospitalLicense" accept=".jpg, .png, .bmp" style="width: 280px">
 						<input type="hidden" class="form-control" name="oldhospitalLicense" id="oldhospitalLicense" value="${memberLoggedIn.hospitalLicense }" readonly>
 						</td>
 					</tr>

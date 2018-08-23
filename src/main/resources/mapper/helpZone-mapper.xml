@@ -104,7 +104,24 @@
 	<select id="commentCountH" parameterType="_int" resultType="_int">
 		select count(*) from helpZoneCommentHospital where hzNumH=#{number}
 	</select>
+	<!-- 댓글갯수 -->
 	<update id="commentCountUpdate" parameterType="map">
 		update helpZone set helpZoneCommentCount=#{totalCount} where helpZoneNum=#{no}
 	</update>
+	<!-- 제목으로 검색 -->
+	<select id="selectTitleSearchCount" parameterType="string" resultType="_int">
+		select count(*) from helpZone where helpZoneTitle like #{searchContent}
+	</select>
+	<!-- 내용으로 검색 -->
+	<select id="selectTitleSearchCount" parameterType="string" resultType="_int">
+		select count(*) from helpZone where helpZoneContent like #{searchContent}
+	</select>
+	<!-- 제목으로 검색 한 리스트 -->
+	<select id="selectHelpZoneTitleList" parameterType="string" resultType="HelpZone">
+		select * from helpZone where helpZoneTitle like #{searchContent}
+	</select>
+	<!-- 내용으로 검색 한 리스트 -->
+	<select id="selectHelpZoneContentList" parameterType="string" resultType="HelpZone">
+		select * from helpZone where helpZoneContent like #{searchContent}
+	</select>
 </mapper>

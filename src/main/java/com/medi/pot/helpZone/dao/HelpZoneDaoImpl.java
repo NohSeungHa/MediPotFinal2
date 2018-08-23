@@ -135,6 +135,28 @@ public class HelpZoneDaoImpl implements HelpZoneDao {
 	public int deleteHelpZoneCommentH(HelpZoneCommentHospital helpZoneCommentHospital) {
 		return session.delete("helpZone.deleteHelpZoneCommentH", helpZoneCommentHospital);
 	}
+
+	@Override
+	public int selectTitleSearchCount(String searchContent) {
+		return session.selectOne("helpZone.selectTitleSearchCount", searchContent);
+	}
+
+	@Override
+	public int selectContentSearchCount(String searchContent) {
+		return session.selectOne("helpZone.selectContentSearchCount", searchContent);
+	}
+
+	@Override
+	public List<HelpZone> selectHelpZoneTitleList(int cPage, int numPerPage, String searchContent) {
+		RowBounds rb=new RowBounds((cPage-1)*numPerPage,numPerPage);
+		return session.selectList("helpZone.selectHelpZoneTitleList", searchContent, rb);
+	}
+
+	@Override
+	public List<HelpZone> selectHelpZoneContentList(int cPage, int numPerPage, String searchContent) {
+		RowBounds rb=new RowBounds((cPage-1)*numPerPage,numPerPage);
+		return session.selectList("helpZone.selectHelpZoneContentList", searchContent, rb);
+	}
 	
 
 }

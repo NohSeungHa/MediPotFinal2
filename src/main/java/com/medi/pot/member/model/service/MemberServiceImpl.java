@@ -331,7 +331,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public String selectDoctorPhoto(int hospitalNo) {
+	public List<String> selectDoctorPhoto(int hospitalNo) {
 		
 		return dao.selectDoctorPhoto(sqlSession, hospitalNo);
 		
@@ -383,6 +383,34 @@ public class MemberServiceImpl implements MemberService {
 	public List<Integer> selectNoticeNums(String memberId) {
 		
 		return dao.selectNoticeNums(sqlSession, memberId);
+		
+	}
+
+	@Override
+	public int deleteMemberReservation(int checkHospital) {
+		
+		return dao.deleteMemberReservation(sqlSession, checkHospital);
+		
+	}
+
+	@Override
+	public int deleteDoctorSchedule(int scheduleNum) {
+		
+		return dao.deleteDoctorSchedule(sqlSession, scheduleNum);
+		
+	}
+
+	@Override
+	public int deleteReservationBlock(int blockHospital) {
+		
+		return dao.deleteReservationBlock(sqlSession, blockHospital);
+		
+	}
+
+	@Override
+	public int updateHelpZoneInfo(int hzCommentWriterNumH) {
+		
+		return dao.updateHelpZoneInfo(sqlSession, hzCommentWriterNumH);
 		
 	}
 	

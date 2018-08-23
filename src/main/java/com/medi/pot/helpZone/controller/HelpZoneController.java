@@ -390,4 +390,34 @@ public class HelpZoneController {
 		return "common/msg";
 	}
 	
+	@RequestMapping("/helpZone/helpZoneSearch.do")
+	public String helpZoneSearch(String searchKind, String searchContent,
+			@RequestParam(value="cPage",required=false,defaultValue="1") int cPage, Model model) {
+		int numPerPage=6;
+		int totalCount=0;
+		String pageBar=null;
+		
+		searchContent ="%"+searchContent+"%"; // DB에 입력시 like % a % 라고 입력하기 때문에 변경
+		
+		List<HelpZone> HelpZoneList = new ArrayList();
+		if(searchKind.equals("title")) {
+			HelpZoneList = service.selectHelpZoneTitleList(cPage, numPerPage, searchContent);
+			totalCount = service.selectTitleSearchCount(searchContent);
+		} else {
+			HelpZoneList = service.selectHelpZoneContentList(cPage, numPerPage, searchContent);
+			totalCount = service.selectContentSearchCount(searchContent);
+		}
+		pageBar=new PageCreate().getPageBar(cPage, numPerPage,totalCount,searchKind,searchContent,"helpZoneSearch.do");
+		searchContent = searchContent.replace("%", "");
+		
+		model.addAttribute("cPage", cPage);
+		model.addAttribute("searchKind", searchKind);
+		model.addAttribute("searchContent", searchContent);
+		model.addAttribute("list", HelpZoneList);
+		model.addAttribute("totalCount", totalCount);
+		model.addAttribute("pageBar", pageBar);
+		
+		return "helpZone/helpZoneSearch";
+	}
+	
 }

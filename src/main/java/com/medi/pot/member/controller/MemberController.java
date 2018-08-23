@@ -631,23 +631,37 @@ public class MemberController {
 			if(bcrypt.matches(hospitalPw, h.getHospitalPw())) {
 				msg = "삭제 성공";
 				
-				// 예약 예외처리 부터 지우기
-				// 예약 회원 지우기
+				//예약 조회 삭제 - 병원번호 받아서 삭제
+				service.deleteMemberReservation(h.getHospitalNum());
+				//의사 스케줄 삭제 - 병원안에 의사번호 받아서 삭제
+				List<DoctorInfos> doctorNums = service.selectDoctorInfo(h.getHospitalNum());
+				for(int i = 0; i < doctorNums.size(); i++) {
+					service.deleteDoctorSchedule(doctorNums.get(i).getDoctorNum());					
+				}
+				//예약 블락테이블 삭제 - 병원번호 받아서 삭제
+				service.deleteReservationBlock(h.getHospitalNum());
+				//의사정보 삭제 - 병원번호 받아서 삭제
+				List<String> deleteStr1 = service.selectDoctorPhoto(h.getHospitalNum()); // 의사 사진 삭제
+				service.deleteDoctors(h.getHospitalNum()); // 의사정보삭제
+				for(int j = 0; j < deleteStr1.size(); j++) {
+					File doctorDelete = new File("C:\\Medipot_Git\\MediPotFinal2\\src\\main\\webapp\\resources\\uploadfile\\dortors\\"+deleteStr1.get(j));
+					doctorDelete.delete();					
+				}
 				
-				String deleteStr1 = service.selectDoctorPhoto(h.getHospitalNum()); // 의사 사진 삭제
-				service.deleteDoctors(h.getHospitalNum());
-				File deleteFile = new File("C:\\Medipot_Git\\MediPotFinal2\\src\\main\\webapp\\resources\\uploadfile\\dortors\\"+deleteStr1);
-				deleteFile.delete();
-				
+				// 병원정보 삭제 - 병원번호 받아서 삭제
 				String deleteStr2 = service.selectHospitalInfoPhoto(h.getHospitalNum()); // 병원 사진 삭제
 				service.deleteHospitalInfo(h.getHospitalNum());
-				deleteFile = new File("C:\\Medipot_Git\\MediPotFinal2\\src\\main\\webapp\\resources\\uploadfile\\hospitalInfo\\"+deleteStr2);
-				deleteFile.delete();
+				File hospitalInfoDelete = new File("C:\\Medipot_Git\\MediPotFinal2\\src\\main\\webapp\\resources\\uploadfile\\hospitalInfo\\"+deleteStr2);
+				hospitalInfoDelete.delete();
 				
+				//헬프존 병원댓글 테이블 수정 - 병원번호 받아서 변경
+				service.updateHelpZoneInfo(h.getHospitalNum());
+				
+				// 병원 회원 삭제
 				String deleteStr3 = service.selectHospitalLicense(h.getHospitalNum()); // 병원 회원 사업자번호 사진 삭제
 				service.updateHospital(h.getHospitalNum());
-				deleteFile = new File("C:\\Medipot_Git\\MediPotFinal2\\src\\main\\webapp\\resources\\uploadfile\\H_License\\"+deleteStr3);
-				deleteFile.delete();
+				File hospitalDelete = new File("C:\\Medipot_Git\\MediPotFinal2\\src\\main\\webapp\\resources\\uploadfile\\H_License\\"+deleteStr3);
+				hospitalDelete.delete();
 				
 				sessionStatus.setComplete();
 			}

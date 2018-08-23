@@ -209,4 +209,23 @@
 	<select id="selectHospitalLicense" parameterType="_int" resultType="string">
 		select hospitalReLicense from hospital where hospitalNum=#{hospitalNum}
 	</select>
+	
+	<delete id="deleteMemberReservation" parameterType="_int">
+		delete from MemberReservation where checkHospital=#{checkHospital}
+	</delete>
+	
+	<delete id="deleteDoctorSchedule" parameterType="_int">
+		delete from DoctorSchedule where scheduleNum=#{scheduleNum}
+	</delete>
+	
+	<delete id="deleteReservationBlock" parameterType="_int">
+		delete from ReservationBlock where blockHospital=#{blockHospital}
+	</delete>
+	
+	<update id="updateHelpZoneInfo" parameterType="_int">
+		update HelpZoneCommentHospital set
+			hzCommentWriterNumH='회원탈퇴',
+			hzCommentChoice=0
+		where hzCommentWriterNumH=#{hzCommentWriterNumH}
+	</update>
 </mapper>

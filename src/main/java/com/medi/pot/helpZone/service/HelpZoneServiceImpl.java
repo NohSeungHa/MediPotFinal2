@@ -118,5 +118,25 @@ public class HelpZoneServiceImpl implements HelpZoneService {
 		return helpZoneDao.deleteHelpZoneCommentH(helpZoneCommentHospital);
 	}
 
+	@Override
+	public int selectTitleSearchCount(String searchContent) {
+		return helpZoneDao.selectTitleSearchCount(searchContent);
+	}
+
+	@Override
+	public int selectContentSearchCount(String searchContent) {
+		return helpZoneDao.selectContentSearchCount(searchContent);
+	}
+
+	@Override
+	public List<HelpZone> selectHelpZoneTitleList(int cPage, int numPerPage, String searchContent) {
+		return helpZoneDao.selectHelpZoneTitleList(cPage, numPerPage, searchContent);
+	}
+
+	@Override
+	public List<HelpZone> selectHelpZoneContentList(int cPage, int numPerPage, String searchContent) {
+		return helpZoneDao.selectHelpZoneContentList(cPage, numPerPage, searchContent);
+	}
+
 	
 }

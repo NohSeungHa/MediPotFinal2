@@ -67,9 +67,13 @@ public interface MemberService {
 	int deleteDoctors(int hospitalNo);
 	int deleteHospitalInfo(int hospitalInfoNum);
 	int updateHospital(int hospitalNum);
-	String selectDoctorPhoto(int hospitalNo);
+	List<String> selectDoctorPhoto(int hospitalNo);
 	String selectHospitalInfoPhoto(int hospitalInfoNum);
 	String selectHospitalLicense(int hospitalNum);
+	int deleteMemberReservation(int checkHospital);
+	int deleteDoctorSchedule(int scheduleNum);	
+	int deleteReservationBlock(int blockHospital);
+	int updateHelpZoneInfo(int hzCommentWriterNumH);
 	
 	/* 병원정보 */
 	int hospitalInfoinsert(HospitalInfos hospitalInfo);

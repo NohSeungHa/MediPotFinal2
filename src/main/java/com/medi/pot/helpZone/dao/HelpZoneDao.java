@@ -29,4 +29,9 @@ public interface HelpZoneDao {
 	int hospitalAddLike(HelpZoneCommentHospital helpZoneCommentHospital);
 	int deleteHelpZoneCommentM(HelpZoneCommentMember helpZoneCommentMember);
 	int deleteHelpZoneCommentH(HelpZoneCommentHospital helpZoneCommentHospital);
+	int selectTitleSearchCount(String searchContent);
+	int selectContentSearchCount(String searchContent);
+	List<HelpZone> selectHelpZoneTitleList(int cPage, int numPerPage, String searchContent);
+	List<HelpZone> selectHelpZoneContentList(int cPage, int numPerPage, String searchContent);
+	
 }
