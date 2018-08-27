@@ -387,6 +387,16 @@ $(function(){
 			alert("이메일을 인증해주세요.");
 			return false;
 		}
+		if($('#J1').prop('checked') || $('#C1').prop('checked') || $('#P1').prop('checked') || $('#S1').prop('checked') ||
+	            $('#A1').prop('checked') || $('#B1').prop('checked') || $('#S2').prop('checked') || $('#N1').prop('checked') ||
+	            $('#E1').prop('checked') || $('#H1').prop('checked') || $('#SB1').prop('checked')){
+	         
+	        return true;
+	     }
+	     else {
+	        alert("진료과목을 체크해주세요.");
+	        return false;
+	     }
 		return true;
 	}
 	</script>
