@@ -31,6 +31,7 @@
 			<span style="font-size:20px;">${list.hospitalAddr }</span></p>
 		</div>
 	</div>
+		
 	</c:forEach>
 		${pageBar }
 	</div>

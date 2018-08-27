@@ -37,7 +37,7 @@
 </div>
 
 <div class="HospitalUpdateFrm">
-	<h1 style="text-align: center">병 원 정 보 입 력</h1>
+	<h1 style="text-align: center">병 원 정 보 수 정</h1>
 	<form action="${pageContext.request.contextPath }/member/hospitalInfoUpdateEnd.do" method="post" enctype="multipart/form-data">
 		<table class="tblUpdateFrm">
 			<tr>

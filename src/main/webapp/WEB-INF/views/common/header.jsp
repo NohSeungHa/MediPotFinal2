@@ -46,11 +46,11 @@
                <span class="icon-bar"></span>
             </button>
             <!-- 네비게이션 바 메디팟 로고  -->
-            <a class="navbar-brand" href="${path }/"><img src="${path }/resources/img/common/MediPot_logo.png" width="250px" height="60px" style="margin-left:30%;margin-top: 4%;" ></a>
+            <a class="navbar-brand" href="${path }/"><img src="${path }/resources/img/common/MediPot_logo.png" width="250px" height="60px" style="margin-left:30%;margin-top: 6%;" ></a>
          </div>
          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <!-- 검색창 만들기 -->
-            <form class="navbar-form navbar-left" action="${path }/medi/searchMedi" style="margin-top: 2.5%;margin-left:5%;">
+            <form class="navbar-form navbar-left" action="${path }/medi/searchMedi" style="margin-top: 2.25%;margin-left:5%;">
                <input type="text" name="hName" class="form-control" placeholder="병원이름 검색">
                <button type="submit" class="btn btn-default">검색</button>
             </form>
@@ -67,11 +67,11 @@
             <!-- 로그인 후 -->
             <c:if test="${memberLoggedIn!=null }">
                
-            <ul class="nav navbar-nav navbar-right" style="margin-top:2.5%;margin-right:1%;">
+            <ul class="nav navbar-nav navbar-right" style="margin-top:2.0%;margin-right:1%;">
             
                <c:if test="${checkPH=='P' }">
                   <c:if test="${memberLoggedIn.memberId!='admin' }">
-                     <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${memberLoggedIn.memberName }&nbsp;님 환영합니다.<span class="caret"></span></a>
+                     <li class="dropdown"><a href="#" class="dropdown-toggle dt2" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><p style="max-width: 100px;">${memberLoggedIn.memberName }&nbsp;님<br>환영합니다.<span class="caret"></span></p></a>
                      <ul class="dropdown-menu">
                         <li><a href="${pageContext.request.contextPath }/member/mypage.do?user_id=${memberLoggedIn.memberId}&checkPH=${checkPH}">마이페이지</a></li>
                         <li><a href="${pageContext.request.contextPath }/medi/reserList?userNum=${memberLoggedIn.memberNum}" >내 예약 정보</a></li>
@@ -80,7 +80,7 @@
                      </li>
                   </c:if>
                   <c:if test="${memberLoggedIn.memberId=='admin' }">
-                     <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${memberLoggedIn.memberName }&nbsp;님 환영합니다.<span class="caret"></span></a>
+                     <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><p style="max-width: 100px;">${memberLoggedIn.memberName }&nbsp;님<br>환영합니다.<span class="caret"></span></p></a>
                      <ul class="dropdown-menu">
                         <li><a href="${pageContext.request.contextPath }/member/mypage.do?user_id=${memberLoggedIn.memberId}&checkPH=${checkPH}">관리자 페이지</a></li>
                      </ul>
@@ -116,7 +116,7 @@
                      </c:if>
                      
                      <li class="dropdown">
-                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${memberLoggedIn.hospitalName }&nbsp;님 환영합니다.<span class="caret"></span></a>
+                     <a href="#" class="dropdown-toggle dt2" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><p>${memberLoggedIn.hospitalName }&nbsp;님<br>환영합니다.<span class="caret"></span></p></a>
                      <ul class="dropdown-menu">
                         <li><a href="${pageContext.request.contextPath }/member/mypage.do?user_id=${memberLoggedIn.hospitalId}&checkPH=${checkPH}">마이페이지</a></li>
                         <c:if test="${InfoCheck=='no' }">
@@ -144,7 +144,7 @@
 
 
             <!-- 드롭다운 메뉴 -->
-            <ul class="nav navbar-nav navbar-right" style="font-size:35px;margin-top:2.5%;margin-right:2%;">
+            <ul class="nav navbar-nav navbar-right" style="font-size:30px;margin-top:2.5%;margin-right:2%;">
                <li><a href="${path}/medi/mediAll"><span style="font-size:20px;">병원 전체 보기</span></a></li>
                <li><a href="${path}/medi/medireser.do">병원예약</a></li>
                <!-- 드랍다운 메뉴 만들기 기본 셋팅-->
@@ -188,10 +188,15 @@
                $(function () {
                   $('.dropdown-toggle').click(function () {
                      $('.dropdown-toggle').css("background-color","#2C3E50");
-                     
                   });
                   
                });
+               $(function () {
+                   $('.dt2').click(function () {
+                      $('.dt2').css("padding-bottom","0px");
+                   });
+                   
+                });
                $(function(){
                       if(${checkPH=='P'} || ${checkPH=='H'}){
                          $('#bemember').css("display","none");

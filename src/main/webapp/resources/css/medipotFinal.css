@@ -18,7 +18,7 @@ a:hover{
 
 /*네비게이션 영역*/
 .navbar-default{/*배경 색상*/
-	height:120px;
+	height:150px;
 	background-color: #2c3e50;
 	border-bottom:8px solid #59DBF1;		/*블랙*/
 }
@@ -50,7 +50,7 @@ a:hover{
 .navbar-default .navbar-nav > .open > a,
 .navbar-default .navbar-nav > .open > a:hover,
 .navbar-default .navbar-nav > .open > a:focus {/*드랍다운이 열렸을 때 마우스 색상 이벤트*/
-	color: #51C0BF;
+	color: #51C0BF	;
 	background-color: #ffffff; 
 	text-decoration: none;
 }

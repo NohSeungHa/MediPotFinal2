@@ -12,14 +12,16 @@ public class HelpZone {
 	String helpZoneReFile;			//새로운 파일 이름
 	int helpZoneReadCount;			//조회수
 	Date helpZoneDate;				//작성 날짜
+	int helpZoneCommentCount;
 	
 	
 	public HelpZone() {
 	}
 
+
 	public HelpZone(int helpZoneNum, String helpZoneTitle, int helpZoneQuestioner, String helpZoneKeyWord,
 			String helpZoneContent, String helpZoneFile, String helpZoneReFile, int helpZoneReadCount,
-			Date helpZoneDate) {
+			Date helpZoneDate, int helpZoneCommentCount) {
 		super();
 		this.helpZoneNum = helpZoneNum;
 		this.helpZoneTitle = helpZoneTitle;
@@ -30,91 +32,120 @@ public class HelpZone {
 		this.helpZoneReFile = helpZoneReFile;
 		this.helpZoneReadCount = helpZoneReadCount;
 		this.helpZoneDate = helpZoneDate;
+		this.helpZoneCommentCount = helpZoneCommentCount;
 	}
+
+
+	@Override
+	public String toString() {
+		return "HelpZone [helpZoneNum=" + helpZoneNum + ", helpZoneTitle=" + helpZoneTitle + ", helpZoneQuestioner="
+				+ helpZoneQuestioner + ", helpZoneKeyWord=" + helpZoneKeyWord + ", helpZoneContent=" + helpZoneContent
+				+ ", helpZoneFile=" + helpZoneFile + ", helpZoneReFile=" + helpZoneReFile + ", helpZoneReadCount="
+				+ helpZoneReadCount + ", helpZoneDate=" + helpZoneDate + ", helpZoneCommentCount="
+				+ helpZoneCommentCount + "]";
+	}
+
 
 	public int getHelpZoneNum() {
 		return helpZoneNum;
 	}
 
+
 	public void setHelpZoneNum(int helpZoneNum) {
 		this.helpZoneNum = helpZoneNum;
 	}
+
 
 	public String getHelpZoneTitle() {
 		return helpZoneTitle;
 	}
 
+
 	public void setHelpZoneTitle(String helpZoneTitle) {
 		this.helpZoneTitle = helpZoneTitle;
 	}
+
 
 	public int getHelpZoneQuestioner() {
 		return helpZoneQuestioner;
 	}
 
+
 	public void setHelpZoneQuestioner(int helpZoneQuestioner) {
 		this.helpZoneQuestioner = helpZoneQuestioner;
 	}
+
 
 	public String getHelpZoneKeyWord() {
 		return helpZoneKeyWord;
 	}
 
+
 	public void setHelpZoneKeyWord(String helpZoneKeyWord) {
 		this.helpZoneKeyWord = helpZoneKeyWord;
 	}
+
 
 	public String getHelpZoneContent() {
 		return helpZoneContent;
 	}
 
+
 	public void setHelpZoneContent(String helpZoneContent) {
 		this.helpZoneContent = helpZoneContent;
 	}
+
 
 	public String getHelpZoneFile() {
 		return helpZoneFile;
 	}
 
+
 	public void setHelpZoneFile(String helpZoneFile) {
 		this.helpZoneFile = helpZoneFile;
 	}
+
 
 	public String getHelpZoneReFile() {
 		return helpZoneReFile;
 	}
 
+
 	public void setHelpZoneReFile(String helpZoneReFile) {
 		this.helpZoneReFile = helpZoneReFile;
 	}
+
 
 	public int getHelpZoneReadCount() {
 		return helpZoneReadCount;
 	}
 
+
 	public void setHelpZoneReadCount(int helpZoneReadCount) {
 		this.helpZoneReadCount = helpZoneReadCount;
 	}
+
 
 	public Date getHelpZoneDate() {
 		return helpZoneDate;
 	}
 
+
 	public void setHelpZoneDate(Date helpZoneDate) {
 		this.helpZoneDate = helpZoneDate;
 	}
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("HelpZone [helpZoneNum=").append(helpZoneNum).append(", helpZoneTitle=").append(helpZoneTitle)
-				.append(", helpZoneQuestioner=").append(helpZoneQuestioner).append(", helpZoneKeyWord=")
-				.append(helpZoneKeyWord).append(", helpZoneContent=").append(helpZoneContent).append(", helpZoneFile=")
-				.append(helpZoneFile).append(", helpZoneReFile=").append(helpZoneReFile).append(", helpZoneReadCount=")
-				.append(helpZoneReadCount).append(", helpZoneDate=").append(helpZoneDate).append(", helpZoneLikeNum=")
-				.append("]");
-		return builder.toString();
+
+	public int getHelpZoneCommentCount() {
+		return helpZoneCommentCount;
 	}
+
+
+	public void setHelpZoneCommentCount(int helpZoneCommentCount) {
+		this.helpZoneCommentCount = helpZoneCommentCount;
+	}
+
+	
 	
 	
 }

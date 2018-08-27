@@ -14,7 +14,7 @@ public interface ReservationDao {
 	
 	List<HospitalInfo> medisearchList(Map<String, String> map,int cPage,int numPerPage);
 	int selectCount(Map<String, String> map);
-	List<HospitalInfo> mediNameSearch(String hName);
+	List<HospitalInfo> mediNameSearch(String hName,int cPage,int numPerPage);
 	HospitalInfo mediInfo(int num);
 	List<DoctorInfo> selectDoctorList(int num);
 	DoctorInfo selectDoctor(int docNo);
@@ -37,4 +37,5 @@ public interface ReservationDao {
 	int deleteSearchReserMember(int num);
 	List<HospitalInfo> selectHosList();
 	List<HospitalInfo> selectAll();
+	int selectCountSearch(String hName);
 }

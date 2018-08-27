@@ -82,14 +82,18 @@ public class ReservationController {
 	}
 	
 	@RequestMapping("/medi/searchMedi")
-	public String searchMedi(@RequestParam(value = "hName")String hName, HttpServletRequest req) {
-		List<HospitalInfo> nameList=service.mediNameSearch(hName);
+	public String searchMedi(@RequestParam(value="cPage", required=false,defaultValue="1") int cPage, @RequestParam(value = "hName")String hName, HttpServletRequest req) {
+		int numPerPage=10;
+		List<HospitalInfo> nameList=service.mediNameSearch(hName,cPage,numPerPage);
+		int totalCount=service.selectCountSearch(hName);
+		String pageBar=new PageCreate2().getPageBar(cPage, numPerPage, totalCount, req.getContextPath()+"/medi/searchMedi", hName);
 		req.setAttribute("nameList", nameList);
 		String ch="";
 		if(nameList.size()<1) {
 			ch="none";
 		}
 		req.setAttribute("ch", ch);
+		req.setAttribute("pageBar", pageBar);
 		return "medi_reservation/mediFindList";
 	}
 	
@@ -475,8 +479,8 @@ public class ReservationController {
 		if(!str.equals("ok")) {
 			list=null;
 		}
+		
 		req.setAttribute("list", list);
-		System.out.println("list : "+list);
 		return "index";
 	}
 	

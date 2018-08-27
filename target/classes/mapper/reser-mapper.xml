@@ -104,11 +104,15 @@
 	</delete>
 	
 	<select id="selectHos" resultType="HospitalInfo">
-		select * from hospital order by hospitallike desc
+		select * from hospital where hospitallike>0 order by hospitallike desc
 	</select>
 	
 	<select id="selectAll" resultType="HospitalInfo">
       select * from hospital join hospitalinfo on(hospitalnum=hospitalinfonum)
+   </select>
+   
+   <select id="selectCountSearch" resultType="_int">
+   		select count(*) from hospital join hospitalinfo on(hospitalnum=hospitalinfonum) where hospital.hospitalName like '%'||#{hName}||'%'
    </select>
 	
 </mapper>

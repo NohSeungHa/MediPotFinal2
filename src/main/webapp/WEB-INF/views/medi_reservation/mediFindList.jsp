@@ -10,14 +10,15 @@
 </jsp:include>
 	<div class="container">
 	<div id="searchH">
-			<img alt="searchImg" src="${path }/resources/img/reser/reser.png" width="60%;" height="380px;">
-			<div id="searchH2">
-			<form action="${path }/medi/searchMedi">
-			<input type="text" name="hName" class="form-control" placeholder="병원이름 검색" style="width:140%;">
-			<br>
-			<button type="submit" class="btn btn-default" style="margin-left:40%;width:50%">검색</button>
-			</form>
-			</div>
+		
+				<img alt="searchImg" src="${path }/resources/img/reser/reser.png" width="60%;" height="380px;">
+				<div id="searchH2">
+				<form action="${path }/medi/searchMedi">
+				<input type="text" name="hName" class="form-control" placeholder="병원이름 검색" style="width:110%;">
+				<br>
+				<button type="submit" class="btn btn-default" style="margin-left:20%;width:50%">검색</button>
+				</form>
+				</div>
 	</div>
 	<style>
 		#searchH{
@@ -27,7 +28,7 @@
 		#searchH2{
 			position:absolute;
 			top:53%;
-			left:57%; 
+			left:60%; 
 		}
 		
 		#locList 
@@ -80,10 +81,10 @@
 		.mediList{
 			border:4px solid white;
 		}
-		.mediList:hover{
+/* 		.mediList:hover{
 			cursor:pointer;
 			border:4px solid #286090;
-		}
+		} */
 	</style>
 	<br>
 	<c:if test="${empty nameList }">
@@ -125,25 +126,63 @@
 		병원 리스트
 	</div>
 	<c:forEach var="list" items="${nameList }" >
-	<div class="mediList" id="${list.hospitalNum }" style="display:inline-block;width:49%;margin-right:5px; position:relative;margin-bottom:20px;">
-		<div style="display: inline-block;"><img src="${path }/resources/uploadfile/hospitalInfo/${list.hospitalRePhoto}" width="200px;" height="200px;"></div>
-		<div id="hlist" style="display: inline-block;position:absolute;">
-			<p><span style="font-size:20px;color: #286090">병원명</span>&nbsp;&nbsp;
-			<span style="font-size:20px;">${list.hospitalName }</span></p>
-			
-			<p><span style="font-size:20px;color: #286090">진료과목</span>&nbsp;&nbsp;
-			<span style="font-size:20px;">
-			${list.hospitalProfessional }
-			</span></p>
-			
-			<p><span style="font-size:20px;color: #286090">전화번호</span>&nbsp;&nbsp;
-			<span style="font-size:20px;">${list.hospitalTel }</span></p>
-			
-			<p><span style="font-size:20px;color: #286090">주소</span>&nbsp;&nbsp;
-			<span style="font-size:20px;">${list.hospitalAddr }</span></p>
+	<div class="mediList" id="${list.hospitalNum }" style="display:inline-block;width:49%;margin-right:5px; position:relative;margin-bottom:20px;height:230px;padding:5px;">
+			<div style="display: inline-block;"><img src="${path }/resources/uploadfile/hospitalInfo/${list.hospitalRePhoto}" width="200px;" height="210px;"></div>
+			<div id="hlist" style="display: inline-block;position:absolute;">
+				<p><span style="font-size:20px;color: #286090">병원명</span>&nbsp;&nbsp;
+				<span style="font-size:20px;">${list.hospitalName }</span></p>
+				
+				<p><span style="font-size:20px;color: #286090">진료과목</span>&nbsp;&nbsp;
+				<span style="font-size:20px;">
+				${list.hospitalProfessional }
+				</span></p>
+				
+				<p><span style="font-size:20px;color: #286090">전화번호</span>&nbsp;&nbsp;
+				<span style="font-size:20px;">${list.hospitalTel }</span></p>
+				
+				<p><span style="font-size:20px;color: #286090">주소</span>&nbsp;&nbsp;
+				<span style="font-size:20px;">${list.hospitalAddr }</span></p>
+				<button class="reser" name="${list.hospitalNum }">바로 예약하러가기</button>
 		</div>
 	</div>
 	</c:forEach>
+	<style>
+		.reser{
+		width:250px;
+		height:40px;
+		font-size:20px;
+		background-color:white;
+		border:2px solid lightgray;
+		border-radius:5px;
+		box-shadow:3px 3px 5px lightgray;
+		
+	}
+	 .reser:hover{
+		background-color:#286090;
+		color:white;
+	} 
+	</style>
+	<script>
+		$('.reser').click(function (event) {
+			location.href='${path}/medi/reser?no='+$(this).attr('name');
+			event.stopPropagation();
+		});
+		$('.reser').mouseover(function () {
+			$(this).parent().parent('.mediList').css("border","");
+			event.stopPropagation();
+		});
+		$('.reser').mouseout(function () {
+			$(this).parent().parent('.mediList').css("border","4px solid #286090");
+		});
+		$(".mediList").mouseover(function () {
+			$(this).css("border","4px solid #286090");
+			$(this).css("cursor","pointer");
+		});
+		$(".mediList").mouseout(function () {
+			$(this).css("border","4px solid white");
+		});		
+	</script>
+	<div>${pageBar }</div>
 	</c:if>
 	<div id="noneList">
 		<div style="width:100%;height:50px;font-size:20px;text-align:center;background-color:#286090;padding-top:11px;color:white;border-radius:8px;margin-bottom:10px;">

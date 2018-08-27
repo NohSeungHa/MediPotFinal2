@@ -33,8 +33,9 @@ public class ReservationDaoImpl implements ReservationDao {
 	}
 
 	@Override
-	public List<HospitalInfo> mediNameSearch(String hName) {
-		return session.selectList("reser.selectName", hName);
+	public List<HospitalInfo> mediNameSearch(String hName,int cPage,int numPerPage) {
+		RowBounds rowBounds=new RowBounds(((cPage-1)*numPerPage),numPerPage);
+		return session.selectList("reser.selectName", hName, rowBounds);
 	}
 
 	@Override
@@ -150,6 +151,11 @@ public class ReservationDaoImpl implements ReservationDao {
 	   public List<HospitalInfo> selectAll() {
 	      return session.selectList("reser.selectAll");
 	   }
+
+	@Override
+	public int selectCountSearch(String hName) {
+		return session.selectOne("reser.selectCountSearch", hName);
+	}
 	
 	
 	

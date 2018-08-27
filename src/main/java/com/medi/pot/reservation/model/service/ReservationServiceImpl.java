@@ -31,8 +31,8 @@ public class ReservationServiceImpl implements ReservationService {
 	}
 
 	@Override
-	public List<HospitalInfo> mediNameSearch(String hName) {
-		return reserDAO.mediNameSearch(hName);
+	public List<HospitalInfo> mediNameSearch(String hName,int cPage,int numPerPage) {
+		return reserDAO.mediNameSearch(hName,cPage,numPerPage);
 	}
 
 	@Override
@@ -145,6 +145,11 @@ public class ReservationServiceImpl implements ReservationService {
 	   public List<HospitalInfo> selectAll() {
 	      return reserDAO.selectAll();
 	   }
+
+	@Override
+	public int selectCountSearch(String hName) {
+		return reserDAO.selectCountSearch(hName);
+	}
 	
 	
 	
