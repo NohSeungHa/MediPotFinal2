@@ -37,7 +37,7 @@ public class HelpZoneController {
 	@RequestMapping("/helpZone/helpZoneList.do")
 	public ModelAndView helpZoneList(@RequestParam(value="cPage", required=false,defaultValue="1") int cPage) {
 		ModelAndView mv = new ModelAndView();
-		int numPerPage=6;		
+		int numPerPage=6;
 		List<HelpZone> list = service.selectHelpZoneList(cPage,numPerPage);
 		
 		int totalCount=service.selectCount();

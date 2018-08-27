@@ -62,7 +62,7 @@
 
 		
 <!-- 검색창 부분입니다. -->
-		<form action="#{path }/helpZone/helpZoneSearch.do">
+		<form action="${path }/helpZone/helpZoneSearch.do">
 			<select name="searchKind" class="form-control" style="width: 85px; height: 45px; float: left; font-size: 12px;">
 				<option value="title" <c:if test="${searchKind=='title' }">selected</c:if> >제목</option>
 				<option value="content" <c:if test="${searchKind=='content' }">selected</c:if>>내용</option>
@@ -112,10 +112,6 @@
 	function insert() {
 		location.href="${path}/helpZone/helpZoneInsert.do";
 	}
-</script>
-<script>
-	$("searchKind").change(function(){
-	});
 </script>
 
 

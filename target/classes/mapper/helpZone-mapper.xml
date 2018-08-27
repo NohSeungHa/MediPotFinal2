@@ -7,7 +7,7 @@
 	</insert>
 	<!-- 글 모두 불러오기 -->
 	<select id="helpZoneSelectList" resultType="HelpZone">
-		select * from helpzone order by helpzonedate desc
+		select * from helpZone order by helpZoneNum desc
 	</select>
 	<!-- 글 개수 -->
 	<select id="count" resultType="_int">
@@ -106,14 +106,14 @@
 	</select>
 	<!-- 댓글갯수 -->
 	<update id="commentCountUpdate" parameterType="map">
-		update helpZone set helpZoneCommentCount=#{totalCount} where helpZoneNum=#{no}
+		update helpZone set helpZoneCommentCount=#{totalCount} where helpZoneNum=#{number}
 	</update>
 	<!-- 제목으로 검색 -->
 	<select id="selectTitleSearchCount" parameterType="string" resultType="_int">
 		select count(*) from helpZone where helpZoneTitle like #{searchContent}
 	</select>
 	<!-- 내용으로 검색 -->
-	<select id="selectTitleSearchCount" parameterType="string" resultType="_int">
+	<select id="selectContentSearchCount" parameterType="string" resultType="_int">
 		select count(*) from helpZone where helpZoneContent like #{searchContent}
 	</select>
 	<!-- 제목으로 검색 한 리스트 -->

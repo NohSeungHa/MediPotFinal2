@@ -31,17 +31,18 @@ public class HelpZoneDaoImpl implements HelpZoneDao {
 		RowBounds rowBounds=new RowBounds(((cPage-1)*numPerPage),numPerPage);
 		// 댓글 수 확인
 		List<Integer> listNo = session.selectList("helpZone.listNo");
-		for(int i=0; i<listNo.size(); i++) {
-			int number = listNo.get(i);
-			int commentCountM = session.selectOne("helpZone.commentCountM", number);
-			int commentCountH = session.selectOne("helpZone.commentCountH", number);
-			int totalCount = commentCountH + commentCountM;
-			Map<String, Integer> map = new HashMap();
-			map.put("no", number);
-			map.put("totalCount", totalCount);
-			session.update("helpZone.commentCountUpdate", map);
+		if(listNo.size() != 0) {
+			for(int i=0; i<listNo.size(); i++) {
+				int number = listNo.get(i);
+				int commentCountM = session.selectOne("helpZone.commentCountM", number);
+				int commentCountH = session.selectOne("helpZone.commentCountH", number);
+				int totalCount = commentCountH + commentCountM;
+				Map<String, Integer> map = new HashMap();
+				map.put("number", number);
+				map.put("totalCount", totalCount);
+				session.update("helpZone.commentCountUpdate", map);
+			}
 		}
-		
 		return session.selectList("helpZone.helpZoneSelectList", null, rowBounds);
 	}
 	
