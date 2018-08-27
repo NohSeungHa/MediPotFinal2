@@ -194,6 +194,7 @@
 			hospitalName='회원 탈퇴',
 			hospitalEmail='회원 탈퇴',
 			hospitalAddr='회원 탈퇴',
+			hospitalLike=0,
 			hospitalProfessional='회원 탈퇴'
 		where hospitalNum=#{hospitalNum}
 	</update>
@@ -209,4 +210,22 @@
 	<select id="selectHospitalLicense" parameterType="_int" resultType="string">
 		select hospitalReLicense from hospital where hospitalNum=#{hospitalNum}
 	</select>
+	
+	<delete id="deleteMemberReservation" parameterType="_int">
+		delete from MemberReservation where checkHospital=#{checkHospital}
+	</delete>
+	
+	<delete id="deleteDoctorSchedule" parameterType="_int">
+		delete from DoctorSchedule where scheduleNum=#{scheduleNum}
+	</delete>
+	
+	<delete id="deleteReservationBlock" parameterType="_int">
+		delete from ReservationBlock where blockHospital=#{blockHospital}
+	</delete>
+	
+	<update id="updateHelpZoneInfo" parameterType="_int">
+		update HelpZoneCommentHospital set
+			hzCommentChoice=0
+		where hzCommentWriterNumH=#{hzCommentWriterNumH}
+	</update>
 </mapper>

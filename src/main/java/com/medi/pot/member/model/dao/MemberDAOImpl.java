@@ -268,7 +268,7 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public int deleteMember(SqlSessionTemplate sqlSession, int memberNum) {
 		
-		return sqlSession.delete("member.deleteMember", memberNum);
+		return sqlSession.update("member.UpdateDeleteMember", memberNum);
 		
 	}
 
@@ -329,9 +329,9 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public String selectDoctorPhoto(SqlSessionTemplate sqlSession, int hospitalNo) {
+	public List<String> selectDoctorPhoto(SqlSessionTemplate sqlSession, int hospitalNo) {
 		
-		return sqlSession.selectOne("hospital.selectDoctorPhoto", hospitalNo);
+		return sqlSession.selectList("hospital.selectDoctorPhoto", hospitalNo);
 		
 	}
 
@@ -346,6 +346,69 @@ public class MemberDAOImpl implements MemberDAO {
 	public String selectHospitalLicense(SqlSessionTemplate sqlSession, int hospitalNum) {
 		
 		return sqlSession.selectOne("hospital.selectHospitalLicense", hospitalNum);
+		
+	}
+
+	@Override
+	public int deleteNoticeComment(SqlSessionTemplate sqlSession, int commentNo) {
+		
+		return sqlSession.delete("member.deleteNoticeComment", commentNo);
+		
+	}
+
+	@Override
+	public List<String> selectNoticePhoto(SqlSessionTemplate sqlSession, String memberId) {
+		
+		return sqlSession.selectList("member.selectNoticePhoto", memberId);
+		
+	}
+
+	@Override
+	public int deleteNotice(SqlSessionTemplate sqlSession, String memberId) {
+		
+		return sqlSession.delete("member.deleteNotice", memberId);
+		
+	}
+
+	@Override
+	public int deleteInquiry(SqlSessionTemplate sqlSession, String memberId) {
+		
+		return sqlSession.delete("member.deleteInquiry", memberId);
+		
+	}
+
+	@Override
+	public List<Integer> selectNoticeNums(SqlSessionTemplate sqlSession, String memberId) {
+		
+		return sqlSession.selectList("member.selectNoticeNums", memberId);
+		
+	}
+
+	@Override
+	public int deleteMemberReservation(SqlSessionTemplate sqlSession, int checkHospital) {
+		
+		return sqlSession.delete("hospital.deleteMemberReservation", checkHospital);
+		
+	}
+
+	@Override
+	public int deleteDoctorSchedule(SqlSessionTemplate sqlSession, int scheduleNum) {
+		
+		return sqlSession.delete("hospital.deleteDoctorSchedule", scheduleNum);
+		
+	}
+
+	@Override
+	public int deleteReservationBlock(SqlSessionTemplate sqlSession, int blockHospital) {
+		
+		return sqlSession.delete("hospital.deleteReservationBlock", blockHospital);
+		
+	}
+
+	@Override
+	public int updateHelpZoneInfo(SqlSessionTemplate sqlSession, int hzCommentWriterNumH) {
+		
+		return sqlSession.update("hospital.updateHelpZoneInfo", hzCommentWriterNumH);
 		
 	}
 

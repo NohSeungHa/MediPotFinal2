@@ -120,7 +120,34 @@ $(function(){
 	});
 	<!-- 아이디 잘 못 입력시 ajax이용한 출력문 스크립트 끝 -->
 
+	$(function(){
+		$('#hospitalTel').on("keyup",function(){
+			var hospitalTel=$('#hospitalTel').val().trim();
+			if(hospitalTel.length==11){
+				if(!hospitalTel.match(/([0-9])/) || hospitalTel.match(/([ㄱ-ㅎ|가-힣]|([!,@,#,$,%,^,&,*,?,_,~,-]))/) || hospitalTel.match(/([a-zA-Z])/)){
+					alert("전화번호는 숫자만 입력이 가능합니다.");
+					$('#hospitalTel').val("");
+					$('#hospitalTel').focus();
+					$('#telCommentOne').css("display","block");
+					$('#telCommentTwo').css("display","block");
+					return false;
+				} else if(hospitalTel.match(/([0-9])/) ){
+					return true;
+				}
+			} else {
+				if(!hospitalTel.match(/([0-9])/) || hospitalTel.match(/([ㄱ-ㅎ|가-힣]|([!,@,#,$,%,^,&,*,?,_,~,-]))/) || hospitalTel.match(/([a-zA-Z])/)){
+					alert("전화번호는 숫자만 입력이 가능합니다.");
+					$('#hospitalTel').val("");
+					$('#hospitalTel').focus();
+					$('#telCommentOne').css("display","block");
+					$('#telCommentTwo').css("display","block");
+					return false;
+				}
+				
+			}
 
+		});
+	});
 
 </script>
 
@@ -239,7 +266,9 @@ $(function(){
 					<tr>
 						<th>전화번호<b>(*)</b></th>
 						<td>	
-							<input type="tel" class="form-control" placeholder="(-없이)0212341234" name="hospitalTel" id="hospitalTel" maxlength="11" required>
+							<input type="tel" class="form-control" placeholder="(-없이)0212341234" name="hospitalTel" id="hospitalTel" maxlength="11" required><br>
+							<h4 id="telCommentOne" style="font-size: 8pt; color: red; display:none;">* 정확한 전화번호를 입력해주시기 바랍니다.</h4>
+							<h4 id="telCommentTwo" style="font-size: 8pt; color: red; display:none;">* 번호가 다를 시 원활한 이용이 불가능할수도 있습니다.</h4>
 						</td>
 					</tr>
 					<tr>

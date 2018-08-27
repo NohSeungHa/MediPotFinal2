@@ -132,6 +132,63 @@ $(function(){
 		});
 	});
 <!-- 아이디 잘 못 입력시 ajax이용한 출력문 스크립트 끝 -->
+$(function(){
+	$('#memberBirth').on("keyup",function(){
+		var memberBirth=$('#memberBirth').val().trim();
+		if(memberBirth.length==6){
+			if(!memberBirth.match(/([0-9])/) || memberBirth.match(/([ㄱ-ㅎ|가-힣]|([!,@,#,$,%,^,&,*,?,_,~,-]))/) || memberBirth.match(/([a-zA-Z])/)){
+				alert("생년월일은 숫자로만 입력이 가능합니다.");
+				$('#memberBirth').val("");
+				$('#memberBirth').focus();
+				$('#birthCommentOne').css("display","block");
+				$('#birthCommentTwo').css("display","block");
+				return false;
+			} else if(memberBirth.match(/([0-9])/) ) {
+				return true;
+			}
+		} else {
+			if(!memberBirth.match(/([0-9])/) || memberBirth.match(/([ㄱ-ㅎ|가-힣]|([!,@,#,$,%,^,&,*,?,_,~,-]))/) || memberBirth.match(/([a-zA-Z])/)){
+				alert("생년월일은 숫자로만 입력이 가능합니다.");
+				$('#memberBirth').val("");
+				$('#memberBirth').focus();
+				$('#birthCommentOne').css("display","block");
+				$('#birthCommentTwo').css("display","block");
+				return false;
+			}
+			
+		}
+
+	});
+});
+
+$(function(){
+	$('#phone').on("keyup",function(){
+		var phone=$('#phone').val().trim();
+		if(phone.length==11){
+			if(!phone.match(/([0-9])/) || phone.match(/([ㄱ-ㅎ|가-힣]|([!,@,#,$,%,^,&,*,?,_,~,-]))/) || phone.match(/([a-zA-Z])/)){
+				alert("핸드폰 번호는 숫자만 입력해주시기 바랍니다.");
+				$('#phone').val("");
+				$('#phone').focus();
+				$('#telCommentOne').css("display","block");
+				$('#telCommentTwo').css("display","block");
+				return false;
+			} else if(phone.match(/([0-9])/) ){
+				return true;
+			}
+		} else {
+			if(!phone.match(/([0-9])/) || phone.match(/([ㄱ-ㅎ|가-힣]|([!,@,#,$,%,^,&,*,?,_,~,-]))/) || phone.match(/([a-zA-Z])/)){
+				alert("핸드폰 번호는 숫자만 입력해주시기 바랍니다.");
+				$('#phone').val("");
+				$('#phone').focus();
+				$('#telCommentOne').css("display","block");
+				$('#telCommentTwo').css("display","block");
+				return false;
+			}
+			
+		}
+
+	});
+})
 
 </script>
 
@@ -250,6 +307,8 @@ $(function(){
 						<td>	
 						<input type="text" class="form-control" name="memberBirth" id="memberBirth" 
 							maxlength="6" placeholder="6자리로 입력해주십시오." required>
+							<h4 id="birthCommentOne" style="font-size: 8pt; color: red; display:none;">* 정확한 생년월일을 입력해주시기 바랍니다.</h4>
+							<h4 id="birthCommentTwo" style="font-size: 8pt; color: red; display:none;">* 생년월일이 올바르지 않다면 불이익이 있을수도 있습니다.</h4>
 						</td>
 					</tr>
 					<tr>
@@ -267,6 +326,8 @@ $(function(){
 						<th>휴대폰<b>(*)</b></th>
 						<td>	
 							<input type="tel" class="form-control" placeholder="(-없이)01012345678" name="memberPhone" id="phone" maxlength="11" required>
+							<h4 id="telCommentOne" style="font-size: 8pt; color: red; display:none;">* 정확한 전화번호를 입력해주시기 바랍니다.</h4>
+							<h4 id="telCommentTwo" style="font-size: 8pt; color: red; display:none;">* 번호가 다를 시 원활한 이용이 불가능할수도 있습니다.</h4>
 						</td>
 					</tr>
 					<tr>

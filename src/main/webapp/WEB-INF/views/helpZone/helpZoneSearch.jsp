@@ -64,10 +64,10 @@
 <!-- 검색창 부분입니다. -->
 		<form action="${path }/helpZone/helpZoneSearch.do">
 			<select name="searchKind" class="form-control" style="width: 85px; height: 45px; float: left; font-size: 12px;">
-				<option value="title">제목</option>
-				<option value="content">내용</option>
+				<option value="title" <c:if test="${searchKind=='title' }">selected</c:if> >제목</option>
+				<option value="content" <c:if test="${searchKind=='content' }">selected</c:if>>내용</option>
 			</select>
-			<input name="searchContent" class="form-control mr-sm-2" type="text" placeholder="원하시는 검색 내용을 적어주세요" style="width: 280px; height: 45px; float: left;">
+			<input name="searchContent" class="form-control mr-sm-2" type="text" value="${searchContent }" style="width: 280px; height: 45px; float: left;">
 			<button class="btn btn-info btn-lg" type="submit" style="margin-left: 3px;">검색</button>
 		</form>
 		

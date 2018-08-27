@@ -292,9 +292,11 @@ to {
 			</c:if>
 		</table>
 		<br><br><br>
-		<span style="font-size:30px;">명예전당이란?</span>
-		<br>
-		<p>HELP ZONE에서 가장 많은 채택을 받은 병원들의 순위 입니다.</p>
+		<div style="text-align:center;">
+      <span style="font-size:30px;">명예전당이란?</span>
+      <br>
+      <p>HELP ZONE에서 가장 많은 채택을 받은 병원들의 순위 입니다.</p>
+   </div>
 	</div>
 	<style>
 		#lankDiv{

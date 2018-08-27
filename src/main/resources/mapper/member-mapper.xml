@@ -82,7 +82,32 @@
  		select count(*) from member
  	</select>
  	
- 	<delete id="deleteMember" parameterType="_int">
- 		delete from member where memberNum=#{memberNum}
+ 	<update id="UpdateDeleteMember" parameterType="_int">
+ 		update member set 
+ 			memberId='탈퇴한 회원',
+ 			memberName='회원탈퇴',
+ 			memberEmail='회원탈퇴',
+ 			memberAddr='회원탈퇴'
+ 		where memberNum=#{memberNum}
+ 	</update>
+ 	
+ 	<select id="selectNoticeNums" parameterType="string" resultType="_int">
+ 		select communityNum from Community where communityWriter=#{memberId}
+ 	</select>
+ 	
+ 	<delete id="deleteNoticeComment" parameterType="_int">
+ 		delete from CommunityComment where commentNo=#{commentNo}
+ 	</delete>
+ 	
+ 	<select id="selectNoticePhoto" parameterType="string" resultType="string">
+ 		select communityRefile from Community where communityWriter=#{memberId}
+ 	</select>
+ 	
+ 	<delete id="deleteNotice" parameterType="string">
+ 		delete from Community where communityWriter=#{memberId}
+ 	</delete>
+ 	
+ 	<delete id="deleteInquiry" parameterType="string">
+ 		delete from inquiry where inquiryWriter=#{memberId}
  	</delete>
 </mapper>

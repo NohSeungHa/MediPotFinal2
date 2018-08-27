@@ -331,7 +331,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public String selectDoctorPhoto(int hospitalNo) {
+	public List<String> selectDoctorPhoto(int hospitalNo) {
 		
 		return dao.selectDoctorPhoto(sqlSession, hospitalNo);
 		
@@ -348,6 +348,69 @@ public class MemberServiceImpl implements MemberService {
 	public String selectHospitalLicense(int hospitalNum) {
 		
 		return dao.selectHospitalLicense(sqlSession, hospitalNum);
+		
+	}
+
+	@Override
+	public int deleteNoticeComment(int commentNo) {
+		
+		return dao.deleteNoticeComment(sqlSession, commentNo);
+		
+	}
+
+	@Override
+	public List<String> selectNoticePhoto(String memberId) {
+		
+		return dao.selectNoticePhoto(sqlSession, memberId);
+		
+	}
+
+	@Override
+	public int deleteNotice(String memberId) {
+		
+		return dao.deleteNotice(sqlSession, memberId);
+		
+	}
+
+	@Override
+	public int deleteInquiry(String memberId) {
+		
+		return dao.deleteInquiry(sqlSession, memberId);
+		
+	}
+
+	@Override
+	public List<Integer> selectNoticeNums(String memberId) {
+		
+		return dao.selectNoticeNums(sqlSession, memberId);
+		
+	}
+
+	@Override
+	public int deleteMemberReservation(int checkHospital) {
+		
+		return dao.deleteMemberReservation(sqlSession, checkHospital);
+		
+	}
+
+	@Override
+	public int deleteDoctorSchedule(int scheduleNum) {
+		
+		return dao.deleteDoctorSchedule(sqlSession, scheduleNum);
+		
+	}
+
+	@Override
+	public int deleteReservationBlock(int blockHospital) {
+		
+		return dao.deleteReservationBlock(sqlSession, blockHospital);
+		
+	}
+
+	@Override
+	public int updateHelpZoneInfo(int hzCommentWriterNumH) {
+		
+		return dao.updateHelpZoneInfo(sqlSession, hzCommentWriterNumH);
 		
 	}
 	

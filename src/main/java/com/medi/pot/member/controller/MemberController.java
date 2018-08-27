@@ -518,8 +518,23 @@ public class MemberController {
 		Member m = service.selectMember(memberId);
 		if(m != null) {
 			if(bcrypt.matches(memberPw, m.getMemberPw())) {
-				msg = "삭제 성공";
-				int result = service.deleteMember(m.getMemberNum());
+				msg = "회원 삭제 성공";
+				// 자유게시판 댓글 삭제 후 게시글 삭제
+				List<Integer> noticeNum = service.selectNoticeNums(memberId);
+				List<String> noticeStr = service.selectNoticePhoto(memberId); // 게시물 안 사진파일 이름 받기
+				for(int j = 0; j < noticeNum.size(); j++) {
+					service.deleteNoticeComment(noticeNum.get(j)); // 댓글 삭제					
+				}
+				service.deleteNotice(memberId); // 게시물 삭제
+				// 게시글 삭제 중 파일이 있으면 파일도 삭제
+				for(int i = 0; i < noticeStr.size(); i++) {
+					File deleteNotice = new File("C:\\Medipot_Git\\MediPotFinal2\\src\\main\\webapp\\resources\\uploadfile\\notice\\"+noticeStr.get(i));
+					deleteNotice.delete();
+				}
+				// 1:1문의 삭제
+				service.deleteInquiry(memberId);
+				// 회원 탈퇴
+				service.deleteMember(m.getMemberNum());
 				sessionStatus.setComplete();
 			}
 		}
@@ -615,20 +630,38 @@ public class MemberController {
 		if(h != null) {
 			if(bcrypt.matches(hospitalPw, h.getHospitalPw())) {
 				msg = "삭제 성공";
-				String deleteStr1 = service.selectDoctorPhoto(h.getHospitalNum()); // 의사 사진 삭제
-				service.deleteDoctors(h.getHospitalNum());
-				File deleteFile = new File("C:\\Medipot_Git\\MediPotFinal2\\src\\main\\webapp\\resources\\uploadfile\\dortors\\"+deleteStr1);
-				deleteFile.delete();
 				
+				//예약 조회 삭제 - 병원번호 받아서 삭제
+				service.deleteMemberReservation(h.getHospitalNum());
+				//의사 스케줄 삭제 - 병원안에 의사번호 받아서 삭제
+				List<DoctorInfos> doctorNums = service.selectDoctorInfo(h.getHospitalNum());
+				for(int i = 0; i < doctorNums.size(); i++) {
+					service.deleteDoctorSchedule(doctorNums.get(i).getDoctorNum());					
+				}
+				//예약 블락테이블 삭제 - 병원번호 받아서 삭제
+				service.deleteReservationBlock(h.getHospitalNum());
+				//의사정보 삭제 - 병원번호 받아서 삭제
+				List<String> deleteStr1 = service.selectDoctorPhoto(h.getHospitalNum()); // 의사 사진 삭제
+				service.deleteDoctors(h.getHospitalNum()); // 의사정보삭제
+				for(int j = 0; j < deleteStr1.size(); j++) {
+					File doctorDelete = new File("C:\\Medipot_Git\\MediPotFinal2\\src\\main\\webapp\\resources\\uploadfile\\dortors\\"+deleteStr1.get(j));
+					doctorDelete.delete();					
+				}
+				
+				// 병원정보 삭제 - 병원번호 받아서 삭제
 				String deleteStr2 = service.selectHospitalInfoPhoto(h.getHospitalNum()); // 병원 사진 삭제
 				service.deleteHospitalInfo(h.getHospitalNum());
-				deleteFile = new File("C:\\Medipot_Git\\MediPotFinal2\\src\\main\\webapp\\resources\\uploadfile\\hospitalInfo\\"+deleteStr2);
-				deleteFile.delete();
+				File hospitalInfoDelete = new File("C:\\Medipot_Git\\MediPotFinal2\\src\\main\\webapp\\resources\\uploadfile\\hospitalInfo\\"+deleteStr2);
+				hospitalInfoDelete.delete();
 				
+				//헬프존 병원댓글 테이블 수정 - 병원번호 받아서 변경
+				service.updateHelpZoneInfo(h.getHospitalNum());
+				
+				// 병원 회원 삭제
 				String deleteStr3 = service.selectHospitalLicense(h.getHospitalNum()); // 병원 회원 사업자번호 사진 삭제
 				service.updateHospital(h.getHospitalNum());
-				deleteFile = new File("C:\\Medipot_Git\\MediPotFinal2\\src\\main\\webapp\\resources\\uploadfile\\H_License\\"+deleteStr3);
-				deleteFile.delete();
+				File hospitalDelete = new File("C:\\Medipot_Git\\MediPotFinal2\\src\\main\\webapp\\resources\\uploadfile\\H_License\\"+deleteStr3);
+				hospitalDelete.delete();
 				
 				sessionStatus.setComplete();
 			}
@@ -847,13 +880,13 @@ public class MemberController {
 	
 	/* 비밀번호를 찾음 */
 	@RequestMapping("/member/memberFindPw.do")
-	public String memberFindPw(String findid, String findemail, Model model) {
+	public String memberFindPw(String findid, String UserEmail, Model model) {
 		System.out.println("비밀번호를 찾음");
 		String view="";
 		System.out.println("아이디는?? " + findid);
 		Member m = service.searchID(findid);
 		
-		if(m.getMemberEmail().equals(findemail)) {
+		if(m.getMemberEmail().equals(UserEmail)) {
 			System.out.println("회원정보가 일치");
 			view = "member/findPasswordprint";
 			model.addAttribute("findid",findid);
@@ -885,7 +918,7 @@ public class MemberController {
 		int result = service.MemberUpdate(m);
 		
 		if(result>0) {
-			msg = "이제 로그인 하시면 됩니다.";
+			msg = "비밀번호가 변경되었습니다. 변경된 비밀번호로 로그인을 하시면 됩니다.";
 		}
 		else {
 			msg = "새로운 비밀번호를 받는 도중에 오류가 발생했습니다.";

@@ -40,6 +40,7 @@
 		<h3>정말로 회원 탈퇴를 하시겠습니까?</h3>
 		<h4>** 회원 가입시 입력한 아이디와 비밀번호를 입력해주세요. **</h4>
 		<h4>** 일치하지 않는다면 회원 탈퇴가 되지 않습니다. **</h4>
+		<h4>** 회원 탈퇴시 작성했던 게시물들은 삭제되지만 헬프존 게시물은 삭제되지 않습니다. **</h4>
 	</p>
 	<br>
 	<form action="${pageContext.request.contextPath }/member/deleteMemberEnd.do">

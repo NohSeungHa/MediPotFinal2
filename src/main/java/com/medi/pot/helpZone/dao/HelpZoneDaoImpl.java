@@ -1,6 +1,8 @@
 package com.medi.pot.helpZone.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -27,6 +29,20 @@ public class HelpZoneDaoImpl implements HelpZoneDao {
 	@Override
 	public List<HelpZone> selectHelpZoneList(int cPage, int numPerPage) {
 		RowBounds rowBounds=new RowBounds(((cPage-1)*numPerPage),numPerPage);
+		// 댓글 수 확인
+		List<Integer> listNo = session.selectList("helpZone.listNo");
+		if(listNo.size() != 0) {
+			for(int i=0; i<listNo.size(); i++) {
+				int number = listNo.get(i);
+				int commentCountM = session.selectOne("helpZone.commentCountM", number);
+				int commentCountH = session.selectOne("helpZone.commentCountH", number);
+				int totalCount = commentCountH + commentCountM;
+				Map<String, Integer> map = new HashMap();
+				map.put("number", number);
+				map.put("totalCount", totalCount);
+				session.update("helpZone.commentCountUpdate", map);
+			}
+		}
 		return session.selectList("helpZone.helpZoneSelectList", null, rowBounds);
 	}
 	
@@ -119,6 +135,28 @@ public class HelpZoneDaoImpl implements HelpZoneDao {
 	@Override
 	public int deleteHelpZoneCommentH(HelpZoneCommentHospital helpZoneCommentHospital) {
 		return session.delete("helpZone.deleteHelpZoneCommentH", helpZoneCommentHospital);
+	}
+
+	@Override
+	public int selectTitleSearchCount(String searchContent) {
+		return session.selectOne("helpZone.selectTitleSearchCount", searchContent);
+	}
+
+	@Override
+	public int selectContentSearchCount(String searchContent) {
+		return session.selectOne("helpZone.selectContentSearchCount", searchContent);
+	}
+
+	@Override
+	public List<HelpZone> selectHelpZoneTitleList(int cPage, int numPerPage, String searchContent) {
+		RowBounds rb=new RowBounds((cPage-1)*numPerPage,numPerPage);
+		return session.selectList("helpZone.selectHelpZoneTitleList", searchContent, rb);
+	}
+
+	@Override
+	public List<HelpZone> selectHelpZoneContentList(int cPage, int numPerPage, String searchContent) {
+		RowBounds rb=new RowBounds((cPage-1)*numPerPage,numPerPage);
+		return session.selectList("helpZone.selectHelpZoneContentList", searchContent, rb);
 	}
 	
 

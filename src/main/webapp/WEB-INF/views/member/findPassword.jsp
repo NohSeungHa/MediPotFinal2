@@ -130,7 +130,7 @@
 		return true;
 		$.ajax({
 			url:"${pageContext.request.contextPath}/member/findCheckEmail.do?PnH="+$('#findP').val(),
-			data:{memberEmail:$('#UserEmail').val()},
+			data:{UserEmail:$('#UserEmail').val()},
 			success:function(data){
 				if(email.length > 0){
 					if(data == 'true'){
@@ -180,7 +180,7 @@
 	
 	function emailAuther(){
 		var nowemail = $('#UserEmail').val();
-		var url="${pageContext.request.contextPath }/member/emailEnd.do?memberEmail="+nowemail;
+		var url="${pageContext.request.contextPath }/member/emailEnd.do?UserEmail="+nowemail;
 		var title="emailAuther";
 		var status="left=500px, top=100px, width=600px, height=200px";
 		var popup=window.open(url,title,status);

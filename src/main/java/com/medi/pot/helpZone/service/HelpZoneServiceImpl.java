@@ -16,7 +16,7 @@ import com.medi.pot.member.model.vo.Member;
 public class HelpZoneServiceImpl implements HelpZoneService {
 	
 	@Autowired
-	private HelpZoneDao helpZoneDao; 
+	private HelpZoneDao helpZoneDao;
 	
 
 	//헬프존 입력하기
@@ -116,6 +116,26 @@ public class HelpZoneServiceImpl implements HelpZoneService {
 	@Override
 	public int deleteHelpZoneCommentH(HelpZoneCommentHospital helpZoneCommentHospital) {
 		return helpZoneDao.deleteHelpZoneCommentH(helpZoneCommentHospital);
+	}
+
+	@Override
+	public int selectTitleSearchCount(String searchContent) {
+		return helpZoneDao.selectTitleSearchCount(searchContent);
+	}
+
+	@Override
+	public int selectContentSearchCount(String searchContent) {
+		return helpZoneDao.selectContentSearchCount(searchContent);
+	}
+
+	@Override
+	public List<HelpZone> selectHelpZoneTitleList(int cPage, int numPerPage, String searchContent) {
+		return helpZoneDao.selectHelpZoneTitleList(cPage, numPerPage, searchContent);
+	}
+
+	@Override
+	public List<HelpZone> selectHelpZoneContentList(int cPage, int numPerPage, String searchContent) {
+		return helpZoneDao.selectHelpZoneContentList(cPage, numPerPage, searchContent);
 	}
 
 	

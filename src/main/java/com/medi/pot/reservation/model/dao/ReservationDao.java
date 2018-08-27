@@ -36,4 +36,5 @@ public interface ReservationDao {
 	int searchReserMemCount(Map<String, Object> map);
 	int deleteSearchReserMember(int num);
 	List<HospitalInfo> selectHosList();
+	List<HospitalInfo> selectAll();
 }

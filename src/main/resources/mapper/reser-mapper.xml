@@ -107,4 +107,8 @@
 		select * from hospital order by hospitallike desc
 	</select>
 	
+	<select id="selectAll" resultType="HospitalInfo">
+      select * from hospital join hospitalinfo on(hospitalnum=hospitalinfonum)
+   </select>
+	
 </mapper>

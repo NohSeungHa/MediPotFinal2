@@ -3,11 +3,11 @@
 <mapper namespace="helpZone">
 	<!-- 글 등록 -->
 	<insert id="helpZoneInsert" parameterType="HelpZone">
-		insert into HelpZone VALUES(HelpZone_SEQ.nextval, #{helpZoneTitle}, #{helpZoneQuestioner}, #{helpZoneKeyWord}, #{helpZoneContent}, #{helpZoneFile}, #{helpZoneReFile}, #{helpZoneReadCount}, sysdate)
+		insert into HelpZone VALUES(HelpZone_SEQ.nextval, #{helpZoneTitle}, #{helpZoneQuestioner}, #{helpZoneKeyWord}, #{helpZoneContent}, #{helpZoneFile}, #{helpZoneReFile}, #{helpZoneReadCount}, sysdate, 0)
 	</insert>
 	<!-- 글 모두 불러오기 -->
 	<select id="helpZoneSelectList" resultType="HelpZone">
-		select * from helpzone order by helpzonedate desc
+		select * from helpZone order by helpZoneNum desc
 	</select>
 	<!-- 글 개수 -->
 	<select id="count" resultType="_int">
@@ -46,7 +46,7 @@
 	
 	<!-- 일반회원 댓글 리스트 -->
 	<select id="selectMemberCommentList" resultType="HelpZoneCommentMember" parameterType="_int">
-		select * from HelpZoneCommentMember order by hzCommentNumM desc
+		select * from HelpZoneCommentMember where hzNumM=#{no} order by hzCommentNumM desc
 	</select>
 	<!-- 병원회원 댓글 리스트 -->
 	<select id="selectHospitalCommentList" resultType="HelpZoneCommentHospital" parameterType="_int">
@@ -80,16 +80,48 @@
 			where hzCommentNumH=#{hzCommentNumH} and hzNumH=#{hzNumH}
 		)
 	</update>
-	
+	<!-- 채택한 것 불러오기 -->
 	<select id="commentchoice" parameterType="_int" resultType="HelpZoneCommentHospital">
 		select * from HelpZoneCommentHospital where hzNumH=#{helpZoneNum} and hzCommentChoice=1
 	</select>
-	
+	<!-- 댓글삭제(일반) -->
 	<delete id="deleteHelpZoneCommentM" parameterType="HelpZoneCommentMember">
 		delete from HelpZoneCommentMember where hzCommentNumM=#{hzCommentNumM} and hzNumM=#{hzNumM}
 	</delete>
-	
+	<!-- 댓글삭제(병원) -->
 	<delete id="deleteHelpZoneCommentH" parameterType="HelpZoneCommentHospital">
 		delete from HelpZoneCommentHospital where hzCommentNumH=#{hzCommentNumH} and hzNumM=#{hzNumH}
 	</delete>
+	<!-- 헬프존 리스트 번호뽑기 -->
+	<select id="listNo" resultType="_int">
+		select helpZoneNum from helpZone
+	</select>
+	<!-- 헬프존 번호에 대한 일반회원 댓글수 -->
+	<select id="commentCountM" parameterType="_int" resultType="_int">
+		select count(*) from helpZoneCommentMember where hzNumM=#{number}
+	</select>
+	<!-- 헬프존 번호에 대한 병원회원 댓글수 -->
+	<select id="commentCountH" parameterType="_int" resultType="_int">
+		select count(*) from helpZoneCommentHospital where hzNumH=#{number}
+	</select>
+	<!-- 댓글갯수 -->
+	<update id="commentCountUpdate" parameterType="map">
+		update helpZone set helpZoneCommentCount=#{totalCount} where helpZoneNum=#{number}
+	</update>
+	<!-- 제목으로 검색 -->
+	<select id="selectTitleSearchCount" parameterType="string" resultType="_int">
+		select count(*) from helpZone where helpZoneTitle like #{searchContent}
+	</select>
+	<!-- 내용으로 검색 -->
+	<select id="selectContentSearchCount" parameterType="string" resultType="_int">
+		select count(*) from helpZone where helpZoneContent like #{searchContent}
+	</select>
+	<!-- 제목으로 검색 한 리스트 -->
+	<select id="selectHelpZoneTitleList" parameterType="string" resultType="HelpZone">
+		select * from helpZone where helpZoneTitle like #{searchContent}
+	</select>
+	<!-- 내용으로 검색 한 리스트 -->
+	<select id="selectHelpZoneContentList" parameterType="string" resultType="HelpZone">
+		select * from helpZone where helpZoneContent like #{searchContent}
+	</select>
 </mapper>
