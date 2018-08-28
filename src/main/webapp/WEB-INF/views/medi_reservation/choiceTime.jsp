@@ -126,8 +126,8 @@
 		</div>
 	</c:if>
 	<div style="text-align: center;margin-top: 10px;">
-		<span style="font-size:20px;">** 병원측에 남기실 말이 있다면 적어주세요  **</span>
-		<textarea rows="3" cols="83" style="resize:none" name="sendMsg" id="sendMsg"></textarea>
+		<span style="font-size:20px;">** 병에 대한 증상이나 병원측에 남기실 메세지를 입력해주세요  **</span>
+		<textarea rows="3" cols="90" style="resize:none" name="sendMsg" id="sendMsg"></textarea>
 	</div>
 	
 	<div style="text-align:center;margin-top:20px;">
