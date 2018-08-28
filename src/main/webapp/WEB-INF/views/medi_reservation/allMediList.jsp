@@ -12,6 +12,9 @@
 <jsp:param value="HomeSpring" name="pageTitle"></jsp:param>
 </jsp:include>
    <div class="container">
+	<div id="listId" style="width:100%;height:50px;font-size:20px;text-align:center;background-color:#286090;padding-top:11px;color:white;border-radius:8px;margin-bottom:10px;">
+		전국 병원
+	</div>
                <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=abdb50b4b74a87e05a2f581cfdc897a8&libraries=services"></script>
                <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=services,clusterer,drawing"></script>
                

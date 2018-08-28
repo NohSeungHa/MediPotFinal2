@@ -285,7 +285,7 @@ $(function(){
 						</td>
 					</tr>
 					<tr>
-						<th>주소</th>
+						<th>주소<b>(*)</b></th>
 						<td>
 							<input type="text" class="form-control" name="hospitalAddr" id="hospitalAddr" placeholder="도로명주소" readonly>
 						</td>
@@ -295,7 +295,7 @@ $(function(){
 						</td>
 					</tr>
 					<tr>
-				<th><br>진료과목</th>
+				<th><br>진료과목<b>(*)</b></th>
 				<td><br>
 					<input type="checkbox" name="professional" id="J1" value="정형외과">
 					<label for="J1">정형외과&nbsp;&nbsp;</label>

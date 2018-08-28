@@ -331,7 +331,7 @@ $(function(){
 						</td>
 					</tr>
 					<tr>
-						<th>이메일</th>
+						<th>이메일<b>(*)</b></th>
 						<td>	
 							<input type="email" class="form-control" placeholder="abc@xyz.com" name="memberEmail" id="UserEmail">
 						</td>
@@ -345,7 +345,7 @@ $(function(){
 						</td>
 					</tr>
 					<tr>
-						<th>주소</th>
+						<th>주소<b>(*)</b></th>
 						<td>
 							<input type="text" class="form-control" name="memberAddr" id="memberAddr" placeholder="도로명주소" readonly>
 						</td>

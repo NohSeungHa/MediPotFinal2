@@ -98,9 +98,9 @@
 		location.href="${path}/community/communityList.do";
 	}
 	function checkLength(comment) {
-	    if (comment.value.length > 1000 ) {
+	    if (comment.value.length > 680 ) {
 	        comment.blur();
-	        comment.value = comment.value.substring(0, 1000);
+	        comment.value = comment.value.substring(0, 680);
 	        comment.focus();
 	        return false;
 	    }

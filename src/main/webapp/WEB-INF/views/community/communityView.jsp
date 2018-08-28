@@ -93,7 +93,7 @@
   	<br>
   	<!-- 댓글  -->
   
-  <div id="cc2s" class="modal-body" >
+  <div id="cc2s" class="modal-body">
   <c:if test="${not empty cc2}">
   	<h2 id="commentMain">댓글</h2>
   	<c:forEach var='cc' items='${cc2 }' varStatus="vs">
@@ -112,7 +112,7 @@
 			</c:if>
 		</c:if>
 		</p>
-		<p id="commentContent2" name="commentContent2">&nbsp;${cc.commentContent }</p>
+			<p id="commentContent2" name="commentContent2" style="width: 100%;word-break:break-all;">&nbsp;${cc.commentContent }</p>
   		<hr>
   	</c:forEach>
   	${pageBar }
@@ -208,9 +208,9 @@
         location.href="${path}/community/fileDownload.do?oName="+oName+"&rName="+rName;
     }
 	function checkLength(comment) {
-	    if (comment.value.length > 500 ) {
+	    if (comment.value.length > 250 ) {
 	        comment.blur();
-	        comment.value = comment.value.substring(0, 500);
+	        comment.value = comment.value.substring(0, 250);
 	        comment.focus();
 	        return false;
 	    }
